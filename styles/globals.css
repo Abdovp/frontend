@@ -1,0 +1,321 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  direction: rtl;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+:root {
+  --site-header-height: 4rem;
+}
+
+@media (min-width: 640px) {
+  :root {
+    --site-header-height: 4.75rem;
+  }
+}
+
+body {
+  text-align: right;
+  @apply bg-white text-ink antialiased;
+  font-family: 'Tajawal', 'IBM Plex Sans Arabic', 'Tahoma', system-ui, sans-serif;
+  font-feature-settings: 'kern';
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4 {
+  font-family: 'Cairo', 'Tajawal', 'Tahoma', system-ui, sans-serif;
+  @apply tracking-tight;
+}
+
+::selection {
+  background: rgba(201, 162, 39, 0.28);
+}
+
+/* LTR grid for explicit image-left / image-right sections */
+.layout-ltr {
+  direction: ltr;
+}
+
+.layout-ltr > [dir='rtl'] {
+  direction: rtl;
+  text-align: right;
+}
+
+@layer base {
+  /* Default focus ring for keyboard users */
+  a:focus-visible,
+  button:focus-visible,
+  input:focus-visible,
+  textarea:focus-visible,
+  select:focus-visible {
+    @apply outline-none ring-2 ring-accent ring-offset-2 ring-offset-white rounded-md;
+  }
+}
+
+@layer components {
+  /* ---------- Layout ---------- */
+  .container {
+    @apply max-w-6xl;
+  }
+
+  .container-wide {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+
+  .eyebrow {
+    @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest2 text-accent-dark;
+  }
+
+  .eyebrow-light {
+    @apply inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest2 text-accent;
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 bg-brand text-white font-bold text-base py-4 px-8 rounded-full transition-all duration-200 shadow-brand hover:bg-brand-dark hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  .btn-gold {
+    @apply inline-flex items-center justify-center gap-2 bg-accent text-ink font-extrabold text-base py-4 px-8 rounded-full transition-all duration-200 shadow-gold hover:bg-accent-dark hover:-translate-y-0.5 active:translate-y-0;
+  }
+
+  /* Kept for backwards compatibility — accent now means gold */
+  .btn-accent {
+    @apply btn-gold;
+  }
+
+  .btn-outline {
+    @apply inline-flex items-center justify-center gap-2 border border-brand/25 text-brand font-bold py-4 px-8 rounded-full transition-all duration-200 hover:border-brand hover:bg-brand hover:text-white;
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 text-brand font-bold py-3 px-5 rounded-full transition hover:bg-brand/5;
+  }
+
+  /* ---------- Surfaces ---------- */
+  .card-elevated {
+    @apply bg-white rounded-2xl border border-ink/[0.06] shadow-soft transition-all duration-300 hover:shadow-card hover:-translate-y-1;
+  }
+
+  .card-flat {
+    @apply bg-white rounded-2xl border border-ink/[0.07];
+  }
+
+  .image-placeholder {
+    @apply w-full overflow-hidden rounded-2xl border border-ink/[0.06] bg-gradient-to-br from-cream via-white to-brand/[0.04] flex items-center justify-center;
+  }
+
+  /* ---------- Pills & badges ---------- */
+  .badge-pill {
+    @apply inline-flex items-center gap-1 text-xs font-bold px-3 py-1 rounded-full;
+  }
+
+  .pill-soft {
+    @apply inline-flex items-center gap-2 text-sm font-semibold px-4 py-1.5 rounded-full bg-brand/5 text-brand border border-brand/10;
+  }
+
+  .star-row {
+    @apply inline-flex items-center gap-0.5 text-accent;
+  }
+
+  /* ---------- Header ---------- */
+  .announcement-bar {
+    @apply bg-ink text-white text-xs sm:text-sm overflow-hidden;
+  }
+
+  .site-header {
+    @apply sticky top-0 inset-x-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-ink/[0.07];
+  }
+
+  .site-header__bar {
+    @apply container-wide flex items-center justify-between gap-2 sm:gap-4;
+    min-height: var(--site-header-height);
+  }
+
+  @media (min-width: 768px) {
+    .site-header__bar {
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;
+      align-items: center;
+    }
+  }
+
+  .site-header__logo {
+    @apply flex items-center gap-2.5 sm:gap-3 transition hover:opacity-80 min-w-0 justify-self-start;
+  }
+
+  .site-header__nav {
+    @apply justify-self-center;
+  }
+
+  .nav-link {
+    @apply relative text-sm font-semibold text-ink/70 hover:text-brand transition-colors whitespace-nowrap py-2;
+  }
+
+  .nav-link::after {
+    content: '';
+    @apply absolute -bottom-0.5 right-0 h-0.5 w-0 bg-accent transition-all duration-300;
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  .site-header__actions {
+    @apply flex items-center gap-2 sm:gap-3 shrink-0 justify-self-end;
+  }
+
+  .site-header__menu {
+    @apply border-t border-ink/[0.07] shadow-card;
+  }
+
+  .icon-btn {
+    @apply relative flex items-center justify-center w-11 h-11 rounded-full text-ink hover:bg-ink/[0.05] transition;
+  }
+
+  /* ---------- Trust / proof ---------- */
+  .trust-strip {
+    @apply flex flex-wrap gap-3 justify-center md:justify-start;
+  }
+
+  .trust-chip {
+    @apply inline-flex items-center gap-2 bg-white border border-ink/[0.07] rounded-full px-4 py-2 text-sm font-semibold text-ink shadow-soft;
+  }
+
+  /* ---------- PDP buy box ---------- */
+  .checkout-hero {
+    @apply bg-cream;
+  }
+
+  .scarcity-banner {
+    @apply flex items-center gap-2.5 bg-red-50 border border-red-100 rounded-xl px-4 py-3 text-red-700 text-sm font-bold;
+  }
+
+  .offer-card {
+    @apply flex items-center gap-4 bg-white border-2 border-ink/[0.09] rounded-2xl px-4 sm:px-5 py-4 transition-all duration-200 hover:border-brand/40 text-start w-full;
+  }
+
+  .offer-card--selected {
+    @apply border-brand bg-brand/[0.035] shadow-soft;
+  }
+
+  .offer-badge {
+    @apply absolute -top-2.5 start-5 z-10 inline-flex items-center text-[0.7rem] font-extrabold px-3 py-1 rounded-full bg-accent text-ink shadow-gold;
+  }
+
+  .offer-badge--save {
+    @apply bg-brand text-white;
+    box-shadow: 0 2px 6px rgba(19, 41, 75, 0.2);
+  }
+
+  .offer-radio {
+    @apply shrink-0 w-5 h-5 rounded-full border-2 border-ink/25 bg-white grid place-items-center transition;
+  }
+
+  .offer-radio--checked {
+    @apply border-brand bg-brand;
+  }
+
+  .offer-radio--checked::after {
+    content: '';
+    @apply w-2 h-2 rounded-full bg-white;
+  }
+
+  .checkout-cta {
+    @apply inline-flex items-center justify-center gap-2 bg-brand text-white font-extrabold text-lg py-4 px-8 rounded-full transition-colors duration-200 shadow-brand hover:bg-brand-dark active:scale-[0.98];
+  }
+
+  .checkout-cta--pulse {
+    @apply animate-cta-pulse;
+  }
+
+  .checkout-cta--pulse:hover {
+    animation-play-state: paused;
+  }
+
+  .trust-badge-box {
+    @apply bg-white border border-ink/[0.07] rounded-2xl p-3 sm:p-4 text-center shadow-soft;
+  }
+
+  .trust-badge-box__icon {
+    @apply mx-auto mb-2 flex items-center justify-center w-9 h-9 rounded-full bg-brand/[0.07] text-brand;
+  }
+
+  /* ---------- Guarantee bar ---------- */
+  .guarantee-bar {
+    @apply bg-ink text-white;
+  }
+
+  .guarantee-icon {
+    @apply flex items-center justify-center w-11 h-11 rounded-full bg-accent/15 text-accent shrink-0;
+  }
+
+  /* ---------- Sticky CTA ---------- */
+  .sticky-cta {
+    @apply fixed bottom-0 inset-x-0 z-40 bg-white border-t border-ink/10 shadow-lift;
+    padding-bottom: calc(0.75rem + env(safe-area-inset-bottom, 0px));
+    transform: translateY(100%);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+  }
+
+  .sticky-cta--visible {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .sticky-cta .container-wide {
+    @apply py-3 md:py-4;
+  }
+
+  /* ---------- Cart ---------- */
+  .cart-item-card {
+    @apply flex items-center gap-3 bg-cream border border-ink/[0.06] rounded-2xl p-3;
+  }
+
+  .cart-item-thumb {
+    @apply shrink-0 w-16 h-20 rounded-xl bg-white border border-ink/[0.08] flex items-center justify-center shadow-soft text-brand;
+  }
+
+  .cart-crosssell-card {
+    @apply flex items-center gap-3 bg-white border border-ink/[0.09] rounded-2xl p-3;
+  }
+
+  .cart-crosssell-btn {
+    @apply inline-flex items-center justify-center bg-accent text-ink text-sm font-extrabold px-4 py-2 rounded-full hover:bg-accent-dark transition whitespace-nowrap;
+  }
+
+  .field-label {
+    @apply block text-sm font-bold text-ink mb-1.5;
+  }
+
+  .field-input {
+    @apply w-full border border-ink/15 rounded-xl px-4 py-3 text-ink text-right placeholder:text-ink/35 placeholder:text-right focus:outline-none focus:border-brand focus:ring-2 focus:ring-brand/15 transition;
+  }
+
+  .field-input-tel {
+    @apply field-input text-right;
+    direction: ltr;
+  }
+}
+
+@layer utilities {
+  .hero-grid-bg {
+    background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.08) 1px, transparent 0);
+    background-size: 28px 28px;
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+}
