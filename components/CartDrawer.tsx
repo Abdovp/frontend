@@ -1,3 +1,5 @@
+import { createPurchaseEventId, submitOrder } from '../lib/api/orders';
+import { trackAddToCart, trackInitiateCheckout, trackPurchase } from '../lib/analytics/track';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
 import { useCartStore } from '../lib/cart-store';
@@ -31,6 +33,12 @@ export default function CartDrawer() {
   const handleAddCrossSell = () => {
     if (!crossSell) return;
     const offer = crossSell.offers[0];
+    trackAddToCart({
+      productId: crossSell.id,
+      name: crossSell.nameAr,
+      price: offer.price,
+      quantity: 1,
+    });
     addItem({
       id: crossSell.id,
       name: crossSell.nameAr,
@@ -137,7 +145,21 @@ export default function CartDrawer() {
                 {total} <span className="text-base">{CURRENCY}</span>
               </span>
             </div>
-            <button onClick={() => setIsCheckoutOpen(true)} className="checkout-cta w-full">
+            <button
+              onClick={() => {
+                trackInitiateCheckout(
+                  items.map((item) => ({
+                    productId: item.id,
+                    name: item.name,
+                    price: item.price,
+                    quantity: item.quantity,
+                  })),
+                  total
+                );
+                setIsCheckoutOpen(true);
+              }}
+              className="checkout-cta w-full"
+            >
               <Icon name="lock" size={18} />
               إتمام الطلب
             </button>
@@ -181,7 +203,9 @@ function CheckoutModal({ onClose, items, total }: CheckoutModalProps) {
     setPhoneError(phone && !validatePhone(phone) ? 'دخّل رقم هاتف مغربي صحيح' : '');
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [submitError, setSubmitError] = useState('');
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!formData.name || !formData.address || !formData.phone) return;
     if (!validatePhone(formData.phone)) {
@@ -190,16 +214,47 @@ function CheckoutModal({ onClose, items, total }: CheckoutModalProps) {
     }
 
     setSubmitting(true);
-    saveOrderConfirmation({
-      name: formData.name,
-      phone: formData.phone,
-      items,
-      total,
-    });
-    clearCart();
-    closeCart();
-    onClose();
-    router.push('/thank-you');
+    setSubmitError('');
+    const eventId = createPurchaseEventId();
+
+    try {
+      const result = await submitOrder({
+        eventId,
+        name: formData.name,
+        address: formData.address,
+        phone: formData.phone,
+        items,
+        total,
+      });
+
+      saveOrderConfirmation({
+        name: formData.name,
+        phone: formData.phone,
+        items,
+        total,
+        eventId,
+        orderId: result.id,
+      });
+
+      trackPurchase({
+        eventId,
+        value: total,
+        items: items.map((item) => ({
+          productId: item.id,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+        })),
+      });
+
+      clearCart();
+      closeCart();
+      onClose();
+      router.push('/thank-you');
+    } catch {
+      setSubmitError('ما قدرناش نسجّلو الطلب. جرّب مرة أخرى.');
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -263,6 +318,7 @@ function CheckoutModal({ onClose, items, total }: CheckoutModalProps) {
               />
               {phoneError && <p className="text-red-500 text-xs mt-1.5">{phoneError}</p>}
             </div>
+            {submitError && <p className="text-red-500 text-sm">{submitError}</p>}
             <button type="submit" disabled={submitting} className="checkout-cta w-full disabled:opacity-50">
               <Icon name="check" size={20} />
               {submitting ? 'جاري التأكيد...' : 'تأكيد الطلب — دفع عند الاستلام'}

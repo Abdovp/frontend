@@ -6,6 +6,9 @@ export const ORDER_CONFIRMATION_KEY = 'boya_order_confirmation';
 export interface OrderConfirmation {
   firstName: string;
   phone: string;
+  eventId?: string;
+  orderId?: number;
+  purchaseTracked?: boolean;
   items: Array<{
     productId?: ProductId;
     name: string;
@@ -22,12 +25,17 @@ export function saveOrderConfirmation(data: {
   phone: string;
   items: CartItem[];
   total: number;
+  eventId?: string;
+  orderId?: number;
 }): void {
   if (typeof window === 'undefined') return;
 
   const payload: OrderConfirmation = {
     firstName: data.name.trim().split(/\s+/)[0] || data.name.trim(),
     phone: data.phone.trim(),
+    eventId: data.eventId,
+    orderId: data.orderId,
+    purchaseTracked: true,
     items: data.items.map((item) => ({
       productId: item.id,
       name: item.name,

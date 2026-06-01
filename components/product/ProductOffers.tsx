@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
+import { trackAddToCart } from '../../lib/analytics/track';
 import { useCartStore } from '../../lib/cart-store';
 import type { Product } from '../../lib/products';
 import { CURRENCY } from '../../lib/products';
@@ -59,6 +60,12 @@ export default function ProductOffers({ product }: ProductOffersProps) {
 
   const handleCheckout = () => {
     if (!selectedOffer) return;
+    trackAddToCart({
+      productId: product.id,
+      name: product.nameAr,
+      price: selectedOffer.price,
+      quantity: 1,
+    });
     addItem({
       id: product.id,
       name: product.nameAr,
