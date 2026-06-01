@@ -38,16 +38,16 @@ export const useCartStore = create<CartStore>((set, get) => ({
   addItem: (item) => {
     const lineKey = `${item.id}-${item.offer}`;
     const { items } = get();
-    const existing = items.find((i) => i.lineKey === lineKey);
-    if (existing) {
-      set({
-        items: items.map((i) =>
-          i.lineKey === lineKey ? { ...i, quantity: i.quantity + item.quantity } : i
-        ),
-      });
-    } else {
-      set({ items: [...items, { ...item, lineKey }] });
+    const existingSameLine = items.find((i) => i.lineKey === lineKey);
+
+    if (existingSameLine) {
+      return;
     }
+
+    const withoutSameProduct = items.filter((i) => i.id !== item.id);
+    set({
+      items: [...withoutSameProduct, { ...item, lineKey, quantity: item.quantity }],
+    });
   },
 
   removeItem: (lineKey) => set({ items: get().items.filter((i) => i.lineKey !== lineKey) }),

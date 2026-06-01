@@ -35,7 +35,7 @@ module.exports = {
         card: '0 12px 40px rgba(14, 17, 22, 0.08)',
         lift: '0 20px 60px rgba(14, 17, 22, 0.14)',
         gold: '0 14px 30px rgba(201, 162, 39, 0.28)',
-        brand: '0 16px 36px rgba(19, 41, 75, 0.26)',
+        brand: '0 2px 8px rgba(19, 41, 75, 0.16)',
       },
       borderRadius: {
         xl: '0.875rem',
@@ -57,11 +57,11 @@ module.exports = {
         },
         'cta-pulse': {
           '0%, 100%': {
-            boxShadow: '0 16px 36px rgba(19, 41, 75, 0.26)',
+            boxShadow: '0 2px 8px rgba(19, 41, 75, 0.16)',
             transform: 'scale(1)',
           },
           '50%': {
-            boxShadow: '0 20px 44px rgba(19, 41, 75, 0.4), 0 0 0 6px rgba(19, 41, 75, 0.12)',
+            boxShadow: '0 4px 12px rgba(19, 41, 75, 0.22), 0 0 0 3px rgba(19, 41, 75, 0.08)',
             transform: 'scale(1.02)',
           },
         },

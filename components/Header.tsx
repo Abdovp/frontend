@@ -25,13 +25,13 @@ function Logo({ onClick }: { onClick?: () => void }) {
   );
 }
 
-export default function Header() {
+export default function Header({ showAnnouncement = true }: { showAnnouncement?: boolean }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const closeMenu = () => setMenuOpen(false);
 
   return (
     <>
-      <AnnouncementBar />
+      {showAnnouncement && <AnnouncementBar variant="marquee" />}
       <header className="site-header">
         <div className="site-header__bar">
           <Logo onClick={closeMenu} />

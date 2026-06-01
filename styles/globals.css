@@ -131,8 +131,34 @@ h1, h2, h3, h4 {
     @apply bg-ink text-white text-xs sm:text-sm overflow-hidden;
   }
 
+  .announcement-bar--tick {
+    --tick-height: 2.25rem;
+    @apply relative overflow-hidden;
+    height: var(--tick-height);
+  }
+
+  @media (min-width: 640px) {
+    .announcement-bar--tick {
+      --tick-height: 2.5rem;
+    }
+  }
+
+  .announcement-bar__track {
+    @apply flex flex-col transition-transform duration-500 ease-in-out;
+  }
+
+  .announcement-bar__slide {
+    @apply flex shrink-0 items-center justify-center gap-2 px-4 font-medium text-center;
+    height: var(--tick-height);
+  }
+
   .site-header {
     @apply sticky top-0 inset-x-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-ink/[0.07];
+  }
+
+  .product-moving-header {
+    @apply sticky z-40 w-full;
+    top: var(--site-header-height);
   }
 
   .site-header__bar {
@@ -196,7 +222,7 @@ h1, h2, h3, h4 {
   }
 
   .scarcity-banner {
-    @apply flex items-center gap-2.5 bg-red-50 border border-red-100 rounded-xl px-4 py-3 text-red-700 text-sm font-bold;
+    @apply inline-flex items-center gap-2.5 w-fit max-w-full bg-red-50 border border-red-100 rounded-xl px-3 py-2.5 sm:px-4 sm:py-3 text-red-700 text-sm font-bold;
   }
 
   .offer-card {
@@ -247,6 +273,18 @@ h1, h2, h3, h4 {
 
   .trust-badge-box__icon {
     @apply mx-auto mb-2 flex items-center justify-center w-9 h-9 rounded-full bg-brand/[0.07] text-brand;
+  }
+
+  .product-benefit-chip {
+    @apply flex flex-col items-center justify-center text-center bg-white border border-ink/[0.07] rounded-2xl px-2 py-3 sm:px-3 sm:py-3.5 shadow-soft min-h-[5.5rem] sm:min-h-[6rem];
+  }
+
+  .product-benefit-chip__icon {
+    @apply flex items-center justify-center w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-brand/[0.07] text-brand shrink-0;
+  }
+
+  .product-benefit-chip__title {
+    @apply mt-2 font-bold text-ink text-[0.7rem] sm:text-sm leading-snug text-balance;
   }
 
   /* ---------- Guarantee bar ---------- */

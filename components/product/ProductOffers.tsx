@@ -88,14 +88,13 @@ export default function ProductOffers({ product }: ProductOffersProps) {
               aspect="square"
               className="shadow-card"
             />
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-5">
-              {product.trustBadges.map((badge) => (
-                <div key={badge.title} className="trust-badge-box">
-                  <span className="trust-badge-box__icon">
-                    <Icon name={badge.icon} size={18} />
+            <div className="grid grid-cols-4 gap-2 sm:gap-3 mt-5">
+              {product.valueProps.map((v) => (
+                <div key={v.title} className="product-benefit-chip">
+                  <span className="product-benefit-chip__icon">
+                    <Icon name={v.icon} size={18} />
                   </span>
-                  <p className="font-bold text-ink text-sm leading-tight">{badge.title}</p>
-                  <p className="text-ink/50 text-xs mt-0.5">{badge.subtitle}</p>
+                  <p className="product-benefit-chip__title">{v.title}</p>
                 </div>
               ))}
             </div>
@@ -120,13 +119,13 @@ export default function ProductOffers({ product }: ProductOffersProps) {
               </span>
             </div>
 
-            <p className="text-ink/65 text-base md:text-lg leading-relaxed mb-5">
+            <p className="text-ink/80 text-base md:text-lg leading-relaxed mb-5 font-medium">
               {product.checkoutDescription}
             </p>
 
             <ul className="space-y-2.5 mb-6">
               {product.highlights.map((h) => (
-                <li key={h} className="flex items-center gap-3 text-ink/80">
+                <li key={h} className="flex items-center gap-3 text-ink/85 font-medium">
                   <span className="flex items-center justify-center w-6 h-6 rounded-full bg-brand/[0.08] text-brand shrink-0">
                     <Icon name="check" size={14} />
                   </span>
@@ -203,20 +202,6 @@ export default function ProductOffers({ product }: ProductOffersProps) {
               <Icon name="lock" size={15} className="text-brand" />
               الدفع عند الاستلام — بدون دفع أونلاين
             </p>
-
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-4 gap-y-3 mt-7 pt-6 border-t border-ink/[0.08]">
-              {product.valueProps.map((v) => (
-                <div key={v.title} className="flex items-start gap-2.5">
-                  <span className="flex items-center justify-center w-9 h-9 rounded-xl bg-white border border-ink/[0.07] text-brand shrink-0 shadow-soft">
-                    <Icon name={v.icon} size={18} />
-                  </span>
-                  <div className="leading-tight">
-                    <p className="text-sm font-bold text-ink">{v.title}</p>
-                    <p className="text-xs text-ink/50 mt-0.5">{v.text}</p>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </div>

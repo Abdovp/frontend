@@ -29,7 +29,7 @@ export default function SectionHeading({
         {title}
       </h2>
       {subtitle && (
-        <p className={`mt-4 text-lg leading-relaxed ${subColor}`}>{subtitle}</p>
+        <p className={`mt-4 text-lg leading-relaxed font-medium ${subColor}`}>{subtitle}</p>
       )}
     </div>
   );

@@ -17,7 +17,7 @@ function SectionContent({
       {section.bullets && (
         <ul className="space-y-3">
           {section.bullets.map((b) => (
-            <li key={b} className="flex items-center gap-3 text-ink/75">
+            <li key={b} className="flex items-center gap-3 text-ink/80 font-medium">
               <span
                 className={`flex items-center justify-center w-6 h-6 rounded-full shrink-0 ${
                   tone === 'cross' ? 'bg-red-50 text-red-500' : 'bg-brand/[0.08] text-brand'

@@ -1,6 +1,8 @@
 import { useState } from 'react';
+import { useRouter } from 'next/router';
 import { useCartStore } from '../lib/cart-store';
-import { products, CURRENCY, STORE_PROOF, WARRANTY_DAYS, type Product, type ProductId } from '../lib/products';
+import { saveOrderConfirmation } from '../lib/order-confirmation';
+import { products, CURRENCY, WARRANTY_DAYS, type Product, type ProductId } from '../lib/products';
 import Icon, { Stars } from './ui/Icon';
 
 function getCrossSellProduct(cartIds: ProductId[]): Product | null {
@@ -165,10 +167,11 @@ interface CheckoutModalProps {
 }
 
 function CheckoutModal({ onClose, items, total }: CheckoutModalProps) {
+  const router = useRouter();
   const { clearCart, closeCart } = useCartStore();
-  const [step, setStep] = useState(1);
   const [formData, setFormData] = useState({ name: '', address: '', phone: '' });
   const [phoneError, setPhoneError] = useState('');
+  const [submitting, setSubmitting] = useState(false);
 
   const validatePhone = (phone: string) => /^(\+212|0)[67]\d{8}$/.test(phone.replace(/\s/g, ''));
 
@@ -185,111 +188,91 @@ function CheckoutModal({ onClose, items, total }: CheckoutModalProps) {
       setPhoneError('دخّل رقم هاتف مغربي صحيح');
       return;
     }
-    setStep(2);
-  };
 
-  const finish = () => {
+    setSubmitting(true);
+    saveOrderConfirmation({
+      name: formData.name,
+      phone: formData.phone,
+      items,
+      total,
+    });
     clearCart();
     closeCart();
     onClose();
+    router.push('/thank-you');
   };
 
   return (
     <>
-      <div className="fixed inset-0 bg-ink/60 backdrop-blur-sm z-[80]" onClick={step === 2 ? finish : onClose} />
+      <div className="fixed inset-0 bg-ink/60 backdrop-blur-sm z-[80]" onClick={onClose} />
       <div className="fixed inset-0 z-[80] flex items-center justify-center p-4">
         <div className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-lift max-h-[92vh] overflow-y-auto">
-          {step === 1 && (
-            <>
-              <div className="flex items-center justify-between mb-5">
-                <h2 className="font-heading text-2xl font-extrabold text-ink">إتمام الطلب</h2>
-                <button onClick={onClose} className="icon-btn" aria-label="إغلاق">
-                  <Icon name="close" size={20} />
-                </button>
+          <div className="flex items-center justify-between mb-5">
+            <h2 className="font-heading text-2xl font-extrabold text-ink">إتمام الطلب</h2>
+            <button onClick={onClose} className="icon-btn" aria-label="إغلاق">
+              <Icon name="close" size={20} />
+            </button>
+          </div>
+
+          <div className="bg-cream rounded-2xl p-4 mb-5">
+            {items.map((item) => (
+              <div key={item.lineKey} className="flex justify-between mb-2 text-sm">
+                <span className="text-ink/70">{item.name} ({item.offer})</span>
+                <span className="font-bold text-ink">{item.price * item.quantity} {CURRENCY}</span>
               </div>
-
-              <div className="bg-cream rounded-2xl p-4 mb-5">
-                {items.map((item) => (
-                  <div key={item.lineKey} className="flex justify-between mb-2 text-sm">
-                    <span className="text-ink/70">{item.name} ({item.offer})</span>
-                    <span className="font-bold text-ink">{item.price * item.quantity} {CURRENCY}</span>
-                  </div>
-                ))}
-                <div className="border-t border-ink/10 pt-2 mt-2 flex justify-between font-extrabold">
-                  <span>المجموع</span>
-                  <span className="text-brand">{total} {CURRENCY}</span>
-                </div>
-              </div>
-
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div>
-                  <label className="field-label">الاسم الكامل</label>
-                  <input
-                    type="text"
-                    value={formData.name}
-                    onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                    className="field-input"
-                    placeholder="مثال: محمد العلوي"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="field-label">العنوان والمدينة</label>
-                  <input
-                    type="text"
-                    value={formData.address}
-                    onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                    className="field-input"
-                    placeholder="الحي، الشارع، المدينة"
-                    required
-                  />
-                </div>
-                <div>
-                  <label className="field-label">رقم الهاتف</label>
-                  <input
-                    type="tel"
-                    value={formData.phone}
-                    onChange={handlePhoneChange}
-                    placeholder="06XXXXXXXX"
-                    dir="ltr"
-                    className={`field-input-tel ${phoneError ? '!border-red-400 !ring-red-100' : ''}`}
-                    required
-                  />
-                  {phoneError && <p className="text-red-500 text-xs mt-1.5">{phoneError}</p>}
-                </div>
-                <button type="submit" className="checkout-cta w-full">
-                  <Icon name="check" size={20} />
-                  تأكيد الطلب — دفع عند الاستلام
-                </button>
-              </form>
-
-              <p className="flex items-center justify-center gap-2 text-xs text-ink/50 mt-4">
-                <Icon name="shield" size={14} className="text-brand" />
-                معلوماتك آمنة — كنستعملوها فقط لتأكيد الطلب
-              </p>
-            </>
-          )}
-
-          {step === 2 && (
-            <div className="text-center py-4">
-              <span className="mx-auto mb-5 flex items-center justify-center w-16 h-16 rounded-full bg-emerald-50 text-emerald-600">
-                <Icon name="check-circle" size={34} />
-              </span>
-              <h2 className="font-heading text-2xl font-extrabold text-ink mb-2">تم استلام طلبك!</h2>
-              <p className="text-ink/60 mb-6">
-                شكراً {formData.name.split(' ')[0]} 🤝 — الفريق غادي يتصل بيك قريباً لتأكيد الطلب والتوصيل.
-              </p>
-              <div className="bg-cream rounded-2xl p-4 mb-6 text-sm text-ink/70 space-y-1.5">
-                <p className="flex items-center justify-center gap-2">
-                  <Icon name="truck" size={15} className="text-brand" /> التوصيل خلال {STORE_PROOF.delivery}
-                </p>
-                <p className="flex items-center justify-center gap-2">
-                  <Icon name="wallet" size={15} className="text-brand" /> تخلّص {total} {CURRENCY} عند الاستلام
-                </p>
-              </div>
-              <button onClick={finish} className="btn-primary w-full">العودة للمتجر</button>
+            ))}
+            <div className="border-t border-ink/10 pt-2 mt-2 flex justify-between font-extrabold">
+              <span>المجموع</span>
+              <span className="text-brand">{total} {CURRENCY}</span>
             </div>
-          )}
+          </div>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="field-label">الاسم الكامل</label>
+              <input
+                type="text"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                className="field-input"
+                placeholder="مثال: محمد العلوي"
+                required
+              />
+            </div>
+            <div>
+              <label className="field-label">العنوان والمدينة</label>
+              <input
+                type="text"
+                value={formData.address}
+                onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                className="field-input"
+                placeholder="الحي، الشارع، المدينة"
+                required
+              />
+            </div>
+            <div>
+              <label className="field-label">رقم الهاتف</label>
+              <input
+                type="tel"
+                value={formData.phone}
+                onChange={handlePhoneChange}
+                placeholder="06XXXXXXXX"
+                dir="ltr"
+                className={`field-input-tel ${phoneError ? '!border-red-400 !ring-red-100' : ''}`}
+                required
+              />
+              {phoneError && <p className="text-red-500 text-xs mt-1.5">{phoneError}</p>}
+            </div>
+            <button type="submit" disabled={submitting} className="checkout-cta w-full disabled:opacity-50">
+              <Icon name="check" size={20} />
+              {submitting ? 'جاري التأكيد...' : 'تأكيد الطلب — دفع عند الاستلام'}
+            </button>
+          </form>
+
+          <p className="flex items-center justify-center gap-2 text-xs text-ink/50 mt-4">
+            <Icon name="shield" size={14} className="text-brand" />
+            معلوماتك آمنة — كنستعملوها فقط لتأكيد الطلب
+          </p>
         </div>
       </div>
     </>
