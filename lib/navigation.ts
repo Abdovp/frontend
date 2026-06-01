@@ -87,7 +87,7 @@ export const policies: Record<PolicySlug, PolicyPage> = {
       },
       {
         heading: 'حقوقك',
-        body: 'عندك الحق ف أي وقت تطلب حذف بياناتك أو تعديلها. تواصل معانا على support@boya-shop.online.',
+        body: 'عندك الحق ف أي وقت تطلب حذف بياناتك أو تعديلها. تواصل معانا على support@boyashop.store.',
       },
     ],
   },
@@ -98,7 +98,7 @@ export const policies: Record<PolicySlug, PolicyPage> = {
     sections: [
       {
         heading: 'قبول الشروط',
-        body: 'باستخدامك لموقع boya-shop.online أو بتقديم طلب، كتوافق على هاد الشروط والأحكام.',
+        body: 'باستخدامك لموقع boyashop.store أو بتقديم طلب، كتوافق على هاد الشروط والأحكام.',
       },
       {
         heading: 'المنتجات والأسعار',

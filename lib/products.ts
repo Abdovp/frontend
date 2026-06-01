@@ -84,7 +84,7 @@ export const STORE = {
   tagline: 'إكسسوارات سيارات مختارة بعناية',
   phone: '+212 6 00 00 00 00',
   whatsapp: '+212600000000',
-  email: 'support@boya-shop.online',
+  email: 'support@boyashop.store',
 };
 
 export const STORE_PROOF = {
