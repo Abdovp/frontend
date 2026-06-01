@@ -1,4 +1,5 @@
 import { createEventId } from './event-id';
+import { logTrackingEvent } from '../api/events';
 import { getFacebookCookies, PIXEL_IDS } from './pixels';
 
 type AnalyticsItem = {
@@ -48,7 +49,13 @@ function trackSnapchat(eventName: string, params: Record<string, unknown>, event
   window.snaptr('track', eventName, { ...params, uuid_c1: eventId });
 }
 
-function trackAll(eventName: string, params: Record<string, unknown>, eventId: string) {
+function trackAll(
+  eventName: 'PageView' | 'ViewContent' | 'AddToCart' | 'InitiateCheckout' | 'Purchase',
+  params: Record<string, unknown>,
+  eventId: string,
+  orderId?: number
+) {
+  void logTrackingEvent(eventId, eventName, params, orderId);
   whenReady(() => {
     trackFacebook(eventName, params, eventId);
     trackTikTok(eventName, params, eventId);
@@ -110,7 +117,12 @@ export function trackPurchase(payload: PurchasePayload) {
     num_items: payload.items.reduce((sum, item) => sum + (item.quantity ?? 1), 0),
     contents: mapContents(payload.items),
   };
-  trackAll('Purchase', params, payload.eventId);
+  // Purchase is stored by POST /api/orders (order + order_items + tracking_events + CAPI).
+  whenReady(() => {
+    trackFacebook('Purchase', params, payload.eventId);
+    trackTikTok('Purchase', params, payload.eventId);
+    trackSnapchat('Purchase', params, payload.eventId);
+  });
 }
 
 export { getFacebookCookies, createEventId };
