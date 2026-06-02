@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { trackAddToCart } from '../../lib/analytics/track';
 import { useCartStore } from '../../lib/cart-store';
 import type { Product } from '../../lib/products';
-import { CURRENCY } from '../../lib/products';
+import { CURRENCY, getFirstOffer } from '../../lib/products';
 import ImagePlaceholder from '../ui/ImagePlaceholder';
 import Icon, { Stars } from '../ui/Icon';
 import ProductGuaranteeBar from './ProductGuaranteeBar';
@@ -14,8 +14,7 @@ interface ProductOffersProps {
 type OfferQuantity = 1 | 2 | 3;
 
 function getDefaultOffer(product: Product): OfferQuantity {
-  const popular = product.offers.find((o) => o.badge === 'الأكثر مبيعاً');
-  return popular?.quantity ?? product.offers[0]?.quantity ?? 1;
+  return getFirstOffer(product).quantity;
 }
 
 export default function ProductOffers({ product }: ProductOffersProps) {
@@ -52,16 +51,17 @@ export default function ProductOffers({ product }: ProductOffersProps) {
     [product.offers, selected]
   );
 
-  const firstOffer = product.offers[0];
+  const firstOffer = useMemo(() => getFirstOffer(product), [product]);
 
   const selectOffer = (quantity: OfferQuantity) => {
     setSelectedOffer(product.id, quantity);
   };
 
-  const handleCheckout = () => {
-    if (!selectedOffer) return;
+  const handleCheckout = (quantity: OfferQuantity = selected) => {
+    const offer = product.offers.find((o) => o.quantity === quantity);
+    if (!offer) return;
 
-    if (isInCart(product.id, selectedOffer.quantity)) {
+    if (isInCart(product.id, offer.quantity)) {
       openCart();
       return;
     }
@@ -69,20 +69,23 @@ export default function ProductOffers({ product }: ProductOffersProps) {
     trackAddToCart({
       productId: product.id,
       name: product.nameAr,
-      price: selectedOffer.price,
+      price: offer.price,
       quantity: 1,
     });
     addItem({
       id: product.id,
       name: product.nameAr,
-      price: selectedOffer.price,
-      offer: selectedOffer.quantity,
+      price: offer.price,
+      offer: offer.quantity,
       quantity: 1,
     });
     setTimeout(() => openCart(), 350);
   };
 
-  const displayOffer = selectedOffer ?? firstOffer;
+  const handleStickyCheckout = () => {
+    setSelectedOffer(product.id, firstOffer.quantity);
+    handleCheckout(firstOffer.quantity);
+  };
 
   return (
     <section className="checkout-hero section-padding pt-8 md:pt-12">
@@ -201,7 +204,7 @@ export default function ProductOffers({ product }: ProductOffersProps) {
 
             <button
               type="button"
-              onClick={handleCheckout}
+              onClick={() => handleCheckout()}
               disabled={!selectedOffer}
               className="checkout-cta checkout-cta--pulse w-full disabled:opacity-50"
             >
@@ -231,28 +234,21 @@ export default function ProductOffers({ product }: ProductOffersProps) {
       >
         <div className="container-wide">
           <div className="mx-auto max-w-3xl flex items-center gap-3 md:gap-4">
-            <div className="leading-tight shrink-0 hidden sm:block">
-              <p className="text-xs text-ink/50">{displayOffer.label}</p>
+            <div className="leading-tight shrink-0">
+              <p className="text-xs text-ink/50">{firstOffer.label}</p>
               <p className="font-heading font-extrabold text-brand text-lg">
-                {displayOffer.price} <span className="text-sm">{CURRENCY}</span>
-              </p>
-            </div>
-            <div className="leading-tight shrink-0 sm:hidden">
-              <p className="text-xs text-ink/50">{displayOffer.label}</p>
-              <p className="font-heading font-extrabold text-brand text-lg">
-                {displayOffer.price} <span className="text-sm">{CURRENCY}</span>
+                {firstOffer.price} <span className="text-sm">{CURRENCY}</span>
               </p>
             </div>
             <button
               type="button"
-              onClick={handleCheckout}
-              disabled={!displayOffer}
+              onClick={handleStickyCheckout}
               className="checkout-cta checkout-cta--pulse flex-1 py-3.5 text-base md:py-4"
             >
               <Icon name="cart" size={18} />
-              {displayOffer && isInCart(product.id, displayOffer.quantity)
+              {isInCart(product.id, firstOffer.quantity)
                 ? 'شوف السلة'
-                : `اطلب دابا — ${displayOffer.price} ${CURRENCY}`}
+                : `اطلب دابا — ${firstOffer.price} ${CURRENCY}`}
             </button>
           </div>
         </div>

@@ -1,5 +1,6 @@
-import { createPurchaseEventId } from '../lib/api/orders';
-import { trackAddToCart, trackInitiateCheckout } from '../lib/analytics/track';
+import { createPurchaseEventId, submitOrder } from '../lib/api/orders';
+import { getCheckoutErrorMessage } from '../lib/api/order-errors';
+import { trackAddToCart, trackInitiateCheckout, trackPurchase } from '../lib/analytics/track';
 import {
   validateCheckoutField,
   validateCheckoutForm,
@@ -7,9 +8,10 @@ import {
   type CheckoutFormData,
 } from '../lib/checkout-validation';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { createPortal } from 'react-dom';
 import { useRouter } from 'next/router';
 import { useCartStore } from '../lib/cart-store';
-import { savePendingCheckout } from '../lib/pending-checkout';
+import { saveOrderConfirmation } from '../lib/order-confirmation';
 import { products, CURRENCY, WARRANTY_DAYS, type Product, type ProductId } from '../lib/products';
 import FormField from './ui/FormField';
 import Icon, { Stars } from './ui/Icon';
@@ -55,13 +57,15 @@ export default function CartDrawer() {
     });
   };
 
-  if (!isOpen) return null;
+  if (!isOpen && !isCheckoutOpen) return null;
 
   return (
     <>
-      <div className="fixed inset-0 bg-ink/50 backdrop-blur-sm z-[60]" onClick={closeCart} />
+      {isOpen && !isCheckoutOpen && (
+        <>
+          <div className="fixed inset-0 bg-ink/50 backdrop-blur-sm z-[60]" onClick={closeCart} />
 
-      <div className="fixed end-0 top-0 h-full w-full sm:w-[26rem] bg-white shadow-lift z-[70] flex flex-col animate-fade-up">
+          <div className="fixed end-0 top-0 h-full w-full sm:w-[26rem] bg-white shadow-lift z-[70] flex flex-col animate-fade-up">
         <div className="flex items-center justify-between px-5 py-4 border-b border-ink/[0.07]">
           <h2 className="font-heading text-xl font-extrabold text-ink flex items-center gap-2">
             <Icon name="cart" size={22} className="text-brand" />
@@ -181,6 +185,8 @@ export default function CartDrawer() {
           </div>
         )}
       </div>
+        </>
+      )}
 
       {isCheckoutOpen && (
         <CheckoutModal onClose={() => setIsCheckoutOpen(false)} items={items} total={total} />
@@ -199,11 +205,16 @@ function CheckoutModal({ onClose, items, total }: CheckoutModalProps) {
   const router = useRouter();
   const { clearCart, closeCart } = useCartStore();
   const nameRef = useRef<HTMLInputElement>(null);
+  const [mounted, setMounted] = useState(false);
   const [formData, setFormData] = useState<CheckoutFormData>({ name: '', address: '', phone: '' });
   const [errors, setErrors] = useState<Partial<Record<CheckoutField, string>>>({});
   const [touched, setTouched] = useState<Partial<Record<CheckoutField, boolean>>>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -262,35 +273,62 @@ function CheckoutModal({ onClose, items, total }: CheckoutModalProps) {
     setSubmitError('');
     const eventId = createPurchaseEventId();
 
-    savePendingCheckout({
-      eventId,
-      name: formData.name.trim(),
-      address: formData.address.trim(),
-      phone: formData.phone.trim(),
-      items,
-      total,
-    });
+    try {
+      const result = await submitOrder({
+        eventId,
+        name: formData.name.trim(),
+        address: formData.address.trim(),
+        phone: formData.phone.trim(),
+        items,
+        total,
+      });
 
-    clearCart();
-    closeCart();
-    onClose();
-    void router.push('/thank-you');
-    setSubmitting(false);
+      saveOrderConfirmation({
+        name: formData.name.trim(),
+        phone: formData.phone.trim(),
+        items,
+        total,
+        eventId,
+        orderId: result.id,
+        publicOrderId: result.public_order_id,
+      });
+
+      trackPurchase({
+        eventId,
+        value: total,
+        items: items.map((item) => ({
+          productId: item.id,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+        })),
+      });
+
+      clearCart();
+      closeCart();
+      onClose();
+      void router.push('/thank-you');
+    } catch (error) {
+      setSubmitError(getCheckoutErrorMessage(error));
+      setSubmitting(false);
+    }
   };
 
-  return (
-    <>
+  if (!mounted) return null;
+
+  return createPortal(
+    <div className="fixed inset-0 z-[80] overflow-y-auto">
       <div
-        className="fixed inset-0 bg-ink/60 backdrop-blur-sm z-[80]"
+        className="fixed inset-0 bg-ink/60 backdrop-blur-sm"
         onClick={submitting ? undefined : onClose}
         aria-hidden
       />
-      <div className="fixed inset-0 z-[80] flex items-end sm:items-center justify-center p-0 sm:p-4">
+      <div className="relative flex min-h-[100dvh] items-center justify-center p-4 sm:min-h-full">
         <div
           role="dialog"
           aria-modal="true"
           aria-labelledby="checkout-title"
-          className="bg-white rounded-t-3xl sm:rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-lift max-h-[92vh] overflow-y-auto animate-fade-up"
+          className="relative w-full max-w-md bg-white rounded-3xl p-6 sm:p-8 shadow-lift max-h-[90vh] overflow-y-auto animate-fade-up"
         >
           <div className="flex items-center justify-between mb-5">
             <h2 id="checkout-title" className="font-heading text-2xl font-extrabold text-ink">
@@ -392,6 +430,7 @@ function CheckoutModal({ onClose, items, total }: CheckoutModalProps) {
           </p>
         </div>
       </div>
-    </>
+    </div>,
+    document.body
   );
 }

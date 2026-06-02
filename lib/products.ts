@@ -404,6 +404,11 @@ export function getProduct(id: ProductId): Product {
   return products[id];
 }
 
+/** Single-unit / first listed offer — used for sticky CTA and default selection. */
+export function getFirstOffer(product: Product): ProductOffer {
+  return product.offers.find((offer) => offer.quantity === 1) ?? product.offers[0];
+}
+
 export function getProductSku(id: ProductId | string): string {
   const product = products[id as ProductId];
   return product?.sku ?? `BOYA-UNK-${String(id).replace(/-/g, '').slice(0, 8).toUpperCase()}`;

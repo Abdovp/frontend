@@ -5,41 +5,17 @@ import Header from '../components/Header';
 import Footer from '../components/Footer';
 import UpsellPopup from '../components/UpsellPopup';
 import Icon from '../components/ui/Icon';
-import { trackPurchase } from '../lib/analytics/track';
-import { getCheckoutErrorMessage } from '../lib/api/order-errors';
-import { finalizeOrder, submitOrder } from '../lib/api/orders';
-import type { CartItem } from '../lib/cart-store';
+import { finalizeOrder, type FinalizeUpsellInput } from '../lib/api/orders';
+import { CURRENCY, type Product, type ProductId } from '../lib/products';
 import {
   clearOrderConfirmation,
   loadOrderConfirmation,
-  saveOrderConfirmation,
   type OrderConfirmation,
 } from '../lib/order-confirmation';
-import {
-  clearPendingCheckout,
-  loadPendingCheckout,
-  type PendingCheckout,
-} from '../lib/pending-checkout';
-import { CURRENCY, type Product, type ProductId } from '../lib/products';
 import { pickUpsellProduct, UPSELL_PRICE } from '../lib/upsell';
 
-function getOrderedProductIds(items: Array<{ productId?: ProductId }>): ProductId[] {
-  return [...new Set(items.map((item) => item.productId).filter(Boolean))] as ProductId[];
-}
-
-function pendingToPreview(checkout: PendingCheckout): OrderConfirmation {
-  return {
-    firstName: checkout.name.trim().split(/\s+/)[0] || checkout.name.trim(),
-    phone: checkout.phone.trim(),
-    items: checkout.items.map((item) => ({
-      productId: item.id,
-      name: item.name,
-      offer: item.offer,
-      price: item.price,
-      quantity: item.quantity,
-    })),
-    total: checkout.total,
-  };
+function getOrderedProductIds(order: OrderConfirmation): ProductId[] {
+  return [...new Set(order.items.map((item) => item.productId).filter(Boolean))] as ProductId[];
 }
 
 function offerLabel(offer: number, isUpsell?: boolean) {
@@ -52,136 +28,62 @@ export default function ThankYou() {
   const [order, setOrder] = useState<OrderConfirmation | null>(null);
   const [upsellProduct, setUpsellProduct] = useState<Product | null>(null);
   const [ready, setReady] = useState(false);
-  const [submitting, setSubmitting] = useState(false);
-  const [submitError, setSubmitError] = useState('');
-  const checkoutRef = useRef<PendingCheckout | null>(null);
+  const sheetSentRef = useRef(false);
   const upsellProductRef = useRef<Product | null>(null);
-  const submittedRef = useRef(false);
 
-  const completeCheckout = useCallback(async (upsell?: Product) => {
-    if (submittedRef.current) return;
+  const sendOrderToSheet = useCallback((upsell?: FinalizeUpsellInput) => {
+    if (sheetSentRef.current) return;
 
-    const checkout = checkoutRef.current ?? loadPendingCheckout();
-    if (!checkout) return;
+    const confirmation = loadOrderConfirmation();
+    if (!confirmation?.orderId || !confirmation?.eventId) return;
 
-    submittedRef.current = true;
-    setSubmitting(true);
-    setSubmitError('');
-
-    let orderItems: CartItem[] = checkout.items;
-    let orderTotal = checkout.total;
-
-    if (upsell) {
-      orderItems = [
-        ...checkout.items,
-        {
-          id: upsell.id,
-          lineKey: `${upsell.id}-upsell`,
-          name: upsell.nameAr,
-          price: UPSELL_PRICE,
-          offer: 1,
-          quantity: 1,
-        },
-      ];
-      orderTotal += UPSELL_PRICE;
-    }
-
-    try {
-      const result = await submitOrder({
-        eventId: checkout.eventId,
-        name: checkout.name,
-        address: checkout.address,
-        phone: checkout.phone,
-        items: orderItems,
-        total: orderTotal,
-      });
-
-      saveOrderConfirmation({
-        name: checkout.name,
-        phone: checkout.phone,
-        items: checkout.items,
-        total: orderTotal,
-        eventId: checkout.eventId,
-        orderId: result.id,
-        publicOrderId: result.public_order_id,
-        upsellItem: upsell
-          ? { productId: upsell.id, name: upsell.nameAr, price: UPSELL_PRICE }
-          : undefined,
-      });
-
-      clearPendingCheckout();
-      checkoutRef.current = null;
-
-      trackPurchase({
-        eventId: checkout.eventId,
-        value: orderTotal,
-        items: orderItems.map((item) => ({
-          productId: item.id,
-          name: item.name,
-          price: item.price,
-          quantity: item.quantity,
-        })),
-      });
-
-      await finalizeOrder({
-        orderId: result.id,
-        eventId: checkout.eventId,
-      });
-
-      setOrder(loadOrderConfirmation());
-      setUpsellProduct(null);
-      upsellProductRef.current = null;
-    } catch (error) {
-      submittedRef.current = false;
-      setSubmitError(getCheckoutErrorMessage(error));
-    } finally {
-      setSubmitting(false);
-    }
+    sheetSentRef.current = true;
+    void finalizeOrder({
+      orderId: confirmation.orderId,
+      eventId: confirmation.eventId,
+      upsell,
+    }).then((ok) => {
+      if (!ok) sheetSentRef.current = false;
+    });
   }, []);
 
   useEffect(() => {
     const saved = loadOrderConfirmation();
-    if (saved?.orderId) {
-      setOrder(saved);
-      setReady(true);
-      return;
+    setOrder(saved);
+    if (saved) {
+      const upsell = pickUpsellProduct(getOrderedProductIds(saved));
+      upsellProductRef.current = upsell;
+      setUpsellProduct(upsell);
+      if (!upsell) {
+        sendOrderToSheet();
+      }
     }
-
-    const checkout = loadPendingCheckout();
-    if (!checkout) {
-      setReady(true);
-      return;
-    }
-
-    checkoutRef.current = checkout;
-    setOrder(pendingToPreview(checkout));
-
-    const upsell = pickUpsellProduct(checkout.items.map((item) => item.id));
-    upsellProductRef.current = upsell;
-    setUpsellProduct(upsell);
-
-    if (!upsell) {
-      void completeCheckout();
-    }
-
     setReady(true);
-  }, [completeCheckout]);
+  }, [sendOrderToSheet]);
 
   const handleCloseUpsell = useCallback(() => {
     setUpsellProduct(null);
     upsellProductRef.current = null;
-    void completeCheckout();
-  }, [completeCheckout]);
+    sendOrderToSheet();
+  }, [sendOrderToSheet]);
 
   const handleUpsellAdded = useCallback(() => {
     const product = upsellProductRef.current;
+    setOrder(loadOrderConfirmation());
     setUpsellProduct(null);
-    void completeCheckout(product ?? undefined);
-  }, [completeCheckout]);
+    upsellProductRef.current = null;
+    if (!product) {
+      sendOrderToSheet();
+      return;
+    }
+    sendOrderToSheet({
+      product_id: product.id,
+      product_name: product.nameAr,
+      unit_price: UPSELL_PRICE,
+    });
+  }, [sendOrderToSheet]);
 
   const firstName = order?.firstName ?? 'صديقنا';
-  const showOrderSummary = ready && order && !submitting;
-  const waitingForUpsell = Boolean(upsellProduct) && !submitting;
 
   return (
     <>
@@ -204,58 +106,28 @@ export default function ThankYou() {
 
             <div className="space-y-4 text-ink/75 text-base md:text-lg leading-relaxed">
               <p className="font-semibold text-ink">
-                {submitting
-                  ? 'كنسجّلو الطلب دابا… ثواني قليلة.'
-                  : waitingForUpsell
-                    ? 'مبروك! قبل ما نسجّلو الطلب، عندك عرض خاص.'
-                    : 'مبروك! حجزنا ليك آخر كمية متوفرة من المنتج.'}
+                مبروك! حجزنا ليك آخر كمية متوفرة من المنتج.
               </p>
-              {!waitingForUpsell && !submitting && (
-                <>
-                  <p>
-                    غادي نتصلو بيك ف <span className="font-bold text-brand">10 دقائق أو أقل</span>
-                    {order?.phone ? (
-                      <>
-                        {' '}
-                        على الرقم{' '}
-                        <span className="font-bold text-ink" dir="ltr">
-                          {order.phone}
-                        </span>
-                      </>
-                    ) : null}{' '}
-                    باش نأكدو الطلب — خلي التيليفون حداك.
-                  </p>
-                  <p className="text-sm md:text-base text-ink/60 bg-cream rounded-2xl px-4 py-3 border border-ink/[0.06]">
-                    <Icon name="clock" size={16} className="inline-block text-brand ms-1 align-[-2px]" />{' '}
-                    إلا طلبتي ف الليل، غادي نتصلو بيك ف الصباح باكر ما أمكن.
-                  </p>
-                </>
-              )}
+              <p>
+                غادي نتصلو بيك ف <span className="font-bold text-brand">10 دقائق أو أقل</span>
+                {order?.phone ? (
+                  <>
+                    {' '}
+                    على الرقم{' '}
+                    <span className="font-bold text-ink" dir="ltr">
+                      {order.phone}
+                    </span>
+                  </>
+                ) : null}{' '}
+                باش نأكدو الطلب — خلي التيليفون حداك.
+              </p>
+              <p className="text-sm md:text-base text-ink/60 bg-cream rounded-2xl px-4 py-3 border border-ink/[0.06]">
+                <Icon name="clock" size={16} className="inline-block text-brand ms-1 align-[-2px]" />{' '}
+                إلا طلبتي ف الليل، غادي نتصلو بيك ف الصباح باكر ما أمكن.
+              </p>
             </div>
 
-            {submitting && (
-              <div className="mt-8 rounded-2xl bg-cream border border-ink/[0.06] px-5 py-6 text-center">
-                <p className="text-ink/70 font-semibold">جاري تسجيل الطلب…</p>
-              </div>
-            )}
-
-            {submitError && (
-              <div className="mt-8 rounded-2xl bg-red-50 border border-red-100 px-5 py-4 text-sm text-red-700">
-                {submitError}
-                <button
-                  type="button"
-                  className="btn-primary w-full mt-4"
-                  onClick={() => {
-                    submittedRef.current = false;
-                    void completeCheckout(upsellProductRef.current ?? undefined);
-                  }}
-                >
-                  جرّب مرة أخرى
-                </button>
-              </div>
-            )}
-
-            {showOrderSummary && (
+            {ready && order && (
               <div className="mt-8 rounded-2xl border border-ink/[0.08] overflow-hidden">
                 <div className="bg-brand text-white px-5 py-3.5 flex items-center justify-between gap-3">
                   <div className="flex items-center gap-2 min-w-0">
@@ -299,7 +171,7 @@ export default function ThankYou() {
               </div>
             )}
 
-            {ready && !order && !submitting && (
+            {ready && !order && (
               <div className="mt-8 rounded-2xl bg-cream border border-ink/[0.06] px-5 py-4 text-sm text-ink/60 text-center">
                 ما لقيناش تفاصيل الطلب ف هاد الجلسة. إلا كملتي الطلب، غادي يتصل بيك فريقنا قريباً.
               </div>
@@ -312,10 +184,7 @@ export default function ThankYou() {
               <Link
                 href="/collections"
                 className="btn-outline flex-1 text-center"
-                onClick={() => {
-                  clearOrderConfirmation();
-                  clearPendingCheckout();
-                }}
+                onClick={() => clearOrderConfirmation()}
               >
                 تصفّح منتجات أخرى
               </Link>
@@ -323,7 +192,7 @@ export default function ThankYou() {
           </div>
         </div>
       </main>
-      {upsellProduct && !submitting && (
+      {upsellProduct && (
         <UpsellPopup
           product={upsellProduct}
           onAdded={handleUpsellAdded}
