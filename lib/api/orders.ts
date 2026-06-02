@@ -69,7 +69,7 @@ export async function submitOrder(input: SubmitOrderInput): Promise<SubmitOrderR
           offer: item.offer,
           quantity: item.quantity,
           unit_price: item.price,
-          is_upsell: false,
+          is_upsell: item.lineKey.endsWith('-upsell'),
         })),
       }),
     });
@@ -97,3 +97,45 @@ export function createPurchaseEventId(): string {
 }
 
 export { OrderSubmitError } from './order-errors';
+
+export interface FinalizeUpsellInput {
+  product_id: string;
+  product_name: string;
+  unit_price: number;
+  offer?: number;
+  quantity?: number;
+}
+
+export interface FinalizeOrderInput {
+  orderId: number;
+  eventId: string;
+  upsell?: FinalizeUpsellInput;
+}
+
+export async function finalizeOrder(input: FinalizeOrderInput): Promise<boolean> {
+  const url = `${ORDERS_API_URL}/${input.orderId}/finalize`;
+
+  let response: Response;
+  try {
+    response = await fetch(url, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        event_id: input.eventId,
+        upsell: input.upsell
+          ? {
+              product_id: input.upsell.product_id,
+              product_name: input.upsell.product_name,
+              unit_price: input.upsell.unit_price,
+              offer: input.upsell.offer ?? 1,
+              quantity: input.upsell.quantity ?? 1,
+            }
+          : null,
+      }),
+    });
+  } catch {
+    return false;
+  }
+
+  return response.ok;
+}

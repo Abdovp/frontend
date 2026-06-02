@@ -1,6 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
 import Icon, { Stars } from './ui/Icon';
-import { appendUpsellToOrder } from '../lib/order-confirmation';
 import { CURRENCY, type Product } from '../lib/products';
 import { UPSELL_DURATION_SEC, UPSELL_PRICE } from '../lib/upsell';
 
@@ -30,10 +29,8 @@ export default function UpsellPopup({ product, onAdded, onClose }: UpsellPopupPr
 
   const handleAdd = () => {
     if (added) return;
-    appendUpsellToOrder(product.id, product.nameAr, UPSELL_PRICE);
     setAdded(true);
     onAdded();
-    onClose();
   };
 
   return (

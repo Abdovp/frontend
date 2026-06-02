@@ -29,6 +29,11 @@ export function saveOrderConfirmation(data: {
   eventId?: string;
   orderId?: number;
   publicOrderId?: string;
+  upsellItem?: {
+    productId: ProductId;
+    name: string;
+    price: number;
+  };
 }): void {
   if (typeof window === 'undefined') return;
 
@@ -39,13 +44,27 @@ export function saveOrderConfirmation(data: {
     eventId: data.eventId,
     orderId: data.orderId,
     purchaseTracked: true,
-    items: data.items.map((item) => ({
-      productId: item.id,
-      name: item.name,
-      offer: item.offer,
-      price: item.price,
-      quantity: item.quantity,
-    })),
+    items: [
+      ...data.items.map((item) => ({
+        productId: item.id,
+        name: item.name,
+        offer: item.offer,
+        price: item.price,
+        quantity: item.quantity,
+      })),
+      ...(data.upsellItem
+        ? [
+            {
+              productId: data.upsellItem.productId,
+              name: data.upsellItem.name,
+              offer: 1 as const,
+              price: data.upsellItem.price,
+              quantity: 1,
+              isUpsell: true,
+            },
+          ]
+        : []),
+    ],
     total: data.total,
   };
 

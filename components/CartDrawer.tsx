@@ -1,6 +1,5 @@
-import { createPurchaseEventId, submitOrder } from '../lib/api/orders';
-import { getCheckoutErrorMessage } from '../lib/api/order-errors';
-import { trackAddToCart, trackInitiateCheckout, trackPurchase } from '../lib/analytics/track';
+import { createPurchaseEventId } from '../lib/api/orders';
+import { trackAddToCart, trackInitiateCheckout } from '../lib/analytics/track';
 import {
   validateCheckoutField,
   validateCheckoutForm,
@@ -10,7 +9,7 @@ import {
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useCartStore } from '../lib/cart-store';
-import { saveOrderConfirmation } from '../lib/order-confirmation';
+import { savePendingCheckout } from '../lib/pending-checkout';
 import { products, CURRENCY, WARRANTY_DAYS, type Product, type ProductId } from '../lib/products';
 import FormField from './ui/FormField';
 import Icon, { Stars } from './ui/Icon';
@@ -263,45 +262,20 @@ function CheckoutModal({ onClose, items, total }: CheckoutModalProps) {
     setSubmitError('');
     const eventId = createPurchaseEventId();
 
-    try {
-      const result = await submitOrder({
-        eventId,
-        name: formData.name.trim(),
-        address: formData.address.trim(),
-        phone: formData.phone.trim(),
-        items,
-        total,
-      });
+    savePendingCheckout({
+      eventId,
+      name: formData.name.trim(),
+      address: formData.address.trim(),
+      phone: formData.phone.trim(),
+      items,
+      total,
+    });
 
-      saveOrderConfirmation({
-        name: formData.name.trim(),
-        phone: formData.phone.trim(),
-        items,
-        total,
-        eventId,
-        orderId: result.id,
-        publicOrderId: result.public_order_id,
-      });
-
-      trackPurchase({
-        eventId,
-        value: total,
-        items: items.map((item) => ({
-          productId: item.id,
-          name: item.name,
-          price: item.price,
-          quantity: item.quantity,
-        })),
-      });
-
-      clearCart();
-      closeCart();
-      onClose();
-      void router.push('/thank-you');
-    } catch (error) {
-      setSubmitError(getCheckoutErrorMessage(error));
-      setSubmitting(false);
-    }
+    clearCart();
+    closeCart();
+    onClose();
+    void router.push('/thank-you');
+    setSubmitting(false);
   };
 
   return (
