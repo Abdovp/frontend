@@ -10,13 +10,13 @@ html {
 
 :root {
   --site-header-height: 4rem;
-  --announcement-tick-height: 2.25rem;
+  --announcement-tick-height: 2.75rem;
 }
 
 @media (min-width: 640px) {
   :root {
     --site-header-height: 4.75rem;
-    --announcement-tick-height: 2.5rem;
+    --announcement-tick-height: 3rem;
   }
 }
 
@@ -130,7 +130,7 @@ h1, h2, h3, h4 {
 
   /* ---------- Header ---------- */
   .announcement-bar {
-    @apply bg-ink text-white text-xs sm:text-sm overflow-hidden;
+    @apply bg-ink text-white text-sm sm:text-base overflow-hidden;
   }
 
   .announcement-bar--tick {
@@ -150,7 +150,7 @@ h1, h2, h3, h4 {
   }
 
   .announcement-bar__slide {
-    @apply flex shrink-0 items-center justify-center gap-2 px-4 font-medium text-center;
+    @apply flex shrink-0 items-center justify-center gap-2.5 px-5 sm:px-6 font-medium text-center;
     height: var(--tick-height);
   }
 
@@ -159,18 +159,7 @@ h1, h2, h3, h4 {
   }
 
   .product-moving-header {
-    @apply sticky z-40 w-full;
-    top: var(--site-header-height);
-  }
-
-  /* Product page: keep tick announcement pinned under the header while scrolling */
-  .product-page .product-moving-header {
-    @apply fixed inset-x-0 z-40 w-full;
-    top: var(--site-header-height);
-  }
-
-  .product-page main {
-    padding-top: var(--announcement-tick-height);
+    @apply relative z-40 w-full;
   }
 
   .site-header__bar {
