@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:8000';
+import { apiUrl } from './base-url';
 
 export type TrackingEventName =
   | 'PageView'
@@ -14,7 +14,7 @@ export async function logTrackingEvent(
   orderId?: number
 ): Promise<void> {
   try {
-    await fetch(`${API_URL}/api/events`, {
+    await fetch(apiUrl('/api/events'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({

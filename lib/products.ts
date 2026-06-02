@@ -40,6 +40,7 @@ export interface ProductSection {
 
 export interface Product {
   id: ProductId;
+  sku: string;
   slug: string;
   href: string;
   nameAr: string;
@@ -105,6 +106,7 @@ const SHARED_GUARANTEES: GuaranteeItem[] = [
 export const products: Record<ProductId, Product> = {
   'cooling-pack': {
     id: 'cooling-pack',
+    sku: 'BOYA-CP-2847',
     slug: 'pack',
     href: '/product/pack',
     nameAr: 'باك الحماية من سخونة السيارة',
@@ -252,6 +254,7 @@ export const products: Record<ProductId, Product> = {
   },
   'magnetic-holder': {
     id: 'magnetic-holder',
+    sku: 'BOYA-MH-9153',
     slug: 'magnetic-holder',
     href: '/product/magnetic-holder',
     nameAr: 'حامل الهاتف المغناطيسي للسيارة',
@@ -399,4 +402,9 @@ export const productList: Product[] = Object.values(products);
 
 export function getProduct(id: ProductId): Product {
   return products[id];
+}
+
+export function getProductSku(id: ProductId | string): string {
+  const product = products[id as ProductId];
+  return product?.sku ?? `BOYA-UNK-${String(id).replace(/-/g, '').slice(0, 8).toUpperCase()}`;
 }

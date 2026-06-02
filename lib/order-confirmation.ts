@@ -6,6 +6,7 @@ export const ORDER_CONFIRMATION_KEY = 'boya_order_confirmation';
 export interface OrderConfirmation {
   firstName: string;
   phone: string;
+  publicOrderId?: string;
   eventId?: string;
   orderId?: number;
   purchaseTracked?: boolean;
@@ -27,12 +28,14 @@ export function saveOrderConfirmation(data: {
   total: number;
   eventId?: string;
   orderId?: number;
+  publicOrderId?: string;
 }): void {
   if (typeof window === 'undefined') return;
 
   const payload: OrderConfirmation = {
     firstName: data.name.trim().split(/\s+/)[0] || data.name.trim(),
     phone: data.phone.trim(),
+    publicOrderId: data.publicOrderId,
     eventId: data.eventId,
     orderId: data.orderId,
     purchaseTracked: true,
@@ -46,7 +49,11 @@ export function saveOrderConfirmation(data: {
     total: data.total,
   };
 
-  sessionStorage.setItem(ORDER_CONFIRMATION_KEY, JSON.stringify(payload));
+  try {
+    sessionStorage.setItem(ORDER_CONFIRMATION_KEY, JSON.stringify(payload));
+  } catch {
+    // Private browsing / storage limits must not block checkout.
+  }
 }
 
 export function loadOrderConfirmation(): OrderConfirmation | null {

@@ -88,9 +88,16 @@ export default function ThankYou() {
 
             {ready && order && (
               <div className="mt-8 rounded-2xl border border-ink/[0.08] overflow-hidden">
-                <div className="bg-brand text-white px-5 py-3.5 flex items-center gap-2">
-                  <Icon name="cart" size={18} className="text-accent" />
-                  <h2 className="font-heading font-extrabold text-lg">طلبيتك</h2>
+                <div className="bg-brand text-white px-5 py-3.5 flex items-center justify-between gap-3">
+                  <div className="flex items-center gap-2 min-w-0">
+                    <Icon name="cart" size={18} className="text-accent shrink-0" />
+                    <h2 className="font-heading font-extrabold text-lg">طلبيتك</h2>
+                  </div>
+                  {order.publicOrderId ? (
+                    <span className="text-xs sm:text-sm font-bold bg-white/15 rounded-full px-3 py-1 shrink-0" dir="ltr">
+                      {order.publicOrderId}
+                    </span>
+                  ) : null}
                 </div>
                 <div className="bg-white px-5 py-4 space-y-3">
                   {order.items.map((item, index) => (

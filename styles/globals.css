@@ -345,6 +345,18 @@ h1, h2, h3, h4 {
     @apply field-input text-right;
     direction: ltr;
   }
+
+  .field-input--error {
+    @apply border-red-400 ring-2 ring-red-100 focus:border-red-400 focus:ring-red-100;
+  }
+
+  .field-error {
+    @apply text-red-600 text-xs mt-1.5 font-semibold;
+  }
+
+  .field-hint {
+    @apply text-ink/45 text-xs mt-1.5;
+  }
 }
 
 @layer utilities {

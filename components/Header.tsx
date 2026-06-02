@@ -5,7 +5,7 @@ import AnnouncementBar from './AnnouncementBar';
 import CollapsibleMenu from './ui/CollapsibleMenu';
 import Icon from './ui/Icon';
 import { STORE } from '../lib/products';
-import { mainNavLinks, policyLinks } from '../lib/navigation';
+import { mainNavLinks } from '../lib/navigation';
 
 function Logo({ onClick }: { onClick?: () => void }) {
   return (
@@ -42,25 +42,6 @@ export default function Header({ showAnnouncement = true }: { showAnnouncement?:
                 {link.label}
               </Link>
             ))}
-            <div className="relative group">
-              <Link href="/policies/refund" className="nav-link inline-flex items-center gap-1">
-                السياسات
-                <Icon name="chevron-down" size={14} className="opacity-50" />
-              </Link>
-              <div className="absolute top-full start-0 pt-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all z-50">
-                <div className="bg-white border border-ink/[0.08] rounded-2xl shadow-lift py-2 min-w-[200px]">
-                  {policyLinks.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      className="block px-4 py-2.5 text-sm font-semibold text-ink/75 hover:text-brand hover:bg-brand/[0.04]"
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                </div>
-              </div>
-            </div>
           </nav>
 
           <div className="site-header__actions">
@@ -91,23 +72,6 @@ export default function Header({ showAnnouncement = true }: { showAnnouncement?:
             <CollapsibleMenu title="التصفح" defaultOpen>
               <ul className="space-y-1">
                 {mainNavLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link
-                      href={link.href}
-                      className="flex items-center justify-between py-2.5 text-ink font-semibold hover:text-brand"
-                      onClick={closeMenu}
-                    >
-                      {link.label}
-                      <Icon name="arrow-left" size={16} className="text-ink/30" />
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </CollapsibleMenu>
-
-            <CollapsibleMenu title="السياسات">
-              <ul className="space-y-1">
-                {policyLinks.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}

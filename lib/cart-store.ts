@@ -17,7 +17,8 @@ interface CartStore {
   openCart: () => void;
   closeCart: () => void;
   setSelectedOffer: (productId: ProductId, offer: 1 | 2 | 3) => void;
-  addItem: (item: Omit<CartItem, 'lineKey'>) => void;
+  addItem: (item: Omit<CartItem, 'lineKey'>) => boolean;
+  isInCart: (productId: ProductId, offer: 1 | 2 | 3) => boolean;
   removeItem: (lineKey: string) => void;
   updateQuantity: (lineKey: string, quantity: number) => void;
   clearCart: () => void;
@@ -41,14 +42,18 @@ export const useCartStore = create<CartStore>((set, get) => ({
     const existingSameLine = items.find((i) => i.lineKey === lineKey);
 
     if (existingSameLine) {
-      return;
+      return false;
     }
 
     const withoutSameProduct = items.filter((i) => i.id !== item.id);
     set({
       items: [...withoutSameProduct, { ...item, lineKey, quantity: item.quantity }],
     });
+    return true;
   },
+
+  isInCart: (productId, offer) =>
+    get().items.some((i) => i.id === productId && i.offer === offer),
 
   removeItem: (lineKey) => set({ items: get().items.filter((i) => i.lineKey !== lineKey) }),
 

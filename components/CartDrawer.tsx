@@ -1,10 +1,18 @@
 import { createPurchaseEventId, submitOrder } from '../lib/api/orders';
+import { getCheckoutErrorMessage } from '../lib/api/order-errors';
 import { trackAddToCart, trackInitiateCheckout, trackPurchase } from '../lib/analytics/track';
-import { useState } from 'react';
+import {
+  validateCheckoutField,
+  validateCheckoutForm,
+  type CheckoutField,
+  type CheckoutFormData,
+} from '../lib/checkout-validation';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useCartStore } from '../lib/cart-store';
 import { saveOrderConfirmation } from '../lib/order-confirmation';
 import { products, CURRENCY, WARRANTY_DAYS, type Product, type ProductId } from '../lib/products';
+import FormField from './ui/FormField';
 import Icon, { Stars } from './ui/Icon';
 
 function getCrossSellProduct(cartIds: ProductId[]): Product | null {
@@ -191,25 +199,63 @@ interface CheckoutModalProps {
 function CheckoutModal({ onClose, items, total }: CheckoutModalProps) {
   const router = useRouter();
   const { clearCart, closeCart } = useCartStore();
-  const [formData, setFormData] = useState({ name: '', address: '', phone: '' });
-  const [phoneError, setPhoneError] = useState('');
+  const nameRef = useRef<HTMLInputElement>(null);
+  const [formData, setFormData] = useState<CheckoutFormData>({ name: '', address: '', phone: '' });
+  const [errors, setErrors] = useState<Partial<Record<CheckoutField, string>>>({});
+  const [touched, setTouched] = useState<Partial<Record<CheckoutField, boolean>>>({});
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
-  const validatePhone = (phone: string) => /^(\+212|0)[67]\d{8}$/.test(phone.replace(/\s/g, ''));
+  useEffect(() => {
+    document.body.style.overflow = 'hidden';
+    nameRef.current?.focus();
 
-  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const phone = e.target.value;
-    setFormData({ ...formData, phone });
-    setPhoneError(phone && !validatePhone(phone) ? 'دخّل رقم هاتف مغربي صحيح' : '');
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && !submitting) onClose();
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.body.style.overflow = '';
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [onClose, submitting]);
+
+  const setField = useCallback((field: CheckoutField, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+    setErrors((prev) => {
+      if (!prev[field]) return prev;
+      const next = { ...prev };
+      delete next[field];
+      return next;
+    });
+  }, []);
+
+  const handleBlur = (field: CheckoutField, value: string) => {
+    setTouched((prev) => ({ ...prev, [field]: true }));
+    const error = validateCheckoutField(field, value);
+    setErrors((prev) => {
+      const next = { ...prev };
+      if (error) next[field] = error;
+      else delete next[field];
+      return next;
+    });
   };
 
-  const [submitError, setSubmitError] = useState('');
+  const showError = (field: CheckoutField) =>
+    errors[field] && (touched[field] || submitting) ? errors[field] : undefined;
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!formData.name || !formData.address || !formData.phone) return;
-    if (!validatePhone(formData.phone)) {
-      setPhoneError('دخّل رقم هاتف مغربي صحيح');
+    const nextErrors = validateCheckoutForm(formData);
+    setErrors(nextErrors);
+    setTouched({ name: true, address: true, phone: true });
+
+    if (Object.keys(nextErrors).length > 0) {
+      const firstInvalid = (['name', 'address', 'phone'] as CheckoutField[]).find((f) => nextErrors[f]);
+      if (firstInvalid) {
+        document.getElementById(`checkout-${firstInvalid}`)?.focus();
+      }
       return;
     }
 
@@ -220,20 +266,21 @@ function CheckoutModal({ onClose, items, total }: CheckoutModalProps) {
     try {
       const result = await submitOrder({
         eventId,
-        name: formData.name,
-        address: formData.address,
-        phone: formData.phone,
+        name: formData.name.trim(),
+        address: formData.address.trim(),
+        phone: formData.phone.trim(),
         items,
         total,
       });
 
       saveOrderConfirmation({
-        name: formData.name,
-        phone: formData.phone,
+        name: formData.name.trim(),
+        phone: formData.phone.trim(),
         items,
         total,
         eventId,
         orderId: result.id,
+        publicOrderId: result.public_order_id,
       });
 
       trackPurchase({
@@ -250,75 +297,115 @@ function CheckoutModal({ onClose, items, total }: CheckoutModalProps) {
       clearCart();
       closeCart();
       onClose();
-      router.push('/thank-you');
-    } catch {
-      setSubmitError('ما قدرناش نسجّلو الطلب. جرّب مرة أخرى.');
+      void router.push('/thank-you');
+    } catch (error) {
+      setSubmitError(getCheckoutErrorMessage(error));
       setSubmitting(false);
     }
   };
 
   return (
     <>
-      <div className="fixed inset-0 bg-ink/60 backdrop-blur-sm z-[80]" onClick={onClose} />
-      <div className="fixed inset-0 z-[80] flex items-center justify-center p-4">
-        <div className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-lift max-h-[92vh] overflow-y-auto">
+      <div
+        className="fixed inset-0 bg-ink/60 backdrop-blur-sm z-[80]"
+        onClick={submitting ? undefined : onClose}
+        aria-hidden
+      />
+      <div className="fixed inset-0 z-[80] flex items-end sm:items-center justify-center p-0 sm:p-4">
+        <div
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="checkout-title"
+          className="bg-white rounded-t-3xl sm:rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-lift max-h-[92vh] overflow-y-auto animate-fade-up"
+        >
           <div className="flex items-center justify-between mb-5">
-            <h2 className="font-heading text-2xl font-extrabold text-ink">إتمام الطلب</h2>
-            <button onClick={onClose} className="icon-btn" aria-label="إغلاق">
+            <h2 id="checkout-title" className="font-heading text-2xl font-extrabold text-ink">
+              إتمام الطلب
+            </h2>
+            <button
+              type="button"
+              onClick={onClose}
+              disabled={submitting}
+              className="icon-btn disabled:opacity-40"
+              aria-label="إغلاق"
+            >
               <Icon name="close" size={20} />
             </button>
           </div>
 
           <div className="bg-cream rounded-2xl p-4 mb-5">
             {items.map((item) => (
-              <div key={item.lineKey} className="flex justify-between mb-2 text-sm">
-                <span className="text-ink/70">{item.name} ({item.offer})</span>
-                <span className="font-bold text-ink">{item.price * item.quantity} {CURRENCY}</span>
+              <div key={item.lineKey} className="flex justify-between mb-2 text-sm gap-3">
+                <span className="text-ink/70 min-w-0">
+                  {item.name} ({item.offer} {item.offer === 1 ? 'وحدة' : 'وحدات'})
+                </span>
+                <span className="font-bold text-ink shrink-0">
+                  {item.price * item.quantity} {CURRENCY}
+                </span>
               </div>
             ))}
             <div className="border-t border-ink/10 pt-2 mt-2 flex justify-between font-extrabold">
               <span>المجموع</span>
               <span className="text-brand">{total} {CURRENCY}</span>
             </div>
+            <p className="flex items-center gap-1.5 text-xs text-emerald-700 font-semibold mt-2">
+              <Icon name="wallet" size={14} />
+              دفع عند الاستلام — ما كاينش دفع أونلاين
+            </p>
           </div>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <label className="field-label">الاسم الكامل</label>
-              <input
-                type="text"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="field-input"
-                placeholder="مثال: محمد العلوي"
-                required
-              />
-            </div>
-            <div>
-              <label className="field-label">العنوان والمدينة</label>
-              <input
-                type="text"
-                value={formData.address}
-                onChange={(e) => setFormData({ ...formData, address: e.target.value })}
-                className="field-input"
-                placeholder="الحي، الشارع، المدينة"
-                required
-              />
-            </div>
-            <div>
-              <label className="field-label">رقم الهاتف</label>
-              <input
-                type="tel"
-                value={formData.phone}
-                onChange={handlePhoneChange}
-                placeholder="06XXXXXXXX"
-                dir="ltr"
-                className={`field-input-tel ${phoneError ? '!border-red-400 !ring-red-100' : ''}`}
-                required
-              />
-              {phoneError && <p className="text-red-500 text-xs mt-1.5">{phoneError}</p>}
-            </div>
-            {submitError && <p className="text-red-500 text-sm">{submitError}</p>}
+          <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+            <FormField
+              ref={nameRef}
+              id="checkout-name"
+              label="الاسم الكامل"
+              error={showError('name')}
+              inputProps={{
+                type: 'text',
+                value: formData.name,
+                onChange: (e) => setField('name', e.target.value),
+                onBlur: (e) => handleBlur('name', e.target.value),
+                placeholder: 'مثال: محمد العلوي',
+                autoComplete: 'name',
+                disabled: submitting,
+              }}
+            />
+            <FormField
+              id="checkout-address"
+              label="العنوان والمدينة"
+              error={showError('address')}
+              inputProps={{
+                type: 'text',
+                value: formData.address,
+                onChange: (e) => setField('address', e.target.value),
+                onBlur: (e) => handleBlur('address', e.target.value),
+                placeholder: 'الحي، الشارع، المدينة',
+                autoComplete: 'street-address',
+                disabled: submitting,
+              }}
+            />
+            <FormField
+              id="checkout-phone"
+              label="رقم الهاتف"
+              error={showError('phone')}
+              hint={!showError('phone') ? 'مثال: 0612345678 أو +212612345678' : undefined}
+              inputProps={{
+                type: 'tel',
+                inputMode: 'tel',
+                dir: 'ltr',
+                value: formData.phone,
+                onChange: (e) => setField('phone', e.target.value),
+                onBlur: (e) => handleBlur('phone', e.target.value),
+                placeholder: '06XXXXXXXX',
+                autoComplete: 'tel',
+                disabled: submitting,
+              }}
+            />
+            {submitError && (
+              <p className="text-red-600 text-sm font-semibold bg-red-50 border border-red-100 rounded-xl px-4 py-3" role="alert">
+                {submitError}
+              </p>
+            )}
             <button type="submit" disabled={submitting} className="checkout-cta w-full disabled:opacity-50">
               <Icon name="check" size={20} />
               {submitting ? 'جاري التأكيد...' : 'تأكيد الطلب — دفع عند الاستلام'}

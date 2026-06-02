@@ -19,7 +19,7 @@ function getDefaultOffer(product: Product): OfferQuantity {
 }
 
 export default function ProductOffers({ product }: ProductOffersProps) {
-  const { addItem, openCart, setSelectedOffer } = useCartStore();
+  const { addItem, openCart, setSelectedOffer, isInCart } = useCartStore();
   const productCardRef = useRef<HTMLDivElement>(null);
   const [showSticky, setShowSticky] = useState(false);
 
@@ -60,6 +60,12 @@ export default function ProductOffers({ product }: ProductOffersProps) {
 
   const handleCheckout = () => {
     if (!selectedOffer) return;
+
+    if (isInCart(product.id, selectedOffer.quantity)) {
+      openCart();
+      return;
+    }
+
     trackAddToCart({
       productId: product.id,
       name: product.nameAr,
@@ -76,9 +82,7 @@ export default function ProductOffers({ product }: ProductOffersProps) {
     setTimeout(() => openCart(), 350);
   };
 
-  const scrollToPricing = () => {
-    document.getElementById('product-pricing')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  };
+  const displayOffer = selectedOffer ?? firstOffer;
 
   return (
     <section className="checkout-hero section-padding pt-8 md:pt-12">
@@ -161,6 +165,7 @@ export default function ProductOffers({ product }: ProductOffersProps) {
                     <button
                       type="button"
                       onClick={() => selectOffer(offer.quantity)}
+                      aria-pressed={isSelected}
                       className={`offer-card ${isSelected ? 'offer-card--selected' : ''}`}
                     >
                       <span className={`offer-radio ${isSelected ? 'offer-radio--checked' : ''}`} />
@@ -202,7 +207,9 @@ export default function ProductOffers({ product }: ProductOffersProps) {
             >
               <Icon name="cart" size={20} />
               {selectedOffer
-                ? `اطلب دابا — ${selectedOffer.price} ${CURRENCY}`
+                ? isInCart(product.id, selectedOffer.quantity)
+                  ? 'شوف السلة — المنتج مضاف'
+                  : `اطلب دابا — ${selectedOffer.price} ${CURRENCY}`
                 : 'اطلب دابا'}
             </button>
             <p className="flex items-center justify-center gap-2 text-sm text-ink/55 mt-3">
@@ -225,20 +232,27 @@ export default function ProductOffers({ product }: ProductOffersProps) {
         <div className="container-wide">
           <div className="mx-auto max-w-3xl flex items-center gap-3 md:gap-4">
             <div className="leading-tight shrink-0 hidden sm:block">
-              <p className="text-xs text-ink/50">من {firstOffer.price} {CURRENCY}</p>
+              <p className="text-xs text-ink/50">{displayOffer.label}</p>
               <p className="font-heading font-extrabold text-brand text-lg">
-                {firstOffer.label}
+                {displayOffer.price} <span className="text-sm">{CURRENCY}</span>
               </p>
             </div>
             <div className="leading-tight shrink-0 sm:hidden">
-              <p className="text-xs text-ink/50">{firstOffer.label}</p>
+              <p className="text-xs text-ink/50">{displayOffer.label}</p>
               <p className="font-heading font-extrabold text-brand text-lg">
-                {firstOffer.price} <span className="text-sm">{CURRENCY}</span>
+                {displayOffer.price} <span className="text-sm">{CURRENCY}</span>
               </p>
             </div>
-            <button type="button" onClick={scrollToPricing} className="checkout-cta checkout-cta--pulse flex-1 py-3.5 text-base md:py-4">
-              <Icon name="arrow-left" size={18} />
-              اطلب دابا — {firstOffer.price} {CURRENCY}
+            <button
+              type="button"
+              onClick={handleCheckout}
+              disabled={!displayOffer}
+              className="checkout-cta checkout-cta--pulse flex-1 py-3.5 text-base md:py-4"
+            >
+              <Icon name="cart" size={18} />
+              {displayOffer && isInCart(product.id, displayOffer.quantity)
+                ? 'شوف السلة'
+                : `اطلب دابا — ${displayOffer.price} ${CURRENCY}`}
             </button>
           </div>
         </div>
