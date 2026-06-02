@@ -27,6 +27,7 @@ export default function ProductPageLayout({ product }: { product: Product }) {
         <meta property="og:title" content={`${product.nameAr} | بويا شوب`} />
         <meta property="og:description" content={product.metaDescription} />
       </Head>
+      <div className="product-page">
       <Header showAnnouncement={false} />
       <div className="product-moving-header">
         <AnnouncementBar variant="tick" />
@@ -41,6 +42,7 @@ export default function ProductPageLayout({ product }: { product: Product }) {
         <ProductFAQ product={product} />
       </main>
       <Footer />
+      </div>
     </>
   );
 }

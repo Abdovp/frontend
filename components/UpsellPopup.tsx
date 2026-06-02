@@ -36,15 +36,16 @@ export default function UpsellPopup({ product, onAdded, onClose }: UpsellPopupPr
   };
 
   return (
-    <div className="fixed inset-0 z-[90] flex items-end sm:items-center justify-center p-4">
+    <div className="fixed inset-0 z-[90] overflow-y-auto">
       <div className="absolute inset-0 bg-ink/55" onClick={onClose} aria-hidden />
 
-      <div
-        className="relative w-full max-w-md bg-white rounded-3xl shadow-lift overflow-hidden animate-fade-up"
-        role="dialog"
-        aria-labelledby="upsell-title"
-        aria-modal="true"
-      >
+      <div className="relative flex min-h-[100dvh] items-center justify-center p-4 sm:min-h-full">
+        <div
+          className="relative w-full max-w-md bg-white rounded-3xl shadow-lift overflow-hidden animate-fade-up"
+          role="dialog"
+          aria-labelledby="upsell-title"
+          aria-modal="true"
+        >
         <div
           className="h-1 bg-brand/15"
           aria-hidden
@@ -108,6 +109,7 @@ export default function UpsellPopup({ product, onAdded, onClose }: UpsellPopupPr
             <Icon name="wallet" size={14} className="text-brand" />
             نفس الطلب — دفع عند الاستلام
           </p>
+        </div>
         </div>
       </div>
     </div>

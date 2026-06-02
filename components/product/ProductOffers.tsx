@@ -82,9 +82,14 @@ export default function ProductOffers({ product }: ProductOffersProps) {
     setTimeout(() => openCart(), 350);
   };
 
-  const handleStickyCheckout = () => {
+  const handleStickyClick = () => {
+    if (isInCart(product.id, firstOffer.quantity)) {
+      openCart();
+      return;
+    }
+
     setSelectedOffer(product.id, firstOffer.quantity);
-    handleCheckout(firstOffer.quantity);
+    document.getElementById('product-pricing')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
   return (
@@ -242,7 +247,7 @@ export default function ProductOffers({ product }: ProductOffersProps) {
             </div>
             <button
               type="button"
-              onClick={handleStickyCheckout}
+              onClick={handleStickyClick}
               className="checkout-cta checkout-cta--pulse flex-1 py-3.5 text-base md:py-4"
             >
               <Icon name="cart" size={18} />

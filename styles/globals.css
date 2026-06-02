@@ -156,9 +156,18 @@ h1, h2, h3, h4 {
     @apply sticky top-0 inset-x-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-ink/[0.07];
   }
 
+  .product-page .site-header {
+    @apply fixed;
+  }
+
   .product-moving-header {
     @apply sticky z-40 w-full;
     top: var(--site-header-height);
+  }
+
+  .product-page .product-moving-header {
+    @apply relative z-30;
+    padding-top: var(--site-header-height);
   }
 
   .site-header__bar {
