@@ -206,7 +206,7 @@ function CheckoutModal({ onClose, items, total }: CheckoutModalProps) {
   const { clearCart, closeCart } = useCartStore();
   const nameRef = useRef<HTMLInputElement>(null);
   const [mounted, setMounted] = useState(false);
-  const [formData, setFormData] = useState<CheckoutFormData>({ name: '', address: '', phone: '' });
+  const [formData, setFormData] = useState<CheckoutFormData>({ name: '', phone: '' });
   const [errors, setErrors] = useState<Partial<Record<CheckoutField, string>>>({});
   const [touched, setTouched] = useState<Partial<Record<CheckoutField, boolean>>>({});
   const [submitting, setSubmitting] = useState(false);
@@ -259,10 +259,10 @@ function CheckoutModal({ onClose, items, total }: CheckoutModalProps) {
     e.preventDefault();
     const nextErrors = validateCheckoutForm(formData);
     setErrors(nextErrors);
-    setTouched({ name: true, address: true, phone: true });
+    setTouched({ name: true, phone: true });
 
     if (Object.keys(nextErrors).length > 0) {
-      const firstInvalid = (['name', 'address', 'phone'] as CheckoutField[]).find((f) => nextErrors[f]);
+      const firstInvalid = (['name', 'phone'] as CheckoutField[]).find((f) => nextErrors[f]);
       if (firstInvalid) {
         document.getElementById(`checkout-${firstInvalid}`)?.focus();
       }
@@ -277,7 +277,6 @@ function CheckoutModal({ onClose, items, total }: CheckoutModalProps) {
       const result = await submitOrder({
         eventId,
         name: formData.name.trim(),
-        address: formData.address.trim(),
         phone: formData.phone.trim(),
         items,
         total,
@@ -379,20 +378,6 @@ function CheckoutModal({ onClose, items, total }: CheckoutModalProps) {
                 onBlur: (e) => handleBlur('name', e.target.value),
                 placeholder: 'مثال: محمد العلوي',
                 autoComplete: 'name',
-                disabled: submitting,
-              }}
-            />
-            <FormField
-              id="checkout-address"
-              label="العنوان والمدينة"
-              error={showError('address')}
-              inputProps={{
-                type: 'text',
-                value: formData.address,
-                onChange: (e) => setField('address', e.target.value),
-                onBlur: (e) => handleBlur('address', e.target.value),
-                placeholder: 'الحي، الشارع، المدينة',
-                autoComplete: 'street-address',
                 disabled: submitting,
               }}
             />

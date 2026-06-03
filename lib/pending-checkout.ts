@@ -5,7 +5,6 @@ export const PENDING_CHECKOUT_KEY = 'boya_pending_checkout';
 export interface PendingCheckout {
   eventId: string;
   name: string;
-  address: string;
   phone: string;
   items: CartItem[];
   total: number;

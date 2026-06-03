@@ -9,7 +9,6 @@ const ORDERS_API_URL = 'https://api.boyashop.store/api/orders';
 export interface SubmitOrderInput {
   eventId: string;
   name: string;
-  address: string;
   phone: string;
   items: CartItem[];
   total: number;
@@ -55,7 +54,6 @@ export async function submitOrder(input: SubmitOrderInput): Promise<SubmitOrderR
       body: JSON.stringify({
         event_id: input.eventId,
         customer_name: input.name,
-        address: input.address,
         phone: input.phone,
         total: input.total,
         source_url: typeof window !== 'undefined' ? window.location.href : undefined,
