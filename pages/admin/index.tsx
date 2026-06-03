@@ -25,7 +25,7 @@ export default function AdminDashboardPage() {
         if (!cancelled) setMetrics(data);
       })
       .catch((err) => {
-        if (!cancelled) setError(err instanceof Error ? err.message : 'تعذّر تحميل الإحصائيات');
+        if (!cancelled) setError(err instanceof Error ? err.message : 'Could not load metrics');
       })
       .finally(() => {
         if (!cancelled) setLoading(false);
@@ -36,7 +36,7 @@ export default function AdminDashboardPage() {
   }, [from, to]);
 
   return (
-    <AdminLayout title="لوحة التحكم">
+    <AdminLayout title="Dashboard">
       <div className="space-y-6">
         <DateRangePicker
           from={from}
@@ -48,7 +48,7 @@ export default function AdminDashboardPage() {
         />
 
         {loading ? (
-          <div className="rounded-2xl border border-slate-200 bg-white p-10 text-center text-slate-500">جاري التحميل...</div>
+          <div className="rounded-2xl border border-slate-200 bg-white p-10 text-center text-slate-500">Loading...</div>
         ) : null}
 
         {error ? <div className="rounded-2xl border border-red-200 bg-red-50 p-4 text-red-700">{error}</div> : null}
@@ -56,18 +56,18 @@ export default function AdminDashboardPage() {
         {metrics ? (
           <>
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-              <MetricCard label="زيارات (🇲🇦)" value={metrics.page_views.toLocaleString('fr-MA')} hint="PageView" accent="brand" />
-              <MetricCard label="الطلبات" value={metrics.orders.toLocaleString('fr-MA')} hint={`Upsell: ${metrics.upsell_orders} (${formatPercent(metrics.upsell_rate)})`} accent="gold" />
-              <MetricCard label="الإيرادات" value={formatMad(metrics.revenue)} hint={`AOV: ${formatMad(metrics.average_order_value)}`} accent="green" />
-              <MetricCard label="معدل التحويل" value={formatPercent(metrics.conversion_rate)} hint={`Checkout → Order: ${formatPercent(metrics.checkout_conversion_rate)}`} accent="blue" />
+              <MetricCard label="Visits (🇲🇦)" value={metrics.page_views.toLocaleString('en-US')} hint="PageView" accent="brand" />
+              <MetricCard label="Orders" value={metrics.orders.toLocaleString('en-US')} hint={`Upsell: ${metrics.upsell_orders} (${formatPercent(metrics.upsell_rate)})`} accent="gold" />
+              <MetricCard label="Revenue" value={formatMad(metrics.revenue)} hint={`AOV: ${formatMad(metrics.average_order_value)}`} accent="green" />
+              <MetricCard label="Conversion Rate" value={formatPercent(metrics.conversion_rate)} hint={`Checkout → Order: ${formatPercent(metrics.checkout_conversion_rate)}`} accent="blue" />
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
-              <MetricCard label="عرض المنتج" value={metrics.view_content.toLocaleString('fr-MA')} />
-              <MetricCard label="إضافة للسلة" value={metrics.add_to_cart.toLocaleString('fr-MA')} />
-              <MetricCard label="بدء الشراء" value={metrics.initiate_checkout.toLocaleString('fr-MA')} />
-              <MetricCard label="طلبات جديدة" value={metrics.pending_orders.toLocaleString('fr-MA')} />
-              <MetricCard label="تم التسليم" value={metrics.delivered_orders.toLocaleString('fr-MA')} />
+              <MetricCard label="View Product" value={metrics.view_content.toLocaleString('en-US')} />
+              <MetricCard label="Add to Cart" value={metrics.add_to_cart.toLocaleString('en-US')} />
+              <MetricCard label="Initiate Checkout" value={metrics.initiate_checkout.toLocaleString('en-US')} />
+              <MetricCard label="New Orders" value={metrics.pending_orders.toLocaleString('en-US')} />
+              <MetricCard label="Delivered" value={metrics.delivered_orders.toLocaleString('en-US')} />
             </div>
 
             <div className="grid gap-6 xl:grid-cols-2">
@@ -76,15 +76,15 @@ export default function AdminDashboardPage() {
             </div>
 
             <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-soft">
-              <h3 className="font-heading text-lg font-bold text-ink">أفضل المنتجات</h3>
+              <h3 className="font-heading text-lg font-bold text-ink">Top Products</h3>
               <div className="mt-4 overflow-x-auto">
                 <table className="min-w-full text-sm">
                   <thead className="text-slate-500">
                     <tr>
-                      <th className="py-2 text-right font-semibold">المنتج</th>
-                      <th className="py-2 text-right font-semibold">الطلبات</th>
-                      <th className="py-2 text-right font-semibold">الكمية</th>
-                      <th className="py-2 text-right font-semibold">الإيرادات</th>
+                      <th className="py-2 text-left font-semibold">Product</th>
+                      <th className="py-2 text-left font-semibold">Orders</th>
+                      <th className="py-2 text-left font-semibold">Quantity</th>
+                      <th className="py-2 text-left font-semibold">Revenue</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -102,9 +102,9 @@ export default function AdminDashboardPage() {
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              <MetricCard label="مؤكّدة" value={String(metrics.confirmed_orders)} />
-              <MetricCard label="تم الشحن" value={String(metrics.shipped_orders)} />
-              <MetricCard label="ملغاة" value={String(metrics.cancelled_orders)} />
+              <MetricCard label="Confirmed" value={String(metrics.confirmed_orders)} />
+              <MetricCard label="Shipped" value={String(metrics.shipped_orders)} />
+              <MetricCard label="Cancelled" value={String(metrics.cancelled_orders)} />
               <MetricCard label="Upsell Rate" value={formatPercent(metrics.upsell_rate)} />
             </div>
           </>

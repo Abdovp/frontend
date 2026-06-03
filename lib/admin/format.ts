@@ -1,20 +1,20 @@
 export function formatMad(amount: number): string {
-  return `${amount.toLocaleString('fr-MA', { minimumFractionDigits: 0, maximumFractionDigits: 2 })} د.م`;
+  return `${amount.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 2 })} MAD`;
 }
 
 export function formatPercent(value: number): string {
-  return `${value.toLocaleString('fr-MA', { maximumFractionDigits: 2 })}%`;
+  return `${value.toLocaleString('en-US', { maximumFractionDigits: 2 })}%`;
 }
 
 export function formatDateTime(value: string): string {
-  return new Date(value).toLocaleString('ar-MA', {
+  return new Date(value).toLocaleString('en-US', {
     dateStyle: 'medium',
     timeStyle: 'short',
   });
 }
 
 export function formatDate(value: string): string {
-  return new Date(value).toLocaleDateString('ar-MA', { dateStyle: 'medium' });
+  return new Date(value).toLocaleDateString('en-US', { dateStyle: 'medium' });
 }
 
 export function toInputDate(date: Date): string {

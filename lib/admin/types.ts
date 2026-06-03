@@ -95,12 +95,12 @@ export type OrderStatus =
   | 'returned';
 
 export const ORDER_STATUS_LABELS: Record<OrderStatus, string> = {
-  pending: 'جديد',
-  confirmed: 'مؤكّد',
-  shipped: 'تم الشحن',
-  delivered: 'تم التسليم',
-  cancelled: 'ملغى',
-  returned: 'مرتجع',
+  pending: 'New',
+  confirmed: 'Confirmed',
+  shipped: 'Shipped',
+  delivered: 'Delivered',
+  cancelled: 'Cancelled',
+  returned: 'Returned',
 };
 
 export const ORDER_STATUS_COLORS: Record<OrderStatus, string> = {

@@ -10,8 +10,8 @@ type Props = {
 };
 
 const navItems = [
-  { href: '/admin', label: 'لوحة التحكم', icon: '📊' },
-  { href: '/admin/orders', label: 'الطلبات', icon: '📦' },
+  { href: '/admin', label: 'Dashboard', icon: '📊' },
+  { href: '/admin/orders', label: 'Orders', icon: '📦' },
 ];
 
 export default function AdminLayout({ title, children }: Props) {
@@ -39,12 +39,12 @@ export default function AdminLayout({ title, children }: Props) {
         <title>{title} | Boya Admin</title>
         <meta name="robots" content="noindex,nofollow" />
       </Head>
-      <div className="min-h-screen bg-slate-50" dir="rtl">
-        <aside className="fixed inset-y-0 right-0 z-40 hidden w-64 border-l border-slate-200 bg-brand text-white lg:block">
+      <div className="min-h-screen bg-slate-50" dir="ltr">
+        <aside className="fixed inset-y-0 left-0 z-40 hidden w-64 border-r border-slate-200 bg-brand text-white lg:block">
           <div className="flex h-full flex-col">
             <div className="border-b border-white/10 px-6 py-6">
               <p className="text-xs uppercase tracking-widest2 text-accent">Boya Shop</p>
-              <h1 className="mt-1 font-heading text-xl font-bold">لوحة الإدارة</h1>
+              <h1 className="mt-1 font-heading text-xl font-bold">Admin Panel</h1>
             </div>
             <nav className="flex-1 space-y-1 px-3 py-4">
               {navItems.map((item) => {
@@ -64,20 +64,20 @@ export default function AdminLayout({ title, children }: Props) {
               })}
             </nav>
             <div className="border-t border-white/10 px-6 py-4">
-              <p className="text-xs text-white/60">متصل باسم</p>
+              <p className="text-xs text-white/60">Signed in as</p>
               <p className="mt-1 text-sm font-semibold">{username}</p>
               <button
                 type="button"
                 onClick={logout}
                 className="mt-3 w-full rounded-lg border border-white/20 px-3 py-2 text-sm font-semibold text-white/90 transition hover:bg-white/10"
               >
-                تسجيل الخروج
+                Log out
               </button>
             </div>
           </div>
         </aside>
 
-        <div className="lg:mr-64">
+        <div className="lg:ml-64">
           <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/95 backdrop-blur">
             <div className="flex items-center justify-between gap-4 px-4 py-4 sm:px-6">
               <div>

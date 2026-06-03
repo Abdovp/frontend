@@ -5,9 +5,9 @@ type Props = {
 };
 
 const presets = [
-  { label: '7 أيام', days: 6 },
-  { label: '30 يوم', days: 29 },
-  { label: '90 يوم', days: 89 },
+  { label: '7 days', days: 6 },
+  { label: '30 days', days: 29 },
+  { label: '90 days', days: 89 },
 ];
 
 export default function DateRangePicker({ from, to, onChange }: Props) {
@@ -22,7 +22,7 @@ export default function DateRangePicker({ from, to, onChange }: Props) {
     <div className="flex flex-wrap items-end gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-soft">
       <div>
         <label htmlFor="from-date" className="mb-1 block text-xs font-semibold text-slate-500">
-          من
+          From
         </label>
         <input
           id="from-date"
@@ -34,7 +34,7 @@ export default function DateRangePicker({ from, to, onChange }: Props) {
       </div>
       <div>
         <label htmlFor="to-date" className="mb-1 block text-xs font-semibold text-slate-500">
-          إلى
+          To
         </label>
         <input
           id="to-date"
@@ -56,7 +56,7 @@ export default function DateRangePicker({ from, to, onChange }: Props) {
           </button>
         ))}
       </div>
-      <p className="w-full text-xs text-slate-500">الإحصائيات تُحسب فقط من عناوين IP مغربية صالحة 🇲🇦</p>
+      <p className="w-full text-xs text-slate-500">Metrics count only valid Morocco IP addresses 🇲🇦</p>
     </div>
   );
 }

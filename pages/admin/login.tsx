@@ -20,7 +20,7 @@ export default function AdminLoginPage() {
       setAdminSession(session.token, session.username);
       router.replace('/admin');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'فشل تسجيل الدخول');
+      setError(err instanceof Error ? err.message : 'Login failed');
     } finally {
       setLoading(false);
     }
@@ -29,20 +29,20 @@ export default function AdminLoginPage() {
   return (
     <>
       <Head>
-        <title>تسجيل الدخول | Boya Admin</title>
+        <title>Login | Boya Admin</title>
         <meta name="robots" content="noindex,nofollow" />
       </Head>
-      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-brand-dark via-brand to-brand-light px-4" dir="rtl">
+      <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-brand-dark via-brand to-brand-light px-4" dir="ltr">
         <div className="w-full max-w-md rounded-3xl bg-white p-8 shadow-lift">
           <div className="mb-8 text-center">
             <p className="text-xs font-bold uppercase tracking-widest2 text-accent-dark">Boya Shop</p>
-            <h1 className="mt-2 font-heading text-3xl font-bold text-ink">لوحة الإدارة</h1>
-            <p className="mt-2 text-sm text-slate-500">COD Dashboard — الطلبات والإحصائيات</p>
+            <h1 className="mt-2 font-heading text-3xl font-bold text-ink">Admin Panel</h1>
+            <p className="mt-2 text-sm text-slate-500">COD Dashboard — Orders & Analytics</p>
           </div>
           <form onSubmit={onSubmit} className="space-y-4">
             <div>
               <label htmlFor="username" className="mb-2 block text-sm font-semibold text-ink">
-                اسم المستخدم
+                Username
               </label>
               <input
                 id="username"
@@ -56,7 +56,7 @@ export default function AdminLoginPage() {
             </div>
             <div>
               <label htmlFor="password" className="mb-2 block text-sm font-semibold text-ink">
-                كلمة المرور
+                Password
               </label>
               <input
                 id="password"
@@ -74,7 +74,7 @@ export default function AdminLoginPage() {
               disabled={loading}
               className="w-full rounded-xl bg-brand px-4 py-3 text-sm font-bold text-white shadow-brand transition hover:bg-brand-dark disabled:opacity-60"
             >
-              {loading ? 'جاري الدخول...' : 'دخول'}
+              {loading ? 'Signing in...' : 'Sign in'}
             </button>
           </form>
         </div>

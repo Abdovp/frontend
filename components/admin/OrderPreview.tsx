@@ -33,7 +33,7 @@ export default function OrderPreview({ order, onClose, onUpdated }: Props) {
       });
       onUpdated(updated);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'تعذّر الحفظ');
+      setError(err instanceof Error ? err.message : 'Could not save changes');
     } finally {
       setSaving(false);
     }
@@ -41,12 +41,12 @@ export default function OrderPreview({ order, onClose, onUpdated }: Props) {
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
-      <button type="button" className="absolute inset-0 bg-ink/50 backdrop-blur-sm" onClick={onClose} aria-label="إغلاق" />
+      <button type="button" className="absolute inset-0 bg-ink/50 backdrop-blur-sm" onClick={onClose} aria-label="Close" />
       <div className="relative max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-3xl bg-white shadow-lift">
-        <div className="border-b border-slate-100 bg-gradient-to-l from-brand to-brand-dark px-6 py-5 text-white">
+        <div className="border-b border-slate-100 bg-gradient-to-r from-brand to-brand-dark px-6 py-5 text-white">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <p className="text-xs uppercase tracking-widest2 text-accent">معاينة الطلب</p>
+              <p className="text-xs uppercase tracking-widest2 text-accent">Order Preview</p>
               <h3 className="mt-1 font-heading text-2xl font-bold">{order.public_order_id}</h3>
               <p className="mt-1 text-sm text-white/75">{formatDateTime(order.created_at)}</p>
             </div>
@@ -63,14 +63,14 @@ export default function OrderPreview({ order, onClose, onUpdated }: Props) {
         <div className="space-y-6 px-6 py-6">
           <div className="grid gap-4 sm:grid-cols-2">
             <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
-              <p className="text-xs font-semibold text-slate-500">الزبون</p>
+              <p className="text-xs font-semibold text-slate-500">Customer</p>
               <p className="mt-1 font-heading text-lg font-bold text-ink">{order.customer_name}</p>
-              <a href={`tel:${order.phone}`} className="mt-2 inline-block text-brand font-semibold">
+              <a href={`tel:${order.phone}`} className="mt-2 inline-block font-semibold text-brand">
                 {order.phone}
               </a>
             </div>
             <div className="rounded-2xl border border-slate-100 bg-slate-50 p-4">
-              <p className="text-xs font-semibold text-slate-500">المبلغ الإجمالي</p>
+              <p className="text-xs font-semibold text-slate-500">Order Total</p>
               <p className="mt-1 font-heading text-2xl font-bold text-accent-dark">{formatMad(order.total)}</p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {order.has_upsell ? (
@@ -82,7 +82,7 @@ export default function OrderPreview({ order, onClose, onUpdated }: Props) {
                   <span className="rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-700">Sheet pending</span>
                 )}
                 {order.country_code === 'MA' ? (
-                  <span className="rounded-full bg-blue-100 px-2.5 py-1 text-xs font-semibold text-blue-700">🇲🇦 IP مغربي</span>
+                  <span className="rounded-full bg-blue-100 px-2.5 py-1 text-xs font-semibold text-blue-700">🇲🇦 Morocco IP</span>
                 ) : order.client_ip ? (
                   <span className="rounded-full bg-slate-100 px-2.5 py-1 text-xs font-semibold text-slate-600">{order.client_ip}</span>
                 ) : null}
@@ -91,15 +91,15 @@ export default function OrderPreview({ order, onClose, onUpdated }: Props) {
           </div>
 
           <div>
-            <h4 className="mb-3 font-heading text-lg font-bold text-ink">المنتجات</h4>
+            <h4 className="mb-3 font-heading text-lg font-bold text-ink">Products</h4>
             <div className="overflow-hidden rounded-2xl border border-slate-200">
               <table className="min-w-full text-sm">
                 <thead className="bg-slate-50 text-slate-500">
                   <tr>
-                    <th className="px-4 py-3 text-right font-semibold">المنتج</th>
-                    <th className="px-4 py-3 text-right font-semibold">العرض</th>
-                    <th className="px-4 py-3 text-right font-semibold">الكمية</th>
-                    <th className="px-4 py-3 text-right font-semibold">المجموع</th>
+                    <th className="px-4 py-3 text-left font-semibold">Product</th>
+                    <th className="px-4 py-3 text-left font-semibold">Offer</th>
+                    <th className="px-4 py-3 text-left font-semibold">Qty</th>
+                    <th className="px-4 py-3 text-left font-semibold">Total</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -135,7 +135,7 @@ export default function OrderPreview({ order, onClose, onUpdated }: Props) {
           <div className="grid gap-4 sm:grid-cols-2">
             <div>
               <label htmlFor="order-status" className="mb-2 block text-sm font-semibold text-ink">
-                حالة الطلب
+                Order Status
               </label>
               <select
                 id="order-status"
@@ -159,14 +159,14 @@ export default function OrderPreview({ order, onClose, onUpdated }: Props) {
 
           <div>
             <label htmlFor="order-notes" className="mb-2 block text-sm font-semibold text-ink">
-              ملاحظات داخلية
+              Internal Notes
             </label>
             <textarea
               id="order-notes"
               rows={3}
               value={notes}
               onChange={(event) => setNotes(event.target.value)}
-              placeholder="مثال: اتصلنا بالزبون، تأكيد التوصيل غداً..."
+              placeholder="e.g. Called customer, delivery confirmed for tomorrow..."
               className="w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm"
             />
           </div>
@@ -180,13 +180,13 @@ export default function OrderPreview({ order, onClose, onUpdated }: Props) {
               disabled={saving}
               className="rounded-xl bg-brand px-5 py-3 text-sm font-bold text-white shadow-brand transition hover:bg-brand-dark disabled:opacity-60"
             >
-              {saving ? 'جاري الحفظ...' : 'حفظ التغييرات'}
+              {saving ? 'Saving...' : 'Save Changes'}
             </button>
             <a
               href={`tel:${order.phone}`}
               className="rounded-xl border border-brand px-5 py-3 text-sm font-bold text-brand transition hover:bg-brand-50"
             >
-              اتصل بالزبون
+              Call Customer
             </a>
           </div>
         </div>

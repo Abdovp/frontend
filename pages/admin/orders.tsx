@@ -41,7 +41,7 @@ export default function AdminOrdersPage() {
         setPages(data.pages);
       })
       .catch((err) => {
-        if (!cancelled) setError(err instanceof Error ? err.message : 'تعذّر تحميل الطلبات');
+        if (!cancelled) setError(err instanceof Error ? err.message : 'Could not load orders');
       })
       .finally(() => {
         if (!cancelled) setLoading(false);
@@ -56,7 +56,7 @@ export default function AdminOrdersPage() {
       const order = await fetchAdminOrder(orderId);
       setSelectedOrder(order);
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'تعذّر تحميل الطلب');
+      setError(err instanceof Error ? err.message : 'Could not load order');
     }
   }
 
@@ -66,7 +66,7 @@ export default function AdminOrdersPage() {
   }
 
   return (
-    <AdminLayout title="الطلبات">
+    <AdminLayout title="Orders">
       <div className="space-y-6">
         <DateRangePicker from={from} to={to} onChange={(nextFrom, nextTo) => { setFrom(nextFrom); setTo(nextTo); setPage(1); }} />
 
@@ -78,7 +78,7 @@ export default function AdminOrdersPage() {
               setSearch(event.target.value);
               setPage(1);
             }}
-            placeholder="بحث بالاسم، الهاتف، أو event id..."
+            placeholder="Search by name, phone, or event id..."
             className="rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
           />
           <select
@@ -89,17 +89,17 @@ export default function AdminOrdersPage() {
             }}
             className="rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
           >
-            <option value="">كل الحالات</option>
+            <option value="">All statuses</option>
             {(Object.keys(ORDER_STATUS_LABELS) as OrderStatus[]).map((value) => (
               <option key={value} value={value}>
                 {ORDER_STATUS_LABELS[value]}
               </option>
             ))}
           </select>
-          <p className="flex items-center text-sm font-semibold text-slate-500">{total.toLocaleString('fr-MA')} طلب</p>
+          <p className="flex items-center text-sm font-semibold text-slate-500">{total.toLocaleString('en-US')} orders</p>
         </div>
 
-        {loading ? <div className="rounded-2xl border border-slate-200 bg-white p-10 text-center text-slate-500">جاري التحميل...</div> : null}
+        {loading ? <div className="rounded-2xl border border-slate-200 bg-white p-10 text-center text-slate-500">Loading...</div> : null}
         {error ? <div className="rounded-2xl border border-red-200 bg-red-50 p-4 text-red-700">{error}</div> : null}
 
         {!loading ? <OrdersTable orders={orders} onSelect={openOrder} /> : null}
@@ -112,7 +112,7 @@ export default function AdminOrdersPage() {
               onClick={() => setPage((current) => current - 1)}
               className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-semibold disabled:opacity-40"
             >
-              السابق
+              Previous
             </button>
             <span className="text-sm text-slate-500">
               {page} / {pages}
@@ -123,7 +123,7 @@ export default function AdminOrdersPage() {
               onClick={() => setPage((current) => current + 1)}
               className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-semibold disabled:opacity-40"
             >
-              التالي
+              Next
             </button>
           </div>
         ) : null}

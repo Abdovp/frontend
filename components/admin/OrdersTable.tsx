@@ -11,7 +11,7 @@ export default function OrdersTable({ orders, onSelect }: Props) {
   if (orders.length === 0) {
     return (
       <div className="rounded-2xl border border-dashed border-slate-200 bg-white p-10 text-center text-slate-500">
-        لا توجد طلبات في هذا النطاق
+        No orders in this date range
       </div>
     );
   }
@@ -22,13 +22,13 @@ export default function OrdersTable({ orders, onSelect }: Props) {
         <table className="min-w-full text-sm">
           <thead className="bg-slate-50 text-slate-500">
             <tr>
-              <th className="px-4 py-3 text-right font-semibold">الطلب</th>
-              <th className="px-4 py-3 text-right font-semibold">الزبون</th>
-              <th className="px-4 py-3 text-right font-semibold">الهاتف</th>
-              <th className="px-4 py-3 text-right font-semibold">المبلغ</th>
-              <th className="px-4 py-3 text-right font-semibold">الحالة</th>
-              <th className="px-4 py-3 text-right font-semibold">التاريخ</th>
-              <th className="px-4 py-3 text-right font-semibold" />
+              <th className="px-4 py-3 text-left font-semibold">Order</th>
+              <th className="px-4 py-3 text-left font-semibold">Customer</th>
+              <th className="px-4 py-3 text-left font-semibold">Phone</th>
+              <th className="px-4 py-3 text-left font-semibold">Total</th>
+              <th className="px-4 py-3 text-left font-semibold">Status</th>
+              <th className="px-4 py-3 text-left font-semibold">Date</th>
+              <th className="px-4 py-3 text-left font-semibold" />
             </tr>
           </thead>
           <tbody>
@@ -38,7 +38,7 @@ export default function OrdersTable({ orders, onSelect }: Props) {
                 <tr key={order.id} className="border-t border-slate-100 hover:bg-slate-50/80">
                   <td className="px-4 py-3">
                     <p className="font-bold text-brand">{order.public_order_id}</p>
-                    <p className="text-xs text-slate-400">{order.item_count} منتج</p>
+                    <p className="text-xs text-slate-400">{order.item_count} items</p>
                   </td>
                   <td className="px-4 py-3 font-semibold text-ink">{order.customer_name}</td>
                   <td className="px-4 py-3">
@@ -59,7 +59,7 @@ export default function OrdersTable({ orders, onSelect }: Props) {
                       onClick={() => onSelect(order.id)}
                       className="rounded-lg bg-brand px-3 py-2 text-xs font-bold text-white hover:bg-brand-dark"
                     >
-                      معاينة
+                      View
                     </button>
                   </td>
                 </tr>
