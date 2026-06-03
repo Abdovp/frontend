@@ -1,3 +1,5 @@
+import AdminIcon from './AdminIcon';
+
 type Props = {
   from: string;
   to: string;
@@ -19,44 +21,50 @@ export default function DateRangePicker({ from, to, onChange }: Props) {
   }
 
   return (
-    <div className="flex flex-wrap items-end gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-soft">
-      <div>
-        <label htmlFor="from-date" className="mb-1 block text-xs font-semibold text-slate-500">
-          From
-        </label>
-        <input
-          id="from-date"
-          type="date"
-          value={from}
-          onChange={(event) => onChange(event.target.value, to)}
-          className="rounded-xl border border-slate-200 px-3 py-2 text-sm"
-        />
+    <div className="admin-card p-4 sm:p-5">
+      <div className="mb-4 flex items-center gap-2">
+        <AdminIcon name="calendar" className="h-5 w-5 text-slate-400" />
+        <h3 className="text-sm font-semibold text-slate-900">Date range</h3>
       </div>
-      <div>
-        <label htmlFor="to-date" className="mb-1 block text-xs font-semibold text-slate-500">
-          To
-        </label>
-        <input
-          id="to-date"
-          type="date"
-          value={to}
-          onChange={(event) => onChange(from, event.target.value)}
-          className="rounded-xl border border-slate-200 px-3 py-2 text-sm"
-        />
+      <div className="flex flex-wrap items-end gap-4">
+        <div>
+          <label htmlFor="from-date" className="admin-label">
+            From
+          </label>
+          <input
+            id="from-date"
+            type="date"
+            value={from}
+            onChange={(event) => onChange(event.target.value, to)}
+            className="admin-input w-auto"
+          />
+        </div>
+        <div>
+          <label htmlFor="to-date" className="admin-label">
+            To
+          </label>
+          <input
+            id="to-date"
+            type="date"
+            value={to}
+            onChange={(event) => onChange(from, event.target.value)}
+            className="admin-input w-auto"
+          />
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {presets.map((preset) => (
+            <button
+              key={preset.label}
+              type="button"
+              onClick={() => applyPreset(preset.days)}
+              className="admin-btn-secondary !rounded-full !px-3.5 !py-2 !text-xs"
+            >
+              {preset.label}
+            </button>
+          ))}
+        </div>
       </div>
-      <div className="flex flex-wrap gap-2">
-        {presets.map((preset) => (
-          <button
-            key={preset.label}
-            type="button"
-            onClick={() => applyPreset(preset.days)}
-            className="rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-700 transition hover:border-brand hover:text-brand"
-          >
-            {preset.label}
-          </button>
-        ))}
-      </div>
-      <p className="w-full text-xs text-slate-500">Metrics count only valid Morocco IP addresses 🇲🇦</p>
+      <p className="mt-4 text-xs text-slate-400">Metrics include Morocco IP traffic only</p>
     </div>
   );
 }

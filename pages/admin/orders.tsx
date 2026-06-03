@@ -70,7 +70,7 @@ export default function AdminOrdersPage() {
       <div className="space-y-6">
         <DateRangePicker from={from} to={to} onChange={(nextFrom, nextTo) => { setFrom(nextFrom); setTo(nextTo); setPage(1); }} />
 
-        <div className="grid gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-soft lg:grid-cols-[1fr_auto_auto]">
+        <div className="admin-card grid gap-3 p-4 lg:grid-cols-[1fr_auto_auto] lg:items-center">
           <input
             type="search"
             value={search}
@@ -79,7 +79,7 @@ export default function AdminOrdersPage() {
               setPage(1);
             }}
             placeholder="Search by name, phone, or event id..."
-            className="rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
+            className="admin-input"
           />
           <select
             value={status}
@@ -87,7 +87,7 @@ export default function AdminOrdersPage() {
               setStatus(event.target.value);
               setPage(1);
             }}
-            className="rounded-xl border border-slate-200 px-4 py-2.5 text-sm"
+            className="admin-input lg:w-44"
           >
             <option value="">All statuses</option>
             {(Object.keys(ORDER_STATUS_LABELS) as OrderStatus[]).map((value) => (
@@ -96,11 +96,11 @@ export default function AdminOrdersPage() {
               </option>
             ))}
           </select>
-          <p className="flex items-center text-sm font-semibold text-slate-500">{total.toLocaleString('en-US')} orders</p>
+          <p className="text-sm font-medium text-slate-500">{total.toLocaleString('en-US')} orders</p>
         </div>
 
-        {loading ? <div className="rounded-2xl border border-slate-200 bg-white p-10 text-center text-slate-500">Loading...</div> : null}
-        {error ? <div className="rounded-2xl border border-red-200 bg-red-50 p-4 text-red-700">{error}</div> : null}
+        {loading ? <div className="admin-card p-12 text-center text-sm text-slate-500">Loading orders...</div> : null}
+        {error ? <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">{error}</div> : null}
 
         {!loading ? <OrdersTable orders={orders} onSelect={openOrder} /> : null}
 
@@ -110,7 +110,7 @@ export default function AdminOrdersPage() {
               type="button"
               disabled={page <= 1}
               onClick={() => setPage((current) => current - 1)}
-              className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-semibold disabled:opacity-40"
+              className="admin-btn-secondary disabled:opacity-40"
             >
               Previous
             </button>
@@ -121,7 +121,7 @@ export default function AdminOrdersPage() {
               type="button"
               disabled={page >= pages}
               onClick={() => setPage((current) => current + 1)}
-              className="rounded-lg border border-slate-200 px-4 py-2 text-sm font-semibold disabled:opacity-40"
+              className="admin-btn-secondary disabled:opacity-40"
             >
               Next
             </button>

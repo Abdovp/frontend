@@ -2,22 +2,23 @@ type Props = {
   label: string;
   value: string;
   hint?: string;
-  accent?: 'gold' | 'brand' | 'green' | 'blue';
+  accent?: 'default' | 'brand' | 'gold' | 'green' | 'blue';
 };
 
-const accents = {
-  gold: 'border-accent/30 bg-gradient-to-br from-accent/10 to-white',
-  brand: 'border-brand/20 bg-gradient-to-br from-brand-50 to-white',
-  green: 'border-emerald-200 bg-gradient-to-br from-emerald-50 to-white',
-  blue: 'border-blue-200 bg-gradient-to-br from-blue-50 to-white',
+const valueColors = {
+  default: 'text-slate-900',
+  brand: 'text-brand',
+  gold: 'text-amber-600',
+  green: 'text-emerald-600',
+  blue: 'text-blue-600',
 };
 
-export default function MetricCard({ label, value, hint, accent = 'brand' }: Props) {
+export default function MetricCard({ label, value, hint, accent = 'default' }: Props) {
   return (
-    <div className={`rounded-2xl border p-5 shadow-soft ${accents[accent]}`}>
-      <p className="text-sm font-semibold text-slate-600">{label}</p>
-      <p className="mt-2 font-heading text-2xl font-bold text-ink sm:text-3xl">{value}</p>
-      {hint ? <p className="mt-2 text-xs text-slate-500">{hint}</p> : null}
+    <div className="admin-metric">
+      <p className="admin-metric__label">{label}</p>
+      <p className={`admin-metric__value ${valueColors[accent]}`}>{value}</p>
+      {hint ? <p className="admin-metric__hint">{hint}</p> : null}
     </div>
   );
 }

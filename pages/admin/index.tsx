@@ -48,18 +48,20 @@ export default function AdminDashboardPage() {
         />
 
         {loading ? (
-          <div className="rounded-2xl border border-slate-200 bg-white p-10 text-center text-slate-500">Loading...</div>
+          <div className="admin-card p-12 text-center text-sm text-slate-500">Loading metrics...</div>
         ) : null}
 
-        {error ? <div className="rounded-2xl border border-red-200 bg-red-50 p-4 text-red-700">{error}</div> : null}
+        {error ? (
+          <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">{error}</div>
+        ) : null}
 
         {metrics ? (
           <>
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-              <MetricCard label="Visits (🇲🇦)" value={metrics.page_views.toLocaleString('en-US')} hint="PageView" accent="brand" />
+              <MetricCard label="Visits (MA)" value={metrics.page_views.toLocaleString('en-US')} hint="PageView events" accent="brand" />
               <MetricCard label="Orders" value={metrics.orders.toLocaleString('en-US')} hint={`Upsell: ${metrics.upsell_orders} (${formatPercent(metrics.upsell_rate)})`} accent="gold" />
               <MetricCard label="Revenue" value={formatMad(metrics.revenue)} hint={`AOV: ${formatMad(metrics.average_order_value)}`} accent="green" />
-              <MetricCard label="Conversion Rate" value={formatPercent(metrics.conversion_rate)} hint={`Checkout → Order: ${formatPercent(metrics.checkout_conversion_rate)}`} accent="blue" />
+              <MetricCard label="Conversion" value={formatPercent(metrics.conversion_rate)} hint={`Checkout → Order: ${formatPercent(metrics.checkout_conversion_rate)}`} accent="blue" />
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-5">
@@ -75,25 +77,25 @@ export default function AdminDashboardPage() {
               <DailyChart daily={metrics.daily} />
             </div>
 
-            <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-soft">
-              <h3 className="font-heading text-lg font-bold text-ink">Top Products</h3>
+            <div className="admin-card p-5 sm:p-6">
+              <h3 className="text-base font-semibold text-slate-900">Top products</h3>
               <div className="mt-4 overflow-x-auto">
-                <table className="min-w-full text-sm">
-                  <thead className="text-slate-500">
+                <table className="admin-table min-w-full">
+                  <thead className="border-b border-slate-100">
                     <tr>
-                      <th className="py-2 text-left font-semibold">Product</th>
-                      <th className="py-2 text-left font-semibold">Orders</th>
-                      <th className="py-2 text-left font-semibold">Quantity</th>
-                      <th className="py-2 text-left font-semibold">Revenue</th>
+                      <th>Product</th>
+                      <th>Orders</th>
+                      <th>Qty</th>
+                      <th>Revenue</th>
                     </tr>
                   </thead>
-                  <tbody>
+                  <tbody className="divide-y divide-slate-100">
                     {metrics.top_products.map((product) => (
-                      <tr key={product.product_id} className="border-t border-slate-100">
-                        <td className="py-3 font-semibold text-ink">{product.product_name}</td>
-                        <td className="py-3">{product.orders}</td>
-                        <td className="py-3">{product.quantity}</td>
-                        <td className="py-3 font-bold text-accent-dark">{formatMad(product.revenue)}</td>
+                      <tr key={product.product_id}>
+                        <td className="font-medium text-slate-900">{product.product_name}</td>
+                        <td>{product.orders}</td>
+                        <td>{product.quantity}</td>
+                        <td className="font-semibold tabular-nums text-slate-900">{formatMad(product.revenue)}</td>
                       </tr>
                     ))}
                   </tbody>
