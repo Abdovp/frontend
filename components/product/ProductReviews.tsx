@@ -12,7 +12,7 @@ const distribution = [
 
 export default function ProductReviews({ product }: { product: Product }) {
   return (
-    <section className="section-padding bg-white">
+    <section className="section-padding bg-cream">
       <div className="container-wide">
         <SectionHeading
           eyebrow="آراء موثّقة"

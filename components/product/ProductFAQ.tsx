@@ -8,7 +8,7 @@ export default function ProductFAQ({ product }: { product: Product }) {
   const [open, setOpen] = useState<number | null>(0);
 
   return (
-    <section className="section-padding bg-cream">
+    <section className="section-padding bg-cream pb-24 md:pb-28">
       <div className="container-wide max-w-3xl">
         <div className="flex justify-center">
           <SectionHeading

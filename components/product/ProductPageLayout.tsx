@@ -32,7 +32,7 @@ export default function ProductPageLayout({ product }: { product: Product }) {
       <div className="product-moving-header">
         <AnnouncementBar variant="marquee" />
       </div>
-      <main className="pb-24">
+      <main>
         <div id="offers">
           <ProductOffers product={product} />
         </div>
