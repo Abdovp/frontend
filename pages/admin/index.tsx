@@ -71,10 +71,8 @@ export default function AdminDashboardPage() {
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
               <MetricCard label="Total Orders" value={metrics.orders.toLocaleString('en-US')} icon="clipboard" />
               <MetricCard label="View Product" value={metrics.view_content.toLocaleString('en-US')} icon="eye" />
-              <MetricCard label="Initiate Checkout" value={metrics.initiate_checkout.toLocaleString('en-US')} icon="checkCircle" />
               <MetricCard label="New Orders" value={metrics.pending_orders.toLocaleString('en-US')} icon="cart" />
               <MetricCard label="Delivered" value={metrics.delivered_orders.toLocaleString('en-US')} icon="truck" />
-              <MetricCard label="Shipped" value={metrics.shipped_orders.toLocaleString('en-US')} icon="truck" />
               <MetricCard label="Cancelled" value={metrics.cancelled_orders.toLocaleString('en-US')} icon="refresh" />
               <MetricCard label="Upsell Orders" value={metrics.upsell_orders.toLocaleString('en-US')} icon="shield" />
             </div>
