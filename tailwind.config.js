@@ -19,7 +19,7 @@ module.exports = {
           light: '#E4C463',
         },
         ink: '#0E1116',
-        cream: '#F7F4EE',
+        cream: '#F8FAFC',
         dark: '#0E1116',
         light: '#ffffff',
       },
