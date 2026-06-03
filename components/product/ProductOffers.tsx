@@ -5,7 +5,6 @@ import type { Product } from '../../lib/products';
 import { CURRENCY, getFirstOffer } from '../../lib/products';
 import ImagePlaceholder from '../ui/ImagePlaceholder';
 import Icon, { Stars } from '../ui/Icon';
-import ProductGuaranteeBar from './ProductGuaranteeBar';
 
 interface ProductOffersProps {
   product: Product;
@@ -226,10 +225,6 @@ export default function ProductOffers({ product }: ProductOffersProps) {
             </p>
           </div>
         </div>
-      </div>
-
-      <div className="mt-14 md:mt-20">
-        <ProductGuaranteeBar items={product.guarantees} />
       </div>
 
       {/* Sticky CTA — visible on all screens once scrolled past product card */}

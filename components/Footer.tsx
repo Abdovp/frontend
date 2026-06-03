@@ -11,10 +11,11 @@ const trustRow: { icon: IconName; text: string }[] = [
   { icon: 'shield', text: 'جودة مضمونة' },
 ];
 
-export default function Footer() {
+export default function Footer({ showTrustRow = true }: { showTrustRow?: boolean }) {
   return (
     <footer className="bg-ink text-white">
       <div className="container-wide">
+        {showTrustRow ? (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8 py-10 border-b border-white/10">
           {trustRow.map((t) => (
             <div key={t.text} className="flex items-center gap-3">
@@ -25,6 +26,7 @@ export default function Footer() {
             </div>
           ))}
         </div>
+        ) : null}
 
         <div className="md:hidden py-2">
           <CollapsibleMenuDark title="المنتجات">

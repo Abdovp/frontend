@@ -8,6 +8,7 @@ import ProductOffers from './ProductOffers';
 import ProductAlternatingBlocks from './ProductAlternatingBlocks';
 import ProductReviews from './ProductReviews';
 import ProductFAQ from './ProductFAQ';
+import ProductTrustBadges from './ProductTrustBadges';
 import type { Product } from '../../lib/products';
 
 export default function ProductPageLayout({ product }: { product: Product }) {
@@ -40,8 +41,9 @@ export default function ProductPageLayout({ product }: { product: Product }) {
         <ProductAlternatingBlocks product={product} />
         <ProductReviews product={product} />
         <ProductFAQ product={product} />
+        <ProductTrustBadges items={product.guarantees} />
       </main>
-      <Footer />
+      <Footer showTrustRow={false} />
       </div>
     </>
   );

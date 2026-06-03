@@ -318,6 +318,43 @@ h1, h2, h3, h4 {
     @apply mx-auto mb-2 flex items-center justify-center w-9 h-9 rounded-full bg-brand/[0.07] text-brand;
   }
 
+  .trust-badge-scroll {
+    @apply -mx-4 sm:-mx-6 md:mx-0;
+  }
+
+  .trust-badge-scroll__track {
+    @apply flex gap-4 overflow-x-auto snap-x snap-mandatory px-4 sm:px-6 md:px-0 pb-1;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .trust-badge-scroll__track::-webkit-scrollbar {
+    display: none;
+  }
+
+  @media (min-width: 768px) {
+    .trust-badge-scroll__track {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      overflow: visible;
+    }
+  }
+
+  .trust-badge-card {
+    @apply snap-start shrink-0 flex items-center gap-3 bg-white border-2 border-brand/10 rounded-2xl p-4 shadow-soft;
+    width: min(82vw, 17.5rem);
+  }
+
+  @media (min-width: 768px) {
+    .trust-badge-card {
+      width: auto;
+    }
+  }
+
+  .trust-badge-card__icon {
+    @apply flex items-center justify-center w-11 h-11 rounded-full bg-accent/15 text-accent shrink-0;
+  }
+
   .product-benefit-chip {
     @apply flex flex-col items-center justify-center text-center bg-white border border-ink/[0.07] rounded-2xl px-2 py-3 sm:px-3 sm:py-3.5 shadow-soft min-h-[5.5rem] sm:min-h-[6rem];
   }
@@ -393,15 +430,6 @@ h1, h2, h3, h4 {
 
   .admin-metric__hint {
     @apply mt-2 text-xs text-slate-400;
-  }
-
-  /* ---------- Guarantee bar ---------- */
-  .guarantee-bar {
-    @apply bg-ink text-white;
-  }
-
-  .guarantee-icon {
-    @apply flex items-center justify-center w-11 h-11 rounded-full bg-accent/15 text-accent shrink-0;
   }
 
   /* ---------- Sticky CTA ---------- */
