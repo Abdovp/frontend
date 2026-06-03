@@ -96,7 +96,7 @@ export const STORE_PROOF = {
   warranty: `${WARRANTY_DAYS} يوم`,
 };
 
-const SHARED_GUARANTEES: GuaranteeItem[] = [
+export const SHARED_GUARANTEES: GuaranteeItem[] = [
   { icon: 'wallet', title: 'الدفع عند الاستلام', subtitle: 'تخلّص ملي توصلك السلعة' },
   { icon: 'truck', title: 'توصيل 24–48 ساعة', subtitle: 'لكل مدن المغرب' },
   { icon: 'refresh', title: `استرجاع ${WARRANTY_DAYS} يوم`, subtitle: 'فلوسك راجعة بلا أسئلة' },

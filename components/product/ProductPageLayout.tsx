@@ -41,7 +41,7 @@ export default function ProductPageLayout({ product }: { product: Product }) {
         <ProductAlternatingBlocks product={product} />
         <ProductReviews product={product} />
         <ProductFAQ product={product} />
-        <ProductTrustBadges items={product.guarantees} />
+        <ProductTrustBadges badges={product.trustBadges} />
       </main>
       <Footer showTrustRow={false} />
       </div>

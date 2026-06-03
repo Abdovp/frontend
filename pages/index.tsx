@@ -33,7 +33,7 @@ export default function Home() {
         <TestimonialsSection />
         <HomeFinalCTA />
       </main>
-      <Footer />
+      <Footer showTrustRow={false} />
     </>
   );
 }

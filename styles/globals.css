@@ -341,13 +341,17 @@ h1, h2, h3, h4 {
   }
 
   .trust-badge-card {
-    @apply snap-start shrink-0 flex items-center gap-3 bg-white border-2 border-brand/10 rounded-2xl p-4 shadow-soft;
+    @apply snap-start shrink-0 flex items-center gap-3 bg-white border-[3px] border-brand/15 rounded-2xl p-4 shadow-soft transition-all duration-200;
     width: min(82vw, 17.5rem);
   }
 
   @media (min-width: 768px) {
     .trust-badge-card {
       width: auto;
+    }
+
+    .trust-badge-card:hover {
+      @apply border-brand/30 shadow-card -translate-y-0.5;
     }
   }
 
