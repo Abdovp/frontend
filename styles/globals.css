@@ -227,11 +227,20 @@ h1, h2, h3, h4 {
   }
 
   .offer-card {
-    @apply flex items-center gap-4 bg-white border-2 border-ink/[0.09] rounded-2xl px-4 sm:px-5 py-4 transition-all duration-200 hover:border-brand/40 text-start w-full;
+    @apply flex items-center gap-4 bg-white border-[3px] border-ink/15 rounded-2xl px-4 sm:px-5 py-4 text-start w-full cursor-pointer;
+    @apply transition-all duration-200 ease-out;
+    @apply hover:border-brand/50 hover:shadow-card hover:-translate-y-1 hover:bg-white;
   }
 
   .offer-card--selected {
-    @apply border-brand bg-brand/[0.035] shadow-soft;
+    @apply border-brand bg-white shadow-card ring-[3px] ring-brand/20;
+    box-shadow:
+      0 8px 32px rgba(19, 41, 75, 0.12),
+      0 0 0 1px rgba(19, 41, 75, 0.06);
+  }
+
+  .offer-card--selected:hover {
+    @apply border-brand-dark ring-brand/30 shadow-lift -translate-y-1;
   }
 
   .offer-badge {
@@ -244,11 +253,12 @@ h1, h2, h3, h4 {
   }
 
   .offer-radio {
-    @apply shrink-0 w-5 h-5 rounded-full border-2 border-ink/25 bg-white grid place-items-center transition;
+    @apply shrink-0 w-5 h-5 rounded-full border-[3px] border-ink/30 bg-white grid place-items-center transition-all duration-200;
   }
 
   .offer-radio--checked {
-    @apply border-brand bg-brand;
+    @apply border-brand bg-brand scale-110;
+    box-shadow: 0 0 0 3px rgba(19, 41, 75, 0.15);
   }
 
   .offer-radio--checked::after {
