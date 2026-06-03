@@ -30,7 +30,7 @@ export default function ProductPageLayout({ product }: { product: Product }) {
       <div className="product-page">
       <Header showAnnouncement={false} />
       <div className="product-moving-header">
-        <AnnouncementBar variant="tick" />
+        <AnnouncementBar variant="marquee" />
       </div>
       <main className="pb-24">
         <div id="offers">

@@ -147,6 +147,28 @@ h1, h2, h3, h4 {
 
   .announcement-bar__track {
     @apply flex flex-col transition-transform duration-500 ease-in-out;
+    will-change: transform;
+  }
+
+  .announcement-bar__marquee {
+    direction: ltr;
+  }
+
+  .announcement-bar__marquee .animate-marquee {
+    animation: marquee 28s linear infinite;
+    -webkit-animation: marquee 28s linear infinite;
+    will-change: transform;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .announcement-bar__marquee .animate-marquee {
+      animation: none;
+      -webkit-animation: none;
+    }
+
+    .announcement-bar__track {
+      transition: none;
+    }
   }
 
   .announcement-bar__slide {
@@ -241,6 +263,16 @@ h1, h2, h3, h4 {
 
   .offer-card--selected:hover {
     @apply border-brand-dark ring-brand/30 shadow-lift -translate-y-1;
+  }
+
+  @media (hover: none) and (pointer: coarse) {
+    .offer-card--selected {
+      @apply -translate-y-1;
+    }
+
+    .offer-card:active {
+      @apply scale-[0.99];
+    }
   }
 
   .offer-badge {
