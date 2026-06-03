@@ -1,5 +1,3 @@
-import AdminIcon from './AdminIcon';
-
 type Props = {
   from: string;
   to: string;
@@ -21,50 +19,51 @@ export default function DateRangePicker({ from, to, onChange }: Props) {
   }
 
   return (
-    <div className="admin-card p-4 sm:p-5">
-      <div className="mb-4 flex items-center gap-2">
-        <AdminIcon name="calendar" className="h-5 w-5 text-slate-400" />
-        <h3 className="text-sm font-semibold text-slate-900">Date range</h3>
-      </div>
-      <div className="flex flex-wrap items-end gap-4">
+    <div className="admin-panel">
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
         <div>
-          <label htmlFor="from-date" className="admin-label">
-            From
-          </label>
-          <input
-            id="from-date"
-            type="date"
-            value={from}
-            onChange={(event) => onChange(event.target.value, to)}
-            className="admin-input w-auto"
-          />
+          <h3 className="admin-panel__title">Date range</h3>
+          <p className="mt-1 text-xs text-admin-muted">Metrics include Morocco IP traffic only</p>
         </div>
-        <div>
-          <label htmlFor="to-date" className="admin-label">
-            To
-          </label>
-          <input
-            id="to-date"
-            type="date"
-            value={to}
-            onChange={(event) => onChange(from, event.target.value)}
-            className="admin-input w-auto"
-          />
-        </div>
-        <div className="flex flex-wrap gap-2">
-          {presets.map((preset) => (
-            <button
-              key={preset.label}
-              type="button"
-              onClick={() => applyPreset(preset.days)}
-              className="admin-btn-secondary !rounded-full !px-3.5 !py-2 !text-xs"
-            >
-              {preset.label}
-            </button>
-          ))}
+        <div className="flex flex-wrap items-end gap-3">
+          <div>
+            <label htmlFor="from-date" className="admin-label">
+              From
+            </label>
+            <input
+              id="from-date"
+              type="date"
+              value={from}
+              onChange={(event) => onChange(event.target.value, to)}
+              className="admin-input w-auto min-w-[10rem]"
+            />
+          </div>
+          <div>
+            <label htmlFor="to-date" className="admin-label">
+              To
+            </label>
+            <input
+              id="to-date"
+              type="date"
+              value={to}
+              onChange={(event) => onChange(from, event.target.value)}
+              className="admin-input w-auto min-w-[10rem]"
+            />
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {presets.map((preset) => (
+              <button
+                key={preset.label}
+                type="button"
+                onClick={() => applyPreset(preset.days)}
+                className="admin-btn-secondary !rounded-full !px-4 !py-2 !text-xs"
+              >
+                {preset.label}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
-      <p className="mt-4 text-xs text-slate-400">Metrics include Morocco IP traffic only</p>
     </div>
   );
 }

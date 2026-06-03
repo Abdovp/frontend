@@ -22,6 +22,12 @@ module.exports = {
         cream: '#EEF2F8',
         dark: '#0E1116',
         light: '#ffffff',
+        admin: {
+          bg: '#F5F1EA',
+          accent: '#144534',
+          'accent-light': '#1B5E42',
+          muted: '#6B7280',
+        },
       },
       fontFamily: {
         sans: ['Tajawal', 'IBM Plex Sans Arabic', 'Tahoma', 'system-ui', 'sans-serif'],

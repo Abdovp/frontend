@@ -70,7 +70,7 @@ export default function AdminOrdersPage() {
       <div className="space-y-6">
         <DateRangePicker from={from} to={to} onChange={(nextFrom, nextTo) => { setFrom(nextFrom); setTo(nextTo); setPage(1); }} />
 
-        <div className="admin-card grid gap-3 p-4 lg:grid-cols-[1fr_auto_auto] lg:items-center">
+        <div className="admin-panel grid gap-3 lg:grid-cols-[1fr_auto_auto] lg:items-center">
           <input
             type="search"
             value={search}
@@ -96,10 +96,10 @@ export default function AdminOrdersPage() {
               </option>
             ))}
           </select>
-          <p className="text-sm font-medium text-slate-500">{total.toLocaleString('en-US')} orders</p>
+          <p className="text-sm font-medium text-admin-muted">{total.toLocaleString('en-US')} orders</p>
         </div>
 
-        {loading ? <div className="admin-card p-12 text-center text-sm text-slate-500">Loading orders...</div> : null}
+        {loading ? <div className="admin-panel p-12 text-center text-sm text-admin-muted">Loading orders...</div> : null}
         {error ? <div className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">{error}</div> : null}
 
         {!loading ? <OrdersTable orders={orders} onSelect={openOrder} /> : null}
@@ -114,7 +114,7 @@ export default function AdminOrdersPage() {
             >
               Previous
             </button>
-            <span className="text-sm text-slate-500">
+            <span className="text-sm text-admin-muted">
               {page} / {pages}
             </span>
             <button

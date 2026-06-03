@@ -40,29 +40,29 @@ export default function OrderPreview({ order, onClose, onUpdated }: Props) {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <button type="button" className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm" onClick={onClose} aria-label="Close" />
-      <div className="relative max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-2xl bg-white shadow-2xl">
-        <div className="flex items-start justify-between gap-4 border-b border-slate-100 px-6 py-5">
+      <div className="relative max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-3xl bg-white shadow-2xl">
+        <div className="flex items-start justify-between gap-4 border-b border-admin-bg px-6 py-5">
           <div>
-            <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">Order details</p>
+            <p className="text-xs font-semibold uppercase tracking-wider text-admin-muted">Order details</p>
             <h3 className="mt-1 text-2xl font-bold text-slate-900">{order.public_order_id}</h3>
-            <p className="mt-1 text-sm text-slate-500">{formatDateTime(order.created_at)}</p>
+            <p className="mt-1 text-sm text-admin-muted">{formatDateTime(order.created_at)}</p>
           </div>
-          <button type="button" onClick={onClose} className="rounded-lg p-2 text-slate-400 hover:bg-slate-100 hover:text-slate-600">
+          <button type="button" onClick={onClose} className="rounded-2xl p-2 text-admin-muted hover:bg-admin-bg hover:text-slate-600">
             <AdminIcon name="close" className="h-5 w-5" />
           </button>
         </div>
 
         <div className="space-y-6 px-6 py-6">
           <div className="grid gap-4 sm:grid-cols-2">
-            <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-              <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Customer</p>
+            <div className="rounded-2xl bg-admin-bg p-4">
+              <p className="text-xs font-semibold uppercase tracking-wide text-admin-muted">Customer</p>
               <p className="mt-2 text-lg font-semibold text-slate-900">{order.customer_name}</p>
-              <a href={`tel:${order.phone}`} className="mt-1 inline-block text-sm font-semibold text-brand hover:underline">
+              <a href={`tel:${order.phone}`} className="mt-1 inline-block text-sm font-semibold text-admin-accent hover:underline">
                 {order.phone}
               </a>
             </div>
-            <div className="rounded-xl border border-slate-100 bg-slate-50 p-4">
-              <p className="text-xs font-semibold uppercase tracking-wide text-slate-400">Total</p>
+            <div className="rounded-2xl bg-admin-bg p-4">
+              <p className="text-xs font-semibold uppercase tracking-wide text-admin-muted">Total</p>
               <p className="mt-2 text-2xl font-bold text-slate-900">{formatMad(order.total)}</p>
               <div className="mt-3 flex flex-wrap gap-2">
                 {order.has_upsell ? (
@@ -84,9 +84,9 @@ export default function OrderPreview({ order, onClose, onUpdated }: Props) {
 
           <div>
             <h4 className="mb-3 text-sm font-semibold text-slate-900">Line items</h4>
-            <div className="overflow-hidden rounded-xl border border-slate-200">
+            <div className="overflow-hidden rounded-2xl bg-admin-bg">
               <table className="admin-table min-w-full">
-                <thead className="bg-slate-50">
+                <thead className="bg-admin-bg/70">
                   <tr>
                     <th>Product</th>
                     <th>Offer</th>
@@ -94,7 +94,7 @@ export default function OrderPreview({ order, onClose, onUpdated }: Props) {
                     <th>Total</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-slate-100">
+                <tbody className="divide-y divide-white">
                   {order.items.map((item) => (
                     <tr key={`${item.product_id}-${item.offer}-${item.is_upsell}`}>
                       <td>
@@ -165,7 +165,7 @@ export default function OrderPreview({ order, onClose, onUpdated }: Props) {
 
           {error ? <p className="text-sm font-medium text-red-600">{error}</p> : null}
 
-          <div className="flex flex-wrap gap-3 border-t border-slate-100 pt-4">
+          <div className="flex flex-wrap gap-3 border-t border-admin-bg pt-4">
             <button type="button" onClick={save} disabled={saving} className="admin-btn-primary disabled:opacity-60">
               {saving ? 'Saving...' : 'Save changes'}
             </button>
