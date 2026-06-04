@@ -9,6 +9,8 @@ interface ProductImageProps {
   aspect?: 'square' | 'hero' | 'wide' | 'portrait';
   /** cover = fill crop; contain = full product visible (better for catalogue cards) */
   fit?: 'cover' | 'contain';
+  /** When fit is cover, anchors crop (top helps trim bad edges at bottom) */
+  objectPosition?: 'center' | 'top' | 'bottom';
   className?: string;
   priority?: boolean;
 }
@@ -27,6 +29,7 @@ export default function ProductImage({
   fallbackSublabel,
   aspect = 'square',
   fit = 'cover',
+  objectPosition = 'center',
   className = '',
   priority = false,
 }: ProductImageProps) {
@@ -41,14 +44,21 @@ export default function ProductImage({
     );
   }
 
+  const objectPosClass =
+    objectPosition === 'top'
+      ? 'object-top'
+      : objectPosition === 'bottom'
+        ? 'object-bottom'
+        : 'object-center';
+
   const fitClass =
     fit === 'contain'
       ? 'object-contain object-center p-4 sm:p-5'
-      : 'object-cover object-center';
+      : `object-cover ${objectPosClass}`;
 
   return (
     <div
-      className={`relative overflow-hidden bg-white ${aspectClass[aspect]} ${className}`.trim()}
+      className={`relative overflow-hidden ${aspectClass[aspect]} ${className}`.trim()}
     >
       <Image
         src={src}

@@ -106,8 +106,9 @@ export default function ProductOffers({ product }: ProductOffersProps) {
               fallbackLabel={product.galleryLabels[0]}
               fallbackSublabel="صورة المنتج"
               aspect="square"
-              fit="contain"
-              className="rounded-2xl shadow-card"
+              fit="cover"
+              objectPosition={product.id === 'cooling-pack' ? 'top' : 'center'}
+              className="rounded-2xl shadow-card bg-white"
               priority
             />
             <div className="grid grid-cols-4 gap-2 sm:gap-3 mt-5">
