@@ -46,8 +46,9 @@ export default function Collections() {
                       alt={p.nameAr}
                       fallbackLabel={p.galleryLabels[0]}
                       aspect="square"
-                      fit="contain"
-                      className="!rounded-none !border-0"
+                      fit={p.id === 'cooling-pack' ? 'cover' : 'contain'}
+                      objectPosition={p.id === 'cooling-pack' ? 'top' : 'center'}
+                      className="!rounded-none !border-0 bg-white"
                     />
                     {p.offers.some((o) => o.badge === 'الأكثر مبيعاً') && (
                       <span className="absolute top-3 end-3 z-10 badge-pill bg-accent text-ink shadow-gold">
