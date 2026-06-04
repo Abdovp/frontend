@@ -101,11 +101,12 @@ export default function ProductOffers({ product }: ProductOffersProps) {
           {/* Gallery + trust — on top on mobile */}
           <div className="order-1 lg:order-2 lg:sticky lg:top-28">
             <ProductImage
-              src={product.image}
+              src={product.heroImage ?? product.image}
               alt={product.nameAr}
               fallbackLabel={product.galleryLabels[0]}
               fallbackSublabel="صورة المنتج"
               aspect="square"
+              fit="cover"
               className="rounded-2xl shadow-card"
               priority
             />
