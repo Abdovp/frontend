@@ -14,6 +14,7 @@ import { useCartStore } from '../lib/cart-store';
 import { saveOrderConfirmation } from '../lib/order-confirmation';
 import { products, CURRENCY, WARRANTY_DAYS, type Product, type ProductId } from '../lib/products';
 import FormField from './ui/FormField';
+import CartProductThumb from './ui/CartProductThumb';
 import Icon, { Stars } from './ui/Icon';
 
 function getCrossSellProduct(cartIds: ProductId[]): Product | null {
@@ -22,14 +23,6 @@ function getCrossSellProduct(cartIds: ProductId[]): Product | null {
   if (hasPack && !hasHolder) return products['magnetic-holder'];
   if (hasHolder && !hasPack) return products['cooling-pack'];
   return null;
-}
-
-function Thumb({ productId }: { productId: ProductId }) {
-  return (
-    <div className="cart-item-thumb">
-      <Icon name={products[productId].icon} size={26} />
-    </div>
-  );
 }
 
 export default function CartDrawer() {
@@ -97,7 +90,7 @@ export default function CartDrawer() {
               <div className="space-y-3">
                 {items.map((item) => (
                   <div key={item.lineKey} className="cart-item-card">
-                    <Thumb productId={item.id} />
+                    <CartProductThumb productId={item.id} />
                     <div className="flex-1 min-w-0">
                       <p className="font-bold text-ink leading-snug line-clamp-2">{item.name}</p>
                       <p className="text-sm text-ink/55 mt-0.5">
@@ -124,7 +117,7 @@ export default function CartDrawer() {
                 <div className="mt-6">
                   <p className="font-heading font-bold text-ink mb-3">منتوجات ستساعدك:</p>
                   <div className="cart-crosssell-card">
-                    <Thumb productId={crossSell.id} />
+                    <CartProductThumb productId={crossSell.id} />
                     <div className="flex-1 min-w-0">
                       <p className="font-bold text-ink leading-snug line-clamp-1">{crossSell.nameAr}</p>
                       <p className="text-sm text-ink/55 mt-0.5 line-clamp-1">{crossSell.tagline}</p>
@@ -346,13 +339,16 @@ function CheckoutModal({ onClose, items, total }: CheckoutModalProps) {
 
           <div className="bg-cream rounded-2xl p-4 mb-5">
             {items.map((item) => (
-              <div key={item.lineKey} className="flex justify-between mb-2 text-sm gap-3">
-                <span className="text-ink/70 min-w-0">
-                  {item.name} ({item.offer} {item.offer === 1 ? 'وحدة' : 'وحدات'})
-                </span>
-                <span className="font-bold text-ink shrink-0">
-                  {item.price * item.quantity} {CURRENCY}
-                </span>
+              <div key={item.lineKey} className="flex items-center gap-3 mb-2 text-sm">
+                <CartProductThumb productId={item.id} size="sm" />
+                <div className="flex flex-1 justify-between gap-3 min-w-0">
+                  <span className="text-ink/70 min-w-0">
+                    {item.name} ({item.offer} {item.offer === 1 ? 'وحدة' : 'وحدات'})
+                  </span>
+                  <span className="font-bold text-ink shrink-0">
+                    {item.price * item.quantity} {CURRENCY}
+                  </span>
+                </div>
               </div>
             ))}
             <div className="border-t border-ink/10 pt-2 mt-2 flex justify-between font-extrabold">

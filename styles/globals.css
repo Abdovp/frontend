@@ -493,7 +493,15 @@ h1, h2, h3, h4 {
   }
 
   .cart-item-thumb {
-    @apply shrink-0 w-16 h-20 rounded-xl bg-white border border-ink/[0.08] flex items-center justify-center shadow-soft text-brand;
+    @apply shrink-0 rounded-xl bg-white border border-ink/[0.08] shadow-soft;
+  }
+
+  .cart-item-thumb--photo {
+    @apply overflow-hidden;
+  }
+
+  .cart-item-thumb--icon {
+    @apply flex items-center justify-center text-brand;
   }
 
   .cart-crosssell-card {

@@ -1,5 +1,5 @@
+import Image from 'next/image';
 import AlternatingSection from '../ui/AlternatingSection';
-import ImagePlaceholder from '../ui/ImagePlaceholder';
 import SectionHeading from '../ui/SectionHeading';
 import Icon from '../ui/Icon';
 import Link from 'next/link';
@@ -16,7 +16,15 @@ export default function PainPromiseSection() {
       imageSide="left"
       bg="white"
       image={
-        <ImagePlaceholder label="سائق مرتاح ف طوموبيلو" sublabel="صورة قريباً" aspect="hero" />
+        <div className="relative aspect-[4/5] md:aspect-[4/3] lg:aspect-[16/11] overflow-hidden rounded-3xl border border-ink/[0.08] shadow-lift">
+          <Image
+            src="/images/home-pain-promise.png"
+            alt="سائق مغربي مرتاح ف طوموبيلو — بويا شوب"
+            fill
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            className="object-cover object-center"
+          />
+        </div>
       }
     >
       <SectionHeading
