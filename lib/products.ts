@@ -321,6 +321,7 @@ export const products: Record<ProductId, Product> = {
       },
     ],
     galleryLabels: ['الحامل المغناطيسي', 'المغناطيس القوي', 'القاعدة الصلبة', 'مركب ف الطوموبيل', 'مع الهاتف'],
+    image: '/images/magnetic-holder.png',
     pain: {
       eyebrow: 'المشكل',
       title: 'التلفون كيطيح، الـ GPS كيتقطع، والتركيز كيضيع',
