@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { productList, WARRANTY_DAYS, CURRENCY } from '../lib/products';
-import ImagePlaceholder from '../components/ui/ImagePlaceholder';
+import ProductImage from '../components/ui/ProductImage';
 import Icon, { Stars } from '../components/ui/Icon';
 
 export default function Collections() {
@@ -37,11 +37,12 @@ export default function Collections() {
               {productList.map((p) => (
                 <Link key={p.id} href={p.href} className="card-elevated overflow-hidden group flex flex-col sm:flex-row">
                   <div className="sm:w-2/5 relative">
-                    <ImagePlaceholder
-                      label={p.galleryLabels[0]}
-                      sublabel=""
+                    <ProductImage
+                      src={p.image}
+                      alt={p.nameAr}
+                      fallbackLabel={p.galleryLabels[0]}
                       aspect="square"
-                      className="!rounded-none !border-0 h-full"
+                      className="!rounded-none !border-0 h-full min-h-[12rem] sm:min-h-0"
                     />
                     {p.offers.some((o) => o.badge === 'الأكثر مبيعاً') && (
                       <span className="absolute top-3 end-3 badge-pill bg-accent text-ink shadow-gold">الأكثر مبيعاً</span>

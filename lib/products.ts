@@ -62,6 +62,8 @@ export interface Product {
   guarantees: GuaranteeItem[];
   offers: ProductOffer[];
   galleryLabels: string[];
+  /** Public path e.g. /images/pack.png */
+  image?: string;
   pain: ProductSection;
   logic: ProductSection;
   proof: ProductSection;
@@ -170,6 +172,7 @@ export const products: Record<ProductId, Product> = {
       },
     ],
     galleryLabels: ['الباك كامل', 'المروحة المزدوجة', 'المظلة الحرارية', 'التركيب', 'داخل الطوموبيل'],
+    image: '/images/pack.png',
     pain: {
       eyebrow: 'المشكل',
       title: 'الطوموبيل كتولّي فرن، والجلد كيحرق يديك',

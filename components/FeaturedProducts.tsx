@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { productList } from '../lib/products';
-import ImagePlaceholder from './ui/ImagePlaceholder';
+import ProductImage from './ui/ProductImage';
 import Icon, { Stars } from './ui/Icon';
 
 const comingSoon = [
@@ -29,9 +29,11 @@ export default function FeaturedProducts() {
           {productList.map((p) => (
             <Link key={p.id} href={p.href} className="card-elevated overflow-hidden group flex flex-col">
               <div className="relative">
-                <ImagePlaceholder
-                  label={p.galleryLabels[0]}
-                  sublabel={p.category}
+                <ProductImage
+                  src={p.image}
+                  alt={p.nameAr}
+                  fallbackLabel={p.galleryLabels[0]}
+                  fallbackSublabel={p.category}
                   aspect="square"
                   className="!rounded-none !border-0 border-b border-ink/[0.06]"
                 />

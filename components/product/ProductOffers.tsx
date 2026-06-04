@@ -3,7 +3,7 @@ import { trackAddToCart } from '../../lib/analytics/track';
 import { useCartStore } from '../../lib/cart-store';
 import type { Product } from '../../lib/products';
 import { CURRENCY, getFirstOffer } from '../../lib/products';
-import ImagePlaceholder from '../ui/ImagePlaceholder';
+import ProductImage from '../ui/ProductImage';
 import Icon, { Stars } from '../ui/Icon';
 
 interface ProductOffersProps {
@@ -100,11 +100,14 @@ export default function ProductOffers({ product }: ProductOffersProps) {
         >
           {/* Gallery + trust — on top on mobile */}
           <div className="order-1 lg:order-2 lg:sticky lg:top-28">
-            <ImagePlaceholder
-              label={product.galleryLabels[0]}
-              sublabel="صورة المنتج"
+            <ProductImage
+              src={product.image}
+              alt={product.nameAr}
+              fallbackLabel={product.galleryLabels[0]}
+              fallbackSublabel="صورة المنتج"
               aspect="square"
-              className="shadow-card"
+              className="rounded-2xl shadow-card"
+              priority
             />
             <div className="grid grid-cols-4 gap-2 sm:gap-3 mt-5">
               {product.valueProps.map((v) => (
