@@ -7,6 +7,8 @@ interface ProductImageProps {
   fallbackLabel: string;
   fallbackSublabel?: string;
   aspect?: 'square' | 'hero' | 'wide' | 'portrait';
+  /** cover = fill crop; contain = full product visible (better for catalogue cards) */
+  fit?: 'cover' | 'contain';
   className?: string;
   priority?: boolean;
 }
@@ -24,6 +26,7 @@ export default function ProductImage({
   fallbackLabel,
   fallbackSublabel,
   aspect = 'square',
+  fit = 'cover',
   className = '',
   priority = false,
 }: ProductImageProps) {
@@ -38,15 +41,22 @@ export default function ProductImage({
     );
   }
 
+  const fitClass =
+    fit === 'contain'
+      ? 'object-contain object-center p-4 sm:p-5'
+      : 'object-cover object-center';
+
   return (
-    <div className={`relative overflow-hidden ${aspectClass[aspect]} ${className}`.trim()}>
+    <div
+      className={`relative overflow-hidden bg-white ${aspectClass[aspect]} ${className}`.trim()}
+    >
       <Image
         src={src}
         alt={alt}
         fill
         priority={priority}
         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
-        className="object-cover object-center"
+        className={fitClass}
       />
     </div>
   );

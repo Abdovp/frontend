@@ -35,6 +35,7 @@ export default function FeaturedProducts() {
                   fallbackLabel={p.galleryLabels[0]}
                   fallbackSublabel={p.category}
                   aspect="square"
+                  fit="contain"
                   className="!rounded-none !border-0 border-b border-ink/[0.06]"
                 />
                 {p.offers.some((o) => o.badge === 'الأكثر مبيعاً') && (

@@ -35,20 +35,27 @@ export default function Collections() {
           <div className="container-wide">
             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               {productList.map((p) => (
-                <Link key={p.id} href={p.href} className="card-elevated overflow-hidden group flex flex-col sm:flex-row">
-                  <div className="sm:w-2/5 relative">
+                <Link
+                  key={p.id}
+                  href={p.href}
+                  className="card-elevated overflow-hidden group grid md:grid-cols-[11.5rem_1fr] lg:grid-cols-[13rem_1fr]"
+                >
+                  <div className="relative w-full overflow-hidden border-b border-ink/[0.06] md:border-b-0 md:border-e md:border-ink/[0.06]">
                     <ProductImage
                       src={p.image}
                       alt={p.nameAr}
                       fallbackLabel={p.galleryLabels[0]}
                       aspect="square"
-                      className="!rounded-none !border-0 h-full min-h-[12rem] sm:min-h-0"
+                      fit="contain"
+                      className="!rounded-none !border-0"
                     />
                     {p.offers.some((o) => o.badge === 'الأكثر مبيعاً') && (
-                      <span className="absolute top-3 end-3 badge-pill bg-accent text-ink shadow-gold">الأكثر مبيعاً</span>
+                      <span className="absolute top-3 end-3 z-10 badge-pill bg-accent text-ink shadow-gold">
+                        الأكثر مبيعاً
+                      </span>
                     )}
                   </div>
-                  <div className="p-6 sm:w-3/5 flex flex-col">
+                  <div className="p-6 flex flex-col min-w-0">
                     <p className="text-xs font-bold text-accent-dark mb-1">{p.category}</p>
                     <h2 className="font-heading text-xl font-extrabold text-ink mb-2 group-hover:text-brand transition">
                       {p.nameAr}

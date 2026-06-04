@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import CartProductThumb from './ui/CartProductThumb';
 import Icon, { Stars } from './ui/Icon';
 import { appendUpsellToOrder } from '../lib/order-confirmation';
 import { CURRENCY, type Product } from '../lib/products';
@@ -70,9 +71,7 @@ export default function UpsellPopup({ product, onAdded, onClose }: UpsellPopupPr
           </div>
 
           <div className="flex gap-4 rounded-2xl border border-ink/[0.08] bg-cream p-4 mb-5">
-            <span className="flex items-center justify-center w-16 h-16 rounded-2xl bg-white border border-ink/[0.07] text-brand shrink-0 shadow-soft">
-              <Icon name={product.icon} size={30} />
-            </span>
+            <CartProductThumb productId={product.id} size="md" />
             <div className="min-w-0 flex-1">
               <p className="font-heading font-bold text-ink leading-snug">{product.nameAr}</p>
               <p className="text-sm text-ink/55 mt-1 line-clamp-2">{product.tagline}</p>
