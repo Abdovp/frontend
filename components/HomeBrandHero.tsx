@@ -1,6 +1,6 @@
 import Link from 'next/link';
-import Image from 'next/image';
 import Icon from './ui/Icon';
+import HomeHeroGallery from './HomeHeroGallery';
 import { STORE_PROOF } from '../lib/products';
 
 const heroPoints = [
@@ -67,16 +67,7 @@ export default function HomeBrandHero() {
 
           <div className="order-1 lg:order-2 animate-fade-up">
             <div className="relative">
-              <div className="relative aspect-[4/5] md:aspect-[4/3] lg:aspect-[16/11] overflow-hidden rounded-3xl border border-white/15 shadow-lift">
-                <Image
-                  src="/images/home-hero.png"
-                  alt="سائق مغربي مرتاح ف طوموبيلو — بويا شوب"
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 50vw"
-                  className="object-cover object-center"
-                />
-              </div>
+              <HomeHeroGallery />
               <div className="absolute -bottom-5 -start-5 bg-white text-ink rounded-2xl shadow-lift px-5 py-4 flex items-center gap-3">
                 <span className="flex items-center justify-center w-11 h-11 rounded-full bg-accent/15 text-accent">
                   <Icon name="star" size={22} />
