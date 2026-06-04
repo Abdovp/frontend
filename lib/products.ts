@@ -62,7 +62,7 @@ export interface Product {
   guarantees: GuaranteeItem[];
   offers: ProductOffer[];
   galleryLabels: string[];
-  /** Public path e.g. /images/pack.png */
+  /** Public path e.g. /images/pack.webp */
   image?: string;
   pain: ProductSection;
   logic: ProductSection;
@@ -172,7 +172,7 @@ export const products: Record<ProductId, Product> = {
       },
     ],
     galleryLabels: ['الباك كامل', 'المروحة المزدوجة', 'المظلة الحرارية', 'التركيب', 'داخل الطوموبيل'],
-    image: '/images/pack.png',
+    image: '/images/pack.webp',
     pain: {
       eyebrow: 'المشكل',
       title: 'الطوموبيل كتولّي فرن، والجلد كيحرق يديك',
@@ -321,7 +321,7 @@ export const products: Record<ProductId, Product> = {
       },
     ],
     galleryLabels: ['الحامل المغناطيسي', 'المغناطيس القوي', 'القاعدة الصلبة', 'مركب ف الطوموبيل', 'مع الهاتف'],
-    image: '/images/magnetic-holder.png',
+    image: '/images/magnetic-holder.webp',
     pain: {
       eyebrow: 'المشكل',
       title: 'التلفون كيطيح، الـ GPS كيتقطع، والتركيز كيضيع',

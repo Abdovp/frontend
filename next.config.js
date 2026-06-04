@@ -9,6 +9,7 @@ const nextConfig = {
   output: 'standalone',
   images: {
     domains: ['boyashop.store'],
+    formats: ['image/webp'],
   },
   async rewrites() {
     return [
