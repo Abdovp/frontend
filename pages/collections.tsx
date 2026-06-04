@@ -46,8 +46,8 @@ export default function Collections() {
                       alt={p.nameAr}
                       fallbackLabel={p.galleryLabels[0]}
                       aspect="square"
-                      fit={p.id === 'cooling-pack' ? 'cover' : 'contain'}
-                      objectPosition={p.id === 'cooling-pack' ? 'top' : 'center'}
+                      fit="cover"
+                      objectPosition="center"
                       className="!rounded-none !border-0 bg-white"
                     />
                     {p.offers.some((o) => o.badge === 'الأكثر مبيعاً') && (

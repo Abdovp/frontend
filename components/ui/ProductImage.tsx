@@ -7,7 +7,7 @@ interface ProductImageProps {
   fallbackLabel: string;
   fallbackSublabel?: string;
   aspect?: 'square' | 'hero' | 'wide' | 'portrait';
-  /** cover = fill crop; contain = full product visible (better for catalogue cards) */
+  /** cover = fill square; contain = full image visible with padding */
   fit?: 'cover' | 'contain';
   /** When fit is cover, anchors crop (top helps trim bad edges at bottom) */
   objectPosition?: 'center' | 'top' | 'bottom';
