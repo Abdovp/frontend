@@ -497,7 +497,7 @@ h1, h2, h3, h4 {
   }
 
   .cart-item-thumb--photo {
-    @apply overflow-hidden;
+    @apply overflow-hidden bg-white;
   }
 
   .cart-item-thumb--icon {
