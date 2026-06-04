@@ -1,5 +1,3 @@
-import Image from 'next/image';
-import AlternatingSection from '../ui/AlternatingSection';
 import SectionHeading from '../ui/SectionHeading';
 import Icon from '../ui/Icon';
 import Link from 'next/link';
@@ -12,40 +10,31 @@ const problems = [
 
 export default function PainPromiseSection() {
   return (
-    <AlternatingSection
-      imageSide="left"
-      bg="white"
-      image={
-        <div className="relative aspect-[4/5] md:aspect-[4/3] lg:aspect-[16/11] overflow-hidden rounded-3xl border border-ink/[0.08] shadow-lift">
-          <Image
-            src="/images/home-pain-promise.png"
-            alt="سائق مغربي مرتاح ف طوموبيلو — بويا شوب"
-            fill
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            className="object-cover object-center"
-          />
+    <section className="section-padding bg-white">
+      <div className="container-wide max-w-3xl" dir="rtl">
+        <SectionHeading
+          eyebrow="مشاكل حقيقية، حل واحد"
+          title="كل سائق مغربي كيعاني من نفس المشاكل ف الطريق"
+          subtitle="بويا شوب فهمات الحرارة، التعب، والقلق على السيارة. لهذا كنوفرو منتجات مختارة كتحل المشكل فعلاً — ماشي كلام فالهضرة."
+          align="center"
+        />
+        <ul className="space-y-3 mb-8">
+          {problems.map((p) => (
+            <li key={p} className="flex items-center gap-3 text-ink/75">
+              <span className="flex items-center justify-center w-6 h-6 rounded-full bg-red-50 text-red-500 shrink-0">
+                <Icon name="close" size={14} />
+              </span>
+              <span>{p}</span>
+            </li>
+          ))}
+        </ul>
+        <div className="text-center">
+          <Link href="/collections" className="btn-primary">
+            تصفّح الحلول
+            <Icon name="arrow-left" size={18} />
+          </Link>
         </div>
-      }
-    >
-      <SectionHeading
-        eyebrow="مشاكل حقيقية، حل واحد"
-        title="كل سائق مغربي كيعاني من نفس المشاكل ف الطريق"
-        subtitle="بويا شوب فهمات الحرارة، التعب، والقلق على السيارة. لهذا كنوفرو منتجات مختارة كتحل المشكل فعلاً — ماشي كلام فالهضرة."
-      />
-      <ul className="space-y-3 mb-8">
-        {problems.map((p) => (
-          <li key={p} className="flex items-center gap-3 text-ink/75">
-            <span className="flex items-center justify-center w-6 h-6 rounded-full bg-red-50 text-red-500 shrink-0">
-              <Icon name="close" size={14} />
-            </span>
-            <span>{p}</span>
-          </li>
-        ))}
-      </ul>
-      <Link href="/collections" className="btn-primary">
-        تصفّح الحلول
-        <Icon name="arrow-left" size={18} />
-      </Link>
-    </AlternatingSection>
+      </div>
+    </section>
   );
 }
