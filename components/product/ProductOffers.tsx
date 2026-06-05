@@ -299,19 +299,19 @@ export default function ProductOffers({ product }: ProductOffersProps) {
         aria-hidden={!showSticky}
       >
         <div className="container-wide">
-          <div className="mx-auto w-full max-w-3xl md:max-w-5xl flex items-center gap-3 md:gap-10">
-            <div className="hidden md:flex items-center gap-3 shrink-0 min-w-0 max-w-[14rem] lg:max-w-xs">
-              <div className="w-14 h-14 shrink-0 rounded-xl overflow-hidden border border-ink/[0.08] shadow-soft bg-white">
+          <div className="mx-auto w-full max-w-3xl md:max-w-4xl flex items-center gap-3 md:gap-6">
+            <div className="hidden md:flex items-center gap-2.5 shrink-0 min-w-0 max-w-[10.5rem]">
+              <div className="w-11 h-11 shrink-0 rounded-lg overflow-hidden border border-ink/[0.08] shadow-soft bg-white">
                 <ProductImage
                   src={galleryImages[0] ?? product.image}
                   alt={product.nameAr}
                   fallbackLabel={product.nameAr}
                   aspect="square"
                   fit="cover"
-                  className="rounded-xl"
+                  className="rounded-lg"
                 />
               </div>
-              <p className="font-heading font-bold text-ink text-lg leading-snug line-clamp-2">
+              <p className="font-heading font-bold text-ink text-sm leading-snug line-clamp-2">
                 {product.nameAr}
               </p>
             </div>
@@ -324,7 +324,7 @@ export default function ProductOffers({ product }: ProductOffersProps) {
                 }
                 handleStickyClick();
               }}
-              className="checkout-cta checkout-cta--pulse w-full md:flex-1 md:max-w-xl md:ml-auto py-3.5 text-base md:py-5 md:px-14 md:text-xl"
+              className="checkout-cta checkout-cta--pulse w-full md:flex-1 md:min-w-[20rem] md:max-w-2xl md:ml-auto py-3.5 text-base md:py-5 md:px-16 md:text-xl"
             >
               <Icon name={stickyShowsCart ? 'cart' : 'arrow-up'} size={18} className="md:w-5 md:h-5" />
               {stickyShowsCart
