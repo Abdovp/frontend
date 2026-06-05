@@ -20,10 +20,10 @@ export default function ProductReviews({ product }: { product: Product }) {
             آراء موثّقة
           </p>
           <h2 id="reviews-heading" className="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold text-ink mb-2">
-            شنو قالو السائقين اللي جربوه
+            شنو قالو اللي جربوه
           </h2>
           <p className="text-ink/55 text-sm">
-            تقييمات حقيقية بالدارجة من سائقين مغاربة ف مدن مختلفة
+            تقييمات بالدارجة من زبناء ف المغرب
           </p>
         </div>
 
@@ -33,7 +33,7 @@ export default function ProductReviews({ product }: { product: Product }) {
           <div className="flex justify-center mt-3 mb-2">
             <Stars value={product.rating} size={22} />
           </div>
-          <p className="text-ink/55 text-sm mb-6">{product.reviewCount}+ تقييم موثّق من زبناء حقيقيين</p>
+          <p className="text-ink/55 text-sm mb-6">{product.reviewCount}+ تقييم موثّق</p>
           <div className="space-y-2">
             {distribution.map((d) => (
               <div key={d.stars} className="flex items-center gap-2 text-xs">
@@ -79,7 +79,7 @@ export default function ProductReviews({ product }: { product: Product }) {
         {/* Social proof footer */}
         <div className="mt-10 text-center text-ink/50 text-sm">
           <Icon name="shield" size={16} className="inline-block align-middle ml-1.5 text-brand" />
-          كل التقييمات من زبناء حقيقيين ف المغرب — ما كاين لا تزوير لا اختلاق
+          تقييمات من زبناء حقيقيين ف المغرب
         </div>
       </div>
     </section>
