@@ -301,7 +301,7 @@ export default function ProductOffers({ product }: ProductOffersProps) {
         <div className="container-wide">
           <div className="mx-auto w-full max-w-3xl md:max-w-4xl flex items-center gap-3 md:gap-6">
             <div className="hidden md:flex items-center gap-2.5 shrink-0 min-w-0 max-w-[10.5rem]">
-              <div className="w-11 h-11 shrink-0 rounded-lg overflow-hidden border border-ink/[0.08] shadow-soft bg-white">
+              <div className="w-9 h-9 shrink-0 rounded-lg overflow-hidden border border-ink/[0.08] shadow-soft bg-white">
                 <ProductImage
                   src={galleryImages[0] ?? product.image}
                   alt={product.nameAr}
