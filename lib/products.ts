@@ -160,7 +160,7 @@ export const products: Record<ProductId, Product> = {
     scarcityText: 'بقات غير 12 الحبة في المخزون',
     stockLeft: 9,
     deliveryDays: 'الجمعة أو السبت',
-    checkoutHeadline: 'طوموبيلك كتسخن — الباك هو الحل',
+    checkoutHeadline: 'طوموبيلك كتسخن؟ — الباك هو الحل',
     checkoutDescription:
       'مروحة + مظلة حرارية. تركّب ف دقيقة وتحس الفرق من أول استعمال.',
     highlights: [
