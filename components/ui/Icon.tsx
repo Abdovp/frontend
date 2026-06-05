@@ -28,7 +28,8 @@ export type IconName =
   | 'whatsapp'
   | 'quote'
   | 'clock'
-  | 'leaf';
+  | 'leaf'
+  | 'vacuum';
 
 interface IconProps extends SVGProps<SVGSVGElement> {
   name: IconName;
@@ -142,6 +143,14 @@ const paths: Record<IconName, ReactElement> = {
   ),
   leaf: (
     <path d="M5 19c0-8 6-14 14-14 0 8-6 14-14 14zm0 0c4-4 8-6 12-7" />
+  ),
+  vacuum: (
+    <>
+      <path d="M3 12a6 6 0 0112 0" />
+      <path d="M9 12v5a2 2 0 004 0v-5" />
+      <path d="M15 10l5-5M18 7l2-2" />
+      <circle cx="9" cy="12" r="2" />
+    </>
   ),
 };
 

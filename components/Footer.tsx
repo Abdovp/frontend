@@ -16,6 +16,7 @@ export default function Footer({ showTrustCards = true }: { showTrustCards?: boo
             <ul className="space-y-2.5 text-white/55 text-sm">
               <li><Link href="/product/pack" className="hover:text-accent transition">باك الحماية من السخونة</Link></li>
               <li><Link href="/product/magnetic-holder" className="hover:text-accent transition">حامل الهاتف المغناطيسي</Link></li>
+              <li><Link href="/product/car-vacuum" className="hover:text-accent transition">مكنسة السيارة 3 في 1</Link></li>
               <li><Link href="/collections" className="hover:text-accent transition">كل المنتجات</Link></li>
             </ul>
           </CollapsibleMenuDark>
@@ -73,6 +74,7 @@ export default function Footer({ showTrustCards = true }: { showTrustCards?: boo
             <ul className="space-y-2.5 text-white/55 text-sm">
               <li><Link href="/product/pack" className="hover:text-accent transition">باك الحماية من السخونة</Link></li>
               <li><Link href="/product/magnetic-holder" className="hover:text-accent transition">حامل الهاتف المغناطيسي</Link></li>
+              <li><Link href="/product/car-vacuum" className="hover:text-accent transition">مكنسة السيارة 3 في 1</Link></li>
               <li><Link href="/collections" className="hover:text-accent transition">كل المنتجات</Link></li>
             </ul>
           </div>
