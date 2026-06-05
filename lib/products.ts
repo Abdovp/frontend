@@ -214,8 +214,6 @@ export const products: Record<ProductId, Product> = {
     image: '/images/pack.webp',
     howToUse: {
       title: 'كيفاش تستعمل الباك',
-      image: '/images/pack.webp',
-      imageLabel: 'طريقة استعمال الباك',
       steps: [
         {
           title: 'ركّب المظلة على الزجاج الأمامي',
