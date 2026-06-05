@@ -1,32 +1,15 @@
 import Link from 'next/link';
-import Icon, { type IconName } from './ui/Icon';
+import Icon from './ui/Icon';
 import { CollapsibleMenuDark } from './ui/CollapsibleMenu';
-import { WARRANTY_DAYS, STORE } from '../lib/products';
+import { STORE } from '../lib/products';
 import { policyLinks } from '../lib/navigation';
-
-const trustRow: { icon: IconName; text: string }[] = [
-  { icon: 'wallet', text: 'دفع عند الاستلام' },
-  { icon: 'truck', text: 'توصيل 24–48 ساعة' },
-  { icon: 'refresh', text: `استرجاع ${WARRANTY_DAYS} يوم` },
-  { icon: 'shield', text: 'جودة مضمونة' },
-];
+import StoreTrustRow from './StoreTrustRow';
 
 export default function Footer({ showTrustRow = true }: { showTrustRow?: boolean }) {
   return (
     <footer className="bg-ink text-white">
       <div className="container-wide">
-        {showTrustRow ? (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-8 py-10 border-b border-white/10">
-          {trustRow.map((t) => (
-            <div key={t.text} className="flex items-center gap-3">
-              <span className="flex items-center justify-center w-10 h-10 rounded-full bg-white/[0.06] text-accent shrink-0">
-                <Icon name={t.icon} size={20} />
-              </span>
-              <span className="text-sm font-semibold text-white/85">{t.text}</span>
-            </div>
-          ))}
-        </div>
-        ) : null}
+        {showTrustRow ? <StoreTrustRow variant="dark" /> : null}
 
         <div className="md:hidden py-2">
           <CollapsibleMenuDark title="المنتجات">

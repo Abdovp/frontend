@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import CartButton from './CartButton';
-import TrustBadgesStrip from './TrustBadgesStrip';
+import StoreTrustRow from './StoreTrustRow';
 import CollapsibleMenu from './ui/CollapsibleMenu';
 import Icon from './ui/Icon';
-import { SHARED_GUARANTEES, STORE } from '../lib/products';
+import { STORE } from '../lib/products';
 import { mainNavLinks } from '../lib/navigation';
 
 function Logo({ onClick }: { onClick?: () => void }) {
@@ -31,7 +31,6 @@ export default function Header() {
 
   return (
     <div className="site-header-shell">
-      <TrustBadgesStrip items={SHARED_GUARANTEES} variant="header" />
       <header className="site-header">
         <div className="site-header__bar">
           <Logo onClick={closeMenu} />
@@ -98,6 +97,7 @@ export default function Header() {
           </nav>
         )}
       </header>
+      <StoreTrustRow variant="light" />
     </div>
   );
 }

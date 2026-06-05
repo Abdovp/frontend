@@ -184,34 +184,28 @@ h1, h2, h3, h4 {
     @apply w-full bg-white/90 backdrop-blur-md border-b border-ink/[0.07];
   }
 
-  .header-trust-strip .trust-badge-scroll {
-    @apply -mx-4 sm:-mx-6 md:mx-0;
+  .store-trust-row__grid {
+    @apply grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-3 py-3 md:py-4;
   }
 
-  .header-trust-strip .trust-badge-scroll__track {
-    @apply gap-3;
+  .store-trust-row--dark .store-trust-row__grid {
+    @apply gap-x-6 gap-y-8 py-10;
   }
 
-  @media (min-width: 768px) {
-    .header-trust-strip .trust-badge-scroll__track {
-      gap: 0.75rem;
-    }
+  .store-trust-row__item {
+    @apply flex items-center gap-2.5 sm:gap-3 min-w-0;
   }
 
-  .trust-badge-card--header {
-    @apply p-3 gap-2.5 border-2 shadow-none;
-    width: min(68vw, 13.5rem);
+  .store-trust-row__icon {
+    @apply flex items-center justify-center shrink-0 rounded-full;
   }
 
-  @media (min-width: 768px) {
-    .trust-badge-card--header {
-      @apply p-3.5;
-      width: auto;
-    }
+  .store-trust-row__icon--light {
+    @apply w-9 h-9 bg-brand/[0.06] text-brand;
   }
 
-  .trust-badge-card--header .trust-badge-card__icon {
-    @apply w-9 h-9;
+  .store-trust-row__icon--dark {
+    @apply w-10 h-10 bg-white/[0.06] text-accent;
   }
 
   .site-header__bar {
