@@ -324,7 +324,7 @@ export default function ProductOffers({ product }: ProductOffersProps) {
                 }
                 handleStickyClick();
               }}
-              className="checkout-cta checkout-cta--pulse w-full md:w-auto md:max-w-[15rem] md:ml-auto"
+              className="checkout-cta checkout-cta--pulse w-full md:w-auto md:ml-auto"
             >
               <Icon name={stickyShowsCart ? 'cart' : 'arrow-up'} size={16} />
               {stickyShowsCart
