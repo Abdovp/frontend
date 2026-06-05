@@ -264,16 +264,11 @@ export default function ProductOffers({ product }: ProductOffersProps) {
       >
         <div className="container-wide">
           <div className="mx-auto max-w-3xl flex items-center gap-3 md:gap-4">
-            <div className="leading-tight shrink-0 hidden sm:block">
-              <p className="text-xs text-ink/50 truncate max-w-[120px]">{product.nameAr}</p>
-              <p className="font-heading font-extrabold text-brand text-lg leading-none">
-                {(selectedOffer ?? firstOffer).price}{' '}
-                <span className="text-sm font-semibold">{CURRENCY}</span>
+            <div className="leading-tight shrink-0">
+              <p className="text-xs text-ink/50">{firstOffer.label}</p>
+              <p className="font-heading font-extrabold text-brand text-lg">
+                {firstOffer.price} <span className="text-sm">{CURRENCY}</span>
               </p>
-            </div>
-            <div className="flex items-center gap-1.5 shrink-0 hidden sm:flex">
-              <Icon name="lock" size={13} className="text-emerald-600" />
-              <span className="text-xs text-emerald-700 font-semibold">دفع عند الاستلام</span>
             </div>
             <button
               type="button"
@@ -281,9 +276,9 @@ export default function ProductOffers({ product }: ProductOffersProps) {
               className="checkout-cta checkout-cta--pulse flex-1 py-3.5 text-base md:py-4"
             >
               <Icon name="cart" size={18} />
-              {isInCart(product.id, (selectedOffer ?? firstOffer).quantity)
+              {isInCart(product.id, firstOffer.quantity)
                 ? 'شوف السلة'
-                : `اطلب دابا — ${(selectedOffer ?? firstOffer).price} ${CURRENCY}`}
+                : `اطلب دابا — ${firstOffer.price} ${CURRENCY}`}
             </button>
           </div>
         </div>
