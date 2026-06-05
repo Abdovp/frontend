@@ -157,7 +157,7 @@ export const products: Record<ProductId, Product> = {
     reviewCount: 920,
     unit: 'باك',
     soldText: 'تباع +2,400 باك هاد الشهر',
-    scarcityText: 'بقاو غير 9 وحدات بالسعر الحالي',
+    scarcityText: 'بقات غير 12 الحبة في المخزون',
     stockLeft: 9,
     deliveryDays: 'الجمعة أو السبت',
     checkoutHeadline: 'طوموبيلك كتسخن — الباك هو الحل',
