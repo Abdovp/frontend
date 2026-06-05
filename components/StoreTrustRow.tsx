@@ -4,7 +4,7 @@ import { STORE_TRUST_ITEMS } from '../lib/store-trust';
 export default function StoreTrustRow() {
   return (
     <div
-      className="store-trust-row border-b border-ink/[0.06] bg-white"
+      className="store-trust-row border-t border-ink/[0.06] bg-white"
       aria-label="ضمانات المتجر"
     >
       <div className="container-wide store-trust-row__grid">

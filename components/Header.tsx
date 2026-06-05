@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import CartButton from './CartButton';
-import StoreTrustRow from './StoreTrustRow';
 import CollapsibleMenu from './ui/CollapsibleMenu';
 import Icon from './ui/Icon';
 import { STORE } from '../lib/products';
@@ -30,8 +29,7 @@ export default function Header() {
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <div className="site-header-shell">
-      <header className="site-header">
+    <header className="site-header">
         <div className="site-header__bar">
           <Logo onClick={closeMenu} />
 
@@ -96,8 +94,6 @@ export default function Header() {
             </a>
           </nav>
         )}
-      </header>
-      <StoreTrustRow />
-    </div>
+    </header>
   );
 }

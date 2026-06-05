@@ -176,16 +176,12 @@ h1, h2, h3, h4 {
     height: var(--tick-height);
   }
 
-  .site-header-shell {
-    @apply sticky top-0 inset-x-0 z-50 w-full;
-  }
-
   .site-header {
-    @apply w-full bg-white/90 backdrop-blur-md border-b border-ink/[0.07];
+    @apply sticky top-0 inset-x-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-ink/[0.07];
   }
 
   .store-trust-row__grid {
-    @apply grid grid-cols-2 md:grid-cols-4 gap-x-4 gap-y-4 py-4 md:py-5;
+    @apply grid grid-cols-2 md:grid-cols-4 gap-x-6 gap-y-6 py-8 md:py-10;
   }
 
   .store-trust-row__item {
