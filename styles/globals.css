@@ -154,6 +154,10 @@ h1, h2, h3, h4 {
     transition-duration: 450ms;
   }
 
+  .announcement-bar__track--instant {
+    transition: none !important;
+  }
+
   .announcement-bar__marquee {
     direction: ltr;
   }
