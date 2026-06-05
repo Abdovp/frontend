@@ -346,7 +346,7 @@ export default function ThankYou() {
           {/* ── WHAT HAPPENS ON THE CALL ── */}
           <section className="ty-section" aria-labelledby="ty-call-steps">
             <h2 id="ty-call-steps" className="ty-section-title">
-              شنو غادي يوقع ف التيليفون؟
+              شنو غادي يوقع ف الاتصال؟
             </h2>
             <div className="ty-timeline">
               {ON_CALL_STEPS.map((step, i) => (

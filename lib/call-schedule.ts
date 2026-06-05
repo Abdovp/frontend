@@ -41,7 +41,7 @@ export function getCallScheduleInfo(date: Date = new Date()): CallScheduleInfo {
   }
   return {
     statusLine: `استراحة فريق ${STORE.nameAr} دابا`,
-    message: 'غادي نتصلو بيك غداً من 11 صباحاً (بتوقيت المغرب)',
+    message: 'غادي نتصلو بيك غداً مع 11 صباحاً (بتوقيت المغرب)',
     inWorkHours: false,
   };
 }
