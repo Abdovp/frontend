@@ -237,6 +237,7 @@ export const products: Record<ProductId, Product> = {
         'المكيف بوحدو ما كافيش',
       ],
       imageLabel: 'حرارة الطوموبيل ف الصيف',
+      image: '/images/pack-pain.webp',
     },
     logic: {
       eyebrow: 'الحل',
