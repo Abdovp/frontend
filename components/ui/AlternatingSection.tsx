@@ -35,7 +35,7 @@ export default function AlternatingSection({
   return (
     <section className={`section-padding ${bgClass} ${className}`}>
       <div className="container mx-auto px-4 md:px-8">
-        <div className="layout-ltr grid md:grid-cols-2 gap-10 md:gap-16 items-center">
+        <div className="layout-ltr grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {imageSide === 'left' ? (
             <>
               {imageBlock}

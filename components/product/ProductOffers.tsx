@@ -112,10 +112,10 @@ export default function ProductOffers({ product }: ProductOffersProps) {
       <div className="container-wide">
         <div
           ref={productCardRef}
-          className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-start"
+          className="layout-ltr grid lg:grid-cols-2 gap-10 lg:gap-16 items-start"
         >
-          {/* Gallery + trust — on top on mobile */}
-          <div className="order-1 lg:order-2 lg:sticky lg:top-28">
+          {/* Gallery + trust — desktop left, on top on mobile */}
+          <div className="order-1 lg:order-1 lg:sticky lg:top-28">
             <ProductImage
               src={galleryImages[activeImage]}
               alt={
@@ -170,8 +170,8 @@ export default function ProductOffers({ product }: ProductOffersProps) {
             </div>
           </div>
 
-          {/* Copy + offers */}
-          <div className="order-2 lg:order-1">
+          {/* Copy + offers — desktop right */}
+          <div dir="rtl" className="text-right order-2 lg:order-2">
             <p className="text-accent-dark font-bold text-sm mb-2">{product.category}</p>
             <h1 className="font-heading text-3xl md:text-4xl font-extrabold text-ink leading-[1.15] mb-3 text-balance">
               {product.checkoutHeadline}

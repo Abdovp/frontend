@@ -5,11 +5,11 @@ import type { Product } from '../../lib/products';
 export default function ProductPainSection({ product }: { product: Product }) {
   const { pain } = product;
   return (
-    <section className="bg-[#1a0f0a] text-white py-16 md:py-24" dir="rtl" aria-labelledby="pain-heading">
+    <section className="bg-[#1a0f0a] text-white py-16 md:py-24" aria-labelledby="pain-heading">
       <div className="container-wide">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
-          {/* Copy */}
-          <div>
+        <div className="layout-ltr grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
+          {/* Copy — desktop left */}
+          <div dir="rtl" className="text-right order-2 lg:order-1">
             {pain.eyebrow && (
               <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-red-400 mb-4">
                 <Icon name="flame" size={14} className="text-red-400" />
@@ -39,8 +39,8 @@ export default function ProductPainSection({ product }: { product: Product }) {
             )}
           </div>
 
-          {/* Image */}
-          <div className="order-first lg:order-last">
+          {/* Image — desktop right */}
+          <div className="order-1 lg:order-2">
             <ProductImage
               src={pain.image}
               alt={pain.imageLabel}

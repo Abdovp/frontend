@@ -4,63 +4,56 @@ import type { Product } from '../../lib/products';
 
 export default function ProductHowToUse({ product }: { product: Product }) {
   const { howToUse } = product;
+  const isGif = howToUse.image?.toLowerCase().endsWith('.gif');
 
   return (
-    <section className="section-padding bg-white" dir="rtl" aria-labelledby="how-to-use-heading">
-      <div className="container-wide max-w-4xl">
-        {/* Header */}
-        <div className="text-center mb-12">
-          <p className="eyebrow mb-3">
-            <Icon name="spark" size={14} />
-            طريقة الاستعمال
-          </p>
-          <h2
-            id="how-to-use-heading"
-            className="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold text-ink"
-          >
-            {howToUse.title}
-          </h2>
-        </div>
+    <section className="section-padding bg-white" aria-labelledby="how-to-use-heading">
+      <div className="container-wide max-w-5xl">
+        <div className="layout-ltr grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+          {/* Copy + steps — desktop left */}
+          <div dir="rtl" className="text-right order-2 lg:order-1">
+            <p className="eyebrow mb-3">
+              <Icon name="spark" size={14} />
+              طريقة الاستعمال
+            </p>
+            <h2
+              id="how-to-use-heading"
+              className="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold text-ink mb-8 lg:mb-10"
+            >
+              {howToUse.title}
+            </h2>
 
-        {howToUse.image || howToUse.imageLabel ? (
-          <div className="mb-10 max-w-lg mx-auto w-full">
-            <ProductImage
-              src={howToUse.image}
-              alt={howToUse.imageLabel ?? howToUse.title}
-              fallbackLabel={howToUse.imageLabel ?? 'طريقة الاستعمال'}
-              fallbackSublabel="الصورة قريباً"
-              aspect={howToUse.image?.toLowerCase().endsWith('.gif') ? 'phone' : 'square'}
-              fit="cover"
-              objectPosition="center"
-              className="rounded-2xl shadow-card"
-            />
+            <ol className="flex flex-col gap-5 relative">
+              {howToUse.steps.map((step, i) => (
+                <li key={step.title} className="relative bg-cream rounded-2xl p-6 flex gap-4">
+                  <span className="flex items-center justify-center w-11 h-11 rounded-full bg-brand text-white font-heading font-extrabold text-lg shrink-0 shadow-brand">
+                    {i + 1}
+                  </span>
+                  <div>
+                    <h3 className="font-heading font-bold text-ink text-lg mb-1.5">{step.title}</h3>
+                    <p className="text-ink/65 leading-relaxed text-sm">{step.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </div>
-        ) : null}
 
-        {/* Steps */}
-        <ol className="flex flex-col md:flex-row gap-6 relative">
-          {howToUse.steps.map((step, i) => (
-            <li key={step.title} className="relative flex-1 bg-cream rounded-2xl p-7 flex flex-col gap-4">
-              {/* Arrow connector between cards — desktop only */}
-              {i < howToUse.steps.length - 1 && (
-                <span
-                  className="hidden md:flex absolute -left-3 top-1/2 -translate-y-1/2 z-10 items-center justify-center w-6 h-6 rounded-full bg-white border border-ink/10 text-ink/30 shadow-soft"
-                  aria-hidden
-                >
-                  <Icon name="arrow-left" size={14} />
-                </span>
-              )}
-              {/* Step number */}
-              <span className="flex items-center justify-center w-12 h-12 rounded-full bg-brand text-white font-heading font-extrabold text-xl shrink-0 shadow-brand">
-                {i + 1}
-              </span>
-              <div>
-                <h3 className="font-heading font-bold text-ink text-lg mb-1.5">{step.title}</h3>
-                <p className="text-ink/65 leading-relaxed text-sm">{step.body}</p>
-              </div>
-            </li>
-          ))}
-        </ol>
+          {/* Image — desktop right */}
+          {howToUse.image || howToUse.imageLabel ? (
+            <div className="order-1 lg:order-2 w-full max-w-sm mx-auto lg:max-w-none lg:sticky lg:top-28">
+              <ProductImage
+                src={howToUse.image}
+                alt={howToUse.imageLabel ?? howToUse.title}
+                fallbackLabel={howToUse.imageLabel ?? 'طريقة الاستعمال'}
+                fallbackSublabel="الصورة قريباً"
+                aspect={isGif ? 'phone' : 'square'}
+                fit="cover"
+                objectPosition="center"
+                className="rounded-2xl shadow-card"
+              />
+            </div>
+          ) : null}
+        </div>
 
         {/* COD note */}
         <div className="mt-10 flex items-center justify-center gap-3 bg-emerald-50 border border-emerald-200 rounded-2xl py-4 px-6">
