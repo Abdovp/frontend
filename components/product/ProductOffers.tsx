@@ -195,7 +195,7 @@ export default function ProductOffers({ product }: ProductOffersProps) {
 
             <ul className="space-y-2.5 mb-6">
               {product.highlights.map((h) => (
-                <li key={h} className="flex items-center gap-3 text-ink/85 font-medium">
+                <li key={h} className="flex items-center gap-3 text-ink font-bold">
                   <span className="flex items-center justify-center w-6 h-6 rounded-full bg-brand/[0.08] text-brand shrink-0">
                     <Icon name="check" size={14} />
                   </span>

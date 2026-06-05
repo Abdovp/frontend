@@ -32,7 +32,7 @@ export default function ProductPainSection({ product }: { product: Product }) {
                     <span className="flex items-center justify-center w-7 h-7 rounded-full bg-red-500/20 text-red-400 shrink-0 mt-0.5">
                       <Icon name="close" size={14} />
                     </span>
-                    <span className="text-white font-bold text-base leading-snug">{b}</span>
+                    <span className="text-white font-extrabold text-base leading-snug">{b}</span>
                   </li>
                 ))}
               </ul>
