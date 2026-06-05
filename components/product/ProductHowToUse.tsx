@@ -23,14 +23,14 @@ export default function ProductHowToUse({ product }: { product: Product }) {
         </div>
 
         {howToUse.image || howToUse.imageLabel ? (
-          <div className="mb-10 max-w-2xl mx-auto">
+          <div className="mb-10 max-w-sm mx-auto">
             <ProductImage
               src={howToUse.image}
               alt={howToUse.imageLabel ?? howToUse.title}
               fallbackLabel={howToUse.imageLabel ?? 'طريقة الاستعمال'}
               fallbackSublabel="الصورة قريباً"
-              aspect="square"
-              fit="cover"
+              aspect={howToUse.image?.toLowerCase().endsWith('.gif') ? 'portrait' : 'square'}
+              fit={howToUse.image?.toLowerCase().endsWith('.gif') ? 'contain' : 'cover'}
               objectPosition="center"
               className="rounded-2xl shadow-card bg-white"
             />
