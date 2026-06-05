@@ -10,9 +10,14 @@ const messages: { icon: IconName; text: string }[] = [
 
 interface AnnouncementBarProps {
   variant?: 'marquee' | 'tick';
+  /** Tick variant only — ms between vertical slides */
+  intervalMs?: number;
 }
 
-export default function AnnouncementBar({ variant = 'marquee' }: AnnouncementBarProps) {
+export default function AnnouncementBar({
+  variant = 'marquee',
+  intervalMs = 3000,
+}: AnnouncementBarProps) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   useEffect(() => {
@@ -20,10 +25,10 @@ export default function AnnouncementBar({ variant = 'marquee' }: AnnouncementBar
 
     const timer = window.setInterval(() => {
       setActiveIndex((current) => (current + 1) % messages.length);
-    }, 3000);
+    }, intervalMs);
 
     return () => window.clearInterval(timer);
-  }, [variant]);
+  }, [variant, intervalMs]);
 
   if (variant === 'tick') {
     return (

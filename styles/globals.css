@@ -150,6 +150,10 @@ h1, h2, h3, h4 {
     will-change: transform;
   }
 
+  .announcement-bar--tick .announcement-bar__track {
+    transition-duration: 450ms;
+  }
+
   .announcement-bar__marquee {
     direction: ltr;
   }
