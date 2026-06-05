@@ -51,6 +51,8 @@ export default function ProductOffers({ product }: ProductOffersProps) {
     [product.offers, selected]
   );
 
+  const firstOffer = useMemo(() => getFirstOffer(product), [product]);
+
   const galleryImages = useMemo(
     () =>
       product.galleryImages?.length
@@ -99,9 +101,7 @@ export default function ProductOffers({ product }: ProductOffersProps) {
     document.getElementById('product-pricing')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  const isFirstOfferSelected = selected === 1;
-  const stickyShowsCart =
-    !isFirstOfferSelected && selectedOffer != null && isInCart(product.id, selectedOffer.quantity);
+  const showStickyBar = showSticky && selected === 1;
 
   return (
     <section className="checkout-hero section-padding pt-8 md:pt-12">
@@ -293,30 +293,20 @@ export default function ProductOffers({ product }: ProductOffersProps) {
         <StoreTrustBand className="mt-8 md:mt-10" />
       </div>
 
-      {/* Sticky CTA — visible on all screens once scrolled past product card */}
+      {/* Sticky CTA — first offer only, once scrolled past product card */}
       <div
-        className={`sticky-cta ${showSticky ? 'sticky-cta--visible' : ''}`}
-        aria-hidden={!showSticky}
+        className={`sticky-cta ${showStickyBar ? 'sticky-cta--visible' : ''}`}
+        aria-hidden={!showStickyBar}
       >
         <div className="container-wide">
           {/* Mobile — button only */}
           <button
             type="button"
-            onClick={() => {
-              if (stickyShowsCart) {
-                openCart();
-                return;
-              }
-              handleStickyClick();
-            }}
+            onClick={handleStickyClick}
             className="checkout-cta checkout-cta--pulse sticky-cta__button sticky-cta__button--mobile w-full md:hidden"
           >
-            <Icon name={stickyShowsCart ? 'cart' : 'arrow-up'} size={18} />
-            {stickyShowsCart
-              ? 'شوف السلة'
-              : selectedOffer
-                ? `اطلب دابا — ${selectedOffer.price} ${CURRENCY}`
-                : 'اطلب دابا'}
+            <Icon name="arrow-up" size={18} />
+            {`اطلب دابا — ${firstOffer.price} ${CURRENCY}`}
           </button>
 
           {/* Desktop — product info + wide CTA */}
@@ -339,30 +329,18 @@ export default function ProductOffers({ product }: ProductOffersProps) {
                 <p className="line-clamp-1 font-heading text-sm font-bold text-ink">
                   {product.nameAr}
                 </p>
-                {selectedOffer ? (
-                  <p className="mt-0.5 text-xs leading-snug text-ink/50">
-                    {selectedOffer.price} {CURRENCY} • دفع عند الاستلام
-                  </p>
-                ) : null}
+                <p className="mt-0.5 text-xs leading-snug text-ink/50">
+                  {firstOffer.price} {CURRENCY} • دفع عند الاستلام
+                </p>
               </div>
             </div>
             <button
               type="button"
-              onClick={() => {
-                if (stickyShowsCart) {
-                  openCart();
-                  return;
-                }
-                handleStickyClick();
-              }}
+              onClick={handleStickyClick}
               className="checkout-cta checkout-cta--pulse sticky-cta__button sticky-cta__button--desktop min-w-0 flex-1"
             >
-              <Icon name={stickyShowsCart ? 'cart' : 'arrow-up'} size={18} />
-              {stickyShowsCart
-                ? 'شوف السلة'
-                : selectedOffer
-                  ? `اطلب دابا الآن • ${selectedOffer.price} ${CURRENCY}`
-                  : 'اطلب دابا'}
+              <Icon name="arrow-up" size={18} />
+              {`اطلب دابا الآن • ${firstOffer.price} ${CURRENCY}`}
             </button>
           </div>
         </div>
