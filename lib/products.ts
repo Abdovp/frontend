@@ -98,6 +98,22 @@ export const STORE_PROOF = {
   warranty: `${WARRANTY_DAYS} يوم`,
 };
 
+/** Card-style trust badges above footer (all pages) */
+export const STORE_TRUST_BADGES: TrustBadge[] = [
+  { icon: 'truck', title: STORE_PROOF.delivery, subtitle: 'توصيل سريع' },
+  { icon: 'star', title: `${STORE_PROOF.rating}/5`, subtitle: `${STORE_PROOF.reviews} تقييم` },
+  { icon: 'shield', title: STORE_PROOF.warranty, subtitle: 'ضمان كامل' },
+  { icon: 'badge', title: '100% أصلي', subtitle: 'جودة مفحوصة' },
+];
+
+/** Simple trust band (product page below CTA) */
+export const STORE_TRUST_BAND: { icon: IconName; text: string }[] = [
+  { icon: 'wallet', text: 'دفع عند الاستلام' },
+  { icon: 'truck', text: 'توصيل 24–48 ساعة' },
+  { icon: 'refresh', text: `استرجاع ${WARRANTY_DAYS} يوم` },
+  { icon: 'shield', text: 'جودة مضمونة' },
+];
+
 export const SHARED_GUARANTEES: GuaranteeItem[] = [
   { icon: 'wallet', title: 'الدفع عند الاستلام', subtitle: 'تخلّص ملي توصلك السلعة' },
   { icon: 'truck', title: 'توصيل 24–48 ساعة', subtitle: 'لكل مدن المغرب' },
