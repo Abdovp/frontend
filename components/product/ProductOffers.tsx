@@ -326,7 +326,7 @@ export default function ProductOffers({ product }: ProductOffersProps) {
               }}
               className="checkout-cta checkout-cta--pulse w-full md:w-auto md:ml-auto"
             >
-              <Icon name={stickyShowsCart ? 'cart' : 'arrow-up'} size={16} />
+              <Icon name={stickyShowsCart ? 'cart' : 'arrow-up'} size={18} />
               {stickyShowsCart
                 ? 'شوف السلة'
                 : selectedOffer

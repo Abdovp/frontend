@@ -514,7 +514,7 @@ h1, h2, h3, h4 {
   }
 
   .sticky-cta .checkout-cta {
-    @apply py-2 px-5 text-sm gap-1.5 md:py-2 md:px-6 md:text-sm;
+    @apply py-3 px-7 text-base gap-2 md:py-3.5 md:px-12 md:text-lg md:min-w-[18rem];
   }
 
   /* ---------- Cart ---------- */
