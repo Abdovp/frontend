@@ -363,7 +363,7 @@ export const products: Record<ProductId, Product> = {
     scarcityText: 'بقات غير 12 الحبة في المخزون',
     stockLeft: 12,
     deliveryDays: 'الخميس أو الجمعة',
-    checkoutHeadline: 'تلفونك ثابت — عينيك على الطريق',
+    checkoutHeadline: 'هاتفك في أمان — تركيزك على الطريق',
     checkoutDescription:
       'وداعاً لقلق سقوط الهاتف! مغناطيس خارق يمسك الهاتف في أي اتجاه. ركّبه في 30 ثانية فقط.',
     highlights: [
