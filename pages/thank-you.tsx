@@ -32,7 +32,7 @@ const ON_CALL_STEPS = [
   },
   {
     title: 'ناخدو العنوان ديالك',
-    desc: 'العنوان كامل ف المكالمة: المدينة، الحي، ورقم الدار. ساهل وبسيط.',
+    desc: 'العنوان كامل ف المكالمة: المدينة، الحي. ساهل وبسيط.',
   },
   {
     title: 'نحددو موعد التوصيل',
@@ -259,12 +259,9 @@ export default function ThankYou() {
 
           {/* ── WHAT HAPPENS ON THE CALL ── */}
           <div className="pt-2">
-            <h2 className="font-heading text-xl sm:text-2xl font-extrabold text-ink text-center mb-1">
+            <h2 className="font-heading text-xl sm:text-2xl font-extrabold text-ink text-center mb-6">
               شنو غادي يوقع ف التيليفون؟
             </h2>
-            <p className="text-ink/55 text-sm text-center mb-6">
-              ما خصك تعمر العنوان ف الموقع — غادي ناخدوه معاك ف المكالمة
-            </p>
             <div className="space-y-3">
               {ON_CALL_STEPS.map((step, i) => (
                 <div
