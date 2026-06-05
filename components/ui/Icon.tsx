@@ -16,6 +16,7 @@ export type IconName =
   | 'arrow-left'
   | 'arrow-right'
   | 'chevron-down'
+  | 'chevron-up'
   | 'plus'
   | 'minus'
   | 'spark'
@@ -92,6 +93,7 @@ const paths: Record<IconName, ReactElement> = {
   'arrow-left': <path d="M19 12H5M11 6l-6 6 6 6" />,
   'arrow-right': <path d="M5 12h14M13 6l6 6-6 6" />,
   'chevron-down': <path d="M6 9l6 6 6-6" />,
+  'chevron-up': <path d="M18 15l-6-6-6 6" />,
   plus: <path d="M12 5v14M5 12h14" />,
   minus: <path d="M5 12h14" />,
   spark: (

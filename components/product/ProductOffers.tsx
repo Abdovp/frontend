@@ -51,8 +51,6 @@ export default function ProductOffers({ product }: ProductOffersProps) {
     [product.offers, selected]
   );
 
-  const firstOffer = useMemo(() => getFirstOffer(product), [product]);
-
   const galleryImages = useMemo(
     () =>
       product.galleryImages?.length
@@ -98,14 +96,12 @@ export default function ProductOffers({ product }: ProductOffersProps) {
   };
 
   const handleStickyClick = () => {
-    if (isInCart(product.id, firstOffer.quantity)) {
-      openCart();
-      return;
-    }
-
-    setSelectedOffer(product.id, firstOffer.quantity);
     document.getElementById('product-pricing')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
+
+  const isFirstOfferSelected = selected === 1;
+  const stickyShowsCart =
+    !isFirstOfferSelected && selectedOffer != null && isInCart(product.id, selectedOffer.quantity);
 
   return (
     <section className="checkout-hero section-padding pt-8 md:pt-12">
@@ -303,24 +299,22 @@ export default function ProductOffers({ product }: ProductOffersProps) {
         aria-hidden={!showSticky}
       >
         <div className="container-wide">
-          <div className="mx-auto max-w-3xl flex items-center gap-3 md:gap-4">
-            <div className="leading-tight shrink-0">
-              <p className="text-xs text-ink/50">{firstOffer.label}</p>
-              <p className="font-heading font-extrabold text-brand text-lg">
-                {firstOffer.price} <span className="text-sm">{CURRENCY}</span>
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={handleStickyClick}
-              className="checkout-cta checkout-cta--pulse flex-1 py-3.5 text-base md:py-4"
-            >
-              <Icon name="cart" size={18} />
-              {isInCart(product.id, firstOffer.quantity)
-                ? 'شوف السلة'
-                : `اطلب دابا — ${firstOffer.price} ${CURRENCY}`}
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={() => {
+              if (stickyShowsCart) {
+                openCart();
+                return;
+              }
+              handleStickyClick();
+            }}
+            className="checkout-cta checkout-cta--pulse w-full max-w-3xl mx-auto py-3.5 text-base md:py-4"
+          >
+            <Icon name={stickyShowsCart ? 'cart' : 'chevron-up'} size={18} />
+            {stickyShowsCart && selectedOffer
+              ? 'شوف السلة'
+              : 'اطلب دابا'}
+          </button>
         </div>
       </div>
     </section>
