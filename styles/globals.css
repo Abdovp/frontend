@@ -495,7 +495,7 @@ h1, h2, h3, h4 {
 
   /* ---------- Sticky CTA ---------- */
   .sticky-cta {
-    @apply fixed bottom-0 inset-x-0 z-40 bg-cream border-t border-ink/[0.08] shadow-lift;
+    @apply fixed bottom-0 inset-x-0 z-40 bg-white border-t border-ink/10 shadow-lift md:bg-cream md:border-ink/[0.08];
     padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px));
     transform: translateY(100%);
     opacity: 0;
@@ -514,7 +514,7 @@ h1, h2, h3, h4 {
   }
 
   .sticky-cta .checkout-cta {
-    @apply py-3 px-7 text-base gap-2 md:py-3.5 md:px-16 md:text-lg md:min-w-[24rem];
+    @apply rounded-full py-3 px-4 text-sm font-extrabold gap-2 shadow-brand md:py-3.5 md:px-6 md:text-base;
   }
 
   /* ---------- Cart ---------- */

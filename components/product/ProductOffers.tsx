@@ -299,12 +299,33 @@ export default function ProductOffers({ product }: ProductOffersProps) {
         aria-hidden={!showSticky}
       >
         <div className="container-wide">
+          {/* Mobile — button only */}
+          <button
+            type="button"
+            onClick={() => {
+              if (stickyShowsCart) {
+                openCart();
+                return;
+              }
+              handleStickyClick();
+            }}
+            className="checkout-cta checkout-cta--pulse sticky-cta__button sticky-cta__button--mobile w-full md:hidden"
+          >
+            <Icon name={stickyShowsCart ? 'cart' : 'arrow-up'} size={18} />
+            {stickyShowsCart
+              ? 'شوف السلة'
+              : selectedOffer
+                ? `اطلب دابا — ${selectedOffer.price} ${CURRENCY}`
+                : 'اطلب دابا'}
+          </button>
+
+          {/* Desktop — product info + wide CTA */}
           <div
             dir="rtl"
-            className="mx-auto flex w-full max-w-3xl items-center gap-2.5 md:gap-3"
+            className="mx-auto hidden w-full max-w-3xl items-center gap-3 md:flex"
           >
-            <div className="flex min-w-0 max-w-[38%] shrink-0 items-center gap-2 sm:max-w-[9.5rem] md:max-w-[11rem]">
-              <div className="h-10 w-10 shrink-0 overflow-hidden rounded-lg border border-ink/[0.08] bg-white shadow-soft md:h-11 md:w-11">
+            <div className="flex min-w-0 max-w-[11rem] shrink-0 items-center gap-2.5">
+              <div className="h-11 w-11 shrink-0 overflow-hidden rounded-lg border border-ink/[0.08] bg-white shadow-soft">
                 <ProductImage
                   src={galleryImages[0] ?? product.image}
                   alt={product.nameAr}
@@ -315,11 +336,11 @@ export default function ProductOffers({ product }: ProductOffersProps) {
                 />
               </div>
               <div className="min-w-0">
-                <p className="line-clamp-1 font-heading text-xs font-bold text-ink md:text-sm">
+                <p className="line-clamp-1 font-heading text-sm font-bold text-ink">
                   {product.nameAr}
                 </p>
                 {selectedOffer ? (
-                  <p className="mt-0.5 text-[0.68rem] leading-snug text-ink/50 md:text-xs">
+                  <p className="mt-0.5 text-xs leading-snug text-ink/50">
                     {selectedOffer.price} {CURRENCY} • دفع عند الاستلام
                   </p>
                 ) : null}
@@ -334,7 +355,7 @@ export default function ProductOffers({ product }: ProductOffersProps) {
                 }
                 handleStickyClick();
               }}
-              className="checkout-cta checkout-cta--pulse min-w-0 flex-1"
+              className="checkout-cta checkout-cta--pulse sticky-cta__button sticky-cta__button--desktop min-w-0 flex-1"
             >
               <Icon name={stickyShowsCart ? 'cart' : 'arrow-up'} size={18} />
               {stickyShowsCart
