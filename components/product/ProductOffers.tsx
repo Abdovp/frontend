@@ -299,22 +299,30 @@ export default function ProductOffers({ product }: ProductOffersProps) {
         aria-hidden={!showSticky}
       >
         <div className="container-wide flex justify-center">
-          <button
-            type="button"
-            onClick={() => {
-              if (stickyShowsCart) {
-                openCart();
-                return;
-              }
-              handleStickyClick();
-            }}
-            className="checkout-cta checkout-cta--pulse w-full md:w-auto md:min-w-[18rem] md:px-12 py-3.5 text-base md:py-4"
-          >
-            <Icon name={stickyShowsCart ? 'cart' : 'arrow-up'} size={18} />
-            {stickyShowsCart && selectedOffer
-              ? 'شوف السلة'
-              : 'اطلب دابا'}
-          </button>
+          <div className="w-full max-w-3xl flex items-center gap-3 md:gap-4">
+            {selectedOffer ? (
+              <div className="leading-tight shrink-0">
+                <p className="text-xs text-ink/50">{selectedOffer.label}</p>
+                <p className="font-heading font-extrabold text-brand text-lg">
+                  {selectedOffer.price} <span className="text-sm">{CURRENCY}</span>
+                </p>
+              </div>
+            ) : null}
+            <button
+              type="button"
+              onClick={() => {
+                if (stickyShowsCart) {
+                  openCart();
+                  return;
+                }
+                handleStickyClick();
+              }}
+              className="checkout-cta checkout-cta--pulse flex-1 md:flex-none md:min-w-[18rem] md:px-12 py-3.5 text-base md:py-4"
+            >
+              <Icon name={stickyShowsCart ? 'cart' : 'arrow-up'} size={18} />
+              {stickyShowsCart ? 'شوف السلة' : 'اطلب دابا'}
+            </button>
+          </div>
         </div>
       </div>
     </section>
