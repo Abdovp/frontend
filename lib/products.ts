@@ -248,6 +248,7 @@ export const products: Record<ProductId, Product> = {
         'سيارة باردة مع استهلاك أقل',
       ],
       imageLabel: 'الباك أثناء الاستعمال',
+      image: '/images/pack-solution.webp',
     },
     proof: {
       eyebrow: 'إثبات',

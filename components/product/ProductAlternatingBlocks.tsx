@@ -18,7 +18,7 @@ export default function ProductAlternatingBlocks({ product }: { product: Product
           fallbackSublabel="الحل"
           aspect="square"
           fit="cover"
-          objectPosition={product.id === 'cooling-pack' ? 'top' : 'center'}
+          objectPosition={logic.image ? 'center' : product.id === 'cooling-pack' ? 'top' : 'center'}
           className="rounded-2xl shadow-card bg-white"
         />
       }
