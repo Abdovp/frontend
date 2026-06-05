@@ -8,6 +8,7 @@ import { trackViewContent } from '../../lib/analytics/track';
 import ProductOffers from './ProductOffers';
 import ProductPainSection from './ProductPainSection';
 import ProductAlternatingBlocks from './ProductAlternatingBlocks';
+import ProductHowToUse from './ProductHowToUse';
 import ProductDeliverySteps from './ProductDeliverySteps';
 import ProductReviews from './ProductReviews';
 import ProductGuarantees from './ProductGuarantees';
@@ -47,7 +48,10 @@ export default function ProductPageLayout({ product }: { product: Product }) {
           {/* 3 — Logic/Solution: product image + solution copy */}
           <ProductAlternatingBlocks product={product} />
 
-          {/* 4 — Delivery process: طلب → تأكيد → توصيل */}
+          {/* 4 — How to use: step-by-step guide */}
+          <ProductHowToUse product={product} />
+
+          {/* 5 — Delivery process: طلب → تأكيد → توصيل */}
           <ProductDeliverySteps />
 
           {/* 7 — Reviews: 6 verified Moroccan customers */}

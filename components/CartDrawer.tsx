@@ -19,30 +19,28 @@ import Icon, { Stars } from './ui/Icon';
 
 const CROSS_SELL_ORDER: ProductId[] = ['cooling-pack', 'magnetic-holder', 'car-vacuum'];
 
-function getCrossSellProduct(cartIds: ProductId[]): Product | null {
-  const suggestion = CROSS_SELL_ORDER.find((id) => !cartIds.includes(id));
-  return suggestion ? products[suggestion] : null;
+function getCrossSellProducts(cartIds: ProductId[]): Product[] {
+  return CROSS_SELL_ORDER.filter((id) => !cartIds.includes(id)).map((id) => products[id]);
 }
 
 export default function CartDrawer() {
   const { items, isOpen, closeCart, removeItem, addItem, getTotalPrice } = useCartStore();
   const [isCheckoutOpen, setIsCheckoutOpen] = useState(false);
 
-  const crossSell = getCrossSellProduct(items.map((i) => i.id));
+  const crossSells = getCrossSellProducts(items.map((i) => i.id));
   const total = getTotalPrice();
 
-  const handleAddCrossSell = () => {
-    if (!crossSell) return;
-    const offer = crossSell.offers[0];
+  const handleAddCrossSell = (product: Product) => {
+    const offer = product.offers[0];
     trackAddToCart({
-      productId: crossSell.id,
-      name: crossSell.nameAr,
+      productId: product.id,
+      name: product.nameAr,
       price: offer.price,
       quantity: 1,
     });
     addItem({
-      id: crossSell.id,
-      name: crossSell.nameAr,
+      id: product.id,
+      name: product.nameAr,
       price: offer.price,
       offer: offer.quantity,
       quantity: 1,
@@ -112,27 +110,31 @@ export default function CartDrawer() {
                 ))}
               </div>
 
-              {crossSell && (
+              {crossSells.length > 0 && (
                 <div className="mt-6">
-                  <p className="font-heading font-bold text-ink mb-3">منتوجات ستساعدك:</p>
-                  <div className="cart-crosssell-card">
-                    <CartProductThumb productId={crossSell.id} />
-                    <div className="flex-1 min-w-0">
-                      <p className="font-bold text-ink leading-snug line-clamp-1">{crossSell.nameAr}</p>
-                      <p className="text-sm text-ink/55 mt-0.5 line-clamp-1">{crossSell.tagline}</p>
-                      <div className="flex items-center gap-1.5 mt-1.5">
-                        <Stars value={crossSell.rating} size={12} />
-                        <span className="text-ink/45 text-xs">({crossSell.reviewCount})</span>
+                  <p className="font-heading font-bold text-ink mb-3">أضف معاه:</p>
+                  <div className="space-y-3">
+                    {crossSells.map((cs) => (
+                      <div key={cs.id} className="cart-crosssell-card">
+                        <CartProductThumb productId={cs.id} />
+                        <div className="flex-1 min-w-0">
+                          <p className="font-bold text-ink leading-snug line-clamp-1">{cs.nameAr}</p>
+                          <p className="text-sm text-ink/55 mt-0.5 line-clamp-1">{cs.tagline}</p>
+                          <div className="flex items-center gap-1.5 mt-1.5">
+                            <Stars value={cs.rating} size={12} />
+                            <span className="text-ink/45 text-xs">({cs.reviewCount})</span>
+                          </div>
+                        </div>
+                        <div className="shrink-0 text-start flex flex-col items-start gap-2">
+                          <p className="text-sm font-extrabold text-ink whitespace-nowrap">
+                            {cs.offers[0].price} {CURRENCY}
+                          </p>
+                          <button type="button" onClick={() => handleAddCrossSell(cs)} className="cart-crosssell-btn">
+                            أضفه
+                          </button>
+                        </div>
                       </div>
-                    </div>
-                    <div className="shrink-0 text-start flex flex-col items-start gap-2">
-                      <p className="text-sm font-extrabold text-ink whitespace-nowrap">
-                        {crossSell.offers[0].price} {CURRENCY}
-                      </p>
-                      <button type="button" onClick={handleAddCrossSell} className="cart-crosssell-btn">
-                        أضفه
-                      </button>
-                    </div>
+                    ))}
                   </div>
                 </div>
               )}
