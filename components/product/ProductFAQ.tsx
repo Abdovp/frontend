@@ -5,7 +5,7 @@ import Icon from '../ui/Icon';
 import type { Product } from '../../lib/products';
 
 export default function ProductFAQ({ product }: { product: Product }) {
-  const [open, setOpen] = useState<number | null>(0);
+  const [open, setOpen] = useState<number | null>(3);
 
   return (
     <section className="section-padding bg-cream pb-24 md:pb-28">
