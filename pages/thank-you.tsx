@@ -176,25 +176,25 @@ export default function ThankYou() {
         />
       </Head>
 
-      <main className="bg-cream min-h-screen py-10 md:py-14 px-4" dir="rtl">
-        <div className="max-w-lg mx-auto space-y-5">
+      <main className="ty-page" dir="rtl">
+        <div className="ty-wrap">
 
           {/* ── HEADER ── */}
-          <div className="text-center">
-            <span className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-emerald-700 text-white mb-5 shadow-soft">
-              <Icon name="check" size={32} />
+          <div className="text-center pb-1">
+            <span className="inline-flex items-center justify-center w-[4.5rem] h-[4.5rem] rounded-full bg-emerald-700 text-white mb-5 shadow-soft ring-4 ring-emerald-700/15">
+              <Icon name="check" size={30} />
             </span>
-            <p className="text-ink/70 text-base mb-1">
-              شكراً <span className="font-bold text-ink">{firstName}</span> 🌿
+            <p className="text-ink/60 text-base mb-1.5">
+              شكراً <span className="font-bold text-ink">{firstName}</span>
             </p>
-            <h1 className="font-heading text-2xl sm:text-3xl font-extrabold text-ink leading-snug">
+            <h1 className="font-heading text-2xl sm:text-[1.75rem] font-extrabold text-ink leading-snug text-balance">
               طلبك محجوز – في انتظار تأكيدك
             </h1>
             {order?.publicOrderId ? (
               <button
                 type="button"
                 onClick={copyOrderId}
-                className="inline-flex items-center gap-2 mt-4 text-sm text-ink/55 hover:text-ink transition"
+                className="inline-flex items-center gap-2 mt-4 text-sm text-ink/55 hover:text-ink transition rounded-full px-4 py-1.5 hover:bg-white/60"
               >
                 <span>رقم الطلب:</span>
                 <span className="font-bold text-ink" dir="ltr">
@@ -206,50 +206,54 @@ export default function ThankYou() {
             ) : null}
           </div>
 
-          {/* ── CALL CARD (photo style) ── */}
-          <div className="rounded-2xl border border-ink/[0.08] bg-gradient-to-b from-[#f3ede3] to-white p-5 sm:p-6 shadow-soft">
+          {/* ── CALL CARD ── */}
+          <div className="ty-call-card">
             <div className="flex items-start gap-4">
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold text-accent-dark mb-2">{callInfo.statusLine}</p>
-                <p className="font-heading font-extrabold text-ink text-lg sm:text-xl leading-snug">
+                <p className="text-xs font-bold uppercase tracking-wide text-accent-dark mb-2">
+                  {callInfo.statusLine}
+                </p>
+                <p className="font-heading font-extrabold text-ink text-lg sm:text-xl leading-snug text-balance">
                   {callInfo.message}
                 </p>
               </div>
-              <span className="flex shrink-0 items-center justify-center w-12 h-12 rounded-full bg-emerald-700 text-white">
+              <span className="flex shrink-0 items-center justify-center w-12 h-12 rounded-full bg-emerald-700 text-white shadow-soft">
                 <Icon name="phone" size={22} />
               </span>
             </div>
             {order?.phone ? (
-              <div className="mt-5 flex items-center gap-2.5 bg-white border border-ink/[0.1] rounded-xl px-4 py-3.5 text-sm">
-                <Icon name="phone" size={16} className="text-ink/40 shrink-0" />
-                <span className="text-ink/55">بنتصل على:</span>
-                <span className="font-bold text-ink mr-auto" dir="ltr">
+              <div className="ty-phone-row">
+                <span className="text-ink/55 flex items-center gap-2 shrink-0">
+                  <Icon name="phone" size={16} className="text-ink/40" />
+                  غادي نتصلو على:
+                </span>
+                <span className="font-heading font-extrabold text-ink tabular-nums tracking-wide" dir="ltr">
                   {order.phone}
                 </span>
               </div>
             ) : null}
           </div>
 
-          {/* ── CUSTOMER DETAILS CARD (photo style) ── */}
+          {/* ── CUSTOMER DETAILS CARD ── */}
           {ready && order ? (
-            <div className="bg-white rounded-2xl border border-ink/[0.1] shadow-soft p-5 sm:p-6">
-              <h2 className="font-heading font-bold text-ink mb-4">بياناتك للمكالمة</h2>
-              <div className="space-y-2.5 text-sm mb-5">
-                <p>
-                  <span className="text-ink/50">الاسم: </span>
+            <div className="ty-details-card">
+              <h2 className="font-heading font-bold text-ink text-base mb-3">بياناتك للمكالمة</h2>
+              <div className="text-sm">
+                <div className="ty-detail-row">
+                  <span className="text-ink/50">الاسم</span>
                   <span className="font-bold text-ink">{fullName}</span>
-                </p>
-                <p>
-                  <span className="text-ink/50">الجوال: </span>
-                  <span className="font-bold text-ink" dir="ltr">
+                </div>
+                <div className="ty-detail-row">
+                  <span className="text-ink/50">الجوال</span>
+                  <span className="font-heading font-extrabold text-ink tabular-nums" dir="ltr">
                     {order.phone}
                   </span>
-                </p>
+                </div>
               </div>
-              <div className="w-full flex items-center justify-center gap-2 bg-emerald-700 text-white rounded-xl py-3.5 text-sm font-bold">
-                <Icon name="check" size={18} />
+              <p className="ty-status-badge" role="status" aria-live="polite">
+                <Icon name="check-circle" size={18} className="text-emerald-700" />
                 البيانات صحيحة
-              </div>
+              </p>
             </div>
           ) : ready && !order ? (
             <div className="bg-white rounded-2xl border border-ink/[0.08] p-5 text-sm text-ink/55 text-center">
@@ -258,16 +262,11 @@ export default function ThankYou() {
           ) : null}
 
           {/* ── WHAT HAPPENS ON THE CALL ── */}
-          <div className="pt-2">
-            <h2 className="font-heading text-xl sm:text-2xl font-extrabold text-ink text-center mb-6">
-              شنو غادي يوقع ف التيليفون؟
-            </h2>
+          <div>
+            <h2 className="ty-section-title mb-5">شنو غادي يوقع ف التيليفون؟</h2>
             <div className="space-y-3">
               {ON_CALL_STEPS.map((step, i) => (
-                <div
-                  key={step.title}
-                  className="bg-white rounded-2xl border border-ink/[0.08] shadow-soft p-5 flex items-start gap-4"
-                >
+                <div key={step.title} className="ty-step-card">
                   <span className="flex shrink-0 items-center justify-center w-9 h-9 rounded-full bg-brand text-white font-heading font-extrabold text-sm">
                     {i + 1}
                   </span>
@@ -281,13 +280,13 @@ export default function ThankYou() {
           </div>
 
           {/* ── REVIEWS ── */}
-          <div className="pt-4">
-            <h2 className="font-heading font-extrabold text-lg text-ink text-center mb-5">
+          <div>
+            <h2 className="font-heading font-extrabold text-lg text-ink text-center mb-4 text-balance">
               اللي جاوبو على المكالمة — وصلهم الطرد بسرعة
             </h2>
             <div className="space-y-3">
               {THANK_YOU_REVIEWS.map((r) => (
-                <div key={r.name} className="bg-white rounded-2xl border border-ink/[0.08] p-5 flex gap-4">
+                <div key={r.name} className="ty-step-card gap-3">
                   <span className="flex shrink-0 items-center justify-center w-10 h-10 rounded-full bg-emerald-700 text-white font-heading font-bold">
                     {r.name.charAt(0)}
                   </span>
@@ -310,10 +309,8 @@ export default function ThankYou() {
           </div>
 
           {/* ── FAQ ── */}
-          <div className="pt-4">
-            <h2 className="font-heading text-xl font-extrabold text-ink text-center mb-1">
-              عندك سؤال؟
-            </h2>
+          <div>
+            <h2 className="ty-section-title mb-1">عندك سؤال؟</h2>
             <p className="text-ink/55 text-sm text-center mb-5">
               جاوبنا على الأسئلة اللي كتتسأل بزاف من بعد الطلب
             </p>
@@ -354,10 +351,8 @@ export default function ThankYou() {
 
           {/* ── MORE PRODUCTS ── */}
           {moreProducts.length > 0 && (
-            <div className="pt-4">
-              <h2 className="font-heading text-xl font-extrabold text-ink text-center mb-1">
-                بغيتي تشوف منتجات أخرى؟
-              </h2>
+            <div>
+              <h2 className="ty-section-title mb-1">بغيتي تشوف منتجات أخرى؟</h2>
               <p className="text-ink/55 text-sm text-center mb-5">
                 منتجات أخرى من بويا شوب — نفس التوصيل والدفع عند الاستلام
               </p>

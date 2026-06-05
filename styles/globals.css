@@ -562,6 +562,43 @@ h1, h2, h3, h4 {
   .field-hint {
     @apply text-ink/45 text-xs mt-1.5;
   }
+
+  /* Thank-you page */
+  .ty-page {
+    @apply bg-cream min-h-screen py-10 md:py-16 px-4;
+  }
+
+  .ty-wrap {
+    @apply max-w-lg mx-auto space-y-6;
+  }
+
+  .ty-call-card {
+    @apply rounded-2xl border border-ink/[0.08] bg-gradient-to-b from-[#f0e9df] via-[#f8f4ee] to-white p-5 sm:p-6 shadow-soft;
+  }
+
+  .ty-phone-row {
+    @apply mt-5 flex items-center justify-between gap-4 bg-white border border-ink/[0.1] rounded-xl px-4 py-3.5 text-sm;
+  }
+
+  .ty-details-card {
+    @apply bg-white rounded-2xl border border-ink/[0.1] shadow-soft p-5 sm:p-6;
+  }
+
+  .ty-detail-row {
+    @apply flex items-center justify-between gap-3 py-2.5 border-b border-ink/[0.06] last:border-0;
+  }
+
+  .ty-status-badge {
+    @apply mt-5 w-full flex items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 cursor-default select-none;
+  }
+
+  .ty-step-card {
+    @apply bg-white rounded-2xl border border-ink/[0.08] shadow-soft p-5 flex items-start gap-4;
+  }
+
+  .ty-section-title {
+    @apply font-heading text-xl sm:text-2xl font-extrabold text-ink text-center;
+  }
 }
 
 @layer utilities {
