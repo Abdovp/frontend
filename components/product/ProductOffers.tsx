@@ -302,10 +302,7 @@ export default function ProductOffers({ product }: ProductOffersProps) {
           <div className="w-full max-w-3xl flex items-center gap-3 md:gap-4">
             {selectedOffer ? (
               <div className="leading-tight shrink-0">
-                <p className="text-xs text-ink/50">{selectedOffer.label}</p>
-                <p className="font-heading font-extrabold text-brand text-lg">
-                  {selectedOffer.price} <span className="text-sm">{CURRENCY}</span>
-                </p>
+                <p className="font-heading font-bold text-ink text-sm sm:text-base">{selectedOffer.label}</p>
               </div>
             ) : null}
             <button
@@ -320,7 +317,11 @@ export default function ProductOffers({ product }: ProductOffersProps) {
               className="checkout-cta checkout-cta--pulse flex-1 md:flex-none md:min-w-[18rem] md:px-12 py-3.5 text-base md:py-4"
             >
               <Icon name={stickyShowsCart ? 'cart' : 'arrow-up'} size={18} />
-              {stickyShowsCart ? 'شوف السلة' : 'اطلب دابا'}
+              {stickyShowsCart
+                ? 'شوف السلة'
+                : selectedOffer
+                  ? `اطلب دابا — ${selectedOffer.price} ${CURRENCY}`
+                  : 'اطلب دابا'}
             </button>
           </div>
         </div>
