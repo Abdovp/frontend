@@ -4,20 +4,20 @@ const steps = [
   {
     number: '01',
     icon: 'cart' as const,
-    title: 'اختار و عمّر بيانتك',
-    body: 'الاسم و رقم الهاتف. كياخد دقيقة.',
+    title: 'اختار المنتج وعمّر بيانتك',
+    body: 'اختار العرض المناسب، دخل اسمك ومدينتك ورقم هاتفك — الأمر ما كياخدش غير دقيقة.',
   },
   {
     number: '02',
     icon: 'phone' as const,
-    title: 'كنتصلو بيك',
-    body: 'كنأكدو الطلب و نحددو موعد التوصيل.',
+    title: 'كنتصلو بيك باش نأكدو',
+    body: 'فريق مغربي كيتصل بيك ف أقل من ساعة باش يتأكد من الطلب ويعطيك موعد التوصيل.',
   },
   {
     number: '03',
     icon: 'truck' as const,
-    title: 'يوصلك لبابك',
-    body: '24–48 ساعة. كتخلّص ملي توصلك السلعة.',
+    title: 'يوصلك لبابك وتخلّص عند الاستلام',
+    body: 'الساعي كيوصلك ف 24 إلى 48 ساعة. تعاين المنتج بيدك، وما كتخلّص حتى توصلك السلعة.',
   },
 ];
 
@@ -31,10 +31,10 @@ export default function ProductDeliverySteps() {
             كيفاش كيخدم
           </p>
           <h2 id="delivery-steps-heading" className="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold text-ink mb-3">
-            3 خطوات و توصلك السلعة
+            3 خطوات وتوصلك السلعة لبابك
           </h2>
           <p className="text-ink/60 max-w-lg mx-auto">
-            بلا دفع مسبق — كنوصلو لكل المغرب
+            بلا دفع مسبق، بلا تعقيد — كنوصلو لكل مدن المغرب
           </p>
         </div>
 
@@ -64,7 +64,7 @@ export default function ProductDeliverySteps() {
         <div className="mt-10 flex items-center justify-center gap-3 bg-emerald-50 border border-emerald-200 rounded-2xl py-4 px-6">
           <Icon name="lock" size={20} className="text-emerald-700 shrink-0" />
           <p className="font-bold text-emerald-800 text-sm sm:text-base">
-            الدفع عند الاستلام — كتخلّص ملي توصلك السلعة
+            الدفع عند الاستلام — ما كتخلّص والو قبل ما تعاين المنتج بيدك
           </p>
         </div>
       </div>

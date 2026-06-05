@@ -13,7 +13,7 @@ export default function ProductFAQ({ product }: { product: Product }) {
         <div className="flex justify-center">
           <SectionHeading
             eyebrow="أسئلة شائعة"
-            title="أسئلة كتتسأل بزاف"
+            title="جاوبنا على الشكوك قبل ما تطلب"
             align="center"
           />
         </div>
@@ -58,9 +58,9 @@ export default function ProductFAQ({ product }: { product: Product }) {
               <Icon name="shield" size={14} />
               اطلب بثقة
             </p>
-            <h3 className="font-heading text-2xl md:text-3xl font-extrabold mb-3">باقي عندك سؤال؟</h3>
+            <h3 className="font-heading text-2xl md:text-3xl font-extrabold mb-3">ما زلت عندك شك؟</h3>
             <p className="text-white/65 mb-3 max-w-md mx-auto">
-              راسلنا ف الواتساب — الفريق كيجاوب بالدارجة.
+              فريق بويا شوب كيجاوب بالدارجة قبل وبعد الطلب — اطلب بكل ثقة والدفع عند الاستلام.
             </p>
             <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-white/50 mb-7">
               <span className="flex items-center gap-1.5">

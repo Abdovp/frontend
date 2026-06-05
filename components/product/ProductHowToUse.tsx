@@ -50,7 +50,7 @@ export default function ProductHowToUse({ product }: { product: Product }) {
         <div className="mt-10 flex items-center justify-center gap-3 bg-emerald-50 border border-emerald-200 rounded-2xl py-4 px-6">
           <Icon name="lock" size={20} className="text-emerald-700 shrink-0" />
           <p className="font-bold text-emerald-800 text-sm sm:text-base">
-            الدفع عند الاستلام — كتخلّص ملي توصلك السلعة
+            الدفع عند الاستلام — ما كتخلّص والو حتى توصلك السلعة
           </p>
         </div>
       </div>
