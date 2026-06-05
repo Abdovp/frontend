@@ -298,7 +298,7 @@ export default function ProductOffers({ product }: ProductOffersProps) {
         className={`sticky-cta ${showSticky ? 'sticky-cta--visible' : ''}`}
         aria-hidden={!showSticky}
       >
-        <div className="container-wide">
+        <div className="container-wide flex justify-center">
           <button
             type="button"
             onClick={() => {
@@ -308,9 +308,9 @@ export default function ProductOffers({ product }: ProductOffersProps) {
               }
               handleStickyClick();
             }}
-            className="checkout-cta checkout-cta--pulse w-full max-w-3xl mx-auto py-3.5 text-base md:py-4"
+            className="checkout-cta checkout-cta--pulse w-full md:w-auto md:min-w-[18rem] md:px-12 py-3.5 text-base md:py-4"
           >
-            <Icon name={stickyShowsCart ? 'cart' : 'chevron-up'} size={18} />
+            <Icon name={stickyShowsCart ? 'cart' : 'arrow-up'} size={18} />
             {stickyShowsCart && selectedOffer
               ? 'شوف السلة'
               : 'اطلب دابا'}
