@@ -36,6 +36,8 @@ export interface ProductSection {
   body: string;
   bullets?: string[];
   imageLabel: string;
+  /** Optional section photo override e.g. /images/name.webp */
+  image?: string;
 }
 
 export interface HowToUseStep {
@@ -409,8 +411,7 @@ export const products: Record<ProductId, Product> = {
         perks: ['3 حوامل', 'توفير 91 درهم', 'توصيل مجاني', `ضمان ${WARRANTY_DAYS} يوم`],
       },
     ],
-    galleryLabels: ['الحامل المغناطيسي', 'طرق التركيب', 'القاعدة الصلبة', 'مركب ف الطوموبيل', 'مع الهاتف'],
-    galleryImages: ['/images/magnetic-holder.webp', '/images/magnetic-holder-gallery-2.webp'],
+    galleryLabels: ['الحامل المغناطيسي', 'المغناطيس القوي', 'القاعدة الصلبة', 'مركب ف الطوموبيل', 'مع الهاتف'],
     image: '/images/magnetic-holder.webp',
     howToUse: {
       title: 'كيفاش تركّب الحامل',
@@ -450,6 +451,7 @@ export const products: Record<ProductId, Product> = {
         'يناسب جميع الهواتف الكبيرة والصغيرة',
       ],
       imageLabel: 'الحامل أثناء الاستعمال',
+      image: '/images/magnetic-holder-gallery-2.webp',
     },
     proof: {
       eyebrow: 'إثبات',

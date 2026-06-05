@@ -12,7 +12,7 @@ export default function ProductAlternatingBlocks({ product }: { product: Product
       bg="cream"
       image={
         <ProductImage
-          src={product.image}
+          src={logic.image ?? product.image}
           alt={product.nameAr}
           fallbackLabel={logic.imageLabel}
           fallbackSublabel="الحل"
