@@ -5,10 +5,10 @@ import { STORE, STORE_TRUST_BADGES } from '../lib/products';
 import { policyLinks } from '../lib/navigation';
 import TrustBadgesStrip from './TrustBadgesStrip';
 
-export default function Footer() {
+export default function Footer({ showTrustCards = true }: { showTrustCards?: boolean }) {
   return (
     <>
-      <TrustBadgesStrip items={STORE_TRUST_BADGES} />
+      {showTrustCards ? <TrustBadgesStrip items={STORE_TRUST_BADGES} /> : null}
       <footer className="bg-ink text-white">
       <div className="container-wide">
         <div className="md:hidden py-2">
