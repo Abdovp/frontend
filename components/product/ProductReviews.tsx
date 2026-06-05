@@ -48,9 +48,9 @@ export default function ProductReviews({ product }: { product: Product }) {
           </div>
         </div>
 
-        {/* Review cards — 3-col desktop */}
+        {/* Review cards — up to 3 */}
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {product.reviews.map((r) => (
+          {product.reviews.slice(0, 3).map((r) => (
             <div key={r.name} className="card-flat p-6 flex flex-col">
               <div className="flex items-start justify-between mb-4 gap-3">
                 <div className="flex items-center gap-3">

@@ -18,7 +18,10 @@ export default function StoreTrustBand({ className = '' }: Props) {
             <span className="store-trust-band__icon" aria-hidden>
               <Icon name={item.icon} size={20} />
             </span>
-            <span className="store-trust-band__label">{item.text}</span>
+            <span>
+              <span className="store-trust-band__label">{item.text}</span>
+              <span className="block text-xs text-ink/45 font-medium mt-0.5">{item.sub}</span>
+            </span>
           </li>
         ))}
       </ul>

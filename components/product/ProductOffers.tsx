@@ -112,8 +112,8 @@ export default function ProductOffers({ product }: ProductOffersProps) {
               className="rounded-2xl shadow-card bg-white"
               priority
             />
-            <div className="grid grid-cols-4 gap-2 sm:gap-3 mt-5">
-              {product.valueProps.map((v) => (
+            <div className="grid grid-cols-3 gap-2 sm:gap-3 mt-5">
+              {product.valueProps.slice(0, 3).map((v) => (
                 <div key={v.title} className="product-benefit-chip">
                   <span className="product-benefit-chip__icon">
                     <Icon name={v.icon} size={18} />
@@ -158,16 +158,10 @@ export default function ProductOffers({ product }: ProductOffersProps) {
               ))}
             </ul>
 
-            {/* Scarcity + stock */}
-            <div className="flex flex-wrap gap-3 mb-6">
-              <div className="scarcity-banner flex-1 min-w-0">
-                <Icon name="flame" size={18} className="text-red-500 shrink-0" />
-                <p>{product.scarcityText}</p>
-              </div>
-              <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-200 rounded-full px-4 py-2 text-emerald-800 text-sm font-bold shrink-0">
-                <Icon name="truck" size={15} className="text-emerald-700" />
-                يوصلك {product.deliveryDays}
-              </div>
+            {/* Scarcity */}
+            <div className="scarcity-banner mb-6">
+              <Icon name="flame" size={18} className="text-red-500 shrink-0" />
+              <p>{product.scarcityText}</p>
             </div>
 
             <p className="font-heading font-bold text-ink mb-3">اختار العرض</p>

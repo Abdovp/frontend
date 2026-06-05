@@ -17,12 +17,11 @@ import FormField from './ui/FormField';
 import CartProductThumb from './ui/CartProductThumb';
 import Icon, { Stars } from './ui/Icon';
 
+const CROSS_SELL_ORDER: ProductId[] = ['cooling-pack', 'magnetic-holder', 'car-vacuum'];
+
 function getCrossSellProduct(cartIds: ProductId[]): Product | null {
-  const hasPack = cartIds.includes('cooling-pack');
-  const hasHolder = cartIds.includes('magnetic-holder');
-  if (hasPack && !hasHolder) return products['magnetic-holder'];
-  if (hasHolder && !hasPack) return products['cooling-pack'];
-  return null;
+  const suggestion = CROSS_SELL_ORDER.find((id) => !cartIds.includes(id));
+  return suggestion ? products[suggestion] : null;
 }
 
 export default function CartDrawer() {
