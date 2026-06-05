@@ -369,6 +369,8 @@ export const products: Record<ProductId, Product> = {
     highlights: [
       'مصمم ليناسب جميع الهواتف بجميع أحجامها (الكبيرة والصغيرة)',
       'مغناطيس قوي — هاتفك آمن وثابت 100%',
+      'ثبات تام حتى ف الطرق الوعرة والمطبات',
+      'تركيب وإزالة ف ثواني بلا أثر',
     ],
     valueProps: [
       { icon: 'lock', title: 'ثبات قوي', text: 'مغناطيس ما كيخليش التلفون يتحرك' },
@@ -558,7 +560,7 @@ export const products: Record<ProductId, Product> = {
     reviewCount: 310,
     unit: 'مكنسة',
     soldText: 'تباع +800 مكنسة هاد الشهر',
-    scarcityText: 'بقاو غير 6 وحدات بالسعر الحالي',
+    scarcityText: 'بقات غير 12 الحبة في المخزون',
     stockLeft: 6,
     deliveryDays: 'الخميس أو الجمعة',
     checkoutHeadline: 'طوموبيلك نظيفة ف 10 دقائق',
