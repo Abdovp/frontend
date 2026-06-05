@@ -6,7 +6,7 @@ interface ProductImageProps {
   alt: string;
   fallbackLabel: string;
   fallbackSublabel?: string;
-  aspect?: 'square' | 'hero' | 'wide' | 'portrait';
+  aspect?: 'square' | 'hero' | 'wide' | 'portrait' | 'phone';
   /** cover = fill square; contain = full image visible with padding */
   fit?: 'cover' | 'contain';
   /** When fit is cover, anchors crop (top helps trim bad edges at bottom) */
@@ -19,6 +19,7 @@ const aspectClass = {
   square: 'aspect-square',
   hero: 'aspect-[4/5] md:aspect-[4/3] lg:aspect-[16/11]',
   portrait: 'aspect-[4/5]',
+  phone: 'aspect-[9/16]',
   wide: 'aspect-[21/9]',
 };
 
