@@ -565,43 +565,145 @@ h1, h2, h3, h4 {
 
   /* Thank-you page */
   .ty-page {
-    @apply bg-cream min-h-screen py-10 md:py-16 px-4;
+    @apply bg-gradient-to-b from-brand-50 via-cream to-cream min-h-screen py-8 md:py-14 px-4;
   }
 
   .ty-wrap {
-    @apply max-w-lg mx-auto space-y-6;
+    @apply max-w-md mx-auto;
+  }
+
+  .ty-hero {
+    @apply text-center pb-2 mb-6;
+  }
+
+  .ty-hero-icon {
+    @apply inline-flex items-center justify-center w-[4.25rem] h-[4.25rem] rounded-full bg-emerald-700 text-white mb-4 shadow-lift ring-[3px] ring-white;
+  }
+
+  .ty-order-pill {
+    @apply inline-flex items-center gap-2 mt-4 text-sm text-ink/55 hover:text-ink transition rounded-full px-4 py-2 bg-white/80 border border-ink/[0.08] shadow-soft hover:shadow-card;
+  }
+
+  .ty-priority-stack {
+    @apply space-y-4 mb-8;
   }
 
   .ty-call-card {
-    @apply rounded-2xl border border-ink/[0.08] bg-gradient-to-b from-[#f0e9df] via-[#f8f4ee] to-white p-5 sm:p-6 shadow-soft;
+    @apply relative overflow-hidden rounded-2xl border border-emerald-700/10 bg-gradient-to-br from-[#f4efe6] via-white to-white p-5 sm:p-6 shadow-card;
+  }
+
+  .ty-call-card::before {
+    content: '';
+    @apply absolute top-0 bottom-0 right-0 w-1 bg-emerald-700/80 rounded-r-2xl;
+  }
+
+  .ty-call-status {
+    @apply inline-flex items-center gap-1.5 text-[0.7rem] font-bold uppercase tracking-wider text-accent-dark bg-accent/10 rounded-full px-3 py-1 mb-3;
+  }
+
+  .ty-call-message {
+    @apply font-heading font-extrabold text-ink text-lg sm:text-[1.35rem] leading-snug text-balance;
+  }
+
+  .ty-unknown-pill {
+    @apply mt-3 inline-flex items-center gap-2 text-xs font-semibold text-amber-900 bg-amber-50 border border-amber-200/80 rounded-full px-3 py-1.5;
   }
 
   .ty-phone-row {
-    @apply mt-5 flex items-center justify-between gap-4 bg-white border border-ink/[0.1] rounded-xl px-4 py-3.5 text-sm;
+    @apply mt-5 flex items-center justify-between gap-3 bg-white border border-ink/[0.08] rounded-xl px-4 py-4 shadow-soft;
+  }
+
+  .ty-phone-number {
+    @apply font-heading text-lg font-extrabold text-ink tabular-nums tracking-wide;
   }
 
   .ty-details-card {
-    @apply bg-white rounded-2xl border border-ink/[0.1] shadow-soft p-5 sm:p-6;
+    @apply bg-white rounded-2xl border border-ink/[0.08] shadow-card p-5 sm:p-6;
+  }
+
+  .ty-details-head {
+    @apply flex items-center justify-between gap-3 mb-4 pb-3 border-b border-ink/[0.06];
   }
 
   .ty-detail-row {
-    @apply flex items-center justify-between gap-3 py-2.5 border-b border-ink/[0.06] last:border-0;
+    @apply flex items-center justify-between gap-3 py-3 border-b border-dashed border-ink/[0.08] last:border-0;
+  }
+
+  .ty-detail-label {
+    @apply text-sm text-ink/45;
+  }
+
+  .ty-detail-value {
+    @apply text-sm font-bold text-ink;
+  }
+
+  .ty-confirm-hint {
+    @apply text-xs text-ink/50 text-center mt-5 mb-2 leading-relaxed;
   }
 
   .ty-confirm-btn {
-    @apply mt-4 w-full flex items-center justify-center gap-2 rounded-xl py-3.5 text-sm font-bold text-white bg-emerald-700 shadow-soft transition-all duration-200 hover:bg-emerald-800 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2;
+    @apply w-full flex items-center justify-center gap-2 rounded-xl py-4 text-sm font-bold text-white bg-emerald-700 shadow-brand transition-all duration-200 hover:bg-emerald-800 hover:-translate-y-px active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2;
   }
 
   .ty-status-badge {
-    @apply mt-4 w-full flex items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 cursor-default select-none;
+    @apply mt-5 w-full flex items-center justify-center gap-2 rounded-xl py-3.5 text-sm font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 cursor-default select-none;
   }
 
-  .ty-step-card {
-    @apply bg-white rounded-2xl border border-ink/[0.08] shadow-soft p-5 flex items-start gap-4;
+  .ty-section {
+    @apply mb-10;
   }
 
   .ty-section-title {
-    @apply font-heading text-xl sm:text-2xl font-extrabold text-ink text-center;
+    @apply font-heading text-xl sm:text-2xl font-extrabold text-ink text-center mb-5;
+  }
+
+  .ty-section-sub {
+    @apply text-ink/50 text-sm text-center -mt-3 mb-5;
+  }
+
+  .ty-timeline {
+    @apply relative space-y-0;
+  }
+
+  .ty-timeline-item {
+    @apply relative flex gap-4 pb-6 last:pb-0;
+  }
+
+  .ty-timeline-item::before {
+    content: '';
+    @apply absolute top-10 bottom-0 right-[1.125rem] w-px bg-brand/15;
+  }
+
+  .ty-timeline-item:last-child::before {
+    @apply hidden;
+  }
+
+  .ty-timeline-num {
+    @apply relative z-10 flex shrink-0 items-center justify-center w-9 h-9 rounded-full bg-brand text-white font-heading font-extrabold text-sm shadow-brand;
+  }
+
+  .ty-timeline-body {
+    @apply flex-1 bg-white rounded-2xl border border-ink/[0.07] p-4 shadow-soft -mt-0.5;
+  }
+
+  .ty-review-card {
+    @apply bg-white rounded-2xl border border-ink/[0.07] p-5 shadow-soft flex gap-3;
+  }
+
+  .ty-review-avatar {
+    @apply flex shrink-0 items-center justify-center w-11 h-11 rounded-full bg-brand text-white font-heading font-bold text-base;
+  }
+
+  .ty-faq-card {
+    @apply bg-white rounded-2xl border border-ink/[0.07] overflow-hidden shadow-soft;
+  }
+
+  .ty-product-card {
+    @apply flex items-center gap-4 bg-white rounded-2xl border border-ink/[0.07] p-4 shadow-soft hover:border-brand/20 hover:shadow-card transition-all duration-200;
+  }
+
+  .ty-product-thumb {
+    @apply w-[4.25rem] h-[4.25rem] shrink-0 rounded-xl overflow-hidden ring-1 ring-ink/[0.06];
   }
 }
 

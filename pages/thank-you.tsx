@@ -190,145 +190,139 @@ export default function ThankYou() {
       <main className="ty-page" dir="rtl">
         <div className="ty-wrap">
 
-          {/* ── HEADER ── */}
-          <div className="text-center pb-1">
-            <span className="inline-flex items-center justify-center w-[4.5rem] h-[4.5rem] rounded-full bg-emerald-700 text-white mb-5 shadow-soft ring-4 ring-emerald-700/15">
+          {/* ── HERO ── */}
+          <header className="ty-hero">
+            <span className="ty-hero-icon">
               <Icon name="check" size={30} />
             </span>
-            <p className="text-ink/60 text-base mb-1.5">
+            <p className="text-ink/55 text-base mb-1">
               شكراً <span className="font-bold text-ink">{firstName}</span>
             </p>
             <h1 className="font-heading text-2xl sm:text-[1.75rem] font-extrabold text-ink leading-snug text-balance">
               طلبك محجوز – في انتظار تأكيدك
             </h1>
             {order?.publicOrderId ? (
-              <button
-                type="button"
-                onClick={copyOrderId}
-                className="inline-flex items-center gap-2 mt-4 text-sm text-ink/55 hover:text-ink transition rounded-full px-4 py-1.5 hover:bg-white/60"
-              >
-                <span>رقم الطلب:</span>
+              <button type="button" onClick={copyOrderId} className="ty-order-pill">
+                <span>رقم الطلب</span>
                 <span className="font-bold text-ink" dir="ltr">
                   {order.publicOrderId}
                 </span>
-                <Icon name="badge" size={14} className="text-ink/40" />
+                <Icon name="badge" size={14} className="text-ink/35" />
                 {copied ? <span className="text-emerald-600 text-xs font-bold">تم النسخ</span> : null}
               </button>
             ) : null}
-          </div>
+          </header>
 
-          {/* ── CALL CARD ── */}
-          <div className="ty-call-card">
-            <div className="flex items-start gap-4">
-              <div className="flex-1 min-w-0">
-                <p className="text-xs font-bold uppercase tracking-wide text-accent-dark mb-2">
-                  {callInfo.statusLine}
-                </p>
-                <p className="font-heading font-extrabold text-ink text-lg sm:text-xl leading-snug text-balance">
-                  {callInfo.message}
-                </p>
-                <p className="mt-2.5 text-sm text-ink/60 leading-relaxed">
-                  الرقم غادي يبان <span className="font-bold text-ink">مجهول</span> — جاوب عليه بلا تردد.
-                </p>
+          {/* ── PRIORITY: CALL + DETAILS ── */}
+          <div className="ty-priority-stack">
+            <div className="ty-call-card">
+              <div className="flex items-start gap-4">
+                <div className="flex-1 min-w-0">
+                  <p className="ty-call-status">{callInfo.statusLine}</p>
+                  <p className="ty-call-message">{callInfo.message}</p>
+                  <p className="ty-unknown-pill">
+                    <Icon name="phone" size={13} />
+                    الرقم غادي يبان مجهول — جاوب عليه بلا تردد
+                  </p>
+                </div>
+                <span className="flex shrink-0 items-center justify-center w-11 h-11 rounded-full bg-emerald-700 text-white shadow-soft">
+                  <Icon name="phone" size={20} />
+                </span>
               </div>
-              <span className="flex shrink-0 items-center justify-center w-12 h-12 rounded-full bg-emerald-700 text-white shadow-soft">
-                <Icon name="phone" size={22} />
-              </span>
+              {order?.phone ? (
+                <div className="ty-phone-row">
+                  <span className="text-ink/50 text-sm flex items-center gap-2 shrink-0">
+                    <Icon name="phone" size={15} className="text-emerald-700/60" />
+                    غادي نتصلو على:
+                  </span>
+                  <span className="ty-phone-number" dir="ltr">
+                    {order.phone}
+                  </span>
+                </div>
+              ) : null}
             </div>
-            {order?.phone ? (
-              <div className="ty-phone-row">
-                <span className="text-ink/55 flex items-center gap-2 shrink-0">
-                  <Icon name="phone" size={16} className="text-ink/40" />
-                  غادي نتصلو على:
-                </span>
-                <span className="font-heading font-extrabold text-ink tabular-nums tracking-wide" dir="ltr">
-                  {order.phone}
-                </span>
+
+            {ready && order ? (
+              <div className="ty-details-card">
+                <div className="ty-details-head">
+                  <h2 className="font-heading font-bold text-ink text-base">بياناتك للمكالمة</h2>
+                  {detailsConfirmed ? (
+                    <span className="inline-flex items-center gap-1 text-xs font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 rounded-full px-2.5 py-1">
+                      <Icon name="check-circle" size={13} />
+                      مؤكد
+                    </span>
+                  ) : null}
+                </div>
+                <div>
+                  <div className="ty-detail-row">
+                    <span className="ty-detail-label">الاسم</span>
+                    <span className="ty-detail-value">{fullName}</span>
+                  </div>
+                  <div className="ty-detail-row">
+                    <span className="ty-detail-label">الجوال</span>
+                    <span className="ty-detail-value font-heading tabular-nums" dir="ltr">
+                      {order.phone}
+                    </span>
+                  </div>
+                </div>
+                {detailsConfirmed ? (
+                  <p className="ty-status-badge" role="status" aria-live="polite">
+                    <Icon name="check-circle" size={18} className="text-emerald-700" />
+                    تم التأكيد — بانتظار مكالمتنا
+                  </p>
+                ) : (
+                  <>
+                    <p className="ty-confirm-hint">تأكد أن رقم الجوال صحيح قبل ما نتصلو بيك</p>
+                    <button type="button" onClick={handleConfirmDetails} className="ty-confirm-btn">
+                      <Icon name="check" size={18} />
+                      البيانات صحيحة
+                    </button>
+                  </>
+                )}
+              </div>
+            ) : ready && !order ? (
+              <div className="ty-details-card text-sm text-ink/55 text-center">
+                ما لقيناش تفاصيل الطلب. إلا كملتي الطلب، غادي نتصلو بيك قريباً.
               </div>
             ) : null}
           </div>
 
-          {/* ── CUSTOMER DETAILS CARD ── */}
-          {ready && order ? (
-            <div className="ty-details-card">
-              <h2 className="font-heading font-bold text-ink text-base mb-3">بياناتك للمكالمة</h2>
-              <div className="text-sm">
-                <div className="ty-detail-row">
-                  <span className="text-ink/50">الاسم</span>
-                  <span className="font-bold text-ink">{fullName}</span>
-                </div>
-                <div className="ty-detail-row">
-                  <span className="text-ink/50">الجوال</span>
-                  <span className="font-heading font-extrabold text-ink tabular-nums" dir="ltr">
-                    {order.phone}
-                  </span>
-                </div>
-              </div>
-              {detailsConfirmed ? (
-                <p className="ty-status-badge" role="status" aria-live="polite">
-                  <Icon name="check-circle" size={18} className="text-emerald-700" />
-                  تم التأكيد — بانتظار مكالمتنا
-                </p>
-              ) : (
-                <>
-                  <p className="text-xs text-ink/50 text-center mt-4 mb-2">
-                    تأكد أن رقم الجوال صحيح قبل ما نتصلو بيك
-                  </p>
-                  <button
-                    type="button"
-                    onClick={handleConfirmDetails}
-                    className="ty-confirm-btn"
-                  >
-                    <Icon name="check" size={18} />
-                    البيانات صحيحة
-                  </button>
-                </>
-              )}
-            </div>
-          ) : ready && !order ? (
-            <div className="bg-white rounded-2xl border border-ink/[0.08] p-5 text-sm text-ink/55 text-center">
-              ما لقيناش تفاصيل الطلب. إلا كملتي الطلب، غادي نتصلو بيك قريباً.
-            </div>
-          ) : null}
-
           {/* ── WHAT HAPPENS ON THE CALL ── */}
-          <div>
-            <h2 className="ty-section-title mb-5">شنو غادي يوقع ف التيليفون؟</h2>
-            <div className="space-y-3">
+          <section className="ty-section" aria-labelledby="ty-call-steps">
+            <h2 id="ty-call-steps" className="ty-section-title">
+              شنو غادي يوقع ف التيليفون؟
+            </h2>
+            <div className="ty-timeline">
               {ON_CALL_STEPS.map((step, i) => (
-                <div key={step.title} className="ty-step-card">
-                  <span className="flex shrink-0 items-center justify-center w-9 h-9 rounded-full bg-brand text-white font-heading font-extrabold text-sm">
-                    {i + 1}
-                  </span>
-                  <div className="min-w-0">
+                <div key={step.title} className="ty-timeline-item">
+                  <span className="ty-timeline-num">{i + 1}</span>
+                  <div className="ty-timeline-body">
                     <h3 className="font-heading font-bold text-ink mb-1">{step.title}</h3>
                     <p className="text-sm text-ink/65 leading-relaxed">{step.desc}</p>
                   </div>
                 </div>
               ))}
             </div>
-          </div>
+          </section>
 
           {/* ── REVIEWS ── */}
-          <div>
-            <h2 className="font-heading font-extrabold text-lg text-ink text-center mb-4 text-balance">
+          <section className="ty-section" aria-labelledby="ty-reviews">
+            <h2 id="ty-reviews" className="ty-section-title">
               اللي جاوبو على المكالمة — وصلهم الطرد بسرعة
             </h2>
             <div className="space-y-3">
               {THANK_YOU_REVIEWS.map((r) => (
-                <div key={r.name} className="ty-step-card gap-3">
-                  <span className="flex shrink-0 items-center justify-center w-10 h-10 rounded-full bg-emerald-700 text-white font-heading font-bold">
-                    {r.name.charAt(0)}
-                  </span>
+                <div key={r.name} className="ty-review-card">
+                  <span className="ty-review-avatar">{r.name.charAt(0)}</span>
                   <div className="min-w-0 flex-1">
-                    <div className="flex items-center justify-between gap-2 mb-1">
+                    <div className="flex items-center justify-between gap-2 mb-1.5">
                       <span className="font-bold text-ink text-sm">
                         {r.name} · {r.city}
                       </span>
                       <Stars value={r.rating} size={13} />
                     </div>
                     <p className="text-sm text-ink/70 leading-relaxed">{r.text}</p>
-                    <p className="flex items-center gap-1 mt-2 text-xs text-emerald-700 font-semibold">
+                    <p className="flex items-center gap-1 mt-2.5 text-xs text-emerald-700 font-semibold">
                       <Icon name="check-circle" size={13} />
                       شراء موثّق
                     </p>
@@ -336,19 +330,19 @@ export default function ThankYou() {
                 </div>
               ))}
             </div>
-          </div>
+          </section>
 
           {/* ── FAQ ── */}
-          <div>
-            <h2 className="ty-section-title mb-1">عندك سؤال؟</h2>
-            <p className="text-ink/55 text-sm text-center mb-5">
-              جاوبنا على الأسئلة اللي كتتسأل بزاف من بعد الطلب
-            </p>
-            <div className="space-y-2">
+          <section className="ty-section" aria-labelledby="ty-faq">
+            <h2 id="ty-faq" className="ty-section-title">
+              عندك سؤال؟
+            </h2>
+            <p className="ty-section-sub">جاوبنا على الأسئلة اللي كتتسأل بزاف من بعد الطلب</p>
+            <div className="space-y-2.5">
               {THANK_YOU_FAQS.map((faq, i) => {
                 const isOpen = openFaq === i;
                 return (
-                  <div key={faq.q} className="bg-white rounded-2xl border border-ink/[0.08] overflow-hidden">
+                  <div key={faq.q} className="ty-faq-card">
                     <button
                       type="button"
                       onClick={() => setOpenFaq(isOpen ? null : i)}
@@ -377,13 +371,15 @@ export default function ThankYou() {
                 );
               })}
             </div>
-          </div>
+          </section>
 
           {/* ── MORE PRODUCTS ── */}
           {moreProducts.length > 0 && (
-            <div>
-              <h2 className="ty-section-title mb-1">بغيتي تشوف منتجات أخرى؟</h2>
-              <p className="text-ink/55 text-sm text-center mb-5">
+            <section className="ty-section" aria-labelledby="ty-more-products">
+              <h2 id="ty-more-products" className="ty-section-title">
+                بغيتي تشوف منتجات أخرى؟
+              </h2>
+              <p className="ty-section-sub">
                 منتجات أخرى من بويا شوب — نفس التوصيل والدفع عند الاستلام
               </p>
               <div className="space-y-3">
@@ -391,10 +387,10 @@ export default function ThankYou() {
                   <Link
                     key={product.id}
                     href={product.href}
-                    className="flex items-center gap-4 bg-white rounded-2xl border border-ink/[0.08] p-4 hover:border-brand/25 hover:shadow-soft transition"
+                    className="ty-product-card"
                     onClick={() => clearOrderConfirmation()}
                   >
-                    <div className="w-16 h-16 shrink-0 rounded-xl overflow-hidden">
+                    <div className="ty-product-thumb">
                       <ProductImage
                         src={product.image}
                         alt={product.nameAr}
@@ -409,11 +405,11 @@ export default function ThankYou() {
                         {product.nameAr}
                       </p>
                       <p className="text-xs text-ink/50 mt-0.5 line-clamp-1">{product.tagline}</p>
-                      <p className="font-heading font-extrabold text-brand text-sm mt-1">
+                      <p className="font-heading font-extrabold text-brand text-sm mt-1.5">
                         من {product.offers[0].price} {CURRENCY}
                       </p>
                     </div>
-                    <Icon name="arrow-left" size={18} className="text-ink/30 shrink-0" />
+                    <Icon name="arrow-left" size={18} className="text-brand/40 shrink-0" />
                   </Link>
                 ))}
               </div>
@@ -425,10 +421,10 @@ export default function ThankYou() {
                 <Icon name="spark" size={18} />
                 شوف كل المنتجات
               </Link>
-            </div>
+            </section>
           )}
 
-          <div className="pt-2 text-center">
+          <div className="pt-1 pb-2 text-center">
             <Link
               href="/"
               className="text-sm font-semibold text-brand hover:underline"
