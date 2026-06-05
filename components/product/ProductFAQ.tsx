@@ -51,28 +51,46 @@ export default function ProductFAQ({ product }: { product: Product }) {
           })}
         </div>
 
-        <div className="mt-12 relative overflow-hidden rounded-3xl bg-brand text-white p-8 md:p-10 text-center shadow-lift">
+        <div className="mt-12 relative overflow-hidden rounded-3xl bg-ink text-white p-8 md:p-10 text-center shadow-lift">
           <div className="absolute inset-0 hero-grid-bg opacity-60" />
           <div className="relative">
-            <h3 className="font-heading text-2xl md:text-3xl font-extrabold mb-3">واجد تطلب؟</h3>
-            <p className="text-white/75 mb-7 max-w-md mx-auto">
-              فريق بويا شوب كيجاوب بالدارجة قبل وبعد الطلب — اطلب بكل ثقة.
+            <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-accent mb-4">
+              <Icon name="shield" size={14} />
+              اطلب بثقة
             </p>
+            <h3 className="font-heading text-2xl md:text-3xl font-extrabold mb-3">ما زلت عندك شك؟</h3>
+            <p className="text-white/65 mb-3 max-w-md mx-auto">
+              فريق بويا شوب كيجاوب بالدارجة قبل وبعد الطلب — اطلب بكل ثقة والدفع عند الاستلام.
+            </p>
+            <div className="flex flex-wrap items-center justify-center gap-4 text-sm text-white/50 mb-7">
+              <span className="flex items-center gap-1.5">
+                <Icon name="wallet" size={14} className="text-accent" />
+                دفع عند الاستلام
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Icon name="refresh" size={14} className="text-accent" />
+                ضمان 30 يوم
+              </span>
+              <span className="flex items-center gap-1.5">
+                <Icon name="truck" size={14} className="text-accent" />
+                توصيل 24–48 ساعة
+              </span>
+            </div>
             <div className="flex flex-wrap items-center justify-center gap-3">
               <button
                 type="button"
                 onClick={() => document.getElementById('offers')?.scrollIntoView({ behavior: 'smooth' })}
                 className="btn-gold"
               >
-                رجع للعروض
-                <Icon name="arrow-left" size={18} />
+                <Icon name="cart" size={18} />
+                اطلب دابا
               </button>
               <Link
                 href="/contact"
                 className="inline-flex items-center justify-center gap-2 font-bold py-4 px-7 rounded-full border border-white/25 text-white hover:bg-white/10 transition"
               >
                 <Icon name="whatsapp" size={18} />
-                تواصل معنا
+                تواصل معنا ف الواتساب
               </Link>
             </div>
           </div>

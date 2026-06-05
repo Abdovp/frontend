@@ -158,9 +158,16 @@ export default function ProductOffers({ product }: ProductOffersProps) {
               ))}
             </ul>
 
-            <div className="scarcity-banner mb-6">
-              <Icon name="flame" size={18} className="text-red-500 shrink-0" />
-              <p>{product.scarcityText}</p>
+            {/* Scarcity + stock */}
+            <div className="flex flex-wrap gap-3 mb-6">
+              <div className="scarcity-banner flex-1 min-w-0">
+                <Icon name="flame" size={18} className="text-red-500 shrink-0" />
+                <p>{product.scarcityText}</p>
+              </div>
+              <div className="flex items-center gap-2 bg-emerald-50 border border-emerald-200 rounded-full px-4 py-2 text-emerald-800 text-sm font-bold shrink-0">
+                <Icon name="truck" size={15} className="text-emerald-700" />
+                يوصلك {product.deliveryDays}
+              </div>
             </div>
 
             <p className="font-heading font-bold text-ink mb-3">اختار العرض</p>
@@ -225,10 +232,25 @@ export default function ProductOffers({ product }: ProductOffersProps) {
                   : `اطلب دابا — ${selectedOffer.price} ${CURRENCY}`
                 : 'اطلب دابا'}
             </button>
-            <p className="flex items-center justify-center gap-2 text-sm text-ink/55 mt-3">
-              <Icon name="lock" size={15} className="text-brand" />
-              الدفع عند الاستلام — بدون دفع أونلاين
-            </p>
+
+            {/* COD trust line */}
+            <div className="flex items-center justify-center gap-2 bg-emerald-50 border border-emerald-200 rounded-xl py-3 px-4 mt-3">
+              <Icon name="lock" size={16} className="text-emerald-700 shrink-0" />
+              <p className="text-sm font-bold text-emerald-800">
+                الدفع عند الاستلام — بدون دفع أونلاين
+              </p>
+            </div>
+
+            {/* WhatsApp order option */}
+            <a
+              href={`https://wa.me/212600000000?text=${encodeURIComponent(`مرحبا، بغيت نطلب ${product.nameAr}`)}`}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center justify-center gap-2 text-sm font-bold text-[#25D366] border border-[#25D366]/30 rounded-xl py-3 px-4 mt-3 hover:bg-[#25D366]/[0.05] transition-colors"
+            >
+              <Icon name="whatsapp" size={18} />
+              أو اطلب مباشرة ف الواتساب
+            </a>
           </div>
         </div>
 
@@ -242,11 +264,16 @@ export default function ProductOffers({ product }: ProductOffersProps) {
       >
         <div className="container-wide">
           <div className="mx-auto max-w-3xl flex items-center gap-3 md:gap-4">
-            <div className="leading-tight shrink-0">
-              <p className="text-xs text-ink/50">{firstOffer.label}</p>
-              <p className="font-heading font-extrabold text-brand text-lg">
-                {firstOffer.price} <span className="text-sm">{CURRENCY}</span>
+            <div className="leading-tight shrink-0 hidden sm:block">
+              <p className="text-xs text-ink/50 truncate max-w-[120px]">{product.nameAr}</p>
+              <p className="font-heading font-extrabold text-brand text-lg leading-none">
+                {(selectedOffer ?? firstOffer).price}{' '}
+                <span className="text-sm font-semibold">{CURRENCY}</span>
               </p>
+            </div>
+            <div className="flex items-center gap-1.5 shrink-0 hidden sm:flex">
+              <Icon name="lock" size={13} className="text-emerald-600" />
+              <span className="text-xs text-emerald-700 font-semibold">دفع عند الاستلام</span>
             </div>
             <button
               type="button"
@@ -254,9 +281,9 @@ export default function ProductOffers({ product }: ProductOffersProps) {
               className="checkout-cta checkout-cta--pulse flex-1 py-3.5 text-base md:py-4"
             >
               <Icon name="cart" size={18} />
-              {isInCart(product.id, firstOffer.quantity)
+              {isInCart(product.id, (selectedOffer ?? firstOffer).quantity)
                 ? 'شوف السلة'
-                : `اطلب دابا — ${firstOffer.price} ${CURRENCY}`}
+                : `اطلب دابا — ${(selectedOffer ?? firstOffer).price} ${CURRENCY}`}
             </button>
           </div>
         </div>

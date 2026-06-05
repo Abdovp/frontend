@@ -29,7 +29,8 @@ export type IconName =
   | 'quote'
   | 'clock'
   | 'leaf'
-  | 'vacuum';
+  | 'vacuum'
+  | 'users';
 
 interface IconProps extends SVGProps<SVGSVGElement> {
   name: IconName;
@@ -150,6 +151,14 @@ const paths: Record<IconName, ReactElement> = {
       <path d="M9 12v5a2 2 0 004 0v-5" />
       <path d="M15 10l5-5M18 7l2-2" />
       <circle cx="9" cy="12" r="2" />
+    </>
+  ),
+  users: (
+    <>
+      <circle cx="9" cy="8" r="3" />
+      <path d="M3 20v-1a6 6 0 0112 0v1" />
+      <path d="M16 11a3 3 0 110-6" />
+      <path d="M21 20v-1a6 6 0 00-5-5.9" />
     </>
   ),
 };
