@@ -101,7 +101,7 @@ export default function ProductOffers({ product }: ProductOffersProps) {
     document.getElementById('product-pricing')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  const showStickyBar = showSticky && selected === 1;
+  const showStickyBar = showSticky;
 
   return (
     <section className="checkout-hero section-padding pt-8 md:pt-12">
