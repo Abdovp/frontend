@@ -5,7 +5,9 @@ export const ORDER_CONFIRMATION_KEY = 'boya_order_confirmation';
 
 export interface OrderConfirmation {
   firstName: string;
+  fullName: string;
   phone: string;
+  orderedAt: string;
   publicOrderId?: string;
   eventId?: string;
   orderId?: number;
@@ -39,7 +41,9 @@ export function saveOrderConfirmation(data: {
 
   const payload: OrderConfirmation = {
     firstName: data.name.trim().split(/\s+/)[0] || data.name.trim(),
+    fullName: data.name.trim(),
     phone: data.phone.trim(),
+    orderedAt: new Date().toISOString(),
     publicOrderId: data.publicOrderId,
     eventId: data.eventId,
     orderId: data.orderId,
