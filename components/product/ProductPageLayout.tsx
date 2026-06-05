@@ -2,7 +2,6 @@ import Head from 'next/head';
 import { useEffect } from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
-import AnnouncementBar from '../AnnouncementBar';
 import { trackViewContent } from '../../lib/analytics/track';
 import ProductOffers from './ProductOffers';
 import ProductAlternatingBlocks from './ProductAlternatingBlocks';
@@ -29,10 +28,7 @@ export default function ProductPageLayout({ product }: { product: Product }) {
         <meta property="og:description" content={product.metaDescription} />
       </Head>
       <div className="product-page">
-      <Header showAnnouncement={false} />
-      <div className="product-moving-header">
-        <AnnouncementBar variant="marquee" />
-      </div>
+      <Header />
       <main>
         <div id="offers">
           <ProductOffers product={product} />

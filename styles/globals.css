@@ -176,12 +176,42 @@ h1, h2, h3, h4 {
     height: var(--tick-height);
   }
 
-  .site-header {
-    @apply sticky top-0 inset-x-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-ink/[0.07];
+  .site-header-shell {
+    @apply sticky top-0 inset-x-0 z-50 w-full;
   }
 
-  .product-moving-header {
-    @apply relative z-40 w-full;
+  .site-header {
+    @apply w-full bg-white/90 backdrop-blur-md border-b border-ink/[0.07];
+  }
+
+  .header-trust-strip .trust-badge-scroll {
+    @apply -mx-4 sm:-mx-6 md:mx-0;
+  }
+
+  .header-trust-strip .trust-badge-scroll__track {
+    @apply gap-3;
+  }
+
+  @media (min-width: 768px) {
+    .header-trust-strip .trust-badge-scroll__track {
+      gap: 0.75rem;
+    }
+  }
+
+  .trust-badge-card--header {
+    @apply p-3 gap-2.5 border-2 shadow-none;
+    width: min(68vw, 13.5rem);
+  }
+
+  @media (min-width: 768px) {
+    .trust-badge-card--header {
+      @apply p-3.5;
+      width: auto;
+    }
+  }
+
+  .trust-badge-card--header .trust-badge-card__icon {
+    @apply w-9 h-9;
   }
 
   .site-header__bar {

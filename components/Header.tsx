@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import { useState } from 'react';
 import CartButton from './CartButton';
-import AnnouncementBar from './AnnouncementBar';
+import TrustBadgesStrip from './TrustBadgesStrip';
 import CollapsibleMenu from './ui/CollapsibleMenu';
 import Icon from './ui/Icon';
-import { STORE } from '../lib/products';
+import { SHARED_GUARANTEES, STORE } from '../lib/products';
 import { mainNavLinks } from '../lib/navigation';
 
 function Logo({ onClick }: { onClick?: () => void }) {
@@ -25,13 +25,13 @@ function Logo({ onClick }: { onClick?: () => void }) {
   );
 }
 
-export default function Header({ showAnnouncement = true }: { showAnnouncement?: boolean }) {
+export default function Header() {
   const [menuOpen, setMenuOpen] = useState(false);
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <>
-      {showAnnouncement && <AnnouncementBar variant="marquee" />}
+    <div className="site-header-shell">
+      <TrustBadgesStrip items={SHARED_GUARANTEES} variant="header" />
       <header className="site-header">
         <div className="site-header__bar">
           <Logo onClick={closeMenu} />
@@ -98,6 +98,6 @@ export default function Header({ showAnnouncement = true }: { showAnnouncement?:
           </nav>
         )}
       </header>
-    </>
+    </div>
   );
 }
