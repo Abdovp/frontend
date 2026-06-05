@@ -300,11 +300,21 @@ export default function ProductOffers({ product }: ProductOffersProps) {
       >
         <div className="container-wide">
           <div className="mx-auto w-full max-w-3xl md:max-w-5xl flex items-center gap-3 md:gap-10">
-            {selectedOffer ? (
-              <p className="hidden md:block font-heading font-bold text-ink text-xl shrink-0">
-                {selectedOffer.label}
+            <div className="hidden md:flex items-center gap-3 shrink-0 min-w-0 max-w-[14rem] lg:max-w-xs">
+              <div className="w-14 h-14 shrink-0 rounded-xl overflow-hidden border border-ink/[0.08] shadow-soft bg-white">
+                <ProductImage
+                  src={galleryImages[0] ?? product.image}
+                  alt={product.nameAr}
+                  fallbackLabel={product.nameAr}
+                  aspect="square"
+                  fit="cover"
+                  className="rounded-xl"
+                />
+              </div>
+              <p className="font-heading font-bold text-ink text-lg leading-snug line-clamp-2">
+                {product.nameAr}
               </p>
-            ) : null}
+            </div>
             <button
               type="button"
               onClick={() => {
