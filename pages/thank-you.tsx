@@ -3,6 +3,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Footer from '../components/Footer';
 import UpsellPopup from '../components/UpsellPopup';
+import CartProductThumb from '../components/ui/CartProductThumb';
 import ProductImage from '../components/ui/ProductImage';
 import Icon, { Stars } from '../components/ui/Icon';
 import { finalizeOrder, type FinalizeUpsellInput } from '../lib/api/orders';
@@ -24,6 +25,10 @@ import { pickUpsellProduct, UPSELL_PRICE } from '../lib/upsell';
 
 function getOrderedProductIds(order: OrderConfirmation): ProductId[] {
   return [...new Set(order.items.map((item) => item.productId).filter(Boolean))] as ProductId[];
+}
+
+function formatOfferLabel(offer: number): string {
+  return `${offer} ${offer === 1 ? 'وحدة' : 'وحدات'}`;
 }
 
 const ON_CALL_STEPS = [
@@ -286,6 +291,57 @@ export default function ThankYou() {
               </div>
             ) : null}
           </div>
+
+          {/* ── ORDER SUMMARY ── */}
+          {ready && order && order.items.length > 0 ? (
+            <section className="ty-section" aria-labelledby="ty-order-summary">
+              <h2 id="ty-order-summary" className="ty-section-title">
+                ملخص الطلب
+              </h2>
+              <div className="ty-order-summary">
+                {order.items.map((item, index) => (
+                  <div
+                    key={`${item.productId ?? item.name}-${item.offer}-${index}`}
+                    className="ty-order-line"
+                  >
+                    {item.productId ? (
+                      <CartProductThumb productId={item.productId} size="sm" />
+                    ) : (
+                      <span className="flex shrink-0 items-center justify-center w-12 h-12 rounded-xl bg-brand/10 text-brand">
+                        <Icon name="spark" size={20} />
+                      </span>
+                    )}
+                    <div className="flex flex-1 justify-between gap-3 min-w-0">
+                      <div className="min-w-0">
+                        <p className="text-sm font-bold text-ink leading-snug line-clamp-2">
+                          {item.name}
+                        </p>
+                        <p className="text-xs text-ink/50 mt-0.5">
+                          {formatOfferLabel(item.offer)}
+                          {item.isUpsell ? (
+                            <span className="mr-1.5 text-accent-dark font-semibold">· إضافة</span>
+                          ) : null}
+                        </p>
+                      </div>
+                      <span className="text-sm font-bold text-ink shrink-0">
+                        {item.price * item.quantity} {CURRENCY}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+                <div className="ty-order-total">
+                  <span>المجموع</span>
+                  <span className="ty-order-total-price">
+                    {order.total} {CURRENCY}
+                  </span>
+                </div>
+                <p className="ty-order-cod">
+                  <Icon name="wallet" size={14} />
+                  دفع عند الاستلام — ما كاينش دفع أونلاين
+                </p>
+              </div>
+            </section>
+          ) : null}
 
           {/* ── WHAT HAPPENS ON THE CALL ── */}
           <section className="ty-section" aria-labelledby="ty-call-steps">

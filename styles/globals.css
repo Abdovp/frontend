@@ -705,6 +705,26 @@ h1, h2, h3, h4 {
   .ty-product-thumb {
     @apply w-[4.25rem] h-[4.25rem] shrink-0 rounded-xl overflow-hidden ring-1 ring-ink/[0.06];
   }
+
+  .ty-order-summary {
+    @apply bg-white rounded-2xl border border-ink/[0.08] shadow-card p-5 sm:p-6;
+  }
+
+  .ty-order-line {
+    @apply flex items-center gap-3 py-3 border-b border-dashed border-ink/[0.08] last:border-0;
+  }
+
+  .ty-order-total {
+    @apply flex justify-between items-center font-heading font-extrabold text-ink pt-4 mt-1 border-t border-ink/10;
+  }
+
+  .ty-order-total-price {
+    @apply text-brand text-lg;
+  }
+
+  .ty-order-cod {
+    @apply flex items-center gap-1.5 text-xs text-emerald-700 font-semibold mt-3;
+  }
 }
 
 @layer utilities {
