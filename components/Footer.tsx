@@ -3,13 +3,9 @@ import Icon from './ui/Icon';
 import { CollapsibleMenuDark } from './ui/CollapsibleMenu';
 import { STORE } from '../lib/products';
 import { policyLinks } from '../lib/navigation';
-import StoreTrustRow from './StoreTrustRow';
-
 export default function Footer() {
   return (
-    <>
-      <StoreTrustRow />
-      <footer className="bg-ink text-white">
+    <footer className="bg-ink text-white">
       <div className="container-wide">
         <div className="md:hidden py-2">
           <CollapsibleMenuDark title="المنتجات">
@@ -119,7 +115,6 @@ export default function Footer() {
           © {new Date().getFullYear()} {STORE.nameEn} — {STORE.nameAr}. جميع الحقوق محفوظة.
         </div>
       </div>
-      </footer>
-    </>
+    </footer>
   );
 }

@@ -180,28 +180,6 @@ h1, h2, h3, h4 {
     @apply sticky top-0 inset-x-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-ink/[0.07];
   }
 
-  .store-trust-row__grid {
-    @apply grid grid-cols-2 md:grid-cols-4;
-  }
-
-  .store-trust-row__item {
-    @apply flex items-center justify-center gap-3 py-6 md:py-8 px-3 sm:px-4 md:px-5 min-w-0;
-  }
-
-  @media (min-width: 768px) {
-    .store-trust-row__grid {
-      @apply divide-x divide-x-reverse divide-ink/[0.07];
-    }
-  }
-
-  .store-trust-row__icon {
-    @apply flex items-center justify-center shrink-0 w-11 h-11 rounded-2xl bg-brand/[0.06] text-brand;
-  }
-
-  .store-trust-row__label {
-    @apply font-heading font-bold text-sm md:text-base text-ink leading-snug;
-  }
-
   .site-header__bar {
     @apply container-wide flex items-center justify-between gap-2 sm:gap-4;
     min-height: var(--site-header-height);

@@ -8,13 +8,25 @@ export interface TrustStripItem {
 
 interface TrustBadgesStripProps {
   items: TrustStripItem[];
+  /** section = full-width band; embedded = below product CTA */
+  variant?: 'section' | 'embedded';
   className?: string;
 }
 
-export default function TrustBadgesStrip({ items, className = '' }: TrustBadgesStripProps) {
+export default function TrustBadgesStrip({
+  items,
+  variant = 'section',
+  className = '',
+}: TrustBadgesStripProps) {
+  const isEmbedded = variant === 'embedded';
+
   return (
     <section
-      className={`bg-white border-t border-ink/[0.06] py-8 md:py-10 ${className}`}
+      className={
+        isEmbedded
+          ? `bg-white rounded-2xl border border-ink/[0.08] py-5 md:py-6 shadow-soft ${className}`
+          : `bg-white border-t border-ink/[0.06] py-8 md:py-10 ${className}`
+      }
       aria-label="ضمانات الشراء"
     >
       <div className="container-wide">

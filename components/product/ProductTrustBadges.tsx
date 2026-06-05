@@ -5,6 +5,11 @@ interface ProductTrustBadgesProps {
   badges: Product['trustBadges'];
 }
 
-export default function ProductTrustBadges({ badges }: ProductTrustBadgesProps) {
-  return <TrustBadgesStrip items={badges} />;
+type Props = ProductTrustBadgesProps & {
+  variant?: 'section' | 'embedded';
+  className?: string;
+};
+
+export default function ProductTrustBadges({ badges, variant = 'section', className }: Props) {
+  return <TrustBadgesStrip items={badges} variant={variant} className={className} />;
 }

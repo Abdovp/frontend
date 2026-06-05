@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { useState } from 'react';
+import AnnouncementBar from './AnnouncementBar';
 import CartButton from './CartButton';
 import CollapsibleMenu from './ui/CollapsibleMenu';
 import Icon from './ui/Icon';
@@ -29,7 +30,9 @@ export default function Header() {
   const closeMenu = () => setMenuOpen(false);
 
   return (
-    <header className="site-header">
+    <>
+      <AnnouncementBar variant="marquee" />
+      <header className="site-header">
         <div className="site-header__bar">
           <Logo onClick={closeMenu} />
 
@@ -94,6 +97,7 @@ export default function Header() {
             </a>
           </nav>
         )}
-    </header>
+      </header>
+    </>
   );
 }

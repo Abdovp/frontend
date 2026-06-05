@@ -4,6 +4,7 @@ import { useCartStore } from '../../lib/cart-store';
 import type { Product } from '../../lib/products';
 import { CURRENCY, getFirstOffer } from '../../lib/products';
 import ProductImage from '../ui/ProductImage';
+import ProductTrustBadges from './ProductTrustBadges';
 import Icon, { Stars } from '../ui/Icon';
 
 interface ProductOffersProps {
@@ -230,6 +231,12 @@ export default function ProductOffers({ product }: ProductOffersProps) {
             </p>
           </div>
         </div>
+
+        <ProductTrustBadges
+          badges={product.trustBadges}
+          variant="embedded"
+          className="mt-8 md:mt-10"
+        />
       </div>
 
       {/* Sticky CTA — visible on all screens once scrolled past product card */}
