@@ -16,6 +16,7 @@ import {
 } from '../lib/products';
 import {
   clearOrderConfirmation,
+  confirmOrderDetails,
   loadOrderConfirmation,
   type OrderConfirmation,
 } from '../lib/order-confirmation';
@@ -94,6 +95,7 @@ export default function ThankYou() {
   const [ready, setReady] = useState(false);
   const [copied, setCopied] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [detailsConfirmed, setDetailsConfirmed] = useState(false);
   const sheetSentRef = useRef(false);
   const upsellProductRef = useRef<Product | null>(null);
 
@@ -114,6 +116,7 @@ export default function ThankYou() {
   useEffect(() => {
     const saved = loadOrderConfirmation();
     setOrder(saved);
+    setDetailsConfirmed(saved?.detailsConfirmed ?? false);
     if (saved) {
       const upsell = pickUpsellProduct(getOrderedProductIds(saved));
       upsellProductRef.current = upsell;
@@ -154,6 +157,14 @@ export default function ThankYou() {
     const orderedIds = order ? getOrderedProductIds(order) : [];
     return productList.filter((p) => !orderedIds.includes(p.id));
   }, [order]);
+
+  const handleConfirmDetails = () => {
+    const updated = confirmOrderDetails();
+    if (updated) {
+      setOrder(updated);
+      setDetailsConfirmed(true);
+    }
+  };
 
   const copyOrderId = async () => {
     if (!order?.publicOrderId) return;
@@ -250,10 +261,26 @@ export default function ThankYou() {
                   </span>
                 </div>
               </div>
-              <p className="ty-status-badge" role="status" aria-live="polite">
-                <Icon name="check-circle" size={18} className="text-emerald-700" />
-                البيانات صحيحة
-              </p>
+              {detailsConfirmed ? (
+                <p className="ty-status-badge" role="status" aria-live="polite">
+                  <Icon name="check-circle" size={18} className="text-emerald-700" />
+                  تم التأكيد — بانتظار مكالمتنا
+                </p>
+              ) : (
+                <>
+                  <p className="text-xs text-ink/50 text-center mt-4 mb-2">
+                    تأكد أن رقم الجوال صحيح قبل ما نتصلو بيك
+                  </p>
+                  <button
+                    type="button"
+                    onClick={handleConfirmDetails}
+                    className="ty-confirm-btn"
+                  >
+                    <Icon name="check" size={18} />
+                    البيانات صحيحة
+                  </button>
+                </>
+              )}
             </div>
           ) : ready && !order ? (
             <div className="bg-white rounded-2xl border border-ink/[0.08] p-5 text-sm text-ink/55 text-center">

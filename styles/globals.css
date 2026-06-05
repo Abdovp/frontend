@@ -588,8 +588,12 @@ h1, h2, h3, h4 {
     @apply flex items-center justify-between gap-3 py-2.5 border-b border-ink/[0.06] last:border-0;
   }
 
+  .ty-confirm-btn {
+    @apply mt-4 w-full flex items-center justify-center gap-2 rounded-xl py-3.5 text-sm font-bold text-white bg-emerald-700 shadow-soft transition-all duration-200 hover:bg-emerald-800 active:scale-[0.98] focus-visible:ring-2 focus-visible:ring-emerald-600 focus-visible:ring-offset-2;
+  }
+
   .ty-status-badge {
-    @apply mt-5 w-full flex items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 cursor-default select-none;
+    @apply mt-4 w-full flex items-center justify-center gap-2 rounded-xl py-3 text-sm font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 cursor-default select-none;
   }
 
   .ty-step-card {

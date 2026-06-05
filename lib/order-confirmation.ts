@@ -21,6 +21,8 @@ export interface OrderConfirmation {
     isUpsell?: boolean;
   }>;
   total: number;
+  /** Customer tapped "البيانات صحيحة" on thank-you page */
+  detailsConfirmed?: boolean;
 }
 
 export function saveOrderConfirmation(data: {
@@ -89,6 +91,19 @@ export function loadOrderConfirmation(): OrderConfirmation | null {
   } catch {
     return null;
   }
+}
+
+export function confirmOrderDetails(): OrderConfirmation | null {
+  const order = loadOrderConfirmation();
+  if (!order) return null;
+
+  const updated: OrderConfirmation = { ...order, detailsConfirmed: true };
+  try {
+    sessionStorage.setItem(ORDER_CONFIRMATION_KEY, JSON.stringify(updated));
+  } catch {
+    return order;
+  }
+  return updated;
 }
 
 export function clearOrderConfirmation(): void {
