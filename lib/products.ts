@@ -579,7 +579,7 @@ export const products: Record<ProductId, Product> = {
       'خفيفة وصغيرة باش تبقى ديما معاك',
     ],
     valueProps: [
-      { icon: 'airflow', title: 'شفط و نفخ', text: 'تنظيف عميق بجهاز واحد' },
+      { icon: 'vacuum', title: 'شفط و نفخ', text: 'تنظيف عميق بجهاز واحد' },
       { icon: 'check-circle', title: 'رؤوس متعددة', text: '6 رؤوس لكل زاوية ومكان' },
       { icon: 'spark', title: 'شاحن USB', text: 'كتشحن ف السيارة أو في أي مكان' },
       { icon: 'shield', title: 'قوي وخفيف', text: 'سهل الحمل والاستعمال اليومي' },

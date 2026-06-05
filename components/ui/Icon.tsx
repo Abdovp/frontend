@@ -30,7 +30,6 @@ export type IconName =
   | 'clock'
   | 'leaf'
   | 'vacuum'
-  | 'airflow'
   | 'users';
 
 interface IconProps extends SVGProps<SVGSVGElement> {
@@ -148,19 +147,12 @@ const paths: Record<IconName, ReactElement> = {
   ),
   vacuum: (
     <>
-      <path d="M3 12a6 6 0 0112 0" />
-      <path d="M9 12v5a2 2 0 004 0v-5" />
-      <path d="M15 10l5-5M18 7l2-2" />
-      <circle cx="9" cy="12" r="2" />
-    </>
-  ),
-  airflow: (
-    <>
-      <rect x="8.5" y="9.5" width="7" height="5" rx="1.5" />
-      <path d="M12 4.5v4M10.5 6l1.5-1.5L13.5 6" />
-      <path d="M9.5 6.5h5" />
-      <path d="M12 19.5v-4M10.5 18l1.5 1.5L13.5 18" />
-      <path d="M9.5 17.5h5" />
+      <path d="M3.5 12h5.5" />
+      <ellipse cx="3.5" cy="12" rx="1.5" ry="2" />
+      <rect x="9" y="8" width="10" height="8" rx="2" />
+      <path d="M12 16v4.5a1.5 1.5 0 003 0V16" />
+      <path d="M11.5 10.5h5" />
+      <path d="M11.5 13h3.5" />
     </>
   ),
   users: (
