@@ -38,6 +38,16 @@ export interface ProductSection {
   imageLabel: string;
 }
 
+export interface HowToUseStep {
+  title: string;
+  body: string;
+}
+
+export interface HowToUse {
+  title: string;
+  steps: HowToUseStep[];
+}
+
 export interface Product {
   id: ProductId;
   sku: string;
@@ -72,6 +82,7 @@ export interface Product {
   logic: ProductSection;
   proof: ProductSection;
   howItWorks: ProductSection;
+  howToUse: HowToUse;
   faqs: { q: string; a: string }[];
   reviews: {
     name: string;
@@ -197,6 +208,23 @@ export const products: Record<ProductId, Product> = {
     ],
     galleryLabels: ['الباك كامل', 'المروحة المزدوجة', 'المظلة الحرارية', 'التركيب', 'داخل الطوموبيل'],
     image: '/images/pack.webp',
+    howToUse: {
+      title: 'كيفاش تستعمل الباك',
+      steps: [
+        {
+          title: 'ركّب المظلة على الزجاج الأمامي',
+          body: 'افتح المظلة الحرارية وثبّتها على الزجاج من الداخل. كتعكس الشمس قبل ما تدخل للسيارة.',
+        },
+        {
+          title: 'وصّل المروحة لـ USB السيارة',
+          body: 'ركّب المروحة المزدوجة فوق التابلو أو على زجاج النافذة وشبّكها بـ USB. كتشتغل مباشرة.',
+        },
+        {
+          title: 'شغّل المروحة وركّب',
+          body: 'قبل ما تركب بـ 2-3 دقائق شغّل المروحة. توصل، تحس الفرق مباشرة — جو مريح بلا انتظار.',
+        },
+      ],
+    },
     pain: {
       eyebrow: 'المشكل',
       title: 'الطوموبيل كتولّي فرن — وكل مرة نفس الشي',
@@ -383,6 +411,23 @@ export const products: Record<ProductId, Product> = {
     ],
     galleryLabels: ['الحامل المغناطيسي', 'المغناطيس القوي', 'القاعدة الصلبة', 'مركب ف الطوموبيل', 'مع الهاتف'],
     image: '/images/magnetic-holder.webp',
+    howToUse: {
+      title: 'كيفاش تركّب الحامل',
+      steps: [
+        {
+          title: 'لصّق القاعدة على التابلو أو التهوية',
+          body: 'نظّف المكان مزيان وثبّت القاعدة. القاعدة تدوم سنين بلا ما تعيد التركيب.',
+        },
+        {
+          title: 'لصّق الصفيحة المعدنية على التلفون',
+          body: 'الصفيحة رقيقة وما تضرّش التلفون. تحطّها تحت الكفاية أو على ظهر التلفون مباشرة.',
+        },
+        {
+          title: 'قرّب التلفون للمغناطيس',
+          body: 'مجرّد ما تقرّب التلفون كيثبت لوحدو. نقرة وحدة باش تحيدو — ثبات تام وسهولة تامة.',
+        },
+      ],
+    },
     pain: {
       eyebrow: 'المشكل',
       title: 'التلفون كيطيح — والتركيز كيضيع',
@@ -565,6 +610,23 @@ export const products: Record<ProductId, Product> = {
     ],
     galleryLabels: ['المكنسة كاملة', '6 رؤوس', 'وضع الشفط', 'وضع النفخ', 'الشحن USB'],
     image: '/images/car-vacuum.webp',
+    howToUse: {
+      title: 'كيفاش تستعمل المكنسة',
+      steps: [
+        {
+          title: 'اختار الرأس المناسب',
+          body: 'رأس طويل للشقوق والزوايا، رأس عريض للمقاعد والسجادة، رأس ناعم للأسطح الحساسة. ركّبه وشغّل.',
+        },
+        {
+          title: 'اشفط أو انفخ حسب الحاجة',
+          body: 'وضع الشفط للتراب والفتات. وضع النفخ للتهوية والأماكن الضيقة اللي ما يدخلهاش الرأس.',
+        },
+        {
+          title: 'شحّن بـ USB وخزّن ف الطوموبيل',
+          body: 'من بعد ما تكمل، شحّن المكنسة ف منفذ USB ديال السيارة. دايماً جاهزة للاستعمال.',
+        },
+      ],
+    },
     pain: {
       eyebrow: 'المشكل',
       title: 'الزوايا والشقوق — ما توصلهاش بالخرقة',
