@@ -53,6 +53,21 @@ export default function ProductOffers({ product }: ProductOffersProps) {
 
   const firstOffer = useMemo(() => getFirstOffer(product), [product]);
 
+  const galleryImages = useMemo(
+    () =>
+      product.galleryImages?.length
+        ? product.galleryImages
+        : product.image
+          ? [product.image]
+          : [],
+    [product.galleryImages, product.image]
+  );
+  const [activeImage, setActiveImage] = useState(0);
+
+  useEffect(() => {
+    setActiveImage(0);
+  }, [product.id]);
+
   const selectOffer = (quantity: OfferQuantity) => {
     setSelectedOffer(product.id, quantity);
   };
@@ -102,9 +117,13 @@ export default function ProductOffers({ product }: ProductOffersProps) {
           {/* Gallery + trust — on top on mobile */}
           <div className="order-1 lg:order-2 lg:sticky lg:top-28">
             <ProductImage
-              src={product.image}
-              alt={product.nameAr}
-              fallbackLabel={product.galleryLabels[0]}
+              src={galleryImages[activeImage]}
+              alt={
+                product.galleryLabels[activeImage]
+                  ? `${product.nameAr} — ${product.galleryLabels[activeImage]}`
+                  : product.nameAr
+              }
+              fallbackLabel={product.galleryLabels[activeImage] ?? product.galleryLabels[0]}
               fallbackSublabel="صورة المنتج"
               aspect="square"
               fit="cover"
@@ -112,6 +131,33 @@ export default function ProductOffers({ product }: ProductOffersProps) {
               className="rounded-2xl shadow-card bg-white"
               priority
             />
+            {galleryImages.length > 1 ? (
+              <div className="grid grid-cols-2 gap-2 sm:gap-3 mt-3">
+                {galleryImages.map((src, index) => (
+                  <button
+                    key={src}
+                    type="button"
+                    onClick={() => setActiveImage(index)}
+                    aria-label={product.galleryLabels[index] ?? `صورة ${index + 1}`}
+                    aria-pressed={activeImage === index}
+                    className={`relative overflow-hidden rounded-xl aspect-square ring-2 transition-all ${
+                      activeImage === index
+                        ? 'ring-brand shadow-card'
+                        : 'ring-transparent opacity-80 hover:opacity-100'
+                    }`}
+                  >
+                    <ProductImage
+                      src={src}
+                      alt={product.galleryLabels[index] ?? product.nameAr}
+                      fallbackLabel={product.galleryLabels[index] ?? product.galleryLabels[0]}
+                      aspect="square"
+                      fit="cover"
+                      className="rounded-xl bg-white"
+                    />
+                  </button>
+                ))}
+              </div>
+            ) : null}
             <div className="grid grid-cols-3 gap-2 sm:gap-3 mt-5">
               {product.valueProps.slice(0, 3).map((v) => (
                 <div key={v.title} className="product-benefit-chip">

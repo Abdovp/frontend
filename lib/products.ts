@@ -76,6 +76,8 @@ export interface Product {
   guarantees: GuaranteeItem[];
   offers: ProductOffer[];
   galleryLabels: string[];
+  /** Public paths e.g. /images/pack.webp — when set, hero shows a selectable gallery */
+  galleryImages?: string[];
   /** Public path e.g. /images/pack.webp */
   image?: string;
   pain: ProductSection;
@@ -407,7 +409,8 @@ export const products: Record<ProductId, Product> = {
         perks: ['3 حوامل', 'توفير 91 درهم', 'توصيل مجاني', `ضمان ${WARRANTY_DAYS} يوم`],
       },
     ],
-    galleryLabels: ['الحامل المغناطيسي', 'المغناطيس القوي', 'القاعدة الصلبة', 'مركب ف الطوموبيل', 'مع الهاتف'],
+    galleryLabels: ['الحامل المغناطيسي', 'طرق التركيب', 'القاعدة الصلبة', 'مركب ف الطوموبيل', 'مع الهاتف'],
+    galleryImages: ['/images/magnetic-holder.webp', '/images/magnetic-holder-gallery-2.webp'],
     image: '/images/magnetic-holder.webp',
     howToUse: {
       title: 'كيفاش تركّب الحامل',
