@@ -39,7 +39,7 @@ export default function ProductPageLayout({ product }: { product: Product }) {
         <ProductFAQ product={product} />
         <ProductTrustBadges badges={product.trustBadges} />
       </main>
-      <Footer showTrustRow={false} />
+      <Footer />
       </div>
     </>
   );

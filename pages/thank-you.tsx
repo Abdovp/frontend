@@ -365,7 +365,7 @@ export default function ThankYou() {
       {/* ── WHITE TRUST BADGES STRIP ── */}
       <TrustBadgesStrip items={SHARED_GUARANTEES} />
 
-      <Footer showTrustRow={false} />
+      <Footer />
 
       {upsellProduct && (
         <UpsellPopup

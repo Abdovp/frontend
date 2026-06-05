@@ -97,7 +97,7 @@ export default function Header() {
           </nav>
         )}
       </header>
-      <StoreTrustRow variant="light" />
+      <StoreTrustRow />
     </div>
   );
 }
