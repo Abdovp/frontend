@@ -569,7 +569,7 @@ export const products: Record<ProductId, Product> = {
     scarcityText: 'بقات غير 12 الحبة في المخزون',
     stockLeft: 6,
     deliveryDays: 'الخميس أو الجمعة',
-    checkoutHeadline: 'طوموبيلك نظيفة ف 10 دقائق',
+    checkoutHeadline: 'مكنسة كهربائية لتنظيف سهل و سريع',
     checkoutDescription:
       'شفط + نفخ + 6 رؤوس لكل زاوية. خفيفة، شحن USB، تخزّنها ف الطوموبيل دايماً.',
     highlights: [
