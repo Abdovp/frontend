@@ -360,7 +360,7 @@ export const products: Record<ProductId, Product> = {
     reviewCount: 640,
     unit: 'حامل',
     soldText: 'تباع +1,800 حامل هاد الشهر',
-    scarcityText: 'بقاو غير 12 وحدة بالسعر الحالي',
+    scarcityText: 'بقات غير 12 الحبة في المخزون',
     stockLeft: 12,
     deliveryDays: 'الخميس أو الجمعة',
     checkoutHeadline: 'تلفونك ثابت — عينيك على الطريق',
