@@ -227,6 +227,9 @@ export default function ThankYou() {
                 <p className="font-heading font-extrabold text-ink text-lg sm:text-xl leading-snug text-balance">
                   {callInfo.message}
                 </p>
+                <p className="mt-2.5 text-sm text-ink/60 leading-relaxed">
+                  الرقم غادي يبان <span className="font-bold text-ink">مجهول</span> — جاوب عليه بلا تردد.
+                </p>
               </div>
               <span className="flex shrink-0 items-center justify-center w-12 h-12 rounded-full bg-emerald-700 text-white shadow-soft">
                 <Icon name="phone" size={22} />
