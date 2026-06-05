@@ -47,6 +47,9 @@ export interface HowToUseStep {
 
 export interface HowToUse {
   title: string;
+  /** Optional photo above steps e.g. /images/name.webp */
+  image?: string;
+  imageLabel?: string;
   steps: HowToUseStep[];
 }
 
@@ -211,6 +214,8 @@ export const products: Record<ProductId, Product> = {
     image: '/images/pack.webp',
     howToUse: {
       title: 'كيفاش تستعمل الباك',
+      image: '/images/pack.webp',
+      imageLabel: 'طريقة استعمال الباك',
       steps: [
         {
           title: 'ركّب المظلة على الزجاج الأمامي',
@@ -416,6 +421,8 @@ export const products: Record<ProductId, Product> = {
     image: '/images/magnetic-holder.webp',
     howToUse: {
       title: 'كيفاش تركّب الحامل',
+      image: '/images/magnetic-holder-gallery-2.webp',
+      imageLabel: 'خطوات تركيب الحامل',
       steps: [
         {
           title: 'لصّق القاعدة على التابلو أو المرآة',
@@ -617,6 +624,8 @@ export const products: Record<ProductId, Product> = {
     image: '/images/car-vacuum.webp',
     howToUse: {
       title: 'كيفاش تستعمل المكنسة',
+      image: '/images/car-vacuum.webp',
+      imageLabel: 'طريقة استعمال المكنسة',
       steps: [
         {
           title: 'اختار الرأس المناسب',

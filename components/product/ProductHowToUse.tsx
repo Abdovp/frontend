@@ -1,4 +1,5 @@
 import Icon from '../ui/Icon';
+import ProductImage from '../ui/ProductImage';
 import type { Product } from '../../lib/products';
 
 export default function ProductHowToUse({ product }: { product: Product }) {
@@ -20,6 +21,21 @@ export default function ProductHowToUse({ product }: { product: Product }) {
             {howToUse.title}
           </h2>
         </div>
+
+        {howToUse.image || howToUse.imageLabel ? (
+          <div className="mb-10 max-w-2xl mx-auto">
+            <ProductImage
+              src={howToUse.image}
+              alt={howToUse.imageLabel ?? howToUse.title}
+              fallbackLabel={howToUse.imageLabel ?? 'طريقة الاستعمال'}
+              fallbackSublabel="الصورة قريباً"
+              aspect="square"
+              fit="cover"
+              objectPosition="center"
+              className="rounded-2xl shadow-card bg-white"
+            />
+          </div>
+        ) : null}
 
         {/* Steps */}
         <ol className="flex flex-col md:flex-row gap-6 relative">
