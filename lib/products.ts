@@ -421,8 +421,8 @@ export const products: Record<ProductId, Product> = {
     image: '/images/magnetic-holder.webp',
     howToUse: {
       title: 'كيفاش تركّب الحامل',
-      image: '/images/magnetic-holder-gallery-2.webp',
-      imageLabel: 'خطوات تركيب الحامل',
+      image: '/images/holder-how.webp',
+      imageLabel: 'قرّب الهاتف — كيثبت لوحدو',
       steps: [
         {
           title: 'لصّق القاعدة على التابلو أو المرآة',
