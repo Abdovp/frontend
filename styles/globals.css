@@ -495,7 +495,7 @@ h1, h2, h3, h4 {
 
   /* ---------- Sticky CTA ---------- */
   .sticky-cta {
-    @apply fixed bottom-0 inset-x-0 z-40 bg-white border-t border-ink/10 shadow-lift;
+    @apply fixed bottom-0 inset-x-0 z-40 bg-cream border-t border-ink/[0.08] shadow-lift;
     padding-bottom: calc(0.5rem + env(safe-area-inset-bottom, 0px));
     transform: translateY(100%);
     opacity: 0;
