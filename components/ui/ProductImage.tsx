@@ -56,6 +56,8 @@ export default function ProductImage({
       ? 'object-contain object-center p-4 sm:p-5'
       : `object-cover ${objectPosClass}`;
 
+  const isGif = src.toLowerCase().endsWith('.gif');
+
   return (
     <div
       className={`relative overflow-hidden ${aspectClass[aspect]} ${className}`.trim()}
@@ -65,6 +67,7 @@ export default function ProductImage({
         alt={alt}
         fill
         priority={priority}
+        unoptimized={isGif}
         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
         className={fitClass}
       />

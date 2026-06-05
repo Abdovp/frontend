@@ -442,6 +442,7 @@ export const products: Record<ProductId, Product> = {
         'حاملات رخيصة كتأثر بسخونية الصيف',
       ],
       imageLabel: 'التلفون يطيح ف السيارة',
+      image: '/images/holder-pain.gif',
     },
     logic: {
       eyebrow: 'الحل',
