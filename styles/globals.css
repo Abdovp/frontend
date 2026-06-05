@@ -510,7 +510,7 @@ h1, h2, h3, h4 {
   }
 
   .sticky-cta .container-wide {
-    @apply py-3 md:py-4;
+    @apply py-3 md:py-5;
   }
 
   /* ---------- Cart ---------- */

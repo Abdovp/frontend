@@ -298,12 +298,12 @@ export default function ProductOffers({ product }: ProductOffersProps) {
         className={`sticky-cta ${showSticky ? 'sticky-cta--visible' : ''}`}
         aria-hidden={!showSticky}
       >
-        <div className="container-wide flex justify-center">
-          <div className="w-full max-w-3xl flex items-center gap-3 md:gap-4">
+        <div className="container-wide">
+          <div className="mx-auto w-full max-w-3xl md:max-w-5xl flex items-center gap-3 md:gap-10">
             {selectedOffer ? (
-              <div className="leading-tight shrink-0">
-                <p className="font-heading font-bold text-ink text-sm sm:text-base">{selectedOffer.label}</p>
-              </div>
+              <p className="hidden md:block font-heading font-bold text-ink text-xl shrink-0">
+                {selectedOffer.label}
+              </p>
             ) : null}
             <button
               type="button"
@@ -314,9 +314,9 @@ export default function ProductOffers({ product }: ProductOffersProps) {
                 }
                 handleStickyClick();
               }}
-              className="checkout-cta checkout-cta--pulse flex-1 md:flex-none md:min-w-[18rem] md:px-12 py-3.5 text-base md:py-4"
+              className="checkout-cta checkout-cta--pulse w-full md:flex-1 md:max-w-xl md:ml-auto py-3.5 text-base md:py-5 md:px-14 md:text-xl"
             >
-              <Icon name={stickyShowsCart ? 'cart' : 'arrow-up'} size={18} />
+              <Icon name={stickyShowsCart ? 'cart' : 'arrow-up'} size={18} className="md:w-5 md:h-5" />
               {stickyShowsCart
                 ? 'شوف السلة'
                 : selectedOffer
