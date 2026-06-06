@@ -174,7 +174,7 @@ export const products: Record<ProductId, Product> = {
     stockLeft: 9,
     deliveryDays: 'الجمعة أو السبت',
     checkoutHeadline: 'طوموبيلتك كتسخن فالصيف؟ الباك هو الحل!',
-    checkoutDescription: 'اكتشف "باك الانتعاش المزدوج" لسيارة باردة ومحمية من أول دقيقة',
+    checkoutDescription: 'اكتشف "باك الانتعاش المزدوج" لسيارة باردة ومحمية ضد حرارة الصيف',
     highlights: [
       'حرارة السيارة كتهبط بشكل ملحوظ',
       'تركيب سهل و سريع',
