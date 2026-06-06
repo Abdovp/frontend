@@ -120,6 +120,10 @@ export default function ThankYou() {
   }, []);
 
   useEffect(() => {
+    document.body.style.overflow = '';
+  }, []);
+
+  useEffect(() => {
     const saved = loadOrderConfirmation();
     setOrder(saved);
     setDetailsConfirmed(saved?.detailsConfirmed ?? false);
@@ -197,7 +201,7 @@ export default function ThankYou() {
         />
       </Head>
 
-      <Header showAnnouncement={false} />
+      <Header showAnnouncement={false} sticky={false} />
 
       <main className="ty-page" dir="rtl">
         <div className="ty-wrap">
@@ -207,9 +211,11 @@ export default function ThankYou() {
             <span className="ty-hero-icon">
               <Icon name="check" size={30} />
             </span>
-            <p className="text-ink/55 text-base mb-1">
-              شكراً <span className="font-bold text-ink">{firstName}</span>
-            </p>
+            {customerName ? (
+              <p className="text-ink/55 text-base mb-1">
+                شكراً <span className="font-bold text-ink">{customerName}</span>
+              </p>
+            ) : null}
             <h1 className="font-heading text-2xl sm:text-[1.75rem] font-extrabold text-ink leading-snug text-balance">
               طلبك محجوز – في انتظار تأكيدك
             </h1>

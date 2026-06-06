@@ -188,6 +188,10 @@ h1, h2, h3, h4 {
     @apply sticky top-0 inset-x-0 z-50 w-full bg-white/90 backdrop-blur-md border-b border-ink/[0.07];
   }
 
+  .site-header--static {
+    @apply static;
+  }
+
   .store-trust-band__grid {
     @apply grid grid-cols-2 md:grid-cols-4;
   }
@@ -513,8 +517,12 @@ h1, h2, h3, h4 {
     @apply py-2 md:py-2;
   }
 
-  .sticky-cta .checkout-cta {
-    @apply rounded-full py-3 px-4 text-sm font-extrabold gap-2 shadow-brand md:py-3.5 md:px-6 md:text-base;
+  .sticky-cta__button--mobile {
+    @apply py-3 px-7 text-base gap-2;
+  }
+
+  .sticky-cta__button--desktop {
+    @apply rounded-full py-3.5 px-6 text-base font-extrabold gap-2 shadow-brand;
   }
 
   /* ---------- Cart ---------- */
