@@ -34,7 +34,7 @@ export default function ProductPageLayout({ product }: { product: Product }) {
         <meta property="og:description" content={product.metaDescription} />
       </Head>
       <div className="product-page">
-        <Header showAnnouncement={false} sticky={false} />
+        <Header showAnnouncement={false} />
         <AnnouncementBar variant="tick" intervalMs={1500} />
         <main>
           {/* 1 — Hero: image + headline + offer cards + CTA */}
