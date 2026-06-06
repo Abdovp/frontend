@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
+import Header from '../components/Header';
 import Footer from '../components/Footer';
 import UpsellPopup from '../components/UpsellPopup';
 import CartProductThumb from '../components/ui/CartProductThumb';
@@ -153,8 +154,12 @@ export default function ThankYou() {
     });
   }, [sendOrderToSheet]);
 
-  const firstName = order?.firstName ?? 'صديقنا';
-  const fullName = order?.fullName ?? firstName;
+  const customerName =
+    order?.firstName?.trim() ||
+    order?.fullName?.trim().split(/\s+/)[0] ||
+    order?.fullName?.trim() ||
+    '';
+  const fullName = order?.fullName?.trim() || customerName;
   const orderedAt = order?.orderedAt ? new Date(order.orderedAt) : new Date();
   const callInfo = getCallScheduleInfo(orderedAt);
 
@@ -191,6 +196,8 @@ export default function ThankYou() {
           content="طلبك محجوز في انتظار تأكيدك. غادي نتصلو بيك باش نأكدو الطلب وناخدو العنوان."
         />
       </Head>
+
+      <Header showAnnouncement={false} />
 
       <main className="ty-page" dir="rtl">
         <div className="ty-wrap">
