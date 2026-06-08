@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import { useState } from 'react';
 import AnnouncementBar from './AnnouncementBar';
 import CartButton from './CartButton';
@@ -10,9 +11,14 @@ import { mainNavLinks } from '../lib/navigation';
 function Logo({ onClick }: { onClick?: () => void }) {
   return (
     <Link href="/" className="site-header__logo" onClick={onClick}>
-      <span className="flex items-center justify-center w-10 h-10 sm:w-11 sm:h-11 rounded-2xl bg-brand text-white shrink-0 shadow-brand">
-        <Icon name="spark" size={20} className="text-accent" />
-      </span>
+      <Image
+        src="/apple-touch-icon.png"
+        alt=""
+        width={44}
+        height={44}
+        className="w-10 h-10 sm:w-11 sm:h-11 rounded-2xl shrink-0 shadow-brand"
+        priority
+      />
       <span className="min-w-0 leading-none">
         <span className="block font-heading font-extrabold text-lg sm:text-xl text-brand tracking-tight">
           {STORE.nameEn}

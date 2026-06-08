@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import Icon from './ui/Icon';
 import { CollapsibleMenuDark } from './ui/CollapsibleMenu';
 import { STORE, STORE_TRUST_BADGES } from '../lib/products';
@@ -59,9 +60,13 @@ export default function Footer({ showTrustCards = true }: { showTrustCards?: boo
         <div className="hidden md:grid md:grid-cols-5 gap-10 py-12">
           <div className="md:col-span-1">
             <div className="flex items-center gap-2.5 mb-4">
-              <span className="flex items-center justify-center w-10 h-10 rounded-2xl bg-brand text-white">
-                <Icon name="spark" size={20} className="text-accent" />
-              </span>
+              <Image
+                src="/apple-touch-icon.png"
+                alt=""
+                width={40}
+                height={40}
+                className="w-10 h-10 rounded-2xl shrink-0"
+              />
               <span className="font-heading font-extrabold text-lg">{STORE.nameEn}</span>
             </div>
             <p className="text-white/55 text-sm leading-relaxed">
