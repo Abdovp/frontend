@@ -8,8 +8,33 @@ const nextConfig = {
   reactStrictMode: true,
   output: 'standalone',
   images: {
-    domains: ['boyashop.store'],
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'boyashop.store',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'www.boyashop.store',
+        pathname: '/**',
+      },
+    ],
     formats: ['image/webp'],
+  },
+  async redirects() {
+    return [
+      {
+        source: '/images/pack.png',
+        destination: '/images/pack.webp',
+        permanent: true,
+      },
+      {
+        source: '/images/magnetic-holder.png',
+        destination: '/images/magnetic-holder.webp',
+        permanent: true,
+      },
+    ];
   },
   async rewrites() {
     return [

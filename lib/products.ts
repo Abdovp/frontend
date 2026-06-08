@@ -649,7 +649,7 @@ export const products: Record<ProductId, Product> = {
       },
     ],
     galleryLabels: ['المكنسة كاملة', '6 رؤوس', 'وضع الشفط', 'وضع النفخ', 'الشحن USB'],
-    image: '/images/car-vacuum.png',
+    image: '/images/car-vacuum.webp',
     howToUse: {
       title: 'كيفاش تستعمل المكنسة',
       image: '/images/car-vacuum-how.webp',
@@ -680,7 +680,7 @@ export const products: Record<ProductId, Product> = {
         'كتعتذر على الغبرة كل ما ركب معاك شي واحد',
       ],
       imageLabel: 'داخل السيارة قبل التنظيف',
-      image: '/images/car-vacuum-pain.png',
+      image: '/images/car-vacuum-pain.webp',
     },
     logic: {
       eyebrow: 'الحل',

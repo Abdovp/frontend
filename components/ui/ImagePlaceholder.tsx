@@ -3,7 +3,7 @@ import Icon from './Icon';
 interface ImagePlaceholderProps {
   label: string;
   sublabel?: string;
-  aspect?: 'square' | 'hero' | 'wide' | 'portrait';
+  aspect?: 'square' | 'hero' | 'wide' | 'portrait' | 'phone';
   className?: string;
 }
 
@@ -11,6 +11,7 @@ const aspectClass = {
   square: 'aspect-square',
   hero: 'aspect-[4/5] md:aspect-[4/3] lg:aspect-[16/11]',
   portrait: 'aspect-[4/5]',
+  phone: 'aspect-[9/16]',
   wide: 'aspect-[21/9]',
 };
 
