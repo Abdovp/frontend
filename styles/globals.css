@@ -22,7 +22,7 @@ html {
 
 body {
   text-align: right;
-  @apply bg-white text-ink antialiased;
+  @apply bg-cream text-ink antialiased;
   font-family: 'Tajawal', 'IBM Plex Sans Arabic', 'Tahoma', system-ui, sans-serif;
   font-feature-settings: 'kern';
   -webkit-font-smoothing: antialiased;
