@@ -648,10 +648,10 @@ export const products: Record<ProductId, Product> = {
       },
     ],
     galleryLabels: ['المكنسة كاملة', '6 رؤوس', 'وضع الشفط', 'وضع النفخ', 'الشحن USB'],
-    image: '/images/car-vacuum.webp',
+    image: '/images/car-vacuum.png',
     howToUse: {
       title: 'كيفاش تستعمل المكنسة',
-      image: '/images/car-vacuum.webp',
+      image: '/images/car-vacuum.png',
       imageLabel: 'طريقة استعمال المكنسة',
       steps: [
         {
