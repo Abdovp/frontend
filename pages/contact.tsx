@@ -36,7 +36,7 @@ export default function Contact() {
               <span className="w-6 h-px bg-current opacity-60" /> تواصل معنا
             </span>
             <h1 className="font-heading text-4xl md:text-5xl font-extrabold text-ink">واجدين نعاونوك</h1>
-            <p className="text-ink/60 mt-4 text-lg">أي سؤال على منتج ولا طلب؟ الفريق ديالنا قريب منك.</p>
+            <p className="text-ink mt-4 text-lg">أي سؤال على منتج ولا طلب؟ الفريق ديالنا قريب منك.</p>
           </div>
 
           <div className="grid md:grid-cols-2 gap-8">
@@ -61,7 +61,7 @@ export default function Contact() {
                     <Icon name="check-circle" size={30} />
                   </span>
                   <h2 className="font-heading text-2xl font-extrabold text-ink mb-2">توصلنا برسالتك!</h2>
-                  <p className="text-ink/60">غادي نردو عليك ف أقرب وقت. شكراً على تواصلك.</p>
+                  <p className="text-ink">غادي نردو عليك ف أقرب وقت. شكراً على تواصلك.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-4">

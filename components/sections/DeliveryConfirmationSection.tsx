@@ -24,7 +24,7 @@ export default function DeliveryConfirmationSection() {
               </span>
               <div>
                 <p className="font-heading font-bold text-ink">{s.title}</p>
-                <p className="text-sm text-ink/60 mt-1 leading-relaxed">{s.desc}</p>
+                <p className="text-sm text-ink mt-1 leading-relaxed">{s.desc}</p>
               </div>
             </div>
           ))}

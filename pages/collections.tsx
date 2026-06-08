@@ -61,7 +61,7 @@ export default function Collections() {
                     <h2 className="font-heading text-xl font-extrabold text-ink mb-2 group-hover:text-brand transition">
                       {p.nameAr}
                     </h2>
-                    <p className="text-ink/60 text-sm mb-3 leading-relaxed line-clamp-2">{p.tagline}</p>
+                    <p className="text-ink text-sm mb-3 leading-relaxed line-clamp-2">{p.tagline}</p>
                     <div className="flex items-center gap-1.5 mb-4 text-sm">
                       <Stars value={p.rating} size={14} />
                       <span className="text-ink/45">({p.reviewCount})</span>

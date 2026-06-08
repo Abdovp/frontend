@@ -30,7 +30,7 @@ export default function AuthoritySection() {
                 <Icon name={b.icon} size={24} className="text-accent" />
               </span>
               <h3 className="font-heading font-bold text-lg text-ink mb-2">{b.title}</h3>
-              <p className="text-ink/60 leading-relaxed">{b.desc}</p>
+              <p className="text-ink leading-relaxed">{b.desc}</p>
             </div>
           ))}
         </div>

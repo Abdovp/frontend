@@ -20,7 +20,7 @@ export default function FeaturedProducts() {
           <h2 className="font-heading text-3xl md:text-[2.6rem] font-extrabold text-ink leading-tight">
             منتجات كيختاروها السائقين كل يوم
           </h2>
-          <p className="text-ink/60 mt-4 text-lg">
+          <p className="text-ink mt-4 text-lg">
             مجموعة مختارة بعناية — مفحوصة، مضمونة، وجاهزة للتوصيل بالدفع عند الاستلام.
           </p>
         </div>

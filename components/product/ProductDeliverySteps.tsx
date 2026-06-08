@@ -33,7 +33,7 @@ export default function ProductDeliverySteps() {
           <h2 id="delivery-steps-heading" className="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold text-ink mb-3">
             3 خطوات وتوصلك السلعة لبابك
           </h2>
-          <p className="text-ink/60 max-w-lg mx-auto">
+          <p className="text-ink max-w-lg mx-auto">
             بلا دفع مسبق، بلا تعقيد — كنوصلو لكل مدن المغرب
           </p>
         </div>
@@ -56,7 +56,7 @@ export default function ProductDeliverySteps() {
                 </span>
               </div>
               <h3 className="font-heading font-bold text-ink text-lg mb-2">{step.title}</h3>
-              <p className="text-ink/60 leading-relaxed text-sm">{step.body}</p>
+              <p className="text-ink leading-relaxed text-sm">{step.body}</p>
             </div>
           ))}
         </div>

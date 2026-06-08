@@ -48,7 +48,7 @@ export default function TestimonialsSection() {
           {testimonials.map((t) => (
             <div key={t.name} className="card-elevated p-6 flex flex-col">
               <Icon name="quote" size={28} className="text-accent mb-3" />
-              <p className="text-ink/75 leading-relaxed mb-5 flex-1">{t.text}</p>
+              <p className="text-ink leading-relaxed mb-5 flex-1">{t.text}</p>
               <div className="flex items-center justify-between border-t border-ink/[0.07] pt-4">
                 <div>
                   <p className="font-bold text-ink">{t.name}</p>

@@ -236,7 +236,7 @@ h1, h2, h3, h4 {
   }
 
   .nav-link {
-    @apply relative text-sm font-semibold text-ink/70 hover:text-brand transition-colors whitespace-nowrap py-2;
+    @apply relative text-sm font-semibold text-ink hover:text-brand transition-colors whitespace-nowrap py-2;
   }
 
   .nav-link::after {

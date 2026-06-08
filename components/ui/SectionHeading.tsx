@@ -15,7 +15,7 @@ export default function SectionHeading({
 }: SectionHeadingProps) {
   const alignClass = align === 'center' ? 'text-center mx-auto items-center' : 'text-start items-start';
   const titleColor = light ? 'text-white' : 'text-ink';
-  const subColor = light ? 'text-white/70' : 'text-ink/60';
+  const subColor = light ? 'text-white/70' : 'text-ink';
 
   return (
     <div className={`flex flex-col max-w-2xl mb-10 ${alignClass}`}>

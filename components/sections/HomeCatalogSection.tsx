@@ -20,7 +20,7 @@ export default function HomeCatalogSection() {
           <h2 className="font-heading text-3xl md:text-[2.6rem] font-extrabold text-ink leading-tight">
             متجر كامل لعالم السيارات — كيكبر معاك
           </h2>
-          <p className="text-ink/60 mt-4 text-lg">
+          <p className="text-ink mt-4 text-lg">
             ماشي محدود بمنتج ولا جوج. كنبنيو كتالوج مختار بعناية، من الحماية والتبريد حتى الراحة ف الطريق.
           </p>
         </div>
@@ -44,7 +44,7 @@ export default function HomeCatalogSection() {
                   <Icon name={c.icon} size={24} className={available ? 'text-accent' : ''} />
                 </span>
                 <h3 className="font-heading font-bold text-ink mb-1">{c.title}</h3>
-                <p className="text-sm text-ink/55 mb-4">{c.desc}</p>
+                <p className="text-sm text-ink mb-4">{c.desc}</p>
                 <span
                   className={`badge-pill ${
                     available ? 'bg-brand/[0.07] text-brand' : 'bg-ink/[0.06] text-ink/45'

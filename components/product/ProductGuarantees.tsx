@@ -48,7 +48,7 @@ export default function ProductGuarantees() {
           <h2 id="guarantees-heading" className="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold text-ink mb-3">
             اطلب بكل ثقة — محمي من كل الجهات
           </h2>
-          <p className="text-ink/60 max-w-lg mx-auto">
+          <p className="text-ink max-w-lg mx-auto">
             بويا شوب بنا ثقة آلاف الزبناء المغاربة على هاد الضمانات
           </p>
         </div>
@@ -61,7 +61,7 @@ export default function ProductGuarantees() {
               </span>
               <div>
                 <h3 className={`font-heading font-bold text-base mb-1.5 ${g.color}`}>{g.title}</h3>
-                <p className="text-ink/70 text-sm leading-relaxed">{g.body}</p>
+                <p className="text-ink text-sm leading-relaxed">{g.body}</p>
               </div>
             </div>
           ))}

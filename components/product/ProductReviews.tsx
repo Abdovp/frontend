@@ -67,7 +67,7 @@ export default function ProductReviews({ product }: { product: Product }) {
                 </div>
                 <Stars value={r.rating} size={13} />
               </div>
-              <p className="text-ink/75 leading-relaxed text-sm flex-1">{r.text}</p>
+              <p className="text-ink leading-relaxed text-sm flex-1">{r.text}</p>
               <p className="flex items-center gap-1.5 text-xs text-emerald-700 font-bold mt-4 pt-4 border-t border-ink/[0.06]">
                 <Icon name="check-circle" size={14} />
                 شراء موثّق ✓

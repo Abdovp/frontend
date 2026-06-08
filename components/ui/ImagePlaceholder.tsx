@@ -31,7 +31,7 @@ export default function ImagePlaceholder({
         <span className="mx-auto mb-3 flex items-center justify-center w-14 h-14 rounded-2xl bg-brand/[0.07] text-brand">
           <Icon name="spark" size={26} className="text-accent" />
         </span>
-        <p className="font-heading font-bold text-ink/75">{label}</p>
+        <p className="font-heading font-bold text-ink">{label}</p>
         <p className="text-sm text-ink/40 mt-1">{sublabel}</p>
       </div>
     </div>

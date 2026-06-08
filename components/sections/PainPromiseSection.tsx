@@ -20,7 +20,7 @@ export default function PainPromiseSection() {
         />
         <ul className="space-y-3 mb-8">
           {problems.map((p) => (
-            <li key={p} className="flex items-center gap-3 text-ink/75">
+            <li key={p} className="flex items-center gap-3 text-ink">
               <span className="flex items-center justify-center w-6 h-6 rounded-full bg-red-50 text-red-500 shrink-0">
                 <Icon name="close" size={14} />
               </span>

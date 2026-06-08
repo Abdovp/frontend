@@ -53,13 +53,13 @@ export default function About() {
         <section className="section-padding bg-white">
           <div className="container-wide max-w-3xl">
             <h2 className="font-heading text-3xl font-extrabold text-ink mb-4">رسالتنا</h2>
-            <p className="text-ink/65 text-lg leading-relaxed mb-5">
+            <p className="text-ink text-lg leading-relaxed mb-5">
               كنّا نشوفو السائقين كيعانيو من نفس المشاكل، والحلول إما غالية بزاف ولا مقلدة. قررنا
               نغيّرو هاد الواقع: كل سائق مغربي يستاهل منتجات أصلية، أسعار شفافة، وخدمة كتحترمو.
             </p>
             <ul className="space-y-3">
               {['منتجات أصلية وموثوقة', 'أسعار عادلة وواضحة', 'دعم مغربي بالدارجة', `ضمان ${WARRANTY_DAYS} يوم براحة البال`].map((t) => (
-                <li key={t} className="flex items-center gap-3 text-ink/80">
+                <li key={t} className="flex items-center gap-3 text-ink">
                   <span className="flex items-center justify-center w-6 h-6 rounded-full bg-brand/[0.08] text-brand shrink-0">
                     <Icon name="check" size={14} />
                   </span>
@@ -80,7 +80,7 @@ export default function About() {
                     <Icon name={v.icon} size={24} className="text-accent" />
                   </span>
                   <h3 className="font-heading font-bold text-lg text-ink mb-2">{v.title}</h3>
-                  <p className="text-ink/60 leading-relaxed text-sm">{v.text}</p>
+                  <p className="text-ink leading-relaxed text-sm">{v.text}</p>
                 </div>
               ))}
             </div>

@@ -185,7 +185,7 @@ export default function ProductOffers({ product }: ProductOffersProps) {
               </span>
             </div>
 
-            <p className="text-ink/80 text-base md:text-lg leading-relaxed mb-5 font-medium">
+            <p className="text-ink text-base md:text-lg leading-relaxed mb-5 font-medium">
               {product.checkoutDescription}
             </p>
 

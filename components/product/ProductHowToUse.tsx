@@ -42,7 +42,7 @@ function HowToUseSteps({
           </span>
           <div>
             <h3 className="font-heading font-bold text-ink text-lg mb-1.5">{step.title}</h3>
-            <p className="text-ink/65 leading-relaxed text-sm">{step.body}</p>
+            <p className="text-ink leading-relaxed text-sm">{step.body}</p>
           </div>
         </li>
       ))}

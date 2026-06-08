@@ -367,7 +367,7 @@ export default function ThankYou() {
                   <span className="ty-timeline-num">{i + 1}</span>
                   <div className="ty-timeline-body">
                     <h3 className="font-heading font-bold text-ink mb-1">{step.title}</h3>
-                    <p className="text-sm text-ink/65 leading-relaxed">{step.desc}</p>
+                    <p className="text-sm text-ink leading-relaxed">{step.desc}</p>
                   </div>
                 </div>
               ))}
@@ -390,7 +390,7 @@ export default function ThankYou() {
                       </span>
                       <Stars value={r.rating} size={13} />
                     </div>
-                    <p className="text-sm text-ink/70 leading-relaxed">{r.text}</p>
+                    <p className="text-sm text-ink leading-relaxed">{r.text}</p>
                     <p className="flex items-center gap-1 mt-2.5 text-xs text-emerald-700 font-semibold">
                       <Icon name="check-circle" size={13} />
                       شراء موثّق
@@ -433,7 +433,7 @@ export default function ThankYou() {
                       }`}
                     >
                       <div className="overflow-hidden">
-                        <p className="px-5 pb-4 text-sm text-ink/70 leading-relaxed">{faq.a}</p>
+                        <p className="px-5 pb-4 text-sm text-ink leading-relaxed">{faq.a}</p>
                       </div>
                     </div>
                   </div>

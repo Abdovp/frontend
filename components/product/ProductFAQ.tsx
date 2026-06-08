@@ -56,7 +56,7 @@ export default function ProductFAQ({ product }: { product: Product }) {
                         }`}
                       >
                         <div className="overflow-hidden">
-                          <p className="px-5 sm:px-6 pb-5 text-ink/75 leading-relaxed font-medium">{faq.a}</p>
+                          <p className="px-5 sm:px-6 pb-5 text-ink leading-relaxed font-medium">{faq.a}</p>
                         </div>
                       </div>
                     </div>

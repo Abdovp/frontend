@@ -42,7 +42,7 @@ export default function PolicyPage() {
               {policy.sections.map((section) => (
                 <div key={section.heading}>
                   <h2 className="font-heading text-xl font-extrabold text-ink mb-3">{section.heading}</h2>
-                  <p className="text-ink/65 leading-relaxed">{section.body}</p>
+                  <p className="text-ink leading-relaxed">{section.body}</p>
                 </div>
               ))}
             </div>
