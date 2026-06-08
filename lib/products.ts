@@ -680,6 +680,7 @@ export const products: Record<ProductId, Product> = {
         'كتعتذر على الغبرة كل ما ركب معاك شي واحد',
       ],
       imageLabel: 'داخل السيارة قبل التنظيف',
+      image: '/images/car-vacuum-pain.png',
     },
     logic: {
       eyebrow: 'الحل',
