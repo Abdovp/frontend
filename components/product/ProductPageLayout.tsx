@@ -51,7 +51,7 @@ export default function ProductPageLayout({ product }: { product: Product }) {
           {/* 4 — How to use: step-by-step guide */}
           <ProductHowToUse product={product} />
 
-          {/* 5 — Delivery process: طلب → تأكيد → توصيل */}
+          {/* 5 — Delivery process: طلب → upsell → تأكيد → توصيل */}
           <ProductDeliverySteps />
 
           {/* 7 — Reviews: 6 verified Moroccan customers */}

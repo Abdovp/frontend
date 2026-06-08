@@ -5,16 +5,22 @@ const steps = [
     number: '01',
     icon: 'cart' as const,
     title: 'اختار المنتج وعمّر بيانتك',
-    body: 'اختار العرض المناسب، دخل اسمك ورقم هاتفك',
+    body: 'طلب ف دقيقة — اختار العرض المناسب، دخل اسمك ورقم هاتفك',
   },
   {
     number: '02',
+    icon: 'spark' as const,
+    title: 'يمكن بغيت شي منتج آخر؟',
+    body: 'من بعد الطلب، كنعرضو عليك عرض خاص على منتج ثاني — اختياري.',
+  },
+  {
+    number: '03',
     icon: 'phone' as const,
     title: 'كنتصلو بيك باش نأكدو',
     body: 'فريقنا غيتصل بيك ف أسرع وقت باش يتأكد معاك الطلب ويعطيك موعد التوصيل.',
   },
   {
-    number: '03',
+    number: '04',
     icon: 'truck' as const,
     title: 'يوصلك لبابك وتخلّص عند الاستلام',
     body: 'ليفرور كيوصلك ف 24 إلى 48 ساعة. جرب المنتج بيدك، وما كتخلّص حتى توصلك السلعة.',
@@ -31,17 +37,17 @@ export default function ProductDeliverySteps() {
             كيفاش كيخدم
           </p>
           <h2 id="delivery-steps-heading" className="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold text-ink mb-3">
-            3 خطوات وتوصلك السلعة لبابك
+            4 خطوات وتوصلك السلعة لبابك
           </h2>
           <p className="text-ink/60 max-w-lg mx-auto">
             بلا دفع مسبق، بلا تعقيد — كنوصلو لكل مدن المغرب
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 md:gap-8 relative">
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 relative">
           {/* Connecting line on desktop */}
           <div
-            className="hidden md:block absolute top-10 right-[calc(33.33%+1rem)] left-[calc(33.33%+1rem)] h-px border-t-2 border-dashed border-brand/25"
+            className="hidden lg:block absolute top-10 right-[calc(25%+0.75rem)] left-[calc(25%+0.75rem)] h-px border-t-2 border-dashed border-brand/25"
             aria-hidden="true"
           />
 
