@@ -42,6 +42,7 @@ export type AdminMetrics = {
   cancelled_orders: number;
   confirmation_rate: number;
   delivery_rate: number;
+  cancellation_rate: number;
   funnel: FunnelStep[];
   daily: DailyMetric[];
   top_products: ProductMetric[];

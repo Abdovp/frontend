@@ -85,7 +85,7 @@ export default function AdminDashboardPage() {
               <MetricCard label="View Product" value={metrics.view_content.toLocaleString('en-US')} icon="eye" />
               <MetricCard label="New Orders" value={metrics.pending_orders.toLocaleString('en-US')} icon="cart" />
               <MetricCard label="Delivered" value={metrics.delivered_orders.toLocaleString('en-US')} hint={formatPercent(metrics.delivery_rate)} icon="truck" />
-              <MetricCard label="Cancelled" value={metrics.cancelled_orders.toLocaleString('en-US')} icon="refresh" />
+              <MetricCard label="Cancelled" value={metrics.cancelled_orders.toLocaleString('en-US')} hint={formatPercent(metrics.cancellation_rate)} icon="refresh" />
               <MetricCard label="Upsell Orders" value={metrics.upsell_orders.toLocaleString('en-US')} icon="shield" />
             </div>
 
