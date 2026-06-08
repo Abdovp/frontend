@@ -43,7 +43,6 @@ export default function Header({
 
   return (
     <>
-      {showAnnouncement ? <AnnouncementBar variant="marquee" /> : null}
       <header className={sticky ? 'site-header' : 'site-header site-header--static'}>
         <div className="site-header__bar">
           <Logo onClick={closeMenu} />
@@ -110,6 +109,7 @@ export default function Header({
           </nav>
         )}
       </header>
+      {showAnnouncement ? <AnnouncementBar variant="tick" intervalMs={1500} /> : null}
     </>
   );
 }
