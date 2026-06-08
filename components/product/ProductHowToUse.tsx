@@ -53,9 +53,6 @@ function HowToUseSteps({
 export default function ProductHowToUse({ product }: { product: Product }) {
   const { howToUse } = product;
   const hasImage = !!(howToUse.image || howToUse.imageLabel);
-  const isAnimatedDemo =
-    howToUse.image?.toLowerCase().endsWith('.gif') ||
-    howToUse.image?.toLowerCase().endsWith('.webp');
 
   return (
     <section className="section-padding bg-white" aria-labelledby="how-to-use-heading">
@@ -83,7 +80,7 @@ export default function ProductHowToUse({ product }: { product: Product }) {
                 fallbackLabel={howToUse.imageLabel ?? 'طريقة الاستعمال'}
                 fallbackSublabel="الصورة قريباً"
                 aspect="square"
-                fit={isAnimatedDemo ? 'contain' : 'cover'}
+                fit="cover"
                 objectPosition="center"
                 className="rounded-2xl shadow-card"
               />
