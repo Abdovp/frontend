@@ -59,7 +59,18 @@ export default function AdminDashboardPage() {
           <>
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
               <MetricCard label="Revenue" value={formatMad(metrics.revenue)} hint={`AOV: ${formatMad(metrics.average_order_value)}`} icon="trending" primary />
-              <MetricCard label="Confirmed Orders" value={metrics.confirmed_orders.toLocaleString('en-US')} hint={`Total orders: ${metrics.orders.toLocaleString('en-US')}`} icon="clipboard" />
+              <MetricCard
+                label="Confirmation Rate"
+                value={formatPercent(metrics.confirmation_rate)}
+                hint={`${metrics.confirmed_orders.toLocaleString('en-US')} confirmed (incl. shipped & delivered)`}
+                icon="checkCircle"
+              />
+              <MetricCard
+                label="Delivery Rate"
+                value={formatPercent(metrics.delivery_rate)}
+                hint={`${metrics.delivered_orders.toLocaleString('en-US')} delivered / ${metrics.confirmed_orders.toLocaleString('en-US')} confirmed`}
+                icon="truck"
+              />
               <MetricCard label="Conversion Rate" value={formatPercent(metrics.conversion_rate)} hint={`${metrics.orders} orders / ${metrics.page_views} visits`} icon="barChart" />
               <MetricCard label="Checkout CVR" value={formatPercent(metrics.checkout_conversion_rate)} hint={`${metrics.initiate_checkout.toLocaleString('en-US')} checkouts`} icon="checkCircle" />
               <MetricCard label="Page Views" value={metrics.page_views.toLocaleString('en-US')} hint="Morocco traffic only" icon="eye" />
@@ -70,9 +81,10 @@ export default function AdminDashboardPage() {
 
             <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
               <MetricCard label="Total Orders" value={metrics.orders.toLocaleString('en-US')} icon="clipboard" />
+              <MetricCard label="Confirmed Orders" value={metrics.confirmed_orders.toLocaleString('en-US')} hint="Includes shipped & delivered" icon="clipboard" />
               <MetricCard label="View Product" value={metrics.view_content.toLocaleString('en-US')} icon="eye" />
               <MetricCard label="New Orders" value={metrics.pending_orders.toLocaleString('en-US')} icon="cart" />
-              <MetricCard label="Delivered" value={metrics.delivered_orders.toLocaleString('en-US')} icon="truck" />
+              <MetricCard label="Delivered" value={metrics.delivered_orders.toLocaleString('en-US')} hint={formatPercent(metrics.delivery_rate)} icon="truck" />
               <MetricCard label="Cancelled" value={metrics.cancelled_orders.toLocaleString('en-US')} icon="refresh" />
               <MetricCard label="Upsell Orders" value={metrics.upsell_orders.toLocaleString('en-US')} icon="shield" />
             </div>
