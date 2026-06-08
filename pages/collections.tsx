@@ -49,6 +49,7 @@ export default function Collections() {
                       fit="cover"
                       objectPosition="center"
                       className="!rounded-none !border-0 bg-white"
+                      imageClassName="group-hover:scale-105 transition-transform duration-700 ease-out"
                     />
                     {p.offers.some((o) => o.badge === 'الأكثر مبيعاً') && (
                       <span className="absolute top-3 end-3 z-10 badge-pill bg-accent text-ink shadow-gold">

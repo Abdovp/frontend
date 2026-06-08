@@ -38,11 +38,11 @@ module.exports = {
         widest2: '0.22em',
       },
       boxShadow: {
-        soft: '0 4px 24px rgba(14, 17, 22, 0.06)',
-        card: '0 12px 40px rgba(14, 17, 22, 0.08)',
-        lift: '0 20px 60px rgba(14, 17, 22, 0.14)',
-        gold: '0 14px 30px rgba(212, 160, 23, 0.28)',
-        brand: '0 2px 8px rgba(19, 41, 75, 0.16)',
+        soft: '0 4px 20px -2px rgba(14, 17, 22, 0.04), 0 2px 6px -1px rgba(14, 17, 22, 0.03)',
+        card: '0 12px 32px -4px rgba(14, 17, 22, 0.06), 0 4px 12px -2px rgba(14, 17, 22, 0.04)',
+        lift: '0 24px 48px -8px rgba(14, 17, 22, 0.1), 0 8px 24px -4px rgba(14, 17, 22, 0.06)',
+        gold: '0 12px 30px -4px rgba(212, 160, 23, 0.25), 0 4px 12px -2px rgba(212, 160, 23, 0.15)',
+        brand: '0 8px 24px -4px rgba(19, 41, 75, 0.15), 0 3px 8px -2px rgba(19, 41, 75, 0.1)',
       },
       borderRadius: {
         xl: '0.875rem',

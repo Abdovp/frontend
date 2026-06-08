@@ -47,7 +47,7 @@ export default function HomeBrandHero() {
               </Link>
               <Link
                 href="/product/pack"
-                className="inline-flex items-center justify-center gap-2 font-bold py-4 px-7 rounded-full border border-white/25 text-white hover:bg-white/10 transition"
+                className="inline-flex items-center justify-center gap-2 font-bold py-4 px-7 rounded-full border border-white/25 text-white transition-all duration-300 hover:bg-white/10 hover:border-white/40 active:scale-[0.98]"
               >
                 المنتج الأكثر مبيعاً
               </Link>

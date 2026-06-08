@@ -12,6 +12,7 @@ interface ProductImageProps {
   /** When fit is cover, anchors crop (top helps trim bad edges at bottom) */
   objectPosition?: 'center' | 'top' | 'bottom';
   className?: string;
+  imageClassName?: string;
   priority?: boolean;
 }
 
@@ -32,6 +33,7 @@ export default function ProductImage({
   fit = 'cover',
   objectPosition = 'center',
   className = '',
+  imageClassName = '',
   priority = false,
 }: ProductImageProps) {
   if (!src) {
@@ -70,7 +72,7 @@ export default function ProductImage({
         priority={priority}
         unoptimized={isGif}
         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
-        className={fitClass}
+        className={`${fitClass} ${imageClassName}`.trim()}
       />
     </div>
   );

@@ -21,7 +21,8 @@ export default function ProductAlternatingBlocks({ product }: { product: Product
           aspect="square"
           fit="cover"
           objectPosition={logic.image ? 'center' : product.id === 'cooling-pack' ? 'top' : 'center'}
-          className="rounded-2xl shadow-card bg-white"
+          className="rounded-2xl shadow-card bg-white group"
+          imageClassName="group-hover:scale-105 transition-transform duration-700 ease-out"
         />
       }
     >

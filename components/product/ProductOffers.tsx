@@ -201,7 +201,7 @@ export default function ProductOffers({ product }: ProductOffersProps) {
             </ul>
 
             {/* Scarcity */}
-            <div className="scarcity-banner mb-6">
+            <div className="scarcity-banner mb-6 animate-pulse" style={{ animationDuration: '3s' }}>
               <Icon name="flame" size={18} className="text-red-500 shrink-0" />
               <p>{product.scarcityText}</p>
             </div>

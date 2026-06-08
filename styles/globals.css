@@ -82,11 +82,11 @@ h1, h2, h3, h4 {
 
   /* ---------- Buttons ---------- */
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 bg-brand text-white font-bold text-base py-4 px-8 rounded-full transition-all duration-200 shadow-brand hover:bg-brand-dark hover:-translate-y-0.5 active:translate-y-0;
+    @apply inline-flex items-center justify-center gap-2 bg-brand text-white font-bold text-base py-4 px-8 rounded-full transition-all duration-300 shadow-brand hover:bg-brand-dark hover:-translate-y-0.5 hover:shadow-lift active:translate-y-0 active:scale-[0.98] active:shadow-brand;
   }
 
   .btn-gold {
-    @apply inline-flex items-center justify-center gap-2 bg-accent text-ink font-extrabold text-base py-4 px-8 rounded-full transition-all duration-200 shadow-gold hover:bg-accent-dark hover:-translate-y-0.5 active:translate-y-0;
+    @apply inline-flex items-center justify-center gap-2 bg-accent text-ink font-extrabold text-base py-4 px-8 rounded-full transition-all duration-300 shadow-gold hover:bg-accent-dark hover:-translate-y-0.5 hover:shadow-lift active:translate-y-0 active:scale-[0.98] active:shadow-gold;
   }
 
   /* Kept for backwards compatibility — accent now means gold */
@@ -104,11 +104,11 @@ h1, h2, h3, h4 {
 
   /* ---------- Surfaces ---------- */
   .card-elevated {
-    @apply bg-white rounded-2xl border border-ink/[0.06] shadow-soft transition-all duration-300 hover:shadow-card hover:-translate-y-1;
+    @apply bg-white rounded-2xl border border-ink/[0.04] shadow-soft transition-all duration-300 hover:shadow-card hover:-translate-y-1 hover:border-ink/[0.08];
   }
 
   .card-flat {
-    @apply bg-white rounded-2xl border border-ink/[0.07];
+    @apply bg-white rounded-2xl border border-ink/[0.06] transition-colors duration-300 hover:border-ink/[0.12];
   }
 
   .image-placeholder {
@@ -117,11 +117,11 @@ h1, h2, h3, h4 {
 
   /* ---------- Pills & badges ---------- */
   .badge-pill {
-    @apply inline-flex items-center gap-1 text-xs font-bold px-3 py-1 rounded-full;
+    @apply inline-flex items-center gap-1 text-xs font-bold px-3 py-1 rounded-full backdrop-blur-sm;
   }
 
   .pill-soft {
-    @apply inline-flex items-center gap-2 text-sm font-semibold px-4 py-1.5 rounded-full bg-brand/5 text-brand border border-brand/10;
+    @apply inline-flex items-center gap-2 text-sm font-semibold px-4 py-1.5 rounded-full bg-brand/5 text-brand border border-brand/10 backdrop-blur-sm;
   }
 
   .star-row {
@@ -280,8 +280,8 @@ h1, h2, h3, h4 {
 
   .offer-card {
     @apply flex items-center gap-4 bg-white border-[3px] border-ink/15 rounded-2xl px-4 sm:px-5 py-4 text-start w-full cursor-pointer;
-    @apply transition-all duration-200 ease-out;
-    @apply hover:border-brand/50 hover:shadow-card hover:-translate-y-1 hover:bg-white;
+    @apply transition-all duration-300 ease-out;
+    @apply hover:border-brand/40 hover:shadow-card hover:-translate-y-1 hover:bg-brand/[0.02];
   }
 
   .offer-card--selected {
@@ -329,7 +329,7 @@ h1, h2, h3, h4 {
   }
 
   .checkout-cta {
-    @apply inline-flex items-center justify-center gap-2 bg-brand text-white font-extrabold text-lg py-4 px-8 rounded-full transition-colors duration-200 shadow-brand hover:bg-brand-dark active:scale-[0.98];
+    @apply inline-flex items-center justify-center gap-2 bg-brand text-white font-extrabold text-lg py-4 px-8 rounded-full transition-all duration-300 shadow-brand hover:bg-brand-dark hover:-translate-y-0.5 hover:shadow-lift active:translate-y-0 active:scale-[0.98] active:shadow-brand;
   }
 
   .checkout-cta--pulse {
@@ -371,7 +371,7 @@ h1, h2, h3, h4 {
   }
 
   .trust-badge-card {
-    @apply snap-start shrink-0 flex items-center gap-3 bg-white border-[3px] border-brand/15 rounded-2xl p-4 shadow-soft transition-all duration-200;
+    @apply snap-start shrink-0 flex items-center gap-3 bg-white border-[3px] border-brand/10 rounded-2xl p-4 shadow-soft transition-all duration-300;
     width: min(82vw, 17.5rem);
   }
 
@@ -381,7 +381,7 @@ h1, h2, h3, h4 {
     }
 
     .trust-badge-card:hover {
-      @apply border-brand/30 shadow-card -translate-y-0.5;
+      @apply border-brand/20 shadow-card -translate-y-1;
     }
   }
 
@@ -412,7 +412,7 @@ h1, h2, h3, h4 {
   }
 
   .product-benefit-chip {
-    @apply flex flex-col items-center justify-center text-center bg-white border border-ink/[0.07] rounded-2xl px-2 py-3 sm:px-3 sm:py-3.5 shadow-soft min-h-[5.5rem] sm:min-h-[6rem];
+    @apply flex flex-col items-center justify-center text-center bg-white border border-ink/[0.05] rounded-2xl px-2 py-3 sm:px-3 sm:py-3.5 shadow-soft min-h-[5.5rem] sm:min-h-[6rem] transition-all duration-300 hover:shadow-card hover:-translate-y-1 hover:border-ink/[0.08];
   }
 
   .product-benefit-chip__icon {
@@ -623,7 +623,7 @@ h1, h2, h3, h4 {
   }
 
   .ty-call-card {
-    @apply relative overflow-hidden rounded-2xl border border-emerald-700/10 bg-gradient-to-br from-brand-50 via-white to-white p-5 sm:p-6 shadow-card;
+    @apply relative overflow-hidden rounded-2xl border border-emerald-700/10 bg-gradient-to-br from-brand-50/80 via-white to-white p-5 sm:p-6 shadow-card transition-shadow duration-300 hover:shadow-lift;
   }
 
   .ty-call-card::before {
@@ -652,7 +652,7 @@ h1, h2, h3, h4 {
   }
 
   .ty-details-card {
-    @apply bg-white rounded-2xl border border-ink/[0.08] shadow-card p-5 sm:p-6;
+    @apply bg-white rounded-2xl border border-ink/[0.06] shadow-card p-5 sm:p-6 transition-all duration-300 hover:shadow-lift;
   }
 
   .ty-details-head {
@@ -721,7 +721,7 @@ h1, h2, h3, h4 {
   }
 
   .ty-review-card {
-    @apply bg-white rounded-2xl border border-ink/[0.07] p-5 shadow-soft flex gap-3;
+    @apply bg-white rounded-2xl border border-ink/[0.05] p-5 shadow-soft flex gap-3 transition-all duration-300 hover:-translate-y-1 hover:shadow-card hover:border-ink/[0.08];
   }
 
   .ty-review-avatar {
@@ -729,7 +729,7 @@ h1, h2, h3, h4 {
   }
 
   .ty-faq-card {
-    @apply bg-white rounded-2xl border border-ink/[0.07] overflow-hidden shadow-soft;
+    @apply bg-white rounded-2xl border border-ink/[0.05] overflow-hidden shadow-soft transition-all duration-300 hover:shadow-card;
   }
 
   .ty-product-card {

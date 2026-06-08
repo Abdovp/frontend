@@ -38,6 +38,7 @@ export default function FeaturedProducts() {
                   fit="cover"
                   objectPosition="center"
                   className="!rounded-none !border-0 border-b border-ink/[0.06] bg-white"
+                  imageClassName="group-hover:scale-105 transition-transform duration-700 ease-out"
                 />
                 {p.offers.some((o) => o.badge === 'الأكثر مبيعاً') && (
                   <span className="absolute top-3 end-3 badge-pill bg-accent text-ink shadow-gold">

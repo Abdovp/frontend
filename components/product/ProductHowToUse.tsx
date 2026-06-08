@@ -82,7 +82,8 @@ export default function ProductHowToUse({ product }: { product: Product }) {
                 aspect="square"
                 fit="cover"
                 objectPosition="center"
-                className="rounded-2xl shadow-card lg:aspect-auto lg:h-full"
+                className="rounded-2xl shadow-card lg:aspect-auto lg:h-full group"
+              imageClassName="group-hover:scale-105 transition-transform duration-700 ease-out"
               />
             </div>
           </div>

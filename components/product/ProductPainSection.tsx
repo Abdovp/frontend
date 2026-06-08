@@ -48,7 +48,8 @@ export default function ProductPainSection({ product }: { product: Product }) {
               fallbackSublabel="الصورة قريباً"
               aspect="square"
               fit="cover"
-              className="rounded-2xl overflow-hidden opacity-90"
+              className="rounded-2xl overflow-hidden opacity-90 group"
+              imageClassName="group-hover:scale-105 transition-transform duration-700 ease-out"
             />
           </div>
         </div>
