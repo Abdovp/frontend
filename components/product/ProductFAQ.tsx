@@ -67,7 +67,7 @@ export default function ProductFAQ({ product }: { product: Product }) {
           ))}
         </div>
 
-        <div className="mt-12 relative overflow-hidden rounded-3xl bg-navy-bar text-white p-8 md:p-10 text-center shadow-lift">
+        <div className="mt-12 relative overflow-hidden rounded-3xl bg-ink text-white p-8 md:p-10 text-center shadow-lift">
           <div className="absolute inset-0 hero-grid-bg opacity-60" />
           <div className="relative">
             <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-accent mb-4">
