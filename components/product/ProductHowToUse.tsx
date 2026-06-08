@@ -58,7 +58,7 @@ export default function ProductHowToUse({ product }: { product: Product }) {
     <section className="section-padding bg-white" aria-labelledby="how-to-use-heading">
       <div className={`container-wide ${hasImage ? 'max-w-5xl' : 'max-w-4xl'}`}>
         {hasImage ? (
-          <div className="layout-ltr grid lg:grid-cols-2 gap-10 lg:gap-16 items-start">
+          <div className="layout-ltr grid lg:grid-cols-2 gap-10 lg:gap-16 items-start lg:items-stretch">
             <div dir="rtl" className="text-right order-2 lg:order-1">
               <p className="eyebrow mb-3">
                 <Icon name="spark" size={14} />
@@ -73,7 +73,7 @@ export default function ProductHowToUse({ product }: { product: Product }) {
               <HowToUseSteps steps={howToUse.steps} layout="column" />
             </div>
 
-            <div className="order-1 lg:order-2 w-full max-w-sm mx-auto lg:max-w-none lg:sticky lg:top-28">
+            <div className="order-1 lg:order-2 w-full max-w-sm mx-auto lg:max-w-none lg:h-full lg:min-h-0">
               <ProductImage
                 src={howToUse.image}
                 alt={howToUse.imageLabel ?? howToUse.title}
@@ -82,7 +82,7 @@ export default function ProductHowToUse({ product }: { product: Product }) {
                 aspect="square"
                 fit="cover"
                 objectPosition="center"
-                className="rounded-2xl shadow-card"
+                className="rounded-2xl shadow-card lg:aspect-auto lg:h-full"
               />
             </div>
           </div>
