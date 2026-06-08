@@ -4,7 +4,7 @@ export default function Document() {
   return (
     <Html lang="ar" dir="rtl">
       <Head>
-        <meta name="theme-color" content="#0E1116" />
+        <meta name="theme-color" content="#0F172A" />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link

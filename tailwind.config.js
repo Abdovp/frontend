@@ -9,16 +9,16 @@ module.exports = {
       colors: {
         brand: {
           DEFAULT: '#0F172A',
-          dark: '#080D1A',
-          light: '#1E293B',
+          dark: '#020617',
+          light: '#334155',
           50: '#F1F5F9',
         },
         accent: {
-          DEFAULT: '#C9A227',
-          dark: '#AE8A19',
-          light: '#E4C463',
+          DEFAULT: '#D4A017',
+          dark: '#B8860B',
+          light: '#F0D78C',
         },
-        ink: '#0F172A',
+        ink: '#1E293B',
         cream: '#F8FAFC',
         dark: '#0F172A',
         light: '#ffffff',
@@ -40,7 +40,7 @@ module.exports = {
         soft: '0 4px 24px rgba(15, 23, 42, 0.06)',
         card: '0 12px 40px rgba(15, 23, 42, 0.08)',
         lift: '0 20px 60px rgba(15, 23, 42, 0.14)',
-        gold: '0 14px 30px rgba(201, 162, 39, 0.28)',
+        gold: '0 14px 30px rgba(212, 160, 23, 0.28)',
         brand: '0 2px 8px rgba(15, 23, 42, 0.16)',
       },
       borderRadius: {
