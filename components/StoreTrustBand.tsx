@@ -8,7 +8,7 @@ type Props = {
 export default function StoreTrustBand({ className = '' }: Props) {
   return (
     <section
-      className={`store-trust-band bg-trust-surface rounded-2xl shadow-soft p-5 sm:p-8 md:p-10 ${className}`}
+      className={`store-trust-band bg-trust-surface rounded-none sm:rounded-2xl shadow-soft -mx-4 px-4 py-6 sm:mx-0 sm:px-8 sm:py-8 md:p-10 ${className}`}
       aria-label="ضمانات المتجر"
       dir="rtl"
     >
