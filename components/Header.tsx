@@ -2,7 +2,7 @@ import Link from 'next/link';
 import { useState } from 'react';
 import AnnouncementBar from './AnnouncementBar';
 import CartButton from './CartButton';
-import CollapsibleMenu from './ui/CollapsibleMenu';
+import { CollapsibleMenuDark } from './ui/CollapsibleMenu';
 import Icon from './ui/Icon';
 import { STORE } from '../lib/products';
 import { mainNavLinks } from '../lib/navigation';
@@ -14,10 +14,10 @@ function Logo({ onClick }: { onClick?: () => void }) {
         <Icon name="spark" size={20} className="text-accent" />
       </span>
       <span className="min-w-0 leading-none">
-        <span className="block font-heading font-extrabold text-lg sm:text-xl text-brand tracking-tight">
+        <span className="block font-heading font-extrabold text-lg sm:text-xl text-white tracking-tight">
           {STORE.nameEn}
         </span>
-        <span className="block text-[0.7rem] sm:text-xs text-ink/55 mt-0.5 font-medium">
+        <span className="block text-[0.7rem] sm:text-xs text-white/55 mt-0.5 font-medium">
           {STORE.nameAr} · {STORE.tagline}
         </span>
       </span>
@@ -74,29 +74,29 @@ export default function Header({
         </div>
 
         {menuOpen && (
-          <nav className="site-header__menu md:hidden bg-white px-4 py-2 max-h-[70vh] overflow-y-auto">
-            <CollapsibleMenu title="التصفح" defaultOpen>
+          <nav className="site-header__menu md:hidden px-4 py-2 max-h-[70vh] overflow-y-auto">
+            <CollapsibleMenuDark title="التصفح" defaultOpen>
               <ul className="space-y-1">
                 {mainNavLinks.map((link) => (
                   <li key={link.href}>
                     <Link
                       href={link.href}
-                      className="flex items-center justify-between py-2.5 text-ink font-semibold hover:text-brand"
+                      className="flex items-center justify-between py-2.5 text-white/85 font-semibold hover:text-accent"
                       onClick={closeMenu}
                     >
                       {link.label}
-                      <Icon name="arrow-left" size={16} className="text-ink/30" />
+                      <Icon name="arrow-left" size={16} className="text-white/30" />
                     </Link>
                   </li>
                 ))}
               </ul>
-            </CollapsibleMenu>
+            </CollapsibleMenuDark>
 
             <a
               href={`https://wa.me/${STORE.whatsapp.replace(/[^0-9]/g, '')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="mt-3 mb-2 flex items-center justify-center gap-2 w-full py-3 rounded-full bg-brand/[0.06] text-brand font-bold"
+              className="mt-3 mb-2 flex items-center justify-center gap-2 w-full py-3 rounded-full bg-white/10 text-white font-bold hover:bg-white/15 transition"
               onClick={closeMenu}
             >
               <Icon name="whatsapp" size={18} /> تواصل معنا على واتساب

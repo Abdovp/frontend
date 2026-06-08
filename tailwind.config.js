@@ -19,6 +19,7 @@ module.exports = {
           light: '#E4C463',
         },
         ink: '#000000',
+        'navy-bar': '#1A2433',
         cream: '#F8FAFC',
         dark: '#0E1116',
         light: '#ffffff',

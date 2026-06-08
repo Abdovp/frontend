@@ -2,7 +2,6 @@ import Head from 'next/head';
 import { useEffect } from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
-import AnnouncementBar from '../AnnouncementBar';
 import WhatsAppFloat from '../ui/WhatsAppFloat';
 import { trackViewContent } from '../../lib/analytics/track';
 import ProductOffers from './ProductOffers';
@@ -34,8 +33,7 @@ export default function ProductPageLayout({ product }: { product: Product }) {
         <meta property="og:description" content={product.metaDescription} />
       </Head>
       <div className="product-page">
-        <Header showAnnouncement={false} />
-        <AnnouncementBar variant="tick" intervalMs={1500} />
+        <Header />
         <main>
           {/* 1 — Hero: image + headline + offer cards + CTA */}
           <div id="offers">
