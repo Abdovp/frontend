@@ -5,7 +5,7 @@ import type { Product } from '../../lib/products';
 export default function ProductPainSection({ product }: { product: Product }) {
   const { pain } = product;
   return (
-    <section className="bg-brand-dark text-white py-16 md:py-24" aria-labelledby="pain-heading">
+    <section className="bg-[#1a0f0a] text-white py-16 md:py-24" aria-labelledby="pain-heading">
       <div className="container-wide">
         <div className="layout-ltr grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Copy — desktop left */}

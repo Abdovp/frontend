@@ -8,19 +8,19 @@ module.exports = {
     extend: {
       colors: {
         brand: {
-          DEFAULT: '#0F172A',
-          dark: '#020617',
-          light: '#334155',
-          50: '#F1F5F9',
+          DEFAULT: '#13294B',
+          dark: '#0C1B33',
+          light: '#1E3A63',
+          50: '#EEF2F8',
         },
         accent: {
           DEFAULT: '#D4A017',
           dark: '#B8860B',
-          light: '#F0D78C',
+          light: '#E4C463',
         },
-        ink: '#1E293B',
+        ink: '#0E1116',
         cream: '#F8FAFC',
-        dark: '#0F172A',
+        dark: '#0E1116',
         light: '#ffffff',
         admin: {
           bg: '#F5F1EA',
@@ -37,11 +37,11 @@ module.exports = {
         widest2: '0.22em',
       },
       boxShadow: {
-        soft: '0 4px 24px rgba(15, 23, 42, 0.06)',
-        card: '0 12px 40px rgba(15, 23, 42, 0.08)',
-        lift: '0 20px 60px rgba(15, 23, 42, 0.14)',
+        soft: '0 4px 24px rgba(14, 17, 22, 0.06)',
+        card: '0 12px 40px rgba(14, 17, 22, 0.08)',
+        lift: '0 20px 60px rgba(14, 17, 22, 0.14)',
         gold: '0 14px 30px rgba(212, 160, 23, 0.28)',
-        brand: '0 2px 8px rgba(15, 23, 42, 0.16)',
+        brand: '0 2px 8px rgba(19, 41, 75, 0.16)',
       },
       borderRadius: {
         xl: '0.875rem',
@@ -63,11 +63,11 @@ module.exports = {
         },
         'cta-pulse': {
           '0%, 100%': {
-            boxShadow: '0 2px 8px rgba(15, 23, 42, 0.16)',
+            boxShadow: '0 2px 8px rgba(19, 41, 75, 0.16)',
             transform: 'scale(1)',
           },
           '50%': {
-            boxShadow: '0 4px 12px rgba(15, 23, 42, 0.22), 0 0 0 3px rgba(15, 23, 42, 0.08)',
+            boxShadow: '0 4px 12px rgba(19, 41, 75, 0.22), 0 0 0 3px rgba(19, 41, 75, 0.08)',
             transform: 'scale(1.02)',
           },
         },
