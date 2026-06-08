@@ -18,7 +18,7 @@ module.exports = {
           dark: '#B8860B',
           light: '#E4C463',
         },
-        ink: '#0E1116',
+        ink: '#1E293B',
         cream: '#F8FAFC',
         dark: '#0E1116',
         light: '#ffffff',
