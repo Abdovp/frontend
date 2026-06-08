@@ -19,8 +19,8 @@ export default function ProductAlternatingBlocks({ product }: { product: Product
           alt={product.nameAr}
           fallbackLabel={logic.imageLabel}
           fallbackSublabel="الحل"
-          aspect={isAnimatedDemo ? 'phone' : 'square'}
-          fit="cover"
+          aspect="square"
+          fit={isAnimatedDemo ? 'contain' : 'cover'}
           objectPosition={logic.image ? 'center' : product.id === 'cooling-pack' ? 'top' : 'center'}
           className="rounded-2xl shadow-card bg-white"
         />
