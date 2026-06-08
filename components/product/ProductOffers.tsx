@@ -110,8 +110,8 @@ export default function ProductOffers({ product }: ProductOffersProps) {
           ref={productCardRef}
           className="layout-ltr grid lg:grid-cols-2 gap-10 lg:gap-16 items-start"
         >
-          {/* Gallery + trust — desktop left, on top on mobile */}
-          <div className="order-1 lg:order-1 lg:sticky lg:top-28">
+          {/* Gallery + trust — desktop right, on top on mobile */}
+          <div className="order-1 lg:order-2 lg:sticky lg:top-28">
             <ProductImage
               src={galleryImages[activeImage]}
               alt={
@@ -166,8 +166,8 @@ export default function ProductOffers({ product }: ProductOffersProps) {
             </div>
           </div>
 
-          {/* Copy + offers — desktop right */}
-          <div dir="rtl" className="text-right order-2 lg:order-2">
+          {/* Copy + offers — desktop left */}
+          <div dir="rtl" className="text-right order-2 lg:order-1">
             <p className="text-accent-dark font-bold text-sm mb-2">{product.category}</p>
             <h1 className="font-heading text-3xl md:text-4xl font-extrabold text-ink leading-[1.15] mb-3 text-balance">
               {product.checkoutHeadline}
@@ -293,7 +293,7 @@ export default function ProductOffers({ product }: ProductOffersProps) {
         <StoreTrustBand className="mt-8 md:mt-10" />
       </div>
 
-      {/* Sticky CTA — first offer only, once scrolled past product card */}
+      {/* Sticky CTA — always shows first-offer price, once scrolled past product card */}
       <div
         className={`sticky-cta ${showStickyBar ? 'sticky-cta--visible' : ''}`}
         aria-hidden={!showStickyBar}
