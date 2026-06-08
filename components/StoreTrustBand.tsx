@@ -8,7 +8,7 @@ type Props = {
 export default function StoreTrustBand({ className = '' }: Props) {
   return (
     <section
-      className={`store-trust-band bg-white border border-ink/[0.08] rounded-2xl shadow-soft ${className}`}
+      className={`store-trust-band bg-trust-surface border border-white/10 rounded-2xl shadow-soft ${className}`}
       aria-label="ضمانات المتجر"
       dir="rtl"
     >
@@ -20,7 +20,7 @@ export default function StoreTrustBand({ className = '' }: Props) {
             </span>
             <span>
               <span className="store-trust-band__label">{item.text}</span>
-              <span className="block text-xs text-ink/45 font-medium mt-0.5">{item.sub}</span>
+              <span className="block text-xs text-white/55 font-medium mt-0.5">{item.sub}</span>
             </span>
           </li>
         ))}

@@ -25,7 +25,7 @@ export default function TrustBadgesStrip({
       className={
         isEmbedded
           ? `bg-white rounded-2xl border border-ink/[0.08] py-5 md:py-6 shadow-soft ${className}`
-          : `bg-white border-t border-ink/[0.06] py-8 md:py-10 ${className}`
+          : `bg-trust-surface border-t border-white/10 py-8 md:py-10 ${className}`
       }
       aria-label="ضمانات الشراء"
     >
@@ -33,13 +33,20 @@ export default function TrustBadgesStrip({
         <div className="trust-badge-scroll">
           <div className="trust-badge-scroll__track">
             {items.map((item) => (
-              <article key={item.title} className="trust-badge-card">
+              <article
+                key={item.title}
+                className={`trust-badge-card ${isEmbedded ? '' : 'trust-badge-card--on-dark'}`}
+              >
                 <span className="trust-badge-card__icon">
                   <Icon name={item.icon} size={22} />
                 </span>
                 <div className="min-w-0 leading-tight">
-                  <p className="font-heading font-bold text-ink text-sm md:text-base">{item.title}</p>
-                  <p className="text-xs md:text-sm text-ink/55 mt-0.5">{item.subtitle}</p>
+                  <p className="trust-badge-card__title font-heading font-bold text-ink text-sm md:text-base">
+                    {item.title}
+                  </p>
+                  <p className="trust-badge-card__subtitle text-xs md:text-sm text-ink/55 mt-0.5">
+                    {item.subtitle}
+                  </p>
                 </div>
               </article>
             ))}
