@@ -6,17 +6,20 @@ import type { Product } from '../../lib/products';
 
 export default function ProductAlternatingBlocks({ product }: { product: Product }) {
   const { logic } = product;
+  const imageSrc = logic.image ?? product.image;
+  const isAnimatedDemo = imageSrc?.toLowerCase().endsWith('.gif');
+
   return (
     <AlternatingSection
       imageSide="left"
       bg="cream"
       image={
         <ProductImage
-          src={logic.image ?? product.image}
+          src={imageSrc}
           alt={product.nameAr}
           fallbackLabel={logic.imageLabel}
           fallbackSublabel="الحل"
-          aspect="square"
+          aspect={isAnimatedDemo ? 'phone' : 'square'}
           fit="cover"
           objectPosition={logic.image ? 'center' : product.id === 'cooling-pack' ? 'top' : 'center'}
           className="rounded-2xl shadow-card bg-white"

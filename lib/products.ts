@@ -652,7 +652,7 @@ export const products: Record<ProductId, Product> = {
     image: '/images/car-vacuum.png',
     howToUse: {
       title: 'كيفاش تستعمل المكنسة',
-      image: '/images/car-vacuum-how.jpg',
+      image: '/images/car-vacuum-how.webp',
       imageLabel: 'طريقة استعمال المكنسة',
       steps: [
         {
@@ -692,7 +692,7 @@ export const products: Record<ProductId, Product> = {
         'خفيفة — تخزّنها ف الطوموبيل دايماً',
       ],
       imageLabel: 'المكنسة أثناء الاستعمال',
-      image: '/images/car-vacuum-solution.jpg',
+      image: '/images/car-vacuum-solution.gif',
     },
     proof: {
       eyebrow: 'إثبات',
