@@ -4,7 +4,7 @@ declare global {
     _fbq?: (...args: unknown[]) => void;
     ttq?: {
       load: (pixelId: string) => void;
-      page: () => void;
+      page: (params?: Record<string, unknown>, options?: Record<string, unknown>) => void;
       track: (event: string, params?: Record<string, unknown>, options?: Record<string, unknown>) => void;
     };
     snaptr?: (...args: unknown[]) => void;
