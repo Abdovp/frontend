@@ -17,20 +17,45 @@ type PurchasePayload = {
 
 const CURRENCY = 'MAD';
 
-function whenReady(run: () => void) {
+function whenPixelsReady(run: () => void) {
   if (typeof window === 'undefined') return;
-  if (typeof window.requestIdleCallback === 'function') {
-    window.requestIdleCallback(() => run(), { timeout: 2500 });
+
+  const runSafely = () => {
+    try {
+      run();
+    } catch {
+      // Analytics must not block checkout UX.
+    }
+  };
+
+  if (PIXEL_IDS.tiktok && window.ttq?.ready) {
+    window.ttq.ready(runSafely);
     return;
   }
-  setTimeout(run, 1500);
+
+  if (typeof window.requestIdleCallback === 'function') {
+    window.requestIdleCallback(runSafely, { timeout: 2000 });
+    return;
+  }
+
+  setTimeout(runSafely, 500);
 }
 
-function mapContents(items: AnalyticsItem[]) {
+function mapFacebookContents(items: AnalyticsItem[]) {
   return items.map((item) => ({
     id: item.productId,
     quantity: item.quantity ?? 1,
     item_price: item.price,
+  }));
+}
+
+function mapTikTokContents(items: AnalyticsItem[]) {
+  return items.map((item) => ({
+    content_id: item.productId,
+    content_type: 'product',
+    content_name: item.name,
+    quantity: item.quantity ?? 1,
+    price: item.price,
   }));
 }
 
@@ -54,79 +79,102 @@ function trackSnapchat(eventName: string, params: Record<string, unknown>, event
   window.snaptr('track', eventName, { ...params, uuid_c1: eventId });
 }
 
+function buildFacebookParams(
+  items: AnalyticsItem[],
+  value: number,
+  extra: Record<string, unknown> = {}
+) {
+  return {
+    content_ids: items.map((item) => item.productId),
+    content_type: 'product',
+    currency: CURRENCY,
+    value,
+    contents: mapFacebookContents(items),
+    ...extra,
+  };
+}
+
+function buildTikTokParams(
+  items: AnalyticsItem[],
+  value: number,
+  extra: Record<string, unknown> = {}
+) {
+  return {
+    content_ids: items.map((item) => item.productId),
+    content_type: 'product',
+    currency: CURRENCY,
+    value,
+    contents: mapTikTokContents(items),
+    ...extra,
+  };
+}
+
 function trackAll(
   eventName: 'PageView' | 'ViewContent' | 'AddToCart' | 'InitiateCheckout' | 'Purchase',
-  params: Record<string, unknown>,
+  facebookParams: Record<string, unknown>,
+  tiktokParams: Record<string, unknown>,
   eventId: string,
   orderId?: number
 ) {
-  void logTrackingEvent(eventId, eventName, params, orderId);
-  whenReady(() => {
-    trackFacebook(eventName, params, eventId);
-    trackTikTok(eventName, params, eventId);
-    trackSnapchat(eventName, params, eventId);
+  void logTrackingEvent(eventId, eventName, facebookParams, orderId);
+  whenPixelsReady(() => {
+    trackFacebook(eventName, facebookParams, eventId);
+    trackTikTok(eventName, tiktokParams, eventId);
+    trackSnapchat(eventName, facebookParams, eventId);
   });
 }
 
 export function trackPageView(path?: string) {
   const eventId = createEventId('pv');
   const params = { page_path: path || (typeof window !== 'undefined' ? window.location.pathname : '/') };
-  trackAll('PageView', params, eventId);
+  trackAll('PageView', params, params, eventId);
 }
 
 export function trackViewContent(item: AnalyticsItem) {
   const eventId = createEventId('vc');
-  const params = {
-    content_ids: [item.productId],
-    content_name: item.name,
-    content_type: 'product',
-    currency: CURRENCY,
-    value: item.price,
-    contents: mapContents([item]),
-  };
-  trackAll('ViewContent', params, eventId);
+  trackAll(
+    'ViewContent',
+    buildFacebookParams([item], item.price, { content_name: item.name }),
+    buildTikTokParams([item], item.price),
+    eventId
+  );
 }
 
 export function trackAddToCart(item: AnalyticsItem) {
   const eventId = createEventId('atc');
-  const params = {
-    content_ids: [item.productId],
-    content_name: item.name,
-    content_type: 'product',
-    currency: CURRENCY,
-    value: item.price,
-    contents: mapContents([item]),
-  };
-  trackAll('AddToCart', params, eventId);
+  trackAll(
+    'AddToCart',
+    buildFacebookParams([item], item.price, { content_name: item.name }),
+    buildTikTokParams([item], item.price),
+    eventId
+  );
 }
 
 export function trackInitiateCheckout(items: AnalyticsItem[], value: number) {
   const eventId = createEventId('ic');
-  const params = {
-    content_ids: items.map((item) => item.productId),
-    content_type: 'product',
-    currency: CURRENCY,
-    value,
+  const extra = {
     num_items: items.reduce((sum, item) => sum + (item.quantity ?? 1), 0),
-    contents: mapContents(items),
   };
-  trackAll('InitiateCheckout', params, eventId);
+  trackAll(
+    'InitiateCheckout',
+    buildFacebookParams(items, value, extra),
+    buildTikTokParams(items, value, extra),
+    eventId
+  );
 }
 
 export function trackPurchase(payload: PurchasePayload) {
-  const params = {
-    content_ids: payload.items.map((item) => item.productId),
-    content_type: 'product',
-    currency: CURRENCY,
-    value: payload.value,
+  const extra = {
     num_items: payload.items.reduce((sum, item) => sum + (item.quantity ?? 1), 0),
-    contents: mapContents(payload.items),
   };
+  const facebookParams = buildFacebookParams(payload.items, payload.value, extra);
+  const tiktokParams = buildTikTokParams(payload.items, payload.value, extra);
+
   // Purchase is stored by POST /api/orders (order + order_items + tracking_events + CAPI).
-  whenReady(() => {
-    trackFacebook('Purchase', params, payload.eventId);
-    trackTikTok('Purchase', params, payload.eventId);
-    trackSnapchat('Purchase', params, payload.eventId);
+  whenPixelsReady(() => {
+    trackFacebook('Purchase', facebookParams, payload.eventId);
+    trackTikTok('Purchase', tiktokParams, payload.eventId);
+    trackSnapchat('Purchase', facebookParams, payload.eventId);
   });
 }
 

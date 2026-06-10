@@ -1,5 +1,6 @@
 import type { CartItem } from '../cart-store';
 import { createEventId, getFacebookCookies } from '../analytics/track';
+import { getTikTokCookies } from '../analytics/pixels';
 import { getProductSku } from '../products';
 import { OrderSubmitError, readOrderSubmitError } from './order-errors';
 
@@ -45,6 +46,7 @@ function normalizeOrderResult(data: unknown): SubmitOrderResult {
 
 export async function submitOrder(input: SubmitOrderInput): Promise<SubmitOrderResult> {
   const { fbp, fbc } = getFacebookCookies();
+  const { ttp, ttclid } = getTikTokCookies();
 
   let response: Response;
   try {
@@ -60,6 +62,8 @@ export async function submitOrder(input: SubmitOrderInput): Promise<SubmitOrderR
         user_agent: typeof navigator !== 'undefined' ? navigator.userAgent : undefined,
         fbp,
         fbc,
+        ttp,
+        ttclid,
         items: input.items.map((item) => ({
           product_id: item.id,
           product_name: item.name,

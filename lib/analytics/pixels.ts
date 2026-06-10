@@ -6,6 +6,7 @@ declare global {
       load: (pixelId: string) => void;
       page: (params?: Record<string, unknown>, options?: Record<string, unknown>) => void;
       track: (event: string, params?: Record<string, unknown>, options?: Record<string, unknown>) => void;
+      ready?: (callback: () => void) => void;
     };
     snaptr?: (...args: unknown[]) => void;
   }
@@ -29,4 +30,14 @@ export function getFacebookCookies(): { fbp?: string; fbc?: string } {
     return acc;
   }, {});
   return { fbp: cookies._fbp, fbc: cookies._fbc };
+}
+
+export function getTikTokCookies(): { ttp?: string; ttclid?: string } {
+  if (typeof document === 'undefined') return {};
+  const cookies = document.cookie.split(';').reduce<Record<string, string>>((acc, part) => {
+    const [key, ...rest] = part.trim().split('=');
+    acc[key] = rest.join('=');
+    return acc;
+  }, {});
+  return { ttp: cookies._ttp, ttclid: cookies.ttclid };
 }
