@@ -41,7 +41,12 @@ function trackFacebook(eventName: string, params: Record<string, unknown>, event
 
 function trackTikTok(eventName: string, params: Record<string, unknown>, eventId: string) {
   if (!PIXEL_IDS.tiktok || !window.ttq) return;
-  window.ttq.track(eventName, params, { event_id: eventId });
+  if (eventName === 'PageView') {
+    window.ttq.page({}, { event_id: eventId });
+    return;
+  }
+  const tiktokEvent = eventName === 'Purchase' ? 'CompletePayment' : eventName;
+  window.ttq.track(tiktokEvent, params, { event_id: eventId });
 }
 
 function trackSnapchat(eventName: string, params: Record<string, unknown>, eventId: string) {
