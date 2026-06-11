@@ -38,9 +38,9 @@ export default function Collections() {
                 <Link
                   key={p.id}
                   href={p.href}
-                  className="card-elevated overflow-hidden group grid md:grid-cols-[11.5rem_1fr] lg:grid-cols-[13rem_1fr]"
+                  className="card-elevated overflow-hidden group grid md:grid-cols-[11.5rem_1fr] lg:grid-cols-[13rem_1fr] md:items-stretch"
                 >
-                  <div className="relative w-full overflow-hidden border-b border-ink/[0.06] md:border-b-0 md:border-e md:border-ink/[0.06]">
+                  <div className="relative w-full self-stretch min-h-0 overflow-hidden border-b border-ink/[0.06] md:border-b-0 md:border-e md:border-ink/[0.06]">
                     <ProductImage
                       src={p.image}
                       alt={p.nameAr}
@@ -48,7 +48,7 @@ export default function Collections() {
                       aspect="square"
                       fit="cover"
                       objectPosition="center"
-                      className="!rounded-none !border-0 bg-white"
+                      className="!rounded-none !border-0 bg-white aspect-square md:aspect-auto md:h-full md:min-h-[11.5rem] lg:min-h-[13rem]"
                       imageClassName="group-hover:scale-105 transition-transform duration-700 ease-out"
                     />
                     {p.offers.some((o) => o.badge === 'الأكثر مبيعاً') && (
