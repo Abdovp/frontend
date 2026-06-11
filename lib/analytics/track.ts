@@ -1,23 +1,16 @@
 import { createEventId } from './event-id';
 import { logTrackingEvent } from '../api/events';
-import { getFacebookCookies, PIXEL_IDS } from './pixels';
+import {
+  buildFacebookParams,
+  buildSnapchatParams,
+  buildTikTokParams,
+  SNAPCHAT_EVENT_NAMES,
+  type StandardEventName,
+} from './pixel-events';
+import { getFacebookCookies, PIXEL_IDS, pixelsAreReady } from './pixels';
+import type { AnalyticsItem, PurchasePayload } from './types';
 
-type AnalyticsItem = {
-  productId: string;
-  name: string;
-  price: number;
-  quantity?: number;
-};
-
-type PurchasePayload = {
-  eventId: string;
-  value: number;
-  items: AnalyticsItem[];
-};
-
-const CURRENCY = 'MAD';
-
-function whenPixelsReady(run: () => void) {
+export function whenPixelsReady(run: () => void) {
   if (typeof window === 'undefined') return;
 
   const runSafely = () => {
@@ -28,35 +21,28 @@ function whenPixelsReady(run: () => void) {
     }
   };
 
-  if (PIXEL_IDS.tiktok && window.ttq?.ready) {
-    window.ttq.ready(runSafely);
-    return;
-  }
+  const fire = () => {
+    if (PIXEL_IDS.tiktok && window.ttq?.ready) {
+      window.ttq.ready(runSafely);
+      return;
+    }
+    runSafely();
+  };
+
+  const waitUntilReady = (attempt = 0) => {
+    if (pixelsAreReady() || attempt >= 30) {
+      fire();
+      return;
+    }
+    window.setTimeout(() => waitUntilReady(attempt + 1), 100);
+  };
 
   if (typeof window.requestIdleCallback === 'function') {
-    window.requestIdleCallback(runSafely, { timeout: 2000 });
+    window.requestIdleCallback(() => waitUntilReady(), { timeout: 3500 });
     return;
   }
 
-  setTimeout(runSafely, 500);
-}
-
-function mapFacebookContents(items: AnalyticsItem[]) {
-  return items.map((item) => ({
-    id: item.productId,
-    quantity: item.quantity ?? 1,
-    item_price: item.price,
-  }));
-}
-
-function mapTikTokContents(items: AnalyticsItem[]) {
-  return items.map((item) => ({
-    content_id: item.productId,
-    content_type: 'product',
-    content_name: item.name,
-    quantity: item.quantity ?? 1,
-    price: item.price,
-  }));
+  window.setTimeout(() => waitUntilReady(), 1200);
 }
 
 function trackFacebook(eventName: string, params: Record<string, unknown>, eventId: string) {
@@ -73,45 +59,19 @@ function trackTikTok(eventName: string, params: Record<string, unknown>, eventId
   window.ttq.track(eventName, params, { event_id: eventId });
 }
 
-function trackSnapchat(eventName: string, params: Record<string, unknown>, eventId: string) {
+function trackSnapchat(eventName: StandardEventName, params: Record<string, unknown>, eventId: string) {
   if (!PIXEL_IDS.snapchat || !window.snaptr) return;
-  window.snaptr('track', eventName, { ...params, uuid_c1: eventId });
-}
-
-function buildFacebookParams(
-  items: AnalyticsItem[],
-  value: number,
-  extra: Record<string, unknown> = {}
-) {
-  return {
-    content_ids: items.map((item) => item.productId),
-    content_type: 'product',
-    currency: CURRENCY,
-    value,
-    contents: mapFacebookContents(items),
-    ...extra,
-  };
-}
-
-function buildTikTokParams(
-  items: AnalyticsItem[],
-  value: number,
-  extra: Record<string, unknown> = {}
-) {
-  return {
-    content_ids: items.map((item) => item.productId),
-    content_type: 'product',
-    currency: CURRENCY,
-    value,
-    contents: mapTikTokContents(items),
-    ...extra,
-  };
+  window.snaptr('track', SNAPCHAT_EVENT_NAMES[eventName], {
+    ...params,
+    client_dedup_id: eventId,
+  });
 }
 
 function trackAll(
-  eventName: 'PageView' | 'ViewContent' | 'AddToCart' | 'InitiateCheckout' | 'Purchase',
+  eventName: StandardEventName,
   facebookParams: Record<string, unknown>,
   tiktokParams: Record<string, unknown>,
+  snapParams: Record<string, unknown>,
   eventId: string,
   orderId?: number
 ) {
@@ -119,14 +79,16 @@ function trackAll(
   whenPixelsReady(() => {
     trackFacebook(eventName, facebookParams, eventId);
     trackTikTok(eventName, tiktokParams, eventId);
-    trackSnapchat(eventName, facebookParams, eventId);
+    trackSnapchat(eventName, snapParams, eventId);
   });
 }
 
 export function trackPageView(path?: string) {
   const eventId = createEventId('pv');
-  const params = { page_path: path || (typeof window !== 'undefined' ? window.location.pathname : '/') };
-  trackAll('PageView', params, params, eventId);
+  const params = {
+    page_path: path || (typeof window !== 'undefined' ? window.location.pathname : '/'),
+  };
+  trackAll('PageView', params, params, buildSnapchatParams('PageView', [], 0, eventId), eventId);
 }
 
 export function trackViewContent(item: AnalyticsItem) {
@@ -135,6 +97,7 @@ export function trackViewContent(item: AnalyticsItem) {
     'ViewContent',
     buildFacebookParams([item], item.price, { content_name: item.name }),
     buildTikTokParams([item], item.price),
+    buildSnapchatParams('ViewContent', [item], item.price, eventId),
     eventId
   );
 }
@@ -145,6 +108,7 @@ export function trackAddToCart(item: AnalyticsItem) {
     'AddToCart',
     buildFacebookParams([item], item.price, { content_name: item.name }),
     buildTikTokParams([item], item.price),
+    buildSnapchatParams('AddToCart', [item], item.price, eventId),
     eventId
   );
 }
@@ -158,6 +122,7 @@ export function trackInitiateCheckout(items: AnalyticsItem[], value: number) {
     'InitiateCheckout',
     buildFacebookParams(items, value, extra),
     buildTikTokParams(items, value, extra),
+    buildSnapchatParams('InitiateCheckout', items, value, eventId, extra),
     eventId
   );
 }
@@ -168,12 +133,13 @@ export function trackPurchase(payload: PurchasePayload) {
   };
   const facebookParams = buildFacebookParams(payload.items, payload.value, extra);
   const tiktokParams = buildTikTokParams(payload.items, payload.value, extra);
+  const snapParams = buildSnapchatParams('Purchase', payload.items, payload.value, payload.eventId, extra);
 
   // Purchase is stored by POST /api/orders (order + order_items + tracking_events + CAPI).
   whenPixelsReady(() => {
     trackFacebook('Purchase', facebookParams, payload.eventId);
     trackTikTok('Purchase', tiktokParams, payload.eventId);
-    trackSnapchat('Purchase', facebookParams, payload.eventId);
+    trackSnapchat('Purchase', snapParams, payload.eventId);
   });
 }
 
