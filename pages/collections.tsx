@@ -40,22 +40,24 @@ export default function Collections() {
                   href={p.href}
                   className="card-elevated overflow-hidden group grid md:grid-cols-[11.5rem_1fr] lg:grid-cols-[13rem_1fr] md:items-stretch"
                 >
-                  <div className="relative w-full self-stretch min-h-0 overflow-hidden border-b border-ink/[0.06] md:border-b-0 md:border-e md:border-ink/[0.06]">
-                    <ProductImage
-                      src={p.image}
-                      alt={p.nameAr}
-                      fallbackLabel={p.galleryLabels[0]}
-                      aspect="square"
-                      fit="cover"
-                      objectPosition="center"
-                      className="!rounded-none !border-0 bg-white aspect-square md:aspect-auto md:h-full md:min-h-[11.5rem] lg:min-h-[13rem]"
-                      imageClassName="group-hover:scale-105 transition-transform duration-700 ease-out"
-                    />
-                    {p.offers.some((o) => o.badge === 'الأكثر مبيعاً') && (
-                      <span className="absolute top-3 end-3 z-10 badge-pill bg-accent text-ink shadow-gold">
-                        الأكثر مبيعاً
-                      </span>
-                    )}
+                  <div className="relative w-full self-stretch flex flex-col bg-white border-b border-ink/[0.06] md:border-b-0 md:border-e md:border-ink/[0.06]">
+                    <div className="relative w-full aspect-square overflow-hidden shrink-0">
+                      <ProductImage
+                        src={p.image}
+                        alt={p.nameAr}
+                        fallbackLabel={p.galleryLabels[0]}
+                        aspect="square"
+                        fit="cover"
+                        objectPosition="center"
+                        className="!rounded-none !border-0 bg-white h-full w-full"
+                        imageClassName="group-hover:scale-105 transition-transform duration-700 ease-out"
+                      />
+                      {p.offers.some((o) => o.badge === 'الأكثر مبيعاً') && (
+                        <span className="absolute top-3 end-3 z-10 badge-pill bg-accent text-ink shadow-gold">
+                          الأكثر مبيعاً
+                        </span>
+                      )}
+                    </div>
                   </div>
                   <div className="p-6 flex flex-col min-w-0">
                     <p className="text-xs font-bold text-accent-dark mb-1">{p.category}</p>
