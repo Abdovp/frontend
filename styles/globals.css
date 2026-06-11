@@ -581,7 +581,7 @@ h1, h2, h3, h4 {
   }
 
   .ty-wrap {
-    @apply max-w-md mx-auto;
+    @apply max-w-md md:max-w-xl mx-auto;
   }
 
   .ty-hero {
