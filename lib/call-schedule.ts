@@ -35,7 +35,7 @@ export function getCallScheduleInfo(date: Date = new Date()): CallScheduleInfo {
   if (isWithinCallHours(date)) {
     return {
       statusLine: 'الفريق متاح دابا',
-      message: 'غادي نتصلو بيك ف 10 دقائق (بتوقيت المغرب)',
+      message: 'غادي نتصلو بيك بعد 10 دقائق',
       inWorkHours: true,
     };
   }
