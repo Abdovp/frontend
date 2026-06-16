@@ -3,7 +3,6 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import UpsellPopup from '../components/UpsellPopup';
 import CartProductThumb from '../components/ui/CartProductThumb';
 import ProductImage from '../components/ui/ProductImage';
 import Icon, { Stars } from '../components/ui/Icon';
@@ -13,7 +12,6 @@ import {
   CURRENCY,
   productList,
   STORE,
-  type Product,
   type ProductId,
 } from '../lib/products';
 import {
@@ -22,7 +20,6 @@ import {
   loadOrderConfirmation,
   type OrderConfirmation,
 } from '../lib/order-confirmation';
-import { pickUpsellProduct, UPSELL_PRICE } from '../lib/upsell';
 
 function getOrderedProductIds(order: OrderConfirmation): ProductId[] {
   return [...new Set(order.items.map((item) => item.productId).filter(Boolean))] as ProductId[];
@@ -97,13 +94,11 @@ const THANK_YOU_FAQS = [
 
 export default function ThankYou() {
   const [order, setOrder] = useState<OrderConfirmation | null>(null);
-  const [upsellProduct, setUpsellProduct] = useState<Product | null>(null);
   const [ready, setReady] = useState(false);
   const [copied, setCopied] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [detailsConfirmed, setDetailsConfirmed] = useState(false);
   const sheetSentRef = useRef(false);
-  const upsellProductRef = useRef<Product | null>(null);
 
   const sendOrderToSheet = useCallback((upsell?: FinalizeUpsellInput) => {
     if (sheetSentRef.current) return;
@@ -128,34 +123,9 @@ export default function ThankYou() {
     setOrder(saved);
     setDetailsConfirmed(saved?.detailsConfirmed ?? false);
     if (saved) {
-      const upsell = pickUpsellProduct(getOrderedProductIds(saved));
-      upsellProductRef.current = upsell;
-      setUpsellProduct(upsell);
-      if (!upsell) sendOrderToSheet();
+      sendOrderToSheet();
     }
     setReady(true);
-  }, [sendOrderToSheet]);
-
-  const handleCloseUpsell = useCallback(() => {
-    setUpsellProduct(null);
-    upsellProductRef.current = null;
-    sendOrderToSheet();
-  }, [sendOrderToSheet]);
-
-  const handleUpsellAdded = useCallback(() => {
-    const product = upsellProductRef.current;
-    setOrder(loadOrderConfirmation());
-    setUpsellProduct(null);
-    upsellProductRef.current = null;
-    if (!product) {
-      sendOrderToSheet();
-      return;
-    }
-    sendOrderToSheet({
-      product_id: product.id,
-      product_name: product.nameAr,
-      unit_price: UPSELL_PRICE,
-    });
   }, [sendOrderToSheet]);
 
   const customerName =
@@ -506,14 +476,6 @@ export default function ThankYou() {
       </main>
 
       <Footer />
-
-      {upsellProduct && (
-        <UpsellPopup
-          product={upsellProduct}
-          onAdded={handleUpsellAdded}
-          onClose={handleCloseUpsell}
-        />
-      )}
     </>
   );
 }

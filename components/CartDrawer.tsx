@@ -1,4 +1,4 @@
-import { createPurchaseEventId, submitOrder } from '../lib/api/orders';
+import { createPurchaseEventId, finalizeOrder, submitOrder, type FinalizeUpsellInput } from '../lib/api/orders';
 import { getCheckoutErrorMessage } from '../lib/api/order-errors';
 import { trackAddToCart, trackInitiateCheckout, trackPurchase } from '../lib/analytics/track';
 import {
@@ -13,9 +13,11 @@ import { useRouter } from 'next/router';
 import { useCartStore } from '../lib/cart-store';
 import { saveOrderConfirmation } from '../lib/order-confirmation';
 import { products, CURRENCY, WARRANTY_DAYS, type Product, type ProductId } from '../lib/products';
+import { pickUpsellProduct, UPSELL_PRICE } from '../lib/upsell';
 import FormField from './ui/FormField';
 import CartProductThumb from './ui/CartProductThumb';
 import Icon, { Stars } from './ui/Icon';
+import UpsellPopup from './UpsellPopup';
 
 const CROSS_SELL_ORDER: ProductId[] = ['cooling-pack', 'magnetic-holder', 'car-vacuum'];
 
@@ -205,6 +207,8 @@ function CheckoutModal({ onClose, items, total }: CheckoutModalProps) {
   const [touched, setTouched] = useState<Partial<Record<CheckoutField, boolean>>>({});
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState('');
+  const [upsellProduct, setUpsellProduct] = useState<Product | null>(null);
+  const submittedOrderRef = useRef<{ orderId: number; eventId: string } | null>(null);
 
   useEffect(() => {
     setMounted(true);
@@ -249,6 +253,42 @@ function CheckoutModal({ onClose, items, total }: CheckoutModalProps) {
   const showError = (field: CheckoutField) =>
     errors[field] && (touched[field] || submitting) ? errors[field] : undefined;
 
+  const finishCheckout = async (upsell?: FinalizeUpsellInput) => {
+    const submitted = submittedOrderRef.current;
+    if (!submitted) return;
+
+    setSubmitting(true);
+    await finalizeOrder({
+      orderId: submitted.orderId,
+      eventId: submitted.eventId,
+      upsell,
+    });
+
+    clearCart();
+    closeCart();
+    onClose();
+    void router.push('/thank-you');
+  };
+
+  const handleUpsellAdded = () => {
+    const product = upsellProduct;
+    setUpsellProduct(null);
+    if (product) {
+      void finishCheckout({
+        product_id: product.id,
+        product_name: product.nameAr,
+        unit_price: UPSELL_PRICE,
+      });
+      return;
+    }
+    void finishCheckout();
+  };
+
+  const handleUpsellClose = () => {
+    setUpsellProduct(null);
+    void finishCheckout();
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     const nextErrors = validateCheckoutForm(formData);
@@ -276,6 +316,8 @@ function CheckoutModal({ onClose, items, total }: CheckoutModalProps) {
         total,
       });
 
+      submittedOrderRef.current = { orderId: result.id, eventId };
+
       saveOrderConfirmation({
         name: formData.name.trim(),
         phone: formData.phone.trim(),
@@ -297,10 +339,14 @@ function CheckoutModal({ onClose, items, total }: CheckoutModalProps) {
         })),
       });
 
-      clearCart();
-      closeCart();
-      onClose();
-      void router.push('/thank-you');
+      const upsell = pickUpsellProduct(items.map((item) => item.id));
+      if (upsell) {
+        setUpsellProduct(upsell);
+        setSubmitting(false);
+        return;
+      }
+
+      await finishCheckout();
     } catch (error) {
       setSubmitError(getCheckoutErrorMessage(error));
       setSubmitting(false);
@@ -308,6 +354,13 @@ function CheckoutModal({ onClose, items, total }: CheckoutModalProps) {
   };
 
   if (!mounted) return null;
+
+  if (upsellProduct) {
+    return createPortal(
+      <UpsellPopup product={upsellProduct} onAdded={handleUpsellAdded} onClose={handleUpsellClose} />,
+      document.body
+    );
+  }
 
   return createPortal(
     <div className="fixed inset-0 z-[80] overflow-y-auto">
