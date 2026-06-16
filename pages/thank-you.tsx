@@ -18,6 +18,7 @@ import {
   clearOrderConfirmation,
   confirmOrderDetails,
   loadOrderConfirmation,
+  getUpsellFromConfirmation,
   type OrderConfirmation,
 } from '../lib/order-confirmation';
 
@@ -123,7 +124,7 @@ export default function ThankYou() {
     setOrder(saved);
     setDetailsConfirmed(saved?.detailsConfirmed ?? false);
     if (saved) {
-      sendOrderToSheet();
+      sendOrderToSheet(getUpsellFromConfirmation(saved));
     }
     setReady(true);
   }, [sendOrderToSheet]);

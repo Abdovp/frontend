@@ -1,4 +1,4 @@
-import { createPurchaseEventId, finalizeOrder, submitOrder, type FinalizeUpsellInput } from '../lib/api/orders';
+import { createPurchaseEventId, submitOrder } from '../lib/api/orders';
 import { getCheckoutErrorMessage } from '../lib/api/order-errors';
 import { trackAddToCart, trackInitiateCheckout, trackPurchase } from '../lib/analytics/track';
 import {
@@ -13,7 +13,7 @@ import { useRouter } from 'next/router';
 import { useCartStore } from '../lib/cart-store';
 import { saveOrderConfirmation } from '../lib/order-confirmation';
 import { products, CURRENCY, WARRANTY_DAYS, type Product, type ProductId } from '../lib/products';
-import { pickUpsellProduct, UPSELL_PRICE } from '../lib/upsell';
+import { pickUpsellProduct } from '../lib/upsell';
 import FormField from './ui/FormField';
 import CartProductThumb from './ui/CartProductThumb';
 import Icon, { Stars } from './ui/Icon';
@@ -212,7 +212,8 @@ function CheckoutModal({ onClose, items, total }: CheckoutModalProps) {
 
   useEffect(() => {
     setMounted(true);
-  }, []);
+    void router.prefetch('/thank-you');
+  }, [router]);
 
   useEffect(() => {
     document.body.style.overflow = 'hidden';
@@ -253,16 +254,8 @@ function CheckoutModal({ onClose, items, total }: CheckoutModalProps) {
   const showError = (field: CheckoutField) =>
     errors[field] && (touched[field] || submitting) ? errors[field] : undefined;
 
-  const finishCheckout = async (upsell?: FinalizeUpsellInput) => {
-    const submitted = submittedOrderRef.current;
-    if (!submitted) return;
-
-    setSubmitting(true);
-    await finalizeOrder({
-      orderId: submitted.orderId,
-      eventId: submitted.eventId,
-      upsell,
-    });
+  const finishCheckout = () => {
+    if (!submittedOrderRef.current) return;
 
     clearCart();
     closeCart();
@@ -271,22 +264,13 @@ function CheckoutModal({ onClose, items, total }: CheckoutModalProps) {
   };
 
   const handleUpsellAdded = () => {
-    const product = upsellProduct;
     setUpsellProduct(null);
-    if (product) {
-      void finishCheckout({
-        product_id: product.id,
-        product_name: product.nameAr,
-        unit_price: UPSELL_PRICE,
-      });
-      return;
-    }
-    void finishCheckout();
+    finishCheckout();
   };
 
   const handleUpsellClose = () => {
     setUpsellProduct(null);
-    void finishCheckout();
+    finishCheckout();
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -346,7 +330,7 @@ function CheckoutModal({ onClose, items, total }: CheckoutModalProps) {
         return;
       }
 
-      await finishCheckout();
+      finishCheckout();
     } catch (error) {
       setSubmitError(getCheckoutErrorMessage(error));
       setSubmitting(false);

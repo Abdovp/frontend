@@ -1,3 +1,4 @@
+import type { FinalizeUpsellInput } from './api/orders';
 import type { CartItem } from './cart-store';
 import type { ProductId } from './products';
 
@@ -140,4 +141,17 @@ export function appendUpsellToOrder(
 
   sessionStorage.setItem(ORDER_CONFIRMATION_KEY, JSON.stringify(updated));
   return updated;
+}
+
+export function getUpsellFromConfirmation(order: OrderConfirmation): FinalizeUpsellInput | undefined {
+  const item = order.items.find((entry) => entry.isUpsell && entry.productId);
+  if (!item?.productId) return undefined;
+
+  return {
+    product_id: item.productId,
+    product_name: item.name,
+    unit_price: item.price,
+    offer: item.offer,
+    quantity: item.quantity,
+  };
 }
