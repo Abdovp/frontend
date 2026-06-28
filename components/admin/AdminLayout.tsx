@@ -13,6 +13,7 @@ type Props = {
 const navItems = [
   { href: '/admin', label: 'Overview' },
   { href: '/admin/orders', label: 'Orders' },
+  { href: '/admin/profit', label: 'Profit' },
 ];
 
 export default function AdminLayout({ title, children }: Props) {
