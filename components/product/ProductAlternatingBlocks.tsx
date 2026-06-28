@@ -10,7 +10,7 @@ export default function ProductAlternatingBlocks({ product }: { product: Product
 
   return (
     <AlternatingSection
-      imageSide="right"
+      imageSide="left"
       bg="cream"
       image={
         <ProductImage
