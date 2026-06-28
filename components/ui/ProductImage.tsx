@@ -9,6 +9,7 @@ interface ProductImageProps {
   aspect?: 'square' | 'hero' | 'wide' | 'portrait' | 'phone';
   /** cover = fill square; contain = full image visible with padding */
   fit?: 'cover' | 'contain';
+  containPadding?: 'all' | 'desktop';
   /** When fit is cover, anchors crop (top helps trim bad edges at bottom) */
   objectPosition?: 'center' | 'top' | 'bottom';
   className?: string;
@@ -31,6 +32,7 @@ export default function ProductImage({
   fallbackSublabel,
   aspect = 'square',
   fit = 'cover',
+  containPadding = 'all',
   objectPosition = 'center',
   className = '',
   imageClassName = '',
@@ -56,7 +58,7 @@ export default function ProductImage({
 
   const fitClass =
     fit === 'contain'
-      ? 'object-contain object-center p-4 sm:p-5'
+      ? `object-contain object-center ${containPadding === 'desktop' ? 'lg:p-5' : 'p-4 sm:p-5'}`
       : `object-cover ${objectPosClass}`;
 
   const isGif = src.toLowerCase().endsWith('.gif');
