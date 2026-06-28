@@ -1,32 +1,15 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { FormEvent, useState } from 'react';
-import { adminLogin } from '../../lib/admin/api';
-import { setAdminSession } from '../../lib/admin/auth';
+import { useEffect } from 'react';
 import { useAdminDocument } from '../../components/admin/useAdminDocument';
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(false);
   useAdminDocument();
 
-  async function onSubmit(event: FormEvent) {
-    event.preventDefault();
-    setLoading(true);
-    setError('');
-    try {
-      const session = await adminLogin(username.trim(), password);
-      setAdminSession(session.token, session.username);
-      router.replace('/admin');
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Login failed');
-    } finally {
-      setLoading(false);
-    }
-  }
+  useEffect(() => {
+    router.replace('/admin');
+  }, [router]);
 
   return (
     <>
@@ -47,43 +30,8 @@ export default function AdminLoginPage() {
           </div>
 
           <div className="admin-panel">
-            <h2 className="text-xl font-bold text-slate-900">Sign in</h2>
-            <p className="mt-1 text-sm text-admin-muted">Enter your admin credentials</p>
-
-            <form onSubmit={onSubmit} className="mt-6 space-y-5">
-              <div>
-                <label htmlFor="username" className="admin-label">
-                  Username
-                </label>
-                <input
-                  id="username"
-                  type="text"
-                  autoComplete="username"
-                  value={username}
-                  onChange={(event) => setUsername(event.target.value)}
-                  className="admin-input"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="password" className="admin-label">
-                  Password
-                </label>
-                <input
-                  id="password"
-                  type="password"
-                  autoComplete="current-password"
-                  value={password}
-                  onChange={(event) => setPassword(event.target.value)}
-                  className="admin-input"
-                  required
-                />
-              </div>
-              {error ? <p className="text-sm font-medium text-red-600">{error}</p> : null}
-              <button type="submit" disabled={loading} className="admin-btn-primary w-full disabled:opacity-60">
-                {loading ? 'Signing in...' : 'Sign in'}
-              </button>
-            </form>
+            <h2 className="text-xl font-bold text-slate-900">Redirecting...</h2>
+            <p className="mt-1 text-sm text-admin-muted">Admin login is disabled. Opening the dashboard.</p>
           </div>
         </div>
       </div>

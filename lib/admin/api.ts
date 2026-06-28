@@ -1,5 +1,4 @@
 import { apiUrl } from '../api/base-url';
-import { clearAdminSession, getAdminToken } from './auth';
 import type { AdminMetrics, AdminOrderDetail, AdminOrderList, OrderStatus } from './types';
 
 class AdminApiError extends Error {
@@ -12,16 +11,10 @@ class AdminApiError extends Error {
 }
 
 async function adminFetch<T>(path: string, init: RequestInit = {}): Promise<T> {
-  const token = getAdminToken();
   const headers = new Headers(init.headers);
   headers.set('Content-Type', 'application/json');
-  if (token) headers.set('Authorization', `Bearer ${token}`);
 
   const response = await fetch(apiUrl(path), { ...init, headers });
-  if (response.status === 401) {
-    clearAdminSession();
-    throw new AdminApiError('Session expired', 401);
-  }
   if (!response.ok) {
     let detail = 'Request failed';
     try {
@@ -33,13 +26,6 @@ async function adminFetch<T>(path: string, init: RequestInit = {}): Promise<T> {
     throw new AdminApiError(detail, response.status);
   }
   return response.json() as Promise<T>;
-}
-
-export async function adminLogin(username: string, password: string) {
-  return adminFetch<{ token: string; expires_at: string; username: string }>('/api/admin/login', {
-    method: 'POST',
-    body: JSON.stringify({ username, password }),
-  });
 }
 
 export async function fetchAdminMetrics(fromDate: string, toDate: string) {

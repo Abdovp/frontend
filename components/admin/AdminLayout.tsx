@@ -1,8 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { ReactNode, useEffect, useState } from 'react';
-import { clearAdminSession, getAdminUsername, isAdminLoggedIn } from '../../lib/admin/auth';
+import { ReactNode } from 'react';
 import { useAdminDocument } from './useAdminDocument';
 
 type Props = {
@@ -18,25 +17,7 @@ const navItems = [
 
 export default function AdminLayout({ title, children }: Props) {
   const router = useRouter();
-  const [mounted, setMounted] = useState(false);
-  const username = mounted ? getAdminUsername() : null;
   useAdminDocument();
-
-  useEffect(() => {
-    setMounted(true);
-    if (!isAdminLoggedIn()) {
-      router.replace('/admin/login');
-    }
-  }, [router]);
-
-  function logout() {
-    clearAdminSession();
-    router.replace('/admin/login');
-  }
-
-  if (!mounted || !isAdminLoggedIn()) {
-    return null;
-  }
 
   return (
     <>
@@ -63,10 +44,7 @@ export default function AdminLayout({ title, children }: Props) {
             </nav>
 
             <div className="flex items-center gap-3">
-              <span className="hidden text-sm text-admin-muted sm:inline">{username}</span>
-              <button type="button" onClick={logout} className="admin-btn-ghost">
-                Log out
-              </button>
+              <span className="hidden text-sm text-admin-muted sm:inline">Admin</span>
             </div>
           </div>
 
