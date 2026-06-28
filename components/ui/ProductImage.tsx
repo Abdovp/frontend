@@ -7,9 +7,8 @@ interface ProductImageProps {
   fallbackLabel: string;
   fallbackSublabel?: string;
   aspect?: 'square' | 'hero' | 'wide' | 'portrait' | 'phone';
-  /** cover = fill square; contain = full image visible with padding */
-  fit?: 'cover' | 'contain';
-  containPadding?: 'all' | 'desktop';
+  /** cover = fill square; contain = full image visible */
+  fit?: 'cover' | 'contain' | 'contain-mobile-cover-desktop';
   /** When fit is cover, anchors crop (top helps trim bad edges at bottom) */
   objectPosition?: 'center' | 'top' | 'bottom';
   className?: string;
@@ -32,7 +31,6 @@ export default function ProductImage({
   fallbackSublabel,
   aspect = 'square',
   fit = 'cover',
-  containPadding = 'all',
   objectPosition = 'center',
   className = '',
   imageClassName = '',
@@ -55,11 +53,19 @@ export default function ProductImage({
       : objectPosition === 'bottom'
         ? 'object-bottom'
         : 'object-center';
+  const lgObjectPosClass =
+    objectPosition === 'top'
+      ? 'lg:object-top'
+      : objectPosition === 'bottom'
+        ? 'lg:object-bottom'
+        : 'lg:object-center';
 
   const fitClass =
     fit === 'contain'
-      ? `object-contain object-center ${containPadding === 'desktop' ? 'lg:p-5' : 'p-4 sm:p-5'}`
-      : `object-cover ${objectPosClass}`;
+      ? 'object-contain object-center p-4 sm:p-5'
+      : fit === 'contain-mobile-cover-desktop'
+        ? `object-contain object-center lg:object-cover ${lgObjectPosClass}`
+        : `object-cover ${objectPosClass}`;
 
   const isGif = src.toLowerCase().endsWith('.gif');
 

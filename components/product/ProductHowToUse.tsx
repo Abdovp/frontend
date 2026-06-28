@@ -80,10 +80,9 @@ export default function ProductHowToUse({ product }: { product: Product }) {
                 fallbackLabel={howToUse.imageLabel ?? 'طريقة الاستعمال'}
                 fallbackSublabel="الصورة قريباً"
                 aspect="square"
-                fit="contain"
-                containPadding="desktop"
+                fit="contain-mobile-cover-desktop"
                 objectPosition="center"
-                className="rounded-2xl shadow-card bg-white lg:aspect-auto lg:h-full group"
+                className="rounded-2xl shadow-card bg-white lg:bg-transparent lg:aspect-auto lg:h-full group"
               imageClassName="group-hover:scale-105 transition-transform duration-700 ease-out"
               />
             </div>
