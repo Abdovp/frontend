@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { ReactNode, useEffect } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { clearAdminSession, getAdminUsername, isAdminLoggedIn } from '../../lib/admin/auth';
 import { useAdminDocument } from './useAdminDocument';
 
@@ -17,10 +17,12 @@ const navItems = [
 
 export default function AdminLayout({ title, children }: Props) {
   const router = useRouter();
-  const username = getAdminUsername();
+  const [mounted, setMounted] = useState(false);
+  const username = mounted ? getAdminUsername() : null;
   useAdminDocument();
 
   useEffect(() => {
+    setMounted(true);
     if (!isAdminLoggedIn()) {
       router.replace('/admin/login');
     }
@@ -31,7 +33,7 @@ export default function AdminLayout({ title, children }: Props) {
     router.replace('/admin/login');
   }
 
-  if (!isAdminLoggedIn()) {
+  if (!mounted || !isAdminLoggedIn()) {
     return null;
   }
 
