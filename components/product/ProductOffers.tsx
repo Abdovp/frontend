@@ -291,14 +291,14 @@ export default function ProductOffers({ product }: ProductOffersProps) {
               href={`https://wa.me/212600000000?text=${encodeURIComponent(`مرحبا، بغيت نطلب ${product.nameAr}`)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className={`flex items-center justify-center gap-2 text-sm font-bold border rounded-xl py-3 px-4 mt-3 transition-colors ${
+              aria-label={isAvailable ? 'اطلب عبر الواتساب' : 'غير متوفر على الواتساب حالياً'}
+              className={`flex items-center justify-center text-sm font-bold border rounded-xl py-3 px-4 mt-3 transition-colors ${
                 isAvailable
                   ? 'text-[#25D366] border-[#25D366]/30 hover:bg-[#25D366]/[0.05]'
                   : 'pointer-events-none text-ink/35 border-ink/10 bg-ink/[0.03]'
               }`}
             >
               <Icon name="whatsapp" size={18} />
-              {isAvailable ? 'أو اطلب مباشرة ف الواتساب' : 'غير متوفر على الواتساب حالياً'}
             </a>
           </div>
         </div>
