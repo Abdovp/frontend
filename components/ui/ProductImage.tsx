@@ -1,6 +1,11 @@
 import Image from 'next/image';
 import ImagePlaceholder from './ImagePlaceholder';
 
+/* Tiny 8×8 warm-gray SVG used as the blur placeholder while images load.
+   Next.js stretches + blurs it automatically via placeholder="blur". */
+const BLUR_PLACEHOLDER =
+  'data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI4IiBoZWlnaHQ9IjgiPjxyZWN0IHdpZHRoPSI4IiBoZWlnaHQ9IjgiIGZpbGw9IiNlZWVlZWMiLz48L3N2Zz4=';
+
 interface ProductImageProps {
   src?: string;
   alt: string;
@@ -78,7 +83,10 @@ export default function ProductImage({
         alt={alt}
         fill
         priority={priority}
+        loading={priority ? undefined : 'lazy'}
         unoptimized={isGif}
+        placeholder={isGif ? 'empty' : 'blur'}
+        blurDataURL={isGif ? undefined : BLUR_PLACEHOLDER}
         sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
         className={`${fitClass} ${imageClassName}`.trim()}
       />
