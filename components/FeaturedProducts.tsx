@@ -10,17 +10,16 @@ const comingSoon = [
 
 export default function FeaturedProducts() {
   return (
-    <section className="section-padding bg-cream">
+    <section className="section-padding bg-cream section-texture">
       <div className="container-wide">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="eyebrow mb-4 justify-center">
-            <span className="w-6 h-px bg-current opacity-60" />
+          <span className="eyebrow mb-5 justify-center">
             الأكثر طلباً
           </span>
-          <h2 className="font-heading text-3xl md:text-[2.6rem] font-extrabold text-ink leading-tight">
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-[2.85rem] font-extrabold text-ink leading-[1.12]">
             منتجات كيختاروها السائقين كل يوم
           </h2>
-          <p className="text-ink mt-4 text-lg">
+          <p className="text-ink/75 mt-4 text-lg">
             مجموعة مختارة بعناية — مفحوصة، مضمونة، وجاهزة للتوصيل بالدفع عند الاستلام.
           </p>
         </div>
@@ -46,7 +45,7 @@ export default function FeaturedProducts() {
                   </span>
                 )}
                 {!isProductAvailable(p) && (
-                  <span className="absolute top-3 start-3 badge-pill bg-red-600 text-white shadow-soft">
+                  <span className="absolute top-3 start-3 badge-pill bg-red-600 text-white">
                     نفد المخزون
                   </span>
                 )}
@@ -70,7 +69,7 @@ export default function FeaturedProducts() {
                       'غير متوفر حالياً'
                     )}
                   </p>
-                  <span className="flex items-center justify-center w-9 h-9 rounded-full bg-brand/[0.06] text-brand group-hover:bg-brand group-hover:text-white transition">
+                  <span className="flex items-center justify-center w-10 h-10 rounded-full bg-brand text-white shadow-brand group-hover:bg-brand-dark transition-colors">
                     <Icon name="arrow-left" size={18} />
                   </span>
                 </div>
@@ -79,20 +78,20 @@ export default function FeaturedProducts() {
           ))}
 
           {comingSoon.map((item) => (
-            <div key={item.name} className="card-flat overflow-hidden flex flex-col opacity-80">
+            <div key={item.name} className="card-flat overflow-hidden flex flex-col opacity-70">
               <div className="aspect-square bg-ink/[0.03] flex items-center justify-center border-b border-ink/[0.06] text-ink/25">
                 <Icon name="spark" size={40} />
               </div>
               <div className="p-5">
                 <p className="text-xs text-ink/45 font-bold mb-1">{item.category}</p>
-                <h3 className="font-heading font-bold text-ink/70 mb-3">{item.name}</h3>
+                <h3 className="font-heading font-bold text-ink/60 mb-3">{item.name}</h3>
                 <span className="badge-pill bg-ink/[0.06] text-ink/50">قريباً</span>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="text-center mt-12">
+        <div className="text-center mt-14">
           <Link href="/collections" className="btn-outline">
             شوف كل المنتجات
             <Icon name="arrow-left" size={18} />

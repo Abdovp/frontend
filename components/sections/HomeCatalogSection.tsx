@@ -13,14 +13,13 @@ export default function HomeCatalogSection() {
     <section className="section-padding bg-white">
       <div className="container-wide">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <span className="eyebrow mb-4 justify-center">
-            <span className="w-6 h-px bg-current opacity-60" />
+          <span className="eyebrow mb-5 justify-center">
             كتالوج بويا شوب
           </span>
-          <h2 className="font-heading text-3xl md:text-[2.6rem] font-extrabold text-ink leading-tight">
+          <h2 className="font-heading text-3xl md:text-4xl lg:text-[2.85rem] font-extrabold text-ink leading-[1.12]">
             متجر كامل لعالم السيارات — كيكبر معاك
           </h2>
-          <p className="text-ink mt-4 text-lg">
+          <p className="text-ink/75 mt-4 text-lg">
             ماشي محدود بمنتج ولا جوج. كنبنيو كتالوج مختار بعناية، من الحماية والتبريد حتى الراحة ف الطريق.
           </p>
         </div>
@@ -32,22 +31,27 @@ export default function HomeCatalogSection() {
               <div
                 className={`group h-full rounded-2xl border p-6 transition-all duration-300 ${
                   available
-                    ? 'bg-white border-ink/[0.07] shadow-soft hover:shadow-card hover:-translate-y-1'
+                    ? 'bg-white border-brand/[0.1] shadow-card hover:shadow-lift hover:-translate-y-1.5'
                     : 'bg-cream border-ink/[0.05]'
                 }`}
               >
-                <span
-                  className={`flex items-center justify-center w-12 h-12 rounded-2xl mb-4 ${
-                    available ? 'bg-brand text-white shadow-brand' : 'bg-ink/[0.06] text-ink/40'
-                  }`}
-                >
-                  <Icon name={c.icon} size={24} className={available ? 'text-accent' : ''} />
-                </span>
-                <h3 className="font-heading font-bold text-ink mb-1">{c.title}</h3>
-                <p className="text-sm text-ink mb-4">{c.desc}</p>
+                <div className="relative mb-5 inline-flex">
+                  <span
+                    className={`flex items-center justify-center w-14 h-14 rounded-2xl ${
+                      available ? 'bg-brand text-white shadow-brand' : 'bg-ink/[0.06] text-ink/40'
+                    }`}
+                  >
+                    <Icon name={c.icon} size={26} className={available ? 'text-accent' : ''} />
+                  </span>
+                  {available && (
+                    <span className="absolute -top-1.5 -end-1.5 w-3.5 h-3.5 rounded-full bg-accent border-2 border-white shadow-gold" />
+                  )}
+                </div>
+                <h3 className={`font-heading font-bold text-lg mb-1 ${available ? 'text-ink' : 'text-ink/60'}`}>{c.title}</h3>
+                <p className="text-sm text-ink/60 mb-4">{c.desc}</p>
                 <span
                   className={`badge-pill ${
-                    available ? 'bg-brand/[0.07] text-brand' : 'bg-ink/[0.06] text-ink/45'
+                    available ? 'bg-brand text-white shadow-brand' : 'bg-ink/[0.06] text-ink/45'
                   }`}
                 >
                   {c.status}

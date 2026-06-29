@@ -18,7 +18,7 @@ export default function StoreTrustBand({ className = '' }: Props) {
             key={item.text} 
             className="flex items-center gap-3 sm:gap-4 min-w-0 group cursor-default"
           >
-            <span className="flex items-center justify-center shrink-0 w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-2xl bg-white/5 border border-white/10 text-accent transition-all duration-300 group-hover:scale-105 group-hover:bg-white/10" aria-hidden>
+            <span className="flex items-center justify-center shrink-0 w-12 h-12 sm:w-14 sm:h-14 lg:w-16 lg:h-16 rounded-2xl bg-white/8 border border-white/15 text-accent transition-all duration-300 group-hover:scale-105 group-hover:bg-white/[0.14] group-hover:border-accent/30" aria-hidden>
               <Icon name={item.icon} size={24} className="opacity-90 sm:w-6 sm:h-6 lg:w-[26px] lg:h-[26px]" />
             </span>
             <span className="flex-1 min-w-0">

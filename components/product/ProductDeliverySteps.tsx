@@ -23,7 +23,7 @@ const steps = [
 
 export default function ProductDeliverySteps() {
   return (
-    <section className="section-padding bg-cream" dir="rtl" aria-labelledby="delivery-steps-heading">
+    <section className="section-padding bg-cream section-texture" dir="rtl" aria-labelledby="delivery-steps-heading">
       <div className="container-wide">
         <div className="text-center mb-12">
           <p className="eyebrow mb-3">
@@ -48,12 +48,15 @@ export default function ProductDeliverySteps() {
           {steps.map((step) => (
             <div key={step.number} className="card-elevated p-7 text-center relative">
               <div className="flex items-center justify-center mb-5">
-                <span className="absolute top-0 right-6 -translate-y-1/2 font-heading font-extrabold text-5xl text-brand/10 select-none leading-none">
+                <span className="absolute top-0 right-6 -translate-y-1/2 font-heading font-extrabold text-6xl text-brand/[0.07] select-none leading-none">
                   {step.number}
                 </span>
-                <span className="relative z-10 flex items-center justify-center w-16 h-16 rounded-full bg-brand text-white shadow-brand">
-                  <Icon name={step.icon} size={28} />
-                </span>
+                <div className="relative z-10 inline-flex">
+                  <span className="flex items-center justify-center w-16 h-16 rounded-full bg-brand text-white shadow-brand">
+                    <Icon name={step.icon} size={28} />
+                  </span>
+                  <span className="absolute -top-1.5 -end-1.5 w-4 h-4 rounded-full bg-accent border-2 border-white shadow-gold" />
+                </div>
               </div>
               <h3 className="font-heading font-bold text-ink text-lg mb-2">{step.title}</h3>
               <p className="text-ink leading-relaxed text-sm">{step.body}</p>

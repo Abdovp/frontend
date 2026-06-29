@@ -13,7 +13,7 @@ const badges: { icon: IconName; title: string; desc: string }[] = [
 
 export default function AuthoritySection() {
   return (
-    <section className="section-padding bg-white">
+    <section className="section-padding bg-cream section-texture">
       <div className="container-wide">
         <div className="flex justify-center">
           <SectionHeading
@@ -25,12 +25,16 @@ export default function AuthoritySection() {
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {badges.map((b) => (
-            <div key={b.title} className="card-elevated p-7">
-              <span className="flex items-center justify-center w-12 h-12 rounded-2xl bg-brand text-white shadow-brand mb-5">
-                <Icon name={b.icon} size={24} className="text-accent" />
-              </span>
+            <div key={b.title} className="card-elevated p-7 group">
+              <div className="relative mb-6 inline-flex">
+                <span className="flex items-center justify-center w-14 h-14 rounded-2xl bg-brand text-white shadow-brand">
+                  <Icon name={b.icon} size={26} className="text-accent" />
+                </span>
+                {/* Gold accent dot */}
+                <span className="absolute -top-1.5 -end-1.5 w-3.5 h-3.5 rounded-full bg-accent border-2 border-white shadow-gold" />
+              </div>
               <h3 className="font-heading font-bold text-lg text-ink mb-2">{b.title}</h3>
-              <p className="text-ink leading-relaxed">{b.desc}</p>
+              <p className="text-ink/75 leading-relaxed">{b.desc}</p>
             </div>
           ))}
         </div>

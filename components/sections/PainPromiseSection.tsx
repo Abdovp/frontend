@@ -18,13 +18,13 @@ export default function PainPromiseSection() {
           subtitle="بويا شوب فهمات الحرارة، التعب، والقلق على السيارة. لهذا كنوفرو منتجات مختارة كتحل المشكل فعلاً — ماشي كلام فالهضرة."
           align="center"
         />
-        <ul className="space-y-3 mb-8">
+        <ul className="space-y-4 mb-10">
           {problems.map((p) => (
-            <li key={p} className="flex items-center gap-3 text-ink">
-              <span className="flex items-center justify-center w-6 h-6 rounded-full bg-red-50 text-red-500 shrink-0">
+            <li key={p} className="flex items-center gap-4 bg-red-50 border border-red-100 rounded-2xl px-5 py-4 text-red-800">
+              <span className="flex items-center justify-center w-8 h-8 rounded-full bg-red-600 text-white shrink-0 shadow-[0_4px_12px_rgba(220,38,38,0.3)]">
                 <Icon name="close" size={14} />
               </span>
-              <span>{p}</span>
+              <span className="font-semibold leading-snug">{p}</span>
             </li>
           ))}
         </ul>

@@ -41,13 +41,14 @@ module.exports = {
         soft: '0 4px 20px -2px rgba(14, 17, 22, 0.04), 0 2px 6px -1px rgba(14, 17, 22, 0.03)',
         card: '0 12px 32px -4px rgba(14, 17, 22, 0.06), 0 4px 12px -2px rgba(14, 17, 22, 0.04)',
         lift: '0 24px 48px -8px rgba(14, 17, 22, 0.1), 0 8px 24px -4px rgba(14, 17, 22, 0.06)',
-        gold: '0 12px 30px -4px rgba(212, 160, 23, 0.25), 0 4px 12px -2px rgba(212, 160, 23, 0.15)',
-        brand: '0 8px 24px -4px rgba(19, 41, 75, 0.15), 0 3px 8px -2px rgba(19, 41, 75, 0.1)',
+        gold: '0 12px 30px -4px rgba(212, 160, 23, 0.30), 0 4px 12px -2px rgba(212, 160, 23, 0.18)',
+        brand: '0 8px 24px -4px rgba(19, 41, 75, 0.18), 0 3px 8px -2px rgba(19, 41, 75, 0.12)',
       },
       borderRadius: {
         xl: '0.875rem',
         '2xl': '1.125rem',
         '3xl': '1.625rem',
+        '4xl': '2rem',
       },
       keyframes: {
         'fade-up': {

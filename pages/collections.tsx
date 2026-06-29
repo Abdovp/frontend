@@ -19,19 +19,21 @@ export default function Collections() {
       <Header />
       <main>
         <section className="bg-brand text-white relative overflow-hidden">
-          <div className="absolute inset-0 hero-grid-bg opacity-60" />
-          <div className="relative container-wide py-16 md:py-20 text-center">
-            <span className="pill-soft bg-white/10 text-white border-white/15 mb-5">
-              <Icon name="badge" size={16} className="text-accent" /> الكتالوج
+          <div className="absolute inset-0 hero-grid-bg opacity-70" />
+          <div className="absolute -top-24 -end-24 w-72 h-72 rounded-full bg-accent/12 blur-[80px]" aria-hidden />
+          <div className="absolute -bottom-24 -start-24 w-72 h-72 rounded-full bg-brand-light/40 blur-[80px]" aria-hidden />
+          <div className="relative container-wide py-20 md:py-24 text-center">
+            <span className="eyebrow-light mb-6">
+              <Icon name="badge" size={14} className="text-accent" /> الكتالوج
             </span>
-            <h1 className="font-heading text-4xl md:text-5xl font-extrabold mb-4">منتجات بويا شوب</h1>
+            <h1 className="font-heading text-4xl md:text-5xl lg:text-[3.2rem] font-extrabold mb-4 leading-[1.1] text-balance">منتجات بويا شوب</h1>
             <p className="text-white/75 max-w-xl mx-auto text-lg">
               إكسسوارات سيارات مختارة بعناية — متوفرة دابا، ومزيد من المجموعات ف الطريق.
             </p>
           </div>
         </section>
 
-        <section className="section-padding bg-cream">
+        <section className="section-padding bg-cream section-texture">
           <div className="container-wide">
             <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
               {productList.map((p) => (

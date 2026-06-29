@@ -5,14 +5,14 @@ import type { Product } from '../../lib/products';
 export default function ProductPainSection({ product }: { product: Product }) {
   const { pain } = product;
   return (
-    <section className="bg-[#1a0f0a] text-white py-16 md:py-24" aria-labelledby="pain-heading">
+    <section className="bg-[#1a0f0a] text-white py-20 md:py-28" aria-labelledby="pain-heading">
       <div className="container-wide">
         <div className="layout-ltr grid lg:grid-cols-2 gap-10 lg:gap-16 items-center">
           {/* Copy — desktop left */}
           <div dir="rtl" className="text-right order-2 lg:order-1">
             {pain.eyebrow && (
-              <p className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-widest text-red-400 mb-4">
-                <Icon name="flame" size={14} className="text-red-400" />
+              <p className="inline-flex items-center gap-2 text-[0.68rem] font-extrabold uppercase tracking-widest2 text-red-400 bg-red-500/10 border border-red-500/25 px-3.5 py-1.5 rounded-full mb-5">
+                <Icon name="flame" size={13} className="text-red-400" />
                 {pain.eyebrow}
               </p>
             )}
@@ -29,7 +29,7 @@ export default function ProductPainSection({ product }: { product: Product }) {
               <ul className="space-y-4">
                 {pain.bullets.map((b) => (
                   <li key={b} className="flex items-start gap-4">
-                    <span className="flex items-center justify-center w-7 h-7 rounded-full bg-red-500/20 text-red-400 shrink-0 mt-0.5">
+                    <span className="flex items-center justify-center w-8 h-8 rounded-full bg-red-600 text-white shrink-0 mt-0.5 shadow-[0_4px_12px_rgba(220,38,38,0.35)]">
                       <Icon name="close" size={14} />
                     </span>
                     <span className="text-white font-extrabold text-base leading-snug">{b}</span>
