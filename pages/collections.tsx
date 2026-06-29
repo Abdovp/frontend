@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { productList, WARRANTY_DAYS, CURRENCY } from '../lib/products';
+import { productList, WARRANTY_DAYS, CURRENCY, isProductAvailable } from '../lib/products';
 import ProductImage from '../components/ui/ProductImage';
 import Icon, { Stars } from '../components/ui/Icon';
 
@@ -57,6 +57,11 @@ export default function Collections() {
                           الأكثر مبيعاً
                         </span>
                       )}
+                      {!isProductAvailable(p) && (
+                        <span className="absolute top-3 start-3 z-10 badge-pill bg-red-600 text-white shadow-soft">
+                          نفد المخزون
+                        </span>
+                      )}
                     </div>
                   </div>
                   <div className="p-6 flex flex-col min-w-0">
@@ -72,7 +77,13 @@ export default function Collections() {
                     <div className="mt-auto flex items-center justify-between">
                       <div>
                         <p className="font-heading font-extrabold text-xl text-brand">
-                          من {p.offers[0].price} <span className="text-sm">{CURRENCY}</span>
+                          {isProductAvailable(p) ? (
+                            <>
+                              من {p.offers[0].price} <span className="text-sm">{CURRENCY}</span>
+                            </>
+                          ) : (
+                            'غير متوفر حالياً'
+                          )}
                         </p>
                         <p className="text-xs text-ink/45 mt-0.5">ضمان {WARRANTY_DAYS} يوم · دفع عند الاستلام</p>
                       </div>

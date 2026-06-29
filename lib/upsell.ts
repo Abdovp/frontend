@@ -1,11 +1,11 @@
-import { productList, type Product, type ProductId } from './products';
+import { isProductAvailable, productList, type Product, type ProductId } from './products';
 
 export const UPSELL_PRICE = 99;
 export const UPSELL_DURATION_SEC = 15;
 export const UPSELL_INDEX_KEY = 'boya_upsell_index';
 
 export function getUpsellCandidates(orderedIds: ProductId[]): Product[] {
-  return productList.filter((p) => !orderedIds.includes(p.id));
+  return productList.filter((p) => isProductAvailable(p) && !orderedIds.includes(p.id));
 }
 
 export function hasUpsellAvailable(orderedIds: ProductId[]): boolean {

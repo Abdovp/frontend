@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef, useState } from 'react';
 import { trackAddToCart } from '../../lib/analytics/track';
 import { useCartStore } from '../../lib/cart-store';
 import type { Product } from '../../lib/products';
-import { CURRENCY, getFirstOffer } from '../../lib/products';
+import { CURRENCY, getFirstOffer, isProductAvailable } from '../../lib/products';
 import ProductImage from '../ui/ProductImage';
 import StoreTrustBand from '../StoreTrustBand';
 import Icon, { Stars } from '../ui/Icon';
@@ -21,6 +21,7 @@ export default function ProductOffers({ product }: ProductOffersProps) {
   const { addItem, openCart, setSelectedOffer, isInCart } = useCartStore();
   const productCardRef = useRef<HTMLDivElement>(null);
   const [showSticky, setShowSticky] = useState(false);
+  const isAvailable = isProductAvailable(product);
 
   const defaultOffer = useMemo(() => getDefaultOffer(product), [product]);
   const selected = useCartStore(
@@ -69,10 +70,12 @@ export default function ProductOffers({ product }: ProductOffersProps) {
   }, [product.id]);
 
   const selectOffer = (quantity: OfferQuantity) => {
+    if (!isAvailable) return;
     setSelectedOffer(product.id, quantity);
   };
 
   const handleCheckout = (quantity: OfferQuantity = selected) => {
+    if (!isAvailable) return;
     const offer = product.offers.find((o) => o.quantity === quantity);
     if (!offer) return;
 
@@ -201,7 +204,10 @@ export default function ProductOffers({ product }: ProductOffersProps) {
             </ul>
 
             {/* Scarcity */}
-            <div className="scarcity-banner mb-6 animate-pulse" style={{ animationDuration: '3s' }}>
+            <div
+              className={`scarcity-banner mb-6 ${isAvailable ? 'animate-pulse' : ''}`}
+              style={{ animationDuration: '3s' }}
+            >
               <Icon name="flame" size={18} className="text-red-500 shrink-0" />
               <p>{product.scarcityText}</p>
             </div>
@@ -222,9 +228,10 @@ export default function ProductOffers({ product }: ProductOffersProps) {
                       type="button"
                       onClick={() => selectOffer(offer.quantity)}
                       aria-pressed={isSelected}
-                      className={`offer-card ${isSelected ? 'offer-card--selected' : ''}`}
+                      disabled={!isAvailable}
+                      className={`offer-card ${isSelected && isAvailable ? 'offer-card--selected' : ''} ${!isAvailable ? 'cursor-not-allowed opacity-60' : ''}`}
                     >
-                      <span className={`offer-radio ${isSelected ? 'offer-radio--checked' : ''}`} />
+                      <span className={`offer-radio ${isSelected && isAvailable ? 'offer-radio--checked' : ''}`} />
                       <span className="flex-1 min-w-0">
                         <span className="block font-heading font-bold text-ink">{offer.label}</span>
                         {offer.sublabel && (
@@ -258,11 +265,13 @@ export default function ProductOffers({ product }: ProductOffersProps) {
             <button
               type="button"
               onClick={() => handleCheckout()}
-              disabled={!selectedOffer}
+              disabled={!selectedOffer || !isAvailable}
               className="checkout-cta checkout-cta--pulse w-full disabled:opacity-50"
             >
               <Icon name="cart" size={20} />
-              {selectedOffer
+              {!isAvailable
+                ? 'غير متوفر حالياً'
+                : selectedOffer
                 ? isInCart(product.id, selectedOffer.quantity)
                   ? 'شوف السلة — المنتج مضاف'
                   : `اطلب دابا — ${selectedOffer.price} ${CURRENCY}`
@@ -282,10 +291,14 @@ export default function ProductOffers({ product }: ProductOffersProps) {
               href={`https://wa.me/212600000000?text=${encodeURIComponent(`مرحبا، بغيت نطلب ${product.nameAr}`)}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center justify-center gap-2 text-sm font-bold text-[#25D366] border border-[#25D366]/30 rounded-xl py-3 px-4 mt-3 hover:bg-[#25D366]/[0.05] transition-colors"
+              className={`flex items-center justify-center gap-2 text-sm font-bold border rounded-xl py-3 px-4 mt-3 transition-colors ${
+                isAvailable
+                  ? 'text-[#25D366] border-[#25D366]/30 hover:bg-[#25D366]/[0.05]'
+                  : 'pointer-events-none text-ink/35 border-ink/10 bg-ink/[0.03]'
+              }`}
             >
               <Icon name="whatsapp" size={18} />
-              أو اطلب مباشرة ف الواتساب
+              {isAvailable ? 'أو اطلب مباشرة ف الواتساب' : 'غير متوفر على الواتساب حالياً'}
             </a>
           </div>
         </div>
@@ -303,10 +316,11 @@ export default function ProductOffers({ product }: ProductOffersProps) {
           <button
             type="button"
             onClick={handleStickyClick}
-            className="checkout-cta checkout-cta--pulse sticky-cta__button sticky-cta__button--mobile w-full md:hidden"
+            disabled={!isAvailable}
+            className="checkout-cta checkout-cta--pulse sticky-cta__button sticky-cta__button--mobile w-full disabled:opacity-50 md:hidden"
           >
             <Icon name="arrow-up" size={18} />
-            {`اطلب دابا — ${firstOffer.price} ${CURRENCY}`}
+            {isAvailable ? `اطلب دابا — ${firstOffer.price} ${CURRENCY}` : 'غير متوفر حالياً'}
           </button>
 
           {/* Desktop — product info + wide CTA */}
@@ -330,17 +344,18 @@ export default function ProductOffers({ product }: ProductOffersProps) {
                   {product.nameAr}
                 </p>
                 <p className="mt-0.5 text-xs leading-snug text-ink/50">
-                  {firstOffer.price} {CURRENCY} • دفع عند الاستلام
+                  {isAvailable ? `${firstOffer.price} ${CURRENCY} • دفع عند الاستلام` : 'غير متوفر حالياً'}
                 </p>
               </div>
             </div>
             <button
               type="button"
               onClick={handleStickyClick}
-              className="checkout-cta checkout-cta--pulse sticky-cta__button sticky-cta__button--desktop min-w-0 flex-1"
+              disabled={!isAvailable}
+              className="checkout-cta checkout-cta--pulse sticky-cta__button sticky-cta__button--desktop min-w-0 flex-1 disabled:opacity-50"
             >
               <Icon name="arrow-up" size={18} />
-              {`اطلب دابا الآن • ${firstOffer.price} ${CURRENCY}`}
+              {isAvailable ? `اطلب دابا الآن • ${firstOffer.price} ${CURRENCY}` : 'غير متوفر حالياً'}
             </button>
           </div>
         </div>

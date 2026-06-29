@@ -379,13 +379,13 @@ export const products: Record<ProductId, Product> = {
     icon: 'pin',
     tagline: 'ثابت ف الطريق، بلا اهتزاز وبلا خطر — تلفونك دائماً قدامك.',
     metaDescription:
-      'حامل هاتف مغناطيسي قوي للسيارة من بويا شوب: ثبات تام بلا اهتزاز. تركيب ف ثواني. دفع عند الاستلام، ضمان 30 يوم. من 120 درهم.',
+      'حامل هاتف مغناطيسي قوي للسيارة من بويا شوب: ثبات تام بلا اهتزاز. تركيب ف ثواني. دفع عند الاستلام، ضمان 30 يوم.',
     rating: 4.8,
     reviewCount: 640,
     unit: 'حامل',
     soldText: 'تباع +1,800 حامل هاد الشهر',
-    scarcityText: 'بقات غير 12 الحبة في المخزون',
-    stockLeft: 12,
+    scarcityText: 'نفد من المخزون مؤقتاً — غادي يرجع قريباً',
+    stockLeft: 0,
     deliveryDays: 'الخميس أو الجمعة',
     checkoutHeadline: 'هاتفك في أمان — تركيزك على الطريق',
     checkoutDescription:
@@ -591,7 +591,7 @@ export const products: Record<ProductId, Product> = {
     icon: 'vacuum',
     tagline: 'شفط، نفخ، وتنظيف عميق — 6 رؤوس قابلة للتبديل، شحن USB.',
     metaDescription:
-      'مكنسة سيارة 3 في 1 من بويا شوب: تشفط، تنفخ، وتنظف بعمق. 6 رؤوس قابلة للتبديل، شحن USB. دفع عند الاستلام، ضمان 30 يوم. من 199 درهم.',
+      'مكنسة سيارة 3 في 1 من بويا شوب: تشفط، تنفخ، وتنظف بعمق. 6 رؤوس قابلة للتبديل، شحن USB. دفع عند الاستلام، ضمان 30 يوم. من 189 درهم.',
     rating: 4.7,
     reviewCount: 310,
     unit: 'مكنسة',
@@ -624,28 +624,28 @@ export const products: Record<ProductId, Product> = {
     offers: [
       {
         quantity: 1,
-        price: 199,
+        price: 189,
         label: 'مكنسة وحدة',
         sublabel: 'مع 6 رؤوس + شاحن USB',
         perks: ['6 رؤوس متعددة', 'شحن USB', 'توصيل مجاني', `ضمان ${WARRANTY_DAYS} يوم`],
       },
       {
         quantity: 2,
-        price: 349,
-        compareAt: 398,
+        price: 264,
+        compareAt: 378,
         label: 'جوج مكانس',
         sublabel: 'وحدة ليك ووحدة هدية',
         badge: 'الأكثر مبيعاً',
-        perks: ['مكنسة ثانية بثمن مخفّض', 'توفير 49 درهم', 'توصيل مجاني', `ضمان ${WARRANTY_DAYS} يوم`],
+        perks: ['مكنسة ثانية بثمن مخفّض', 'توفير 114 درهم', 'توصيل مجاني', `ضمان ${WARRANTY_DAYS} يوم`],
       },
       {
         quantity: 3,
-        price: 479,
-        compareAt: 597,
+        price: 394,
+        compareAt: 567,
         label: '3 مكانس',
         sublabel: 'للعائلة وكهدية مميزة',
         badge: 'أقصى توفير',
-        perks: ['3 مكانس كاملة', 'توفير 118 درهم', 'توصيل مجاني', `ضمان ${WARRANTY_DAYS} يوم`],
+        perks: ['3 مكانس كاملة', 'توفير 173 درهم', 'توصيل مجاني', `ضمان ${WARRANTY_DAYS} يوم`],
       },
     ],
     galleryLabels: ['المكنسة كاملة', '6 رؤوس', 'وضع الشفط', 'وضع النفخ', 'الشحن USB'],
@@ -801,6 +801,10 @@ export const products: Record<ProductId, Product> = {
 };
 
 export const productList: Product[] = Object.values(products);
+
+export function isProductAvailable(product: Product): boolean {
+  return product.stockLeft > 0;
+}
 
 export function getProduct(id: ProductId): Product {
   return products[id];

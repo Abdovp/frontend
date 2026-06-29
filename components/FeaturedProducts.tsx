@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { productList } from '../lib/products';
+import { isProductAvailable, productList } from '../lib/products';
 import ProductImage from './ui/ProductImage';
 import Icon, { Stars } from './ui/Icon';
 
@@ -45,6 +45,11 @@ export default function FeaturedProducts() {
                     الأكثر مبيعاً
                   </span>
                 )}
+                {!isProductAvailable(p) && (
+                  <span className="absolute top-3 start-3 badge-pill bg-red-600 text-white shadow-soft">
+                    نفد المخزون
+                  </span>
+                )}
               </div>
               <div className="p-5 flex flex-col flex-1">
                 <p className="text-xs text-accent-dark font-bold mb-1">{p.category}</p>
@@ -57,7 +62,13 @@ export default function FeaturedProducts() {
                 </div>
                 <div className="mt-auto flex items-center justify-between">
                   <p className="font-heading font-extrabold text-lg text-brand">
-                    من {p.offers[0].price} <span className="text-sm">درهم</span>
+                    {isProductAvailable(p) ? (
+                      <>
+                        من {p.offers[0].price} <span className="text-sm">درهم</span>
+                      </>
+                    ) : (
+                      'غير متوفر حالياً'
+                    )}
                   </p>
                   <span className="flex items-center justify-center w-9 h-9 rounded-full bg-brand/[0.06] text-brand group-hover:bg-brand group-hover:text-white transition">
                     <Icon name="arrow-left" size={18} />

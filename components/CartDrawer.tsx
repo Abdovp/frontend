@@ -12,7 +12,7 @@ import { createPortal } from 'react-dom';
 import { useRouter } from 'next/router';
 import { useCartStore } from '../lib/cart-store';
 import { saveOrderConfirmation } from '../lib/order-confirmation';
-import { products, CURRENCY, WARRANTY_DAYS, type Product, type ProductId } from '../lib/products';
+import { products, CURRENCY, WARRANTY_DAYS, isProductAvailable, type Product, type ProductId } from '../lib/products';
 import { pickUpsellProduct } from '../lib/upsell';
 import FormField from './ui/FormField';
 import CartProductThumb from './ui/CartProductThumb';
@@ -33,6 +33,7 @@ export default function CartDrawer() {
   const total = getTotalPrice();
 
   const handleAddCrossSell = (product: Product) => {
+    if (!isProductAvailable(product)) return;
     const offer = product.offers[0];
     trackAddToCart({
       productId: product.id,
@@ -117,7 +118,7 @@ export default function CartDrawer() {
                   <p className="font-heading font-bold text-ink mb-3">أضف معاه:</p>
                   <div className="space-y-3">
                     {crossSells.map((cs) => (
-                      <div key={cs.id} className="cart-crosssell-card">
+                      <div key={cs.id} className={`cart-crosssell-card ${!isProductAvailable(cs) ? 'opacity-65' : ''}`}>
                         <CartProductThumb productId={cs.id} />
                         <div className="flex-1 min-w-0">
                           <p className="font-bold text-ink leading-snug line-clamp-1">{cs.nameAr}</p>
@@ -131,8 +132,13 @@ export default function CartDrawer() {
                           <p className="text-sm font-extrabold text-ink whitespace-nowrap">
                             {cs.offers[0].price} {CURRENCY}
                           </p>
-                          <button type="button" onClick={() => handleAddCrossSell(cs)} className="cart-crosssell-btn">
-                            أضفه
+                          <button
+                            type="button"
+                            onClick={() => handleAddCrossSell(cs)}
+                            disabled={!isProductAvailable(cs)}
+                            className="cart-crosssell-btn disabled:cursor-not-allowed disabled:bg-ink/10 disabled:text-ink/40"
+                          >
+                            {isProductAvailable(cs) ? 'أضفه' : 'غير متوفر'}
                           </button>
                         </div>
                       </div>
