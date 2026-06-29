@@ -12,10 +12,9 @@ export default function WhatsAppFloat() {
       target="_blank"
       rel="noopener noreferrer"
       aria-label="تواصل معنا ف الواتساب"
-      className="fixed bottom-5 left-5 z-50 flex items-center gap-2.5 bg-[#25D366] text-white font-bold text-sm py-3 px-4 rounded-full shadow-lg hover:bg-[#1ebe59] active:scale-95 transition-all duration-200"
+      className="fixed bottom-5 left-5 z-50 flex h-12 w-12 items-center justify-center bg-[#25D366] text-white rounded-full shadow-lg hover:bg-[#1ebe59] active:scale-95 transition-all duration-200"
     >
       <Icon name="whatsapp" size={22} />
-      <span className="hidden sm:inline">اطلب ف الواتساب</span>
     </a>
   );
 }
