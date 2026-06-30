@@ -1,6 +1,6 @@
-import { useMemo, useState } from 'react';
+import { useMemo, useState, type ReactNode } from 'react';
 import AdminLayout from '../../components/admin/AdminLayout';
-import { formatMad, formatPercent } from '../../lib/admin/format';
+import { formatPercent } from '../../lib/admin/format';
 
 type CalculatorInputProps = {
   label: string;
@@ -23,8 +23,17 @@ function safeNumber(value: number): number {
   return Number.isFinite(value) ? value : 0;
 }
 
-function money(value: number): string {
-  return formatMad(safeNumber(value));
+function money(value: number, signed = false): string {
+  const n = safeNumber(value);
+  const formatted = `${Math.abs(n).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} MAD`;
+  if (!signed) return formatted;
+  if (n > 0) return `+${formatted}`;
+  if (n < 0) return `-${formatted}`;
+  return formatted;
+}
+
+function moneyShort(value: number): string {
+  return `${safeNumber(value).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })} MAD`;
 }
 
 function CalculatorInput({ label, value, onChange, suffix, min = 0, step = 1 }: CalculatorInputProps) {
@@ -50,43 +59,64 @@ function CalculatorInput({ label, value, onChange, suffix, min = 0, step = 1 }: 
   );
 }
 
-function BreakdownCard({
+function MiniStat({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-xl bg-[#f3ede4] px-3 py-3 text-center">
+      <p className="text-xs text-slate-500">{label}</p>
+      <p className="mt-1 text-base font-bold tabular-nums text-slate-900">{value}</p>
+    </div>
+  );
+}
+
+function StatusCheck({ ok, children }: { ok: boolean; children: ReactNode }) {
+  return (
+    <p className={`mt-2 flex items-center gap-1.5 text-xs ${ok ? 'text-emerald-600' : 'text-amber-600'}`}>
+      <span className={`inline-flex h-4 w-4 items-center justify-center rounded-full text-[10px] font-bold text-white ${ok ? 'bg-emerald-500' : 'bg-amber-400'}`}>
+        {ok ? '✓' : '!'}
+      </span>
+      {children}
+    </p>
+  );
+}
+
+function ThresholdCard({
   label,
   value,
-  detail,
-  highlight,
-  tone = 'default',
+  children,
+  highlight = false,
 }: {
   label: string;
   value: string;
-  detail?: string;
+  children?: ReactNode;
   highlight?: boolean;
-  tone?: 'default' | 'positive' | 'negative';
 }) {
-  const toneClass =
-    tone === 'positive'
-      ? 'bg-emerald-50 ring-1 ring-emerald-100'
-      : tone === 'negative'
-        ? 'bg-red-50 ring-1 ring-red-100'
-        : highlight
-          ? 'bg-admin-accent text-white ring-1 ring-admin-accent'
-          : 'bg-admin-bg';
+  return (
+    <div
+      className={`rounded-2xl border p-5 ${
+        highlight ? 'border-emerald-200 bg-emerald-50' : 'border-transparent bg-[#f3ede4]'
+      }`}
+    >
+      <p className="text-sm font-medium text-slate-600">{label}</p>
+      <p className={`mt-2 text-3xl font-bold tabular-nums tracking-tight ${highlight ? 'text-emerald-700' : 'text-slate-900'}`}>
+        {value}
+      </p>
+      {children}
+    </div>
+  );
+}
 
-  const labelClass = highlight ? 'text-white/70' : 'text-admin-muted';
-  const valueClass = highlight
-    ? 'text-white'
-    : tone === 'positive'
-      ? 'text-emerald-700'
-      : tone === 'negative'
-        ? 'text-red-700'
-        : 'text-slate-900';
-  const detailClass = highlight ? 'text-white/65' : 'text-admin-muted';
+function PlRow({ label, value, variant }: { label: string; value: string; variant: 'revenue' | 'cost' | 'total' }) {
+  const valueClass =
+    variant === 'revenue'
+      ? 'font-bold text-emerald-700'
+      : variant === 'cost'
+        ? 'text-red-600'
+        : 'font-bold text-slate-900';
 
   return (
-    <div className={`rounded-2xl p-4 ${toneClass}`}>
-      <p className={`text-xs font-semibold uppercase tracking-wide ${labelClass}`}>{label}</p>
-      <p className={`mt-2 text-2xl font-bold tabular-nums tracking-tight ${valueClass}`}>{value}</p>
-      {detail ? <p className={`mt-1 text-xs ${detailClass}`}>{detail}</p> : null}
+    <div className="flex items-center justify-between gap-4 py-2.5">
+      <span className="text-sm text-slate-700">{label}</span>
+      <span className={`text-sm tabular-nums ${valueClass}`}>{value}</span>
     </div>
   );
 }
@@ -115,37 +145,31 @@ export default function AdminProfitPage() {
     const confirmedFees = confirmed * CONFIRMED_LEAD_COST;
     const returnFees = returns * RETURN_COST;
     const cancelFees = canceled * CANCELED_LEAD_COST;
+    const overhead = fixedOverhead;
     const totalCosts =
-      adSpend + productSpend + shippingSpend + confirmedFees + returnFees + cancelFees + fixedOverhead;
+      adSpend + productSpend + shippingSpend + confirmedFees + returnFees + cancelFees + overhead;
     const profit = revenue - totalCosts;
-    const deliveredRateFromLeads = leads > 0 ? delivered / leads : 0;
-    const profitPerDelivered = delivered > 0 ? profit / delivered : 0;
     const profitPerLead = leads > 0 ? profit / leads : 0;
-    const roas = adSpend > 0 ? revenue / adSpend : 0;
-    const margin = revenue > 0 ? profit / revenue : 0;
+    const profitPerDelivered = delivered > 0 ? profit / delivered : 0;
+    const roi = totalCosts > 0 ? (profit / totalCosts) * 100 : 0;
+
+    const overheadPerLead = leads > 0 ? overhead / leads : 0;
+    const unitMargin = averageOrderValue - productCost - deliveryCost + RETURN_COST;
+    const confDenom = delivery * unitMargin;
+    const delDenom = confirmation * unitMargin;
+
+    const breakevenConfirmationRate =
+      confDenom > 0 ? ((costPerLead + CONFIRMED_LEAD_COST + overheadPerLead) / confDenom) * 100 : null;
+    const breakevenDeliveryRate =
+      delDenom > 0 ? ((costPerLead + CONFIRMED_LEAD_COST + overheadPerLead) / delDenom) * 100 : null;
+
     const contributionBeforeAdsPerLead =
       confirmation * delivery * (averageOrderValue - productCost - deliveryCost) -
       confirmation * CONFIRMED_LEAD_COST -
       confirmation * (1 - delivery) * RETURN_COST -
-      (1 - confirmation) * CANCELED_LEAD_COST;
-    const maxBreakevenCpl = contributionBeforeAdsPerLead;
-    const requiredAov =
-      confirmation * delivery > 0
-        ? (costPerLead +
-            confirmation * CONFIRMED_LEAD_COST +
-            confirmation * (1 - delivery) * RETURN_COST +
-            (1 - confirmation) * CANCELED_LEAD_COST +
-            confirmation * delivery * (productCost + deliveryCost) +
-            (leads > 0 ? fixedOverhead / leads : 0)) /
-          (confirmation * delivery)
-        : 0;
-    const contributionAfterAdsPerLead = contributionBeforeAdsPerLead - costPerLead;
-    const breakevenLeads =
-      fixedOverhead > 0 && contributionAfterAdsPerLead > 0
-        ? fixedOverhead / contributionAfterAdsPerLead
-        : null;
-    const cplGap = maxBreakevenCpl - costPerLead;
-    const cplHealthy = cplGap >= 0;
+      (1 - confirmation) * CANCELED_LEAD_COST -
+      overheadPerLead;
+    const maxAffordableCpl = contributionBeforeAdsPerLead;
 
     return {
       confirmed,
@@ -161,17 +185,16 @@ export default function AdminProfitPage() {
       cancelFees,
       totalCosts,
       profit,
-      deliveredRateFromLeads,
-      profitPerDelivered,
       profitPerLead,
-      roas,
-      margin,
-      maxBreakevenCpl,
-      requiredAov,
-      contributionAfterAdsPerLead,
-      breakevenLeads,
-      cplGap,
-      cplHealthy,
+      profitPerDelivered,
+      roi,
+      breakevenConfirmationRate,
+      breakevenDeliveryRate,
+      maxAffordableCpl,
+      isProfitable: profitPerLead > 0,
+      cplOk: costPerLead <= maxAffordableCpl,
+      deliveryOk: breakevenDeliveryRate != null ? deliveryRate >= breakevenDeliveryRate : true,
+      confirmationOk: breakevenConfirmationRate != null ? confirmationRate >= breakevenConfirmationRate : true,
     };
   }, [
     averageOrderValue,
@@ -184,6 +207,16 @@ export default function AdminProfitPage() {
     productCost,
   ]);
 
+  const costLines = [
+    { label: 'Ad Spend', value: result.adSpend },
+    { label: 'Product Costs', value: result.productSpend },
+    { label: 'Confirmation Fees', value: result.confirmedFees },
+    { label: 'Delivery Fees', value: result.shippingSpend },
+    { label: 'Return Fees', value: result.returnFees },
+    { label: 'Cancel Fees', value: result.cancelFees },
+    ...(fixedOverhead > 0 ? [{ label: 'Fixed Overhead', value: fixedOverhead }] : []),
+  ];
+
   return (
     <AdminLayout title="Profit Calculator">
       <div className="space-y-5">
@@ -194,94 +227,100 @@ export default function AdminProfitPage() {
           </p>
         </div>
 
-        <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_320px]">
+        <section className="admin-panel">
+          <h2 className="admin-panel__title">Inputs</h2>
+          <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            <CalculatorInput label="Leads" value={leads} onChange={setLeads} />
+            <CalculatorInput label="Cost per lead" value={costPerLead} onChange={setCostPerLead} suffix="dh" />
+            <CalculatorInput label="Confirmation rate" value={confirmationRate} onChange={setConfirmationRate} suffix="%" />
+            <CalculatorInput label="Delivery rate" value={deliveryRate} onChange={setDeliveryRate} suffix="%" />
+            <CalculatorInput label="Average order value" value={averageOrderValue} onChange={setAverageOrderValue} suffix="dh" step={0.01} />
+            <CalculatorInput label="Product cost" value={productCost} onChange={setProductCost} suffix="dh" step={0.01} />
+            <CalculatorInput label="Delivery cost" value={deliveryCost} onChange={setDeliveryCost} suffix="dh" />
+            <CalculatorInput label="Fixed overhead" value={fixedOverhead} onChange={setFixedOverhead} suffix="dh" />
+          </div>
+        </section>
+
+        <div className="grid gap-5 xl:grid-cols-2">
+          {/* Section 1 — Breakeven Thresholds */}
           <section className="admin-panel">
-            <h2 className="admin-panel__title">Inputs</h2>
-            <div className="mt-5 space-y-6">
-              <div>
-                <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-admin-muted">Campaign</p>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <CalculatorInput label="Leads" value={leads} onChange={setLeads} />
-                  <CalculatorInput label="Cost per lead" value={costPerLead} onChange={setCostPerLead} suffix="dh" />
-                </div>
-              </div>
+            <h2 className="text-lg font-bold text-slate-900">Section 1 — Breakeven Thresholds</h2>
+            <p className="mt-1 text-sm text-admin-muted">Minimum performance needed to hit 0 MAD profit.</p>
 
-              <div>
-                <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-admin-muted">Rates</p>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <CalculatorInput label="Confirmation rate" value={confirmationRate} onChange={setConfirmationRate} suffix="%" />
-                  <CalculatorInput label="Delivery rate" value={deliveryRate} onChange={setDeliveryRate} suffix="%" />
-                </div>
-              </div>
+            <div className="mt-5 space-y-3">
+              <ThresholdCard label="Current Profit Per Lead" value={money(result.profitPerLead, true)} highlight={result.isProfitable}>
+                <StatusCheck ok={result.isProfitable}>
+                  {result.isProfitable ? 'You are profitable at current CPL' : 'You are below breakeven at current CPL'}
+                </StatusCheck>
+              </ThresholdCard>
 
-              <div>
-                <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-admin-muted">Unit economics</p>
-                <div className="grid gap-4 sm:grid-cols-2">
-                  <CalculatorInput label="Average order value" value={averageOrderValue} onChange={setAverageOrderValue} suffix="dh" />
-                  <CalculatorInput label="Product cost" value={productCost} onChange={setProductCost} suffix="dh" />
-                  <CalculatorInput label="Delivery cost" value={deliveryCost} onChange={setDeliveryCost} suffix="dh" />
-                  <CalculatorInput label="Fixed overhead" value={fixedOverhead} onChange={setFixedOverhead} suffix="dh" />
-                </div>
-              </div>
+              <ThresholdCard
+                label="Breakeven Delivery Rate"
+                value={result.breakevenDeliveryRate != null ? formatPercent(result.breakevenDeliveryRate) : 'N/A'}
+              >
+                <StatusCheck ok={result.deliveryOk}>
+                  Need: {result.breakevenDeliveryRate != null ? formatPercent(result.breakevenDeliveryRate) : 'N/A'} · Current:{' '}
+                  {formatPercent(deliveryRate)}
+                </StatusCheck>
+              </ThresholdCard>
+
+              <ThresholdCard label="Max Affordable CPL" value={moneyShort(result.maxAffordableCpl)}>
+                <StatusCheck ok={result.cplOk}>
+                  Need: Max {moneyShort(result.maxAffordableCpl)} · Current: {moneyShort(costPerLead)}
+                </StatusCheck>
+              </ThresholdCard>
+
+              <ThresholdCard
+                label="Breakeven Confirmation Rate"
+                value={result.breakevenConfirmationRate != null ? formatPercent(result.breakevenConfirmationRate) : 'N/A'}
+              >
+                <StatusCheck ok={result.confirmationOk}>
+                  Need: {result.breakevenConfirmationRate != null ? formatPercent(result.breakevenConfirmationRate) : 'N/A'} · Current:{' '}
+                  {formatPercent(confirmationRate)}
+                </StatusCheck>
+              </ThresholdCard>
             </div>
           </section>
 
-          <aside className="space-y-4">
-            <BreakdownCard
-              label="Expected profit"
-              value={money(result.profit)}
-              detail={`${money(result.profitPerLead)} per lead`}
-              tone={result.profit >= 0 ? 'positive' : 'negative'}
-            />
+          {/* Section 2 — Profit at Scale */}
+          <section className="admin-panel">
+            <h2 className="text-lg font-bold text-slate-900">Section 2 — Profit at Scale</h2>
+            <p className="mt-1 text-sm text-admin-muted">
+              Full P&L projection for <span className="font-semibold text-slate-800">{leads.toLocaleString('en-US')}</span> leads.
+            </p>
 
-            <div className="grid gap-3">
-              <BreakdownCard label="Breakeven CPL" value={money(result.maxBreakevenCpl)} />
-              <BreakdownCard
-                label="CPL gap"
-                value={money(result.cplGap)}
-                detail={result.cplHealthy ? 'Under breakeven CPL' : 'Above breakeven CPL'}
-                tone={result.cplHealthy ? 'positive' : 'negative'}
-              />
-              <BreakdownCard label="Required AOV" value={money(result.requiredAov)} />
-              <BreakdownCard label="ROAS" value={`${result.roas.toFixed(2)}x`} detail={`Margin ${formatPercent(result.margin)}`} />
-              <BreakdownCard
-                label="Breakeven leads"
-                value={result.breakevenLeads ? Math.ceil(result.breakevenLeads).toLocaleString('en-US') : 'N/A'}
-              />
+            <div className="mt-5 grid grid-cols-3 gap-3">
+              <MiniStat label="Leads" value={leads.toLocaleString('en-US')} />
+              <MiniStat label="Confirmed" value={Math.round(result.confirmed).toLocaleString('en-US')} />
+              <MiniStat label="Delivered" value={Math.round(result.delivered).toLocaleString('en-US')} />
             </div>
-          </aside>
+
+            <div className="mt-5">
+              <PlRow label="Revenue" value={money(result.revenue)} variant="revenue" />
+              <div className="my-1 border-t border-slate-200" />
+
+              {costLines.map((line) => (
+                <PlRow key={line.label} label={line.label} value={`-${moneyShort(line.value)}`} variant="cost" />
+              ))}
+
+              <div className="my-1 border-t border-slate-200" />
+              <PlRow label="Total Costs" value={`-${moneyShort(result.totalCosts)}`} variant="total" />
+            </div>
+
+            <div className="mt-4 flex items-center justify-between rounded-xl bg-emerald-50 px-4 py-3.5">
+              <span className="text-sm font-bold text-slate-900">Net Profit</span>
+              <span className={`text-sm font-bold tabular-nums ${result.profit >= 0 ? 'text-emerald-700' : 'text-red-600'}`}>
+                {money(result.profit, true)}
+              </span>
+            </div>
+
+            <div className="mt-4 grid grid-cols-3 gap-3">
+              <MiniStat label="ROI" value={`${result.roi >= 0 ? '+' : ''}${result.roi.toFixed(1)}%`} />
+              <MiniStat label="Per Lead" value={money(result.profitPerLead, true)} />
+              <MiniStat label="Per Delivery" value={money(result.profitPerDelivered, true)} />
+            </div>
+          </section>
         </div>
-
-        <section className="admin-panel">
-          <h2 className="admin-panel__title">Forecast breakdown</h2>
-          <p className="mt-1 text-sm text-admin-muted">Volume, fees, costs, and revenue from your current inputs.</p>
-
-          <div className="mt-5">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-admin-muted">Volume</p>
-            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-              <BreakdownCard label="Confirmed leads" value={result.confirmed.toFixed(1)} detail={`${money(result.confirmedFees)} fees`} />
-              <BreakdownCard label="Delivered orders" value={result.delivered.toFixed(1)} detail={`${formatPercent(result.deliveredRateFromLeads)} from leads`} />
-              <BreakdownCard label="Returns" value={result.returns.toFixed(1)} detail={`${money(result.returnFees)} fees`} />
-              <BreakdownCard label="Canceled leads" value={result.canceled.toFixed(1)} detail={`${money(result.cancelFees)} fees`} />
-            </div>
-          </div>
-
-          <div className="mt-6">
-            <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-admin-muted">Money</p>
-            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-              <BreakdownCard label="Ad spend" value={money(result.adSpend)} detail={`${leads} leads × ${money(costPerLead)}`} />
-              <BreakdownCard label="Product + shipping" value={money(result.productSpend + result.shippingSpend)} />
-              <BreakdownCard label="Total costs" value={money(result.totalCosts)} />
-              <BreakdownCard label="Revenue" value={money(result.revenue)} detail={`${result.delivered.toFixed(1)} delivered × ${money(averageOrderValue)}`} />
-              <BreakdownCard label="Profit per delivered" value={money(result.profitPerDelivered)} />
-              <BreakdownCard
-                label="Net profit"
-                value={money(result.profit)}
-                tone={result.profit >= 0 ? 'positive' : 'negative'}
-              />
-            </div>
-          </div>
-        </section>
       </div>
     </AdminLayout>
   );
