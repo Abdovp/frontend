@@ -15,11 +15,13 @@ export default function AdminDashboardPage() {
   const [metrics, setMetrics] = useState<AdminMetrics | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const [reloadKey, setReloadKey] = useState(0);
 
   useEffect(() => {
     let cancelled = false;
     setLoading(true);
     setError('');
+    setMetrics(null);
     fetchAdminMetrics(from, to)
       .then((data) => {
         if (!cancelled) setMetrics(data);
@@ -33,7 +35,7 @@ export default function AdminDashboardPage() {
     return () => {
       cancelled = true;
     };
-  }, [from, to]);
+  }, [from, to, reloadKey]);
 
   return (
     <AdminLayout title="Overview">
@@ -52,7 +54,16 @@ export default function AdminDashboardPage() {
         ) : null}
 
         {error ? (
-          <div className="rounded-3xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">{error}</div>
+          <div className="rounded-3xl border border-red-200 bg-red-50 px-4 py-4 text-sm text-red-700">
+            <p>{error}</p>
+            <button
+              type="button"
+              onClick={() => setReloadKey((key) => key + 1)}
+              className="admin-btn-secondary mt-3"
+            >
+              Retry
+            </button>
+          </div>
         ) : null}
 
         {metrics ? (

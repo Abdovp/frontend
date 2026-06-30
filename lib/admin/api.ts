@@ -10,11 +10,33 @@ class AdminApiError extends Error {
   }
 }
 
+const ADMIN_FETCH_TIMEOUT_MS = 15_000;
+
 async function adminFetch<T>(path: string, init: RequestInit = {}): Promise<T> {
   const headers = new Headers(init.headers);
   headers.set('Content-Type', 'application/json');
 
-  const response = await fetch(apiUrl(path), { ...init, headers });
+  const controller = new AbortController();
+  const timeoutId = window.setTimeout(() => controller.abort(), ADMIN_FETCH_TIMEOUT_MS);
+
+  let response: Response;
+  try {
+    response = await fetch(apiUrl(path), { ...init, headers, signal: controller.signal });
+  } catch (err) {
+    if (err instanceof DOMException && err.name === 'AbortError') {
+      throw new AdminApiError(
+        'API request timed out. Check that the backend is running and reachable.',
+        0
+      );
+    }
+    throw new AdminApiError(
+      'Could not reach the API. If you are developing locally, start the backend or check Easypanel.',
+      0
+    );
+  } finally {
+    window.clearTimeout(timeoutId);
+  }
+
   if (!response.ok) {
     let detail = 'Request failed';
     try {
