@@ -50,14 +50,43 @@ function CalculatorInput({ label, value, onChange, suffix, min = 0, step = 1 }: 
   );
 }
 
-function ResultRow({ label, value, detail }: { label: string; value: string; detail?: string }) {
+function BreakdownCard({
+  label,
+  value,
+  detail,
+  highlight,
+  tone = 'default',
+}: {
+  label: string;
+  value: string;
+  detail?: string;
+  highlight?: boolean;
+  tone?: 'default' | 'positive' | 'negative';
+}) {
+  const toneClass =
+    tone === 'positive'
+      ? 'bg-emerald-50 ring-1 ring-emerald-100'
+      : tone === 'negative'
+        ? 'bg-red-50 ring-1 ring-red-100'
+        : highlight
+          ? 'bg-admin-accent text-white ring-1 ring-admin-accent'
+          : 'bg-admin-bg';
+
+  const labelClass = highlight ? 'text-white/70' : 'text-admin-muted';
+  const valueClass = highlight
+    ? 'text-white'
+    : tone === 'positive'
+      ? 'text-emerald-700'
+      : tone === 'negative'
+        ? 'text-red-700'
+        : 'text-slate-900';
+  const detailClass = highlight ? 'text-white/65' : 'text-admin-muted';
+
   return (
-    <div className="flex items-center justify-between gap-4 border-b border-admin-bg py-3 last:border-0">
-      <div>
-        <p className="text-sm text-slate-700">{label}</p>
-        {detail ? <p className="text-xs text-admin-muted">{detail}</p> : null}
-      </div>
-      <p className="shrink-0 text-sm font-semibold tabular-nums text-slate-900">{value}</p>
+    <div className={`rounded-2xl p-4 ${toneClass}`}>
+      <p className={`text-xs font-semibold uppercase tracking-wide ${labelClass}`}>{label}</p>
+      <p className={`mt-2 text-2xl font-bold tabular-nums tracking-tight ${valueClass}`}>{value}</p>
+      {detail ? <p className={`mt-1 text-xs ${detailClass}`}>{detail}</p> : null}
     </div>
   );
 }
@@ -166,7 +195,6 @@ export default function AdminProfitPage() {
         </div>
 
         <div className="grid gap-5 lg:grid-cols-[minmax(0,1fr)_320px]">
-          {/* Inputs */}
           <section className="admin-panel">
             <h2 className="admin-panel__title">Inputs</h2>
             <div className="mt-5 space-y-6">
@@ -198,28 +226,25 @@ export default function AdminProfitPage() {
             </div>
           </section>
 
-          {/* Results sidebar */}
           <aside className="space-y-4">
-            <div
-              className={`rounded-3xl p-5 ${
-                result.profit >= 0 ? 'bg-admin-accent text-white' : 'bg-red-600 text-white'
-              }`}
-            >
-              <p className="text-sm font-medium text-white/75">Expected profit</p>
-              <p className="mt-1 text-3xl font-bold tracking-tight">{money(result.profit)}</p>
-              <p className="mt-2 text-sm text-white/70">{money(result.profitPerLead)} per lead</p>
-            </div>
+            <BreakdownCard
+              label="Expected profit"
+              value={money(result.profit)}
+              detail={`${money(result.profitPerLead)} per lead`}
+              tone={result.profit >= 0 ? 'positive' : 'negative'}
+            />
 
-            <div className="admin-panel space-y-0 !p-5">
-              <ResultRow label="Breakeven CPL" value={money(result.maxBreakevenCpl)} />
-              <ResultRow
+            <div className="grid gap-3">
+              <BreakdownCard label="Breakeven CPL" value={money(result.maxBreakevenCpl)} />
+              <BreakdownCard
                 label="CPL gap"
                 value={money(result.cplGap)}
                 detail={result.cplHealthy ? 'Under breakeven CPL' : 'Above breakeven CPL'}
+                tone={result.cplHealthy ? 'positive' : 'negative'}
               />
-              <ResultRow label="Required AOV" value={money(result.requiredAov)} />
-              <ResultRow label="ROAS" value={`${result.roas.toFixed(2)}x`} detail={`Margin ${formatPercent(result.margin)}`} />
-              <ResultRow
+              <BreakdownCard label="Required AOV" value={money(result.requiredAov)} />
+              <BreakdownCard label="ROAS" value={`${result.roas.toFixed(2)}x`} detail={`Margin ${formatPercent(result.margin)}`} />
+              <BreakdownCard
                 label="Breakeven leads"
                 value={result.breakevenLeads ? Math.ceil(result.breakevenLeads).toLocaleString('en-US') : 'N/A'}
               />
@@ -227,22 +252,33 @@ export default function AdminProfitPage() {
           </aside>
         </div>
 
-        {/* Breakdown */}
         <section className="admin-panel">
           <h2 className="admin-panel__title">Forecast breakdown</h2>
-          <div className="mt-4 grid gap-x-8 sm:grid-cols-2">
-            <div>
-              <ResultRow label="Confirmed leads" value={result.confirmed.toFixed(1)} detail={`${money(result.confirmedFees)} fees`} />
-              <ResultRow label="Delivered orders" value={result.delivered.toFixed(1)} detail={formatPercent(result.deliveredRateFromLeads) + ' from leads'} />
-              <ResultRow label="Returns" value={result.returns.toFixed(1)} detail={`${money(result.returnFees)} fees`} />
-              <ResultRow label="Canceled leads" value={result.canceled.toFixed(1)} detail={`${money(result.cancelFees)} fees`} />
+          <p className="mt-1 text-sm text-admin-muted">Volume, fees, costs, and revenue from your current inputs.</p>
+
+          <div className="mt-5">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-admin-muted">Volume</p>
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+              <BreakdownCard label="Confirmed leads" value={result.confirmed.toFixed(1)} detail={`${money(result.confirmedFees)} fees`} />
+              <BreakdownCard label="Delivered orders" value={result.delivered.toFixed(1)} detail={`${formatPercent(result.deliveredRateFromLeads)} from leads`} />
+              <BreakdownCard label="Returns" value={result.returns.toFixed(1)} detail={`${money(result.returnFees)} fees`} />
+              <BreakdownCard label="Canceled leads" value={result.canceled.toFixed(1)} detail={`${money(result.cancelFees)} fees`} />
             </div>
-            <div>
-              <ResultRow label="Ad spend" value={money(result.adSpend)} detail={`${leads} leads × ${money(costPerLead)}`} />
-              <ResultRow label="Product + shipping" value={money(result.productSpend + result.shippingSpend)} />
-              <ResultRow label="Total costs" value={money(result.totalCosts)} />
-              <ResultRow label="Revenue" value={money(result.revenue)} detail={`${result.delivered.toFixed(1)} delivered × ${money(averageOrderValue)}`} />
-              <ResultRow label="Profit per delivered" value={money(result.profitPerDelivered)} />
+          </div>
+
+          <div className="mt-6">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-wide text-admin-muted">Money</p>
+            <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+              <BreakdownCard label="Ad spend" value={money(result.adSpend)} detail={`${leads} leads × ${money(costPerLead)}`} />
+              <BreakdownCard label="Product + shipping" value={money(result.productSpend + result.shippingSpend)} />
+              <BreakdownCard label="Total costs" value={money(result.totalCosts)} />
+              <BreakdownCard label="Revenue" value={money(result.revenue)} detail={`${result.delivered.toFixed(1)} delivered × ${money(averageOrderValue)}`} />
+              <BreakdownCard label="Profit per delivered" value={money(result.profitPerDelivered)} />
+              <BreakdownCard
+                label="Net profit"
+                value={money(result.profit)}
+                tone={result.profit >= 0 ? 'positive' : 'negative'}
+              />
             </div>
           </div>
         </section>
