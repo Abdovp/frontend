@@ -1,0 +1,17 @@
+# Frontend .env.example
+
+# Backend API (orders + tracking events)
+NEXT_PUBLIC_API_URL=https://api.boyashop.store
+
+# Public storefront URL
+NEXT_PUBLIC_SITE_URL=https://boyashop.store
+NEXT_PUBLIC_DOMAIN=boyashop.store
+
+# Web pixels (deferred): PageView, ViewContent, AddToCart, InitiateCheckout, Purchase
+NEXT_PUBLIC_FACEBOOK_PIXEL_ID=
+NEXT_PUBLIC_TIKTOK_PIXEL_ID=
+NEXT_PUBLIC_SNAPCHAT_PIXEL_ID=
+
+# Brand tokens
+NEXT_PUBLIC_BRAND_COLOR=#1A73E8
+NEXT_PUBLIC_ACCENT_COLOR=#F9A825
