@@ -10,6 +10,19 @@ import {
 import { getFacebookCookies, PIXEL_IDS, pixelsAreReady } from './pixels';
 import type { AnalyticsItem, PurchasePayload } from './types';
 
+export const IMPORTANT_PIXEL_EVENTS = [
+  {
+    platform: 'Facebook',
+    events: ['ViewContent', 'AddToCart', 'Purchase'],
+    when: 'Product pages, cart actions, and completed orders',
+  },
+  {
+    platform: 'TikTok',
+    events: ['ViewContent', 'AddToCart', 'CompletePayment'],
+    when: 'Product pages, cart actions, and completed orders',
+  },
+] as const;
+
 export function whenPixelsReady(run: () => void) {
   if (typeof window === 'undefined') return;
 
@@ -56,7 +69,9 @@ function trackTikTok(eventName: string, params: Record<string, unknown>, eventId
     window.ttq.page({}, { event_id: eventId });
     return;
   }
-  window.ttq.track(eventName, params, { event_id: eventId });
+
+  const resolvedEventName = eventName === 'Purchase' ? 'CompletePayment' : eventName;
+  window.ttq.track(resolvedEventName, params, { event_id: eventId });
 }
 
 function trackSnapchat(eventName: StandardEventName, params: Record<string, unknown>, eventId: string) {
