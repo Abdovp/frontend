@@ -1,0 +1,86 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  content: [
+    "./pages/**/*.{js,ts,jsx,tsx}",
+    "./components/**/*.{js,ts,jsx,tsx}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        brand: {
+          DEFAULT: '#13294B',
+          dark: '#0C1B33',
+          light: '#1E3A63',
+          50: '#EEF2F8',
+        },
+        accent: {
+          DEFAULT: '#D4A017',
+          dark: '#B8860B',
+          light: '#E4C463',
+        },
+        ink: '#000000',
+        'trust-surface': '#212c3d',
+        cream: '#F8FAFC',
+        dark: '#0E1116',
+        light: '#ffffff',
+        admin: {
+          bg: '#F5F1EA',
+          accent: '#144534',
+          'accent-light': '#1B5E42',
+          muted: '#6B7280',
+        },
+      },
+      fontFamily: {
+        sans: ['Tajawal', 'IBM Plex Sans Arabic', 'Tahoma', 'system-ui', 'sans-serif'],
+        heading: ['Cairo', 'Tajawal', 'Tahoma', 'system-ui', 'sans-serif'],
+      },
+      letterSpacing: {
+        widest2: '0.22em',
+      },
+      boxShadow: {
+        soft: '0 4px 20px -2px rgba(14, 17, 22, 0.04), 0 2px 6px -1px rgba(14, 17, 22, 0.03)',
+        card: '0 12px 32px -4px rgba(14, 17, 22, 0.06), 0 4px 12px -2px rgba(14, 17, 22, 0.04)',
+        lift: '0 24px 48px -8px rgba(14, 17, 22, 0.1), 0 8px 24px -4px rgba(14, 17, 22, 0.06)',
+        gold: '0 12px 30px -4px rgba(212, 160, 23, 0.30), 0 4px 12px -2px rgba(212, 160, 23, 0.18)',
+        brand: '0 8px 24px -4px rgba(19, 41, 75, 0.18), 0 3px 8px -2px rgba(19, 41, 75, 0.12)',
+      },
+      borderRadius: {
+        xl: '0.875rem',
+        '2xl': '1.125rem',
+        '3xl': '1.625rem',
+        '4xl': '2rem',
+      },
+      keyframes: {
+        'fade-up': {
+          '0%': { opacity: '0', transform: 'translateY(12px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
+        },
+        marquee: {
+          '0%': { transform: 'translateX(0)' },
+          '100%': { transform: 'translateX(-50%)' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '200% 0' },
+          '100%': { backgroundPosition: '-200% 0' },
+        },
+        'cta-pulse': {
+          '0%, 100%': {
+            boxShadow: '0 2px 8px rgba(19, 41, 75, 0.16)',
+            transform: 'scale(1)',
+          },
+          '50%': {
+            boxShadow: '0 4px 12px rgba(19, 41, 75, 0.22), 0 0 0 3px rgba(19, 41, 75, 0.08)',
+            transform: 'scale(1.02)',
+          },
+        },
+      },
+      animation: {
+        'fade-up': 'fade-up 0.6s ease-out both',
+        marquee: 'marquee 28s linear infinite',
+        shimmer: 'shimmer 2.4s linear infinite',
+        'cta-pulse': 'cta-pulse 2s ease-in-out infinite',
+      },
+    }
+  },
+  plugins: []
+};
