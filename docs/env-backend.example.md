@@ -1,0 +1,28 @@
+# Backend .env.example
+
+APP_ENV=production
+APP_NAME=Boya Shop API
+API_BASE_URL=https://api.boyashop.store
+FRONTEND_URL=https://boyashop.store
+
+DATABASE_URL=postgres://postgres:YOUR_PASSWORD@boya-shop_database:5432/boya-shop?sslmode=disable
+
+CORS_ORIGINS=https://boyashop.store,https://www.boyashop.store,http://localhost:3000
+
+GOOGLE_SHEETS_WEBHOOK_URL=
+
+META_PIXEL_ID=
+META_ACCESS_TOKEN=
+META_API_VERSION=v20.0
+
+TIKTOK_PIXEL_CODE=
+TIKTOK_ACCESS_TOKEN=
+TIKTOK_API_VERSION=v1.3
+
+SNAP_PIXEL_ID=
+SNAP_ACCESS_TOKEN=
+
+ENABLE_CAPI=true
+ENABLE_META_CAPI=true
+ENABLE_TIKTOK_CAPI=true
+ENABLE_SNAP_CAPI=true

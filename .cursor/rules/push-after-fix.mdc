@@ -1,0 +1,42 @@
+---
+description: Push bug fixes to GitHub immediately after resolving them
+alwaysApply: true
+---
+
+# Push fixes to GitHub
+
+After fixing a bug or completing a user-requested fix in this project, **commit and push to GitHub without waiting for the user to ask**.
+
+## Repositories
+
+This workspace uses **two separate git repos**:
+
+| Path | Remote |
+|------|--------|
+| `frontend/` | `https://github.com/Abdovp/frontend.git` |
+| `backend/` | `https://github.com/Abdovp/backend.git` |
+
+Push only the repo(s) that were changed.
+
+## Workflow
+
+1. Finish the fix and verify it (lint/build when reasonable).
+2. In each changed repo: `git status` → stage relevant files → commit with a clear message focused on **why**.
+3. `git push origin main` for each repo.
+4. Tell the user which commit(s) were pushed and that they need to **redeploy on Easypanel** (rebuild, not just restart).
+
+## Do not push when
+
+- The user explicitly says not to push yet.
+- Changes are exploratory, incomplete, or broken.
+- Only `.env`, secrets, or local config would be included — never commit secrets.
+
+## Git author
+
+If commit fails due to missing identity, use env vars (do not change git config):
+
+`GIT_AUTHOR_NAME=Abdovp`, `GIT_AUTHOR_EMAIL=Abdovp@users.noreply.github.com` (same for `GIT_COMMITTER_*`).
+
+## Production note
+
+boyashop.store deploys from GitHub. Unpushed local fixes will **not** appear on the live site until pushed and redeployed.
