@@ -1,15 +1,13 @@
-FROM node:20-alpine AS deps
+FROM node:20-alpine
 WORKDIR /app
+
 RUN apk add --no-cache libc6-compat
+
+# Copy package files and install dependencies
 COPY package*.json ./
-RUN npm ci --no-optional --no-audit
+RUN npm ci
 
-FROM node:20-alpine AS builder
-WORKDIR /app
-RUN apk add --no-cache libc6-compat
-COPY --from=deps /app/node_modules ./node_modules
-COPY . .
-
+# Copy source and build args
 ARG NEXT_PUBLIC_API_URL
 ARG NEXT_PUBLIC_SITE_URL
 ARG NEXT_PUBLIC_DOMAIN
@@ -28,21 +26,19 @@ ENV NEXT_PUBLIC_SNAPCHAT_PIXEL_ID=$NEXT_PUBLIC_SNAPCHAT_PIXEL_ID
 ENV NEXT_PUBLIC_BRAND_COLOR=$NEXT_PUBLIC_BRAND_COLOR
 ENV NEXT_PUBLIC_ACCENT_COLOR=$NEXT_PUBLIC_ACCENT_COLOR
 ENV NEXT_TELEMETRY_DISABLED=1
+
+# Copy all source files
+COPY . .
+
+# Build the Next.js app
 RUN npm run build
 
-FROM node:20-alpine AS runner
-WORKDIR /app
-RUN apk add --no-cache libc6-compat
+# Set production env and expose port
 ENV NODE_ENV=production
-ENV NEXT_TELEMETRY_DISABLED=1
 ENV HOSTNAME=0.0.0.0
 ENV PORT=3000
 
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/.next/standalone ./
-COPY --from=builder /app/.next/static ./.next/static
-COPY --from=builder /app/node_modules/sharp ./node_modules/sharp
-COPY --from=builder /app/node_modules/@img ./node_modules/@img
-
 EXPOSE 3000
-CMD ["node", "server.js"]
+
+# Run the app
+CMD ["node", ".next/standalone/server.js"]
