@@ -31,7 +31,7 @@ ENV NEXT_TELEMETRY_DISABLED=1
 COPY . .
 
 # Build the Next.js app
-RUN npm run build
+RUN npx next build
 
 # Set production env and expose port
 ENV NODE_ENV=production
@@ -41,4 +41,4 @@ ENV PORT=3000
 EXPOSE 3000
 
 # Run the app
-CMD ["node", ".next/standalone/server.js"]
+CMD ["npx", "next", "start"]
