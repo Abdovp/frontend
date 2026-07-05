@@ -41,10 +41,10 @@ export default function TrustBadgesStrip({
                   <Icon name={item.icon} size={22} />
                 </span>
                 <div className="min-w-0 leading-tight">
-                  <p className="trust-badge-card__title font-heading font-bold text-ink text-sm md:text-base">
+                  <p className="trust-badge-card__title font-heading font-bold text-ink text-base md:text-lg">
                     {item.title}
                   </p>
-                  <p className="trust-badge-card__subtitle text-xs md:text-sm text-ink/55 mt-0.5">
+                  <p className="trust-badge-card__subtitle text-sm md:text-base text-ink/55 mt-0.5">
                     {item.subtitle}
                   </p>
                 </div>

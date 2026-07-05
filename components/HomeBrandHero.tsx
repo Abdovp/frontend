@@ -6,7 +6,7 @@ import { STORE_PROOF } from '../lib/products';
 const heroPoints = [
   { icon: 'wallet', text: 'دفع عند الاستلام' },
   { icon: 'truck', text: 'توصيل 24–48 ساعة' },
-  { icon: 'refresh', text: 'استرجاع 30 يوم' },
+  { icon: 'refresh', text: 'ضمان 30 يوم' },
 ] as const;
 
 export default function HomeBrandHero() {

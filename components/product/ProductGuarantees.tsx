@@ -5,7 +5,7 @@ const guarantees = [
   {
     icon: 'wallet' as const,
     title: 'الدفع عند الاستلام',
-    body: 'ما كتخلّص والو قبل. تعاين السلعة بيدك، وإلا ما عجبتكش ترجعها ف الحين.',
+    body: 'ما كتخلّص والو حتى توصلك السلعة و تشوفها.',
     color: 'text-emerald-700',
     bg: 'bg-emerald-50 border-emerald-200',
     iconBg: 'bg-emerald-100',

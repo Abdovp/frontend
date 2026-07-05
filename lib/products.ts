@@ -118,7 +118,7 @@ export const STORE = {
   nameEn: 'BOYA SHOP',
   tagline: 'إكسسوارات سيارات مختارة بعناية',
   phone: '+212 6 00 00 00 00',
-  whatsapp: '+212600000000',
+  whatsapp: '+212 644166834',
   email: 'support@boyashop.store',
 };
 
@@ -142,14 +142,14 @@ export const STORE_TRUST_BADGES: TrustBadge[] = [
 export const STORE_TRUST_BAND: { icon: IconName; text: string; sub: string }[] = [
   { icon: 'wallet', text: 'دفع عند الاستلام', sub: 'ما كتخلّص حتى توصلك السلعة' },
   { icon: 'truck', text: 'توصيل 24–48 ساعة', sub: 'لكل مدن المغرب بدون استثناء' },
-  { icon: 'refresh', text: `استرجاع ${WARRANTY_DAYS} يوم`, sub: 'فلوسك راجعة بلا أسئلة' },
+  { icon: 'refresh', text: `ضمان ${WARRANTY_DAYS} يوم`, sub: 'فلوسك راجعة بلا أسئلة' },
   { icon: 'shield', text: 'جودة مضمونة', sub: 'كل منتج مفحوص قبل التصيفط' },
 ];
 
 export const SHARED_GUARANTEES: GuaranteeItem[] = [
   { icon: 'wallet', title: 'الدفع عند الاستلام', subtitle: 'تخلّص ملي توصلك السلعة' },
   { icon: 'truck', title: 'توصيل 24–48 ساعة', subtitle: 'لكل مدن المغرب' },
-  { icon: 'refresh', title: `استرجاع ${WARRANTY_DAYS} يوم`, subtitle: 'فلوسك راجعة بلا أسئلة' },
+  { icon: 'refresh', title: `ضمان ${WARRANTY_DAYS} يوم`, subtitle: 'فلوسك راجعة بلا أسئلة' },
   { icon: 'whatsapp', title: 'دعم بالدارجة', subtitle: 'فريق مغربي قبل وبعد الطلب' },
 ];
 
