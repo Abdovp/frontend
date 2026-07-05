@@ -4,7 +4,6 @@ import Footer from '../components/Footer';
 import HomeBrandHero from '../components/HomeBrandHero';
 import ProofBar from '../components/sections/ProofBar';
 import PainPromiseSection from '../components/sections/PainPromiseSection';
-import HomeCatalogSection from '../components/sections/HomeCatalogSection';
 import FeaturedProducts from '../components/FeaturedProducts';
 import AuthoritySection from '../components/sections/AuthoritySection';
 import DeliveryConfirmationSection from '../components/sections/DeliveryConfirmationSection';
@@ -26,7 +25,6 @@ export default function Home() {
         <HomeBrandHero />
         <ProofBar />
         <PainPromiseSection />
-        <HomeCatalogSection />
         <FeaturedProducts />
         <AuthoritySection />
         <DeliveryConfirmationSection />
