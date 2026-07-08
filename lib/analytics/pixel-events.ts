@@ -50,8 +50,11 @@ export function buildTikTokParams(
   value: number,
   extra: Record<string, unknown> = {}
 ) {
+  const contentIds = items.map((item) => item.productId).filter(Boolean);
+
   return {
-    content_ids: items.map((item) => item.productId),
+    ...(contentIds.length === 1 ? { content_id: contentIds[0] } : {}),
+    content_ids: contentIds,
     content_type: 'product',
     currency: CURRENCY,
     value,
