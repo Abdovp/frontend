@@ -53,7 +53,8 @@ export function buildTikTokParams(
   const contentIds = items.map((item) => item.productId).filter(Boolean);
 
   return {
-    ...(contentIds.length === 1 ? { content_id: contentIds[0] } : {}),
+    // TikTok often expects a top-level content_id even for multi-item carts.
+    ...(contentIds.length > 0 ? { content_id: contentIds[0] } : {}),
     content_ids: contentIds,
     content_type: 'product',
     currency: CURRENCY,
