@@ -1,10 +1,24 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { trackAddToCart } from '../../lib/analytics/track';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useRouter } from 'next/router';
+import { createPurchaseEventId, submitOrder } from '../../lib/api/orders';
+import { getCheckoutErrorMessage } from '../../lib/api/order-errors';
+import { trackInitiateCheckout, trackPurchase } from '../../lib/analytics/track';
+import {
+  validateCheckoutField,
+  validateCheckoutForm,
+  type CheckoutField,
+  type CheckoutFormData,
+} from '../../lib/checkout-validation';
+import { saveOrderConfirmation } from '../../lib/order-confirmation';
+import { pickUpsellProduct } from '../../lib/upsell';
+import type { CartItem } from '../../lib/cart-store';
 import { useCartStore } from '../../lib/cart-store';
 import type { Product } from '../../lib/products';
 import { CURRENCY, getFirstOffer, isProductAvailable } from '../../lib/products';
 import ProductImage from '../ui/ProductImage';
 import StoreTrustBand from '../StoreTrustBand';
+import FormField from '../ui/FormField';
+import UpsellPopup from '../UpsellPopup';
 import Icon, { Stars } from '../ui/Icon';
 
 interface ProductOffersProps {
@@ -18,15 +32,25 @@ function getDefaultOffer(product: Product): OfferQuantity {
 }
 
 export default function ProductOffers({ product }: ProductOffersProps) {
-  const { addItem, openCart, setSelectedOffer, isInCart } = useCartStore();
+  const { setSelectedOffer } = useCartStore();
   const productCardRef = useRef<HTMLDivElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
   const [showSticky, setShowSticky] = useState(false);
   const isAvailable = isProductAvailable(product);
+  const router = useRouter();
 
   const defaultOffer = useMemo(() => getDefaultOffer(product), [product]);
   const selected = useCartStore(
     (state) => state.selectedOffers[product.id] ?? defaultOffer
   );
+
+  const [formData, setFormData] = useState<CheckoutFormData>({ name: '', phone: '' });
+  const [errors, setErrors] = useState<Partial<Record<CheckoutField, string>>>({});
+  const [touched, setTouched] = useState<Partial<Record<CheckoutField, boolean>>>({});
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [upsellProduct, setUpsellProduct] = useState<Product | null>(null);
+  const submittedOrderRef = useRef<{ orderId: number; eventId: string } | null>(null);
 
   useEffect(() => {
     if (useCartStore.getState().selectedOffers[product.id] == null) {
@@ -69,38 +93,142 @@ export default function ProductOffers({ product }: ProductOffersProps) {
     setActiveImage(0);
   }, [product.id]);
 
+  useEffect(() => {
+    void router.prefetch('/thank-you');
+  }, [router]);
+
   const selectOffer = (quantity: OfferQuantity) => {
     if (!isAvailable) return;
     setSelectedOffer(product.id, quantity);
   };
 
-  const handleCheckout = (quantity: OfferQuantity = selected) => {
-    if (!isAvailable) return;
-    const offer = product.offers.find((o) => o.quantity === quantity);
-    if (!offer) return;
+  const setField = useCallback((field: CheckoutField, value: string) => {
+    setFormData((prev) => ({ ...prev, [field]: value }));
+    setErrors((prev) => {
+      if (!prev[field]) return prev;
+      const next = { ...prev };
+      delete next[field];
+      return next;
+    });
+  }, []);
 
-    if (isInCart(product.id, offer.quantity)) {
-      openCart();
+  const handleBlur = (field: CheckoutField, value: string) => {
+    setTouched((prev) => ({ ...prev, [field]: true }));
+    const error = validateCheckoutField(field, value);
+    setErrors((prev) => {
+      const next = { ...prev };
+      if (error) next[field] = error;
+      else delete next[field];
+      return next;
+    });
+  };
+
+  const showError = (field: CheckoutField) =>
+    errors[field] && (touched[field] || submitting) ? errors[field] : undefined;
+
+  const finishCheckout = () => {
+    void router.push('/thank-you');
+  };
+
+  const handleUpsellAdded = () => {
+    setUpsellProduct(null);
+    finishCheckout();
+  };
+
+  const handleUpsellClose = () => {
+    setUpsellProduct(null);
+    finishCheckout();
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isAvailable) return;
+
+    const nextErrors = validateCheckoutForm(formData);
+    setErrors(nextErrors);
+    setTouched({ name: true, phone: true });
+
+    if (Object.keys(nextErrors).length > 0) {
+      const firstInvalid = (['name', 'phone'] as CheckoutField[]).find((f) => nextErrors[f]);
+      if (firstInvalid) {
+        document.getElementById(`product-checkout-${firstInvalid}`)?.focus();
+      }
       return;
     }
 
-    trackAddToCart({
-      productId: product.id,
-      name: product.nameAr,
-      price: offer.price,
-      quantity: 1,
-    });
-    addItem({
-      id: product.id,
-      name: product.nameAr,
-      price: offer.price,
-      offer: offer.quantity,
-      quantity: 1,
-    });
-    setTimeout(() => openCart(), 350);
+    const offer = product.offers.find((o) => o.quantity === selected);
+    if (!offer) return;
+
+    const items: CartItem[] = [
+      {
+        id: product.id,
+        lineKey: `${product.id}-${offer.quantity}`,
+        name: product.nameAr,
+        price: offer.price,
+        offer: offer.quantity,
+        quantity: 1,
+      },
+    ];
+    const total = offer.price;
+
+    setSubmitting(true);
+    setSubmitError('');
+
+    trackInitiateCheckout(
+      items.map((item) => ({ productId: item.id, name: item.name, price: item.price, quantity: item.quantity })),
+      total
+    );
+
+    const eventId = createPurchaseEventId();
+
+    try {
+      const result = await submitOrder({
+        eventId,
+        name: formData.name.trim(),
+        phone: formData.phone.trim(),
+        items,
+        total,
+      });
+
+      submittedOrderRef.current = { orderId: result.id, eventId };
+
+      saveOrderConfirmation({
+        name: formData.name.trim(),
+        phone: formData.phone.trim(),
+        items,
+        total,
+        eventId,
+        orderId: result.id,
+        publicOrderId: result.public_order_id,
+      });
+
+      trackPurchase({
+        eventId,
+        value: total,
+        items: items.map((item) => ({
+          productId: item.id,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+        })),
+      });
+
+      const upsell = pickUpsellProduct([product.id]);
+      if (upsell) {
+        setUpsellProduct(upsell);
+        setSubmitting(false);
+        return;
+      }
+
+      finishCheckout();
+    } catch (error) {
+      setSubmitError(getCheckoutErrorMessage(error));
+      setSubmitting(false);
+    }
   };
 
   const handleStickyClick = () => {
+    document.getElementById('product-checkout-name')?.focus();
     document.getElementById('product-pricing')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
@@ -212,8 +340,13 @@ export default function ProductOffers({ product }: ProductOffersProps) {
               <p>{product.scarcityText}</p>
             </div>
 
-            <p className="font-heading font-bold text-ink mb-3">اختار العرض</p>
-            <div id="product-pricing" className="flex flex-col gap-3 mb-6 scroll-mt-28">
+            <div className="flex items-center gap-2 mb-3">
+              <span className="flex items-center justify-center w-7 h-7 rounded-full bg-brand text-white font-bold text-sm shrink-0">
+                1
+              </span>
+              <p className="font-heading font-extrabold text-ink">اختار العرض</p>
+            </div>
+            <div id="product-pricing" className="flex flex-col gap-3 mb-5 scroll-mt-28">
               {product.offers.map((offer) => {
                 const isSelected = selected === offer.quantity;
                 const savings = offer.compareAt != null ? offer.compareAt - offer.price : null;
@@ -262,29 +395,105 @@ export default function ProductOffers({ product }: ProductOffersProps) {
               })}
             </div>
 
-            <button
-              type="button"
-              onClick={() => handleCheckout()}
-              disabled={!selectedOffer || !isAvailable}
-              className="checkout-cta checkout-cta--pulse w-full disabled:opacity-50"
-            >
-              <Icon name="cart" size={20} />
-              {!isAvailable
-                ? 'غير متوفر حالياً'
-                : selectedOffer
-                ? isInCart(product.id, selectedOffer.quantity)
-                  ? 'شوف السلة — المنتج مضاف'
-                  : `اطلب دابا — ${selectedOffer.price} ${CURRENCY}`
-                : 'اطلب دابا'}
-            </button>
+            {/* Inline checkout form */}
+            <div className="rounded-2xl border-2 border-brand/20 bg-gradient-to-b from-brand/[0.04] to-transparent p-5 mt-2">
+              {/* Form header */}
+              <div className="flex items-center gap-2.5 mb-4">
+                <span className="flex items-center justify-center w-7 h-7 rounded-full bg-brand text-white font-bold text-sm shrink-0">
+                  2
+                </span>
+                <div>
+                  <p className="font-heading font-extrabold text-ink leading-none">أكمل بياناتك للتوصيل</p>
+                  <p className="text-xs text-ink/50 mt-0.5">بدون دفع — الطلب يوصل لبابك</p>
+                </div>
+              </div>
 
-            {/* COD trust line */}
-            <div className="flex items-center justify-center gap-2 bg-emerald-50 border border-emerald-200 rounded-xl py-3 px-4 mt-3">
-              <Icon name="lock" size={16} className="text-emerald-700 shrink-0" />
-              <p className="text-sm font-bold text-emerald-800">
-                الدفع عند الاستلام — بدون دفع أونلاين
-              </p>
+              <form onSubmit={(e) => { void handleSubmit(e); }} noValidate className="space-y-3">
+                <FormField
+                  id="product-checkout-name"
+                  label="الاسم الكامل"
+                  ref={nameRef}
+                  error={showError('name')}
+                  inputProps={{
+                    type: 'text',
+                    name: 'name',
+                    autoComplete: 'name',
+                    placeholder: 'مثلاً: محمد العلوي',
+                    value: formData.name,
+                    onChange: (e) => setField('name', e.target.value),
+                    onBlur: (e) => handleBlur('name', e.target.value),
+                    disabled: submitting,
+                  }}
+                />
+                <FormField
+                  id="product-checkout-phone"
+                  label="رقم الهاتف"
+                  error={showError('phone')}
+                  inputProps={{
+                    type: 'tel',
+                    name: 'phone',
+                    dir: 'ltr',
+                    autoComplete: 'tel',
+                    placeholder: '06XXXXXXXX',
+                    value: formData.phone,
+                    onChange: (e) => setField('phone', e.target.value),
+                    onBlur: (e) => handleBlur('phone', e.target.value),
+                    disabled: submitting,
+                  }}
+                />
+
+                {submitError && (
+                  <p className="text-sm font-semibold text-red-600 bg-red-50 border border-red-200 rounded-xl px-4 py-2.5" role="alert">
+                    {submitError}
+                  </p>
+                )}
+
+                <button
+                  type="submit"
+                  disabled={!isAvailable || submitting}
+                  className="checkout-cta checkout-cta--pulse w-full disabled:opacity-50 !text-base !py-4"
+                >
+                  {submitting ? (
+                    <>
+                      <span className="inline-block h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                      جاري إرسال الطلب...
+                    </>
+                  ) : (
+                    <>
+                      <Icon name="lock" size={20} />
+                      {isAvailable
+                        ? `تأكيد الطلب — ${selectedOffer?.price ?? firstOffer.price} ${CURRENCY} 🚀`
+                        : 'غير متوفر حالياً'}
+                    </>
+                  )}
+                </button>
+
+                <p className="text-center text-xs text-ink/40 flex items-center justify-center gap-1">
+                  <Icon name="lock" size={12} className="shrink-0" />
+                  بياناتك آمنة — لن نشاركها مع أي طرف
+                </p>
+              </form>
             </div>
+
+            {/* Trust badges row */}
+            <div className="grid grid-cols-3 gap-2 mt-3">
+              <div className="flex flex-col items-center gap-1 rounded-xl bg-ink/[0.03] border border-ink/[0.06] py-3 px-2 text-center">
+                <Icon name="wallet" size={18} className="text-brand" />
+                <p className="text-[0.65rem] font-bold text-ink/60 leading-tight">دفع عند الاستلام</p>
+              </div>
+              <div className="flex flex-col items-center gap-1 rounded-xl bg-ink/[0.03] border border-ink/[0.06] py-3 px-2 text-center">
+                <Icon name="truck" size={18} className="text-brand" />
+                <p className="text-[0.65rem] font-bold text-ink/60 leading-tight">توصيل مجاني</p>
+              </div>
+              <div className="flex flex-col items-center gap-1 rounded-xl bg-ink/[0.03] border border-ink/[0.06] py-3 px-2 text-center">
+                <Icon name="refresh" size={18} className="text-brand" />
+                <p className="text-[0.65rem] font-bold text-ink/60 leading-tight">استرجاع مضمون</p>
+              </div>
+            </div>
+
+            {upsellProduct && (
+              <UpsellPopup product={upsellProduct} onAdded={handleUpsellAdded} onClose={handleUpsellClose} />
+            )}
 
           </div>
         </div>
