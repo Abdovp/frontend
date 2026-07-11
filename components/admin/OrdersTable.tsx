@@ -2,6 +2,18 @@ import type { AdminOrderSummary } from '../../lib/admin/types';
 import { ORDER_STATUS_COLORS, ORDER_STATUS_LABELS } from '../../lib/admin/types';
 import { formatDateTime, formatMad } from '../../lib/admin/format';
 
+const PLATFORM_STYLES: Record<string, string> = {
+  meta: 'bg-blue-100 text-blue-800',
+  tiktok: 'bg-slate-900 text-white',
+  snap: 'bg-yellow-200 text-yellow-900',
+};
+
+const PLATFORM_LABELS: Record<string, string> = {
+  meta: 'Meta',
+  tiktok: 'TikTok',
+  snap: 'Snap',
+};
+
 type Props = {
   orders: AdminOrderSummary[];
   onSelect: (orderId: number) => void;
@@ -25,6 +37,7 @@ export default function OrdersTable({ orders, onSelect }: Props) {
               <th>Order</th>
               <th>Customer</th>
               <th>Phone</th>
+              <th>Source</th>
               <th>Total</th>
               <th>Status</th>
               <th>Date</th>
@@ -45,6 +58,22 @@ export default function OrdersTable({ orders, onSelect }: Props) {
                     <a href={`tel:${order.phone}`} className="font-medium text-admin-accent hover:underline">
                       {order.phone}
                     </a>
+                  </td>
+                  <td>
+                    {order.capi_platforms.length > 0 ? (
+                      <div className="flex flex-wrap gap-1">
+                        {order.capi_platforms.map((p) => (
+                          <span
+                            key={p}
+                            className={`inline-flex rounded-full px-2 py-0.5 text-xs font-semibold ${PLATFORM_STYLES[p.toLowerCase()] ?? 'bg-admin-bg text-slate-700'}`}
+                          >
+                            {PLATFORM_LABELS[p.toLowerCase()] ?? p}
+                          </span>
+                        ))}
+                      </div>
+                    ) : (
+                      <span className="text-admin-muted text-xs">—</span>
+                    )}
                   </td>
                   <td className="font-semibold tabular-nums text-slate-900">{formatMad(order.total)}</td>
                   <td>

@@ -72,6 +72,7 @@ export type AdminOrderSummary = {
   sheet_sent: boolean;
   created_at: string;
   item_count: number;
+  capi_platforms: string[];
 };
 
 export type AdminOrderDetail = AdminOrderSummary & {
