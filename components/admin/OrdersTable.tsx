@@ -60,9 +60,9 @@ export default function OrdersTable({ orders, onSelect }: Props) {
                     </a>
                   </td>
                   <td>
-                    {order.capi_platforms.length > 0 ? (
+                    {(order.capi_platforms ?? []).length > 0 ? (
                       <div className="flex flex-wrap gap-1">
-                        {order.capi_platforms.map((p) => (
+                        {(order.capi_platforms ?? []).map((p) => (
                           <span
                             key={p}
                             className={`inline-flex rounded-full px-2 py-0.5 text-xs font-semibold ${PLATFORM_STYLES[p.toLowerCase()] ?? 'bg-admin-bg text-slate-700'}`}

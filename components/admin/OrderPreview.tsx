@@ -111,11 +111,11 @@ export default function OrderPreview({ order, onClose, onUpdated }: Props) {
             </div>
           </div>
 
-          {order.capi_platforms.length > 0 ? (
+          {(order.capi_platforms ?? []).length > 0 ? (
             <div>
               <p className="mb-2 text-xs font-semibold uppercase tracking-wide text-slate-400">CAPI platforms</p>
               <div className="flex flex-wrap gap-2">
-                {order.capi_platforms.map((platform) => (
+                {(order.capi_platforms ?? []).map((platform) => (
                   <span key={platform} className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">
                     {platform}
                   </span>
