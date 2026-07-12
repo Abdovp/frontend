@@ -13,7 +13,6 @@ export default function AnalyticsListener() {
       trackPageView(url);
     };
 
-    lastPath.current = router.asPath;
     sendPageView(router.asPath);
     router.events.on('routeChangeComplete', sendPageView);
     return () => router.events.off('routeChangeComplete', sendPageView);

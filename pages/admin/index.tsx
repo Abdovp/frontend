@@ -84,7 +84,7 @@ export default function AdminDashboardPage() {
               />
               <MetricCard label="Conversion Rate" value={formatPercent(metrics.conversion_rate)} hint={`${metrics.orders} orders / ${metrics.page_views} visits`} icon="barChart" />
               <MetricCard label="Checkout CVR" value={formatPercent(metrics.checkout_conversion_rate)} hint={`${metrics.initiate_checkout.toLocaleString('en-US')} checkouts`} icon="checkCircle" />
-              <MetricCard label="Page Views" value={metrics.page_views.toLocaleString('en-US')} hint="Morocco traffic only" icon="eye" />
+              <MetricCard label="Page Views" value={metrics.page_views.toLocaleString('en-US')} hint="All traffic" icon="eye" />
               <MetricCard label="Add to Cart" value={metrics.add_to_cart.toLocaleString('en-US')} hint={`View product: ${metrics.view_content.toLocaleString('en-US')}`} icon="cursor" />
               <MetricCard label="AOV" value={formatMad(metrics.average_order_value)} hint={`Revenue: ${formatMad(metrics.revenue)}`} icon="package" />
               <MetricCard label="Upsell Take Rate" value={formatPercent(metrics.upsell_rate)} hint={`${metrics.upsell_orders} upsell orders`} icon="shield" />
