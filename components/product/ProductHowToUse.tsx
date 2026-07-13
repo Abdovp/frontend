@@ -58,34 +58,31 @@ export default function ProductHowToUse({ product }: { product: Product }) {
     <section className="section-padding bg-white" aria-labelledby="how-to-use-heading">
       <div className={`container-wide ${hasImage ? 'max-w-5xl' : 'max-w-4xl'}`}>
         {hasImage ? (
-          <div className="layout-ltr grid lg:grid-cols-2 gap-10 lg:gap-16 items-start lg:items-stretch">
-            <div dir="rtl" className="text-right order-2 lg:order-1">
-              <p className="eyebrow mb-3">
+          <div>
+            <div dir="rtl" className="text-center mb-8">
+              <p className="eyebrow mb-3 justify-center">
                 <Icon name="spark" size={14} />
                 طريقة الاستعمال
               </p>
               <h2
                 id="how-to-use-heading"
-                className="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold text-ink mb-8 lg:mb-10"
+                className="font-heading text-2xl sm:text-3xl md:text-4xl font-extrabold text-ink mb-8"
               >
                 {howToUse.title}
               </h2>
-              <HowToUseSteps steps={howToUse.steps} layout="column" />
+
+              {howToUse.image && (
+                <div className="mx-auto max-w-lg rounded-2xl overflow-hidden shadow-card mb-10">
+                  <img
+                    src={howToUse.image}
+                    alt={howToUse.imageLabel ?? howToUse.title}
+                    className="w-full h-auto block"
+                  />
+                </div>
+              )}
             </div>
 
-            <div className="order-1 lg:order-2 w-full max-w-sm mx-auto lg:max-w-none lg:h-full lg:min-h-0">
-              <ProductImage
-                src={howToUse.image}
-                alt={howToUse.imageLabel ?? howToUse.title}
-                fallbackLabel={howToUse.imageLabel ?? 'طريقة الاستعمال'}
-                fallbackSublabel="الصورة قريباً"
-                aspect="square"
-                fit="contain-mobile-cover-desktop"
-                objectPosition="center"
-                className="rounded-2xl shadow-card bg-white lg:bg-transparent lg:aspect-auto lg:h-full group"
-              imageClassName="group-hover:scale-105 transition-transform duration-700 ease-out"
-              />
-            </div>
+            <HowToUseSteps steps={howToUse.steps} layout="row" />
           </div>
         ) : (
           <>

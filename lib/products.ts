@@ -238,6 +238,8 @@ export const products: Record<ProductId, Product> = {
           body: 'قبل ما تركب بـ 2-3 دقائق شغّل المروحة. توصل، تحس الفرق مباشرة — جو مريح بلا انتظار.',
         },
       ],
+      image: '/images/pack-how.webp',
+      imageLabel: 'طريقة تركيب الباك',
     },
     pain: {
       eyebrow: 'المشكل',
