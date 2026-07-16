@@ -396,98 +396,123 @@ export default function ProductOffers({ product }: ProductOffersProps) {
             </div>
 
             {/* Inline checkout form */}
-            <div className="rounded-2xl border-2 border-brand/20 bg-gradient-to-b from-brand/[0.04] to-transparent p-5 mt-2">
-              {/* Form header */}
-              <div className="flex items-center gap-2.5 mb-4">
-                <span className="flex items-center justify-center w-7 h-7 rounded-full bg-brand text-white font-bold text-sm shrink-0">
+            <div className="rounded-2xl overflow-hidden shadow-card border border-ink/[0.07] mt-2">
+              {/* Form header banner */}
+              <div className="bg-brand px-5 py-3.5 flex items-center gap-3">
+                <span className="flex items-center justify-center w-7 h-7 rounded-full bg-white/20 text-white font-bold text-sm shrink-0">
                   2
                 </span>
-                <div>
-                  <p className="font-heading font-extrabold text-ink leading-none">أكمل بياناتك للتوصيل</p>
-                  <p className="text-xs text-ink/50 mt-0.5">بدون دفع — الطلب يوصل لبابك</p>
+                <div className="flex-1 min-w-0">
+                  <p className="font-heading font-extrabold text-white text-sm leading-none">أكمل بياناتك — التوصيل مجاناً</p>
+                  <p className="text-xs text-white/70 mt-0.5">دفع عند الاستلام • لا حاجة لبطاقة بنكية</p>
                 </div>
+                <span className="shrink-0 text-[0.6rem] font-extrabold bg-accent text-ink rounded-full px-2.5 py-1 leading-none">
+                  الخطوة الأخيرة
+                </span>
               </div>
 
-              <form onSubmit={(e) => { void handleSubmit(e); }} noValidate className="space-y-3">
-                <FormField
-                  id="product-checkout-name"
-                  label="الاسم الكامل"
-                  ref={nameRef}
-                  error={showError('name')}
-                  inputProps={{
-                    type: 'text',
-                    name: 'name',
-                    autoComplete: 'name',
-                    placeholder: 'مثلاً: محمد العلوي',
-                    value: formData.name,
-                    onChange: (e) => setField('name', e.target.value),
-                    onBlur: (e) => handleBlur('name', e.target.value),
-                    disabled: submitting,
-                  }}
-                />
-                <FormField
-                  id="product-checkout-phone"
-                  label="رقم الهاتف"
-                  error={showError('phone')}
-                  inputProps={{
-                    type: 'tel',
-                    name: 'phone',
-                    dir: 'ltr',
-                    autoComplete: 'tel',
-                    placeholder: '06XXXXXXXX',
-                    value: formData.phone,
-                    onChange: (e) => setField('phone', e.target.value),
-                    onBlur: (e) => handleBlur('phone', e.target.value),
-                    disabled: submitting,
-                  }}
-                />
+              <div className="bg-white px-5 pt-4 pb-5">
+                <form onSubmit={(e) => { void handleSubmit(e); }} noValidate className="space-y-3">
+                  <FormField
+                    id="product-checkout-name"
+                    label="الاسم الكامل"
+                    ref={nameRef}
+                    error={showError('name')}
+                    inputProps={{
+                      type: 'text',
+                      name: 'name',
+                      autoComplete: 'name',
+                      placeholder: 'مثلاً: محمد العلوي',
+                      value: formData.name,
+                      onChange: (e) => setField('name', e.target.value),
+                      onBlur: (e) => handleBlur('name', e.target.value),
+                      disabled: submitting,
+                    }}
+                  />
+                  <FormField
+                    id="product-checkout-phone"
+                    label="رقم الهاتف"
+                    error={showError('phone')}
+                    hint="سيتصل بك المندوب على هذا الرقم للتأكيد"
+                    inputProps={{
+                      type: 'tel',
+                      name: 'phone',
+                      dir: 'ltr',
+                      autoComplete: 'tel',
+                      placeholder: '06XXXXXXXX',
+                      value: formData.phone,
+                      onChange: (e) => setField('phone', e.target.value),
+                      onBlur: (e) => handleBlur('phone', e.target.value),
+                      disabled: submitting,
+                    }}
+                  />
 
-                {submitError && (
-                  <p className="text-sm font-semibold text-red-600 bg-red-50 border border-red-200 rounded-xl px-4 py-2.5" role="alert">
-                    {submitError}
-                  </p>
-                )}
-
-                <button
-                  type="submit"
-                  disabled={!isAvailable || submitting}
-                  className="checkout-cta checkout-cta--pulse w-full disabled:opacity-50 !text-base !py-4"
-                >
-                  {submitting ? (
-                    <>
-                      <span className="inline-block h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                      جاري إرسال الطلب...
-                    </>
-                  ) : (
-                    <>
-                      <Icon name="lock" size={20} />
-                      {isAvailable
-                        ? `تأكيد الطلب — ${selectedOffer?.price ?? firstOffer.price} ${CURRENCY} 🚀`
-                        : 'غير متوفر حالياً'}
-                    </>
+                  {submitError && (
+                    <p className="text-sm font-semibold text-red-600 bg-red-50 border border-red-200 rounded-xl px-4 py-2.5" role="alert">
+                      {submitError}
+                    </p>
                   )}
-                </button>
 
-                <p className="text-center text-xs text-ink/40 flex items-center justify-center gap-1">
-                  <Icon name="lock" size={12} className="shrink-0" />
-                  بياناتك آمنة — لن نشاركها مع أي طرف
-                </p>
-              </form>
-            </div>
+                  {/* Order summary strip */}
+                  <div className="flex items-center justify-between bg-brand/[0.04] border border-brand/15 rounded-xl px-4 py-3">
+                    <div className="text-sm">
+                      <p className="font-bold text-ink leading-none">{selectedOffer?.label ?? firstOffer.label}</p>
+                      {(selectedOffer?.sublabel ?? firstOffer.sublabel) && (
+                        <p className="text-xs text-ink/50 mt-0.5">{selectedOffer?.sublabel ?? firstOffer.sublabel}</p>
+                      )}
+                    </div>
+                    <div className="text-end">
+                      <p className="font-extrabold text-brand text-lg leading-none">
+                        {selectedOffer?.price ?? firstOffer.price}{' '}
+                        <span className="text-sm font-semibold text-ink/50">{CURRENCY}</span>
+                      </p>
+                      {(selectedOffer?.compareAt ?? firstOffer.compareAt) && (
+                        <p className="text-[0.65rem] text-ink/35 line-through mt-0.5">
+                          {selectedOffer?.compareAt ?? firstOffer.compareAt} {CURRENCY}
+                        </p>
+                      )}
+                    </div>
+                  </div>
 
-            {/* Trust badges row */}
-            <div className="grid grid-cols-3 gap-2 mt-3">
-              <div className="flex flex-col items-center gap-1 rounded-xl bg-ink/[0.03] border border-ink/[0.06] py-3 px-2 text-center">
-                <Icon name="wallet" size={18} className="text-brand" />
-                <p className="text-[0.65rem] font-bold text-ink/60 leading-tight">دفع عند الاستلام</p>
-              </div>
-              <div className="flex flex-col items-center gap-1 rounded-xl bg-ink/[0.03] border border-ink/[0.06] py-3 px-2 text-center">
-                <Icon name="truck" size={18} className="text-brand" />
-                <p className="text-[0.65rem] font-bold text-ink/60 leading-tight">توصيل مجاني</p>
-              </div>
-              <div className="flex flex-col items-center gap-1 rounded-xl bg-ink/[0.03] border border-ink/[0.06] py-3 px-2 text-center">
-                <Icon name="refresh" size={18} className="text-brand" />
-                <p className="text-[0.65rem] font-bold text-ink/60 leading-tight">استرجاع مضمون</p>
+                  <button
+                    type="submit"
+                    disabled={!isAvailable || submitting}
+                    className="checkout-cta checkout-cta--pulse w-full disabled:opacity-50 !text-base !py-4"
+                  >
+                    {submitting ? (
+                      <>
+                        <span className="inline-block h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                        جاري تأكيد طلبك...
+                      </>
+                    ) : (
+                      <>
+                        <Icon name="lock" size={20} />
+                        {isAvailable ? 'تأكيد الطلب 🚀' : 'غير متوفر حالياً'}
+                      </>
+                    )}
+                  </button>
+
+                  {/* Trust strip inside form */}
+                  <div className="grid grid-cols-3 gap-1.5">
+                    <div className="flex flex-col items-center gap-1 rounded-xl bg-emerald-50 border border-emerald-100 py-2.5 px-1 text-center">
+                      <Icon name="wallet" size={16} className="text-emerald-600" />
+                      <p className="text-[0.6rem] font-bold text-emerald-700 leading-tight">دفع عند الاستلام</p>
+                    </div>
+                    <div className="flex flex-col items-center gap-1 rounded-xl bg-emerald-50 border border-emerald-100 py-2.5 px-1 text-center">
+                      <Icon name="truck" size={16} className="text-emerald-600" />
+                      <p className="text-[0.6rem] font-bold text-emerald-700 leading-tight">توصيل مجاني</p>
+                    </div>
+                    <div className="flex flex-col items-center gap-1 rounded-xl bg-emerald-50 border border-emerald-100 py-2.5 px-1 text-center">
+                      <Icon name="refresh" size={16} className="text-emerald-600" />
+                      <p className="text-[0.6rem] font-bold text-emerald-700 leading-tight">استرجاع مضمون</p>
+                    </div>
+                  </div>
+
+                  <p className="text-center text-xs text-ink/40 flex items-center justify-center gap-1 pt-0.5">
+                    <Icon name="lock" size={12} className="shrink-0" />
+                    بياناتك آمنة — لن نشاركها مع أي طرف
+                  </p>
+                </form>
               </div>
             </div>
 
