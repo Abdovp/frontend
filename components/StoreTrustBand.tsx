@@ -22,8 +22,8 @@ export default function StoreTrustBand({ className = '' }: Props) {
               <Icon name={item.icon} size={24} className="opacity-90 sm:w-6 sm:h-6 lg:w-[26px] lg:h-[26px]" />
             </span>
             <span className="flex-1 min-w-0">
-              <span className="block font-heading font-extrabold text-xs sm:text-base lg:text-lg text-white leading-tight mb-0.5 sm:mb-1">{item.text}</span>
-              <span className="block text-[10px] sm:text-sm text-white/60 font-medium leading-tight">{item.sub}</span>
+              <span className="block font-heading font-extrabold text-sm sm:text-base lg:text-lg text-white leading-tight mb-0.5 sm:mb-1">{item.text}</span>
+              <span className="block text-xs sm:text-sm text-white/60 font-medium leading-tight">{item.sub}</span>
             </span>
           </li>
         ))}
