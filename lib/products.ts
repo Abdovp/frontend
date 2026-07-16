@@ -196,15 +196,15 @@ export const products: Record<ProductId, Product> = {
     offers: [
       {
         quantity: 1,
-        price: 185,
+        price: 199,
         label: 'باك واحد',
         sublabel: 'تجربة الحماية لطوموبيل واحدة',
         perks: ['مروحة مزدوجة + مظلة حرارية', 'توصيل مجاني', `ضمان ${WARRANTY_DAYS} يوم`],
       },
       {
         quantity: 2,
-        price: 259,
-        compareAt: 378,
+        price: 279,
+        compareAt: 398,
         label: 'باكان',
         sublabel: 'وحدة ليك ووحدة لعائلتك',
         badge: 'الأكثر مبيعاً',
