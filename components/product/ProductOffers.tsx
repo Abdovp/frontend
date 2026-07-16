@@ -487,7 +487,7 @@ export default function ProductOffers({ product }: ProductOffersProps) {
                     ) : (
                       <>
                         <Icon name="lock" size={20} />
-                        {isAvailable ? 'تأكيد الطلب 🚀' : 'غير متوفر حالياً'}
+                        {isAvailable ? 'اطلب لآن 🚀' : 'غير متوفر حالياً'}
                       </>
                     )}
                   </button>
