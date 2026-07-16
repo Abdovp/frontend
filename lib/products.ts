@@ -196,7 +196,7 @@ export const products: Record<ProductId, Product> = {
     offers: [
       {
         quantity: 1,
-        price: 189,
+        price: 185,
         label: 'باك واحد',
         sublabel: 'تجربة الحماية لطوموبيل واحدة',
         perks: ['مروحة مزدوجة + مظلة حرارية', 'توصيل مجاني', `ضمان ${WARRANTY_DAYS} يوم`],
