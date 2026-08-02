@@ -1,14 +1,14 @@
 # Offers & Pricing
 
-## Main Product
-باك ضد سخونية الطوموبيل (Double fan + umbrella for cars)
+## Main Products
+منتجات مختارة بعناية لحياتك اليومية
 
 ## Offers
-- 1 piece: 199 dh
-- 2 pieces: 279 dh
+- Variable pricing based on product selection
+- Bundle offers available
 
 ## Upsell
-- Relevant product (to be defined), 99 dh, shown only after checkout for 10-15s
+- Complementary products, shown after checkout for 10-15s
 
 ## Cross-sell
 - Show in cart drawer and product page

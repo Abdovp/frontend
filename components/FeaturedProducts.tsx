@@ -4,7 +4,7 @@ import ProductImage from './ui/ProductImage';
 import Icon, { Stars } from './ui/Icon';
 
 const comingSoon = [
-  { name: 'مجموعة العناية والتنظيف', category: 'عناية بالسيارة' },
+  { name: 'مجموعة العناية والتنظيف', category: 'عناية وتنظيف' },
   { name: 'إضاءة LED داخلية', category: 'إكسسوارات' },
 ];
 
@@ -17,7 +17,7 @@ export default function FeaturedProducts() {
             الأكثر طلباً
           </span>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-[2.85rem] font-extrabold text-ink leading-[1.12]">
-            منتجات كيختاروها السائقين كل يوم
+            منتجات كيختاروها الزبناء كل يوم
           </h2>
           <p className="text-ink/75 mt-4 text-lg">
             مجموعة مختارة بعناية — مفحوصة، مضمونة، وجاهزة للتوصيل بالدفع عند الاستلام.

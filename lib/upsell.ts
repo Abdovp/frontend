@@ -13,6 +13,14 @@ export function hasUpsellAvailable(orderedIds: ProductId[]): boolean {
 }
 
 export function pickUpsellProduct(orderedIds: ProductId[]): Product | null {
+  // Specific upsell mappings for certain products
+  if (orderedIds.includes('garden-sprinkler')) {
+    const carVacuum = productList.find((p) => p.id === 'car-vacuum');
+    if (carVacuum && isProductAvailable(carVacuum)) {
+      return carVacuum;
+    }
+  }
+
   const pool = getUpsellCandidates(orderedIds);
   if (pool.length === 0) return null;
 

@@ -10,10 +10,10 @@ export default function Collections() {
   return (
     <>
       <Head>
-        <title>منتجات السيارات | بويا شوب</title>
+        <title>المنتجات | بويا شوب</title>
         <meta
           name="description"
-          content="كتالوج بويا شوب لإكسسوارات السيارات: باك الحماية من السخونة وحامل الهاتف المغناطيسي. أسعار واضحة، ضمان 30 يوم، دفع عند الاستلام."
+          content="كتالوج بويا شوب للمنتجات المبتكرة والعملية. أسعار واضحة، ضمان 30 يوم، دفع عند الاستلام."
         />
       </Head>
       <Header />
@@ -28,7 +28,7 @@ export default function Collections() {
             </span>
             <h1 className="font-heading text-4xl md:text-5xl lg:text-[3.2rem] font-extrabold mb-4 leading-[1.1] text-balance">منتجات بويا شوب</h1>
             <p className="text-white/75 max-w-xl mx-auto text-lg">
-              إكسسوارات سيارات مختارة بعناية — متوفرة دابا، ومزيد من المجموعات ف الطريق.
+              منتجات مختارة بعناية — متوفرة دابا، ومزيد من المجموعات ف الطريق.
             </p>
           </div>
         </section>

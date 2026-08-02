@@ -7,13 +7,13 @@ const testimonials = [
     name: 'حسن المرابط',
     initials: 'ح',
     city: 'الدار البيضاء',
-    text: 'بويا شوب كيبان متخصص فعلاً ف السيارات. التوصيل سريع والتأكيد بالواتساب محترف — حسّيت براحة البال.',
+    text: 'بويا شوب كيبان متخصص فعلاً ف المنتجات المبتكرة. التوصيل سريع والتأكيد بالواتساب محترف — حسّيت براحة البال.',
   },
   {
     name: 'إيمان بنشقرون',
     initials: 'إ',
     city: 'طنجة',
-    text: 'خدمة زوينة ومنتجات كتبان جادة. ما بقيتش نخمّم بزاف فالشراء أونلاين للطوموبيل.',
+    text: 'خدمة زوينة ومنتجات كتبان جادة. ما بقيتش نخمّم بزاف فالشراء أونلاين.',
   },
   {
     name: 'عمر السعدي',
@@ -25,7 +25,7 @@ const testimonials = [
     name: 'ليلى الزاكي',
     initials: 'ل',
     city: 'أكادير',
-    text: 'كنت كنقلب على متجر كيفهم السائق المغربي. بويا شوب قريب لينا فاللغة وفالخدمة.',
+    text: 'كنت كنقلب على متجر كيفهم الزبون المغربي. بويا شوب قريب لينا فاللغة وفالخدمة.',
   },
 ];
 
@@ -38,7 +38,7 @@ export default function TestimonialsSection() {
             آراء الزبناء
           </span>
           <h2 className="font-heading text-3xl md:text-4xl lg:text-[2.85rem] font-extrabold text-ink leading-[1.12]">
-            +{STORE_PROOF.customers.replace('+', '')} سائق مغربي وثقو ف بويا شوب
+            +{STORE_PROOF.customers.replace('+', '')} زبون مغربي وثقو ف بويا شوب
           </h2>
           <div className="flex items-center justify-center gap-2 mt-4 text-ink/60">
             <Stars value={4.9} size={18} />

@@ -3,8 +3,8 @@ import Icon, { type IconName } from '../ui/Icon';
 
 const categories: { icon: IconName; title: string; desc: string; status: string; href: string | null }[] = [
   { icon: 'fan', title: 'تبريد وحماية', desc: 'حلول ضد الحرارة والشمس', status: 'متوفر', href: '/collections' },
-  { icon: 'pin', title: 'راحة السياقة', desc: 'تنظيم وثبات داخل السيارة', status: 'متوفر', href: '/collections' },
-  { icon: 'leaf', title: 'عناية وتنظيف', desc: 'منتجات العناية بالطوموبيل', status: 'قريباً', href: null },
+  { icon: 'pin', title: 'الراحة اليومية', desc: 'منتجات عملية لحياتك اليومية', status: 'متوفر', href: '/collections' },
+  { icon: 'leaf', title: 'عناية وتنظيف', desc: 'منتجات العناية والنظافة', status: 'قريباً', href: null },
   { icon: 'spark', title: 'إكسسوارات عملية', desc: 'إضافات للاستعمال اليومي', status: 'قريباً', href: null },
 ];
 

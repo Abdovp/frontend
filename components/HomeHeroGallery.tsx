@@ -8,7 +8,7 @@ export default function HomeHeroGallery() {
     <div className="relative aspect-[4/5] md:aspect-[4/3] lg:aspect-[16/11] overflow-hidden rounded-3xl border border-white/15 shadow-lift">
       <Image
         src="/images/home-hero-1.webp"
-        alt="سائق مغربي مرتاح ف طوموبيلو — بويا شوب"
+        alt="زبون مغربي راضي عن منتجاتنا — بويا شوب"
         fill
         priority
         placeholder="blur"

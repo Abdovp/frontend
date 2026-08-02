@@ -43,16 +43,16 @@ export default function HomeBrandHero() {
           <div dir="rtl" className="text-right order-2 lg:order-1 animate-fade-up">
             <span className="eyebrow-light mb-6">
               <Icon name="badge" size={14} className="text-accent" />
-              متجر مغربي متخصص ف إكسسوارات السيارات
+              متجر مغربي متخصص ف المنتجات العملية والمبتكرة
             </span>
 
             <h1 className="font-heading text-4xl md:text-5xl lg:text-[3.5rem] font-extrabold leading-[1.08] mb-5 text-balance">
-              إكسسوارات سيارات تستحق طوموبيلك —
-              <span className="text-accent"> مختارة بعناية، مضمونة بثقة.</span>
+              منتجات مختارة بعناية لحياتك اليومية —
+              <span className="text-accent"> جودة مضمونة، ثقة مؤكدة.</span>
             </h1>
 
             <p className="text-lg text-white/75 leading-relaxed mb-8 max-w-xl">
-              ماشي متجر كيبيع أي شي. بويا شوب كيختار ليك منتجات السيارات اللي خدامة فعلاً —
+              ماشي متجر كيبيع أي شي. بويا شوب كيختار ليك المنتجات اللي خدامة فعلاً —
               جودة مفحوصة، أسعار واضحة، ودعم مغربي بالدارجة قبل وبعد الطلب.
             </p>
 

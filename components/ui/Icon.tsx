@@ -32,7 +32,11 @@ export type IconName =
   | 'clock'
   | 'leaf'
   | 'vacuum'
-  | 'users';
+  | 'users'
+  | 'droplets'
+  | 'settings'
+  | 'anchor'
+  | 'zap';
 
 interface IconProps extends SVGProps<SVGSVGElement> {
   name: IconName;
@@ -166,6 +170,30 @@ const paths: Record<IconName, ReactElement> = {
       <path d="M16 11a3 3 0 110-6" />
       <path d="M21 20v-1a6 6 0 00-5-5.9" />
     </>
+  ),
+  droplets: (
+    <>
+      <path d="M8 16c0 1.5 1 3 3 3s3-1.5 3-3-3-5-3-5-3 3.5-3 5z" />
+      <path d="M14 8c0 1.1.7 2 2 2s2-.9 2-2-2-3.5-2-3.5S14 6.9 14 8z" />
+      <path d="M4 12c0 1.1.7 2 2 2s2-.9 2-2-2-3.5-2-3.5S4 10.9 4 12z" />
+    </>
+  ),
+  settings: (
+    <>
+      <circle cx="12" cy="12" r="3" />
+      <path d="M12 3v2M12 19v2M5 12H3M21 12h-2M6.3 6.3l-1.4-1.4M19.1 19.1l-1.4-1.4M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4" />
+    </>
+  ),
+  anchor: (
+    <>
+      <circle cx="12" cy="6" r="2.5" />
+      <path d="M12 8.5v11.5" />
+      <path d="M6 14c-1.5 2-2 4-2 6a8 8 0 0016 0c0-2-.5-4-2-6" />
+      <path d="M7 20h10" />
+    </>
+  ),
+  zap: (
+    <path d="M13 3L5 13h7l-1 8 8-10h-7l1-8z" />
   ),
 };
 

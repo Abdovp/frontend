@@ -18,10 +18,10 @@ export default function HomeFinalCTA() {
         <div className="absolute -bottom-24 -start-24 w-80 h-80 rounded-full bg-brand-light/40 blur-[80px]" aria-hidden />
         <div className="container-wide relative">
           <h2 className="font-heading text-3xl md:text-5xl font-extrabold mb-4 text-balance">
-            بويا شوب — شريكك ف عالم السيارات
+            بويا شوب — شريكك ف عالم المنتجات المبتكرة
           </h2>
           <p className="text-white/75 max-w-2xl mx-auto mb-10 text-lg">
-            اختار المنتج اللي يلائم طوموبيلك، واطلب بكل ثقة. الجودة مضمونة، والمخاطرة علينا حنا.
+            اختار المنتج اللي يلائمك، واطلب بكل ثقة. الجودة مضمونة، والمخاطرة علينا حنا.
           </p>
           <Link href="/collections" className="btn-gold">
             ادخل للكتالوج
