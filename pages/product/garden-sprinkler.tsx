@@ -5,7 +5,8 @@ import { getProduct } from '../../lib/products';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Icon from '../../components/ui/Icon';
-import UpsellPopup from '../../components/UpsellPopup';
+import dynamic from 'next/dynamic';
+const UpsellPopup = dynamic(() => import('../../components/UpsellPopup'), { ssr: false });
 
 export default function GardenSprinklerPage() {
   const product = getProduct('garden-sprinkler');
@@ -84,30 +85,7 @@ export default function GardenSprinklerPage() {
         <meta property="og:description" content="سقي أوتوماتيكي ذكي - وفر 40% من الماء واحصل على حديقة خضراء بدون تعب" />
       </Head>
 
-      <style jsx global>{`
-        :root {
-          --lawn-green: #16a34a;
-          --lawn-dark: #15803d;
-          --grass-light: #86efac;
-          --nature-bg: #f0fdf4;
-        }
-        
-        .lawn-gradient {
-          background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
-        }
-        
-        .nature-gradient {
-          background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 100%);
-        }
 
-        @media (min-width: 1024px) {
-          .container-lawn {
-            max-width: 1280px;
-            margin: 0 auto;
-            padding: 0 2rem;
-          }
-        }
-      `}</style>
 
       <div className="bg-white overflow-x-clip">
         <Header />
@@ -153,7 +131,7 @@ export default function GardenSprinklerPage() {
                 </div>
 
                 {/* Key Benefits */}
-                <div className="space-y-3 bg-white/80 backdrop-blur rounded-2xl p-6 shadow-lg border border-green-100" dir="rtl">
+                <div className="space-y-3 bg-white rounded-2xl p-6 shadow-lg border border-green-100" dir="rtl">
                   {[
                     'سقي متساوي لكل متر — ولا بقعة صفراء',
                     'وفر حتى 40% من الماء — فاتورة أقل',
@@ -296,6 +274,7 @@ export default function GardenSprinklerPage() {
                     alt="رشاش الحديقة الدوار الذكي"
                     width={700}
                     height={700}
+                    sizes="(max-width: 1024px) 100vw, 50vw"
                     className="w-full h-auto rounded-2xl shadow-2xl"
                     priority
                   />
@@ -459,6 +438,8 @@ export default function GardenSprinklerPage() {
                     alt="رشاش الحديقة أثناء العمل"
                     width={700}
                     height={700}
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    loading="lazy"
                     className="w-full rounded-2xl shadow-2xl"
                   />
                   {/* Overlay Stats */}

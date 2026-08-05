@@ -760,6 +760,14 @@ h1, h2, h3, h4 {
 }
 
 @layer utilities {
+  .lawn-gradient {
+    background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  }
+
+  .nature-gradient {
+    background: linear-gradient(180deg, #f0fdf4 0%, #ffffff 100%);
+  }
+
   /* Dot-grid hero background — slightly more visible for depth */
   .hero-grid-bg {
     background-image: radial-gradient(circle at 1px 1px, rgba(255, 255, 255, 0.1) 1px, transparent 0);
