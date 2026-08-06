@@ -278,10 +278,6 @@ export default function GardenSprinklerPage() {
                     className="w-full h-auto rounded-2xl shadow-2xl"
                     priority
                   />
-                  {/* Floating Badge */}
-                  <div className="absolute top-4 left-4 bg-gradient-to-r from-yellow-400 to-yellow-500 text-yellow-900 px-4 py-2 rounded-full text-sm font-black shadow-lg">
-                    ⭐ الأكثر مبيعًا
-                  </div>
                 </div>
               </div>
 
