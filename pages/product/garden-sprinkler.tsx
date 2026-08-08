@@ -793,7 +793,7 @@ export default function GardenSprinklerPage() {
               <button
                 type="button"
                 onClick={scrollToOrderForm}
-                className="bg-white text-green-700 px-6 py-3 rounded-full font-black text-base sm:text-lg hover:bg-green-50 transition-all shadow-lg"
+                className="bg-white text-green-700 px-5 py-2.5 rounded-full font-black text-sm sm:text-base hover:bg-green-50 transition-all shadow-lg"
               >
                 اطلب الآن
               </button>
