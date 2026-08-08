@@ -1,7 +1,13 @@
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Head from 'next/head';
 import Image from 'next/image';
-import { getProduct } from '../../lib/products';
+import { createPurchaseEventId, submitOrder } from '../../lib/api/orders';
+import { getCheckoutErrorMessage } from '../../lib/api/order-errors';
+import { trackInitiateCheckout, trackPurchase } from '../../lib/analytics/track';
+import { saveOrderConfirmation } from '../../lib/order-confirmation';
+import { pickUpsellProduct } from '../../lib/upsell';
+import { getProduct, type Product } from '../../lib/products';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
 import Icon from '../../components/ui/Icon';
@@ -9,12 +15,20 @@ import dynamic from 'next/dynamic';
 const UpsellPopup = dynamic(() => import('../../components/UpsellPopup'), { ssr: false });
 
 export default function GardenSprinklerPage() {
+  const router = useRouter();
   const product = getProduct('garden-sprinkler');
-  const upsellProduct = getProduct('car-vacuum');
+  const upsellCandidate = getProduct('car-vacuum');
   const [selectedOffer, setSelectedOffer] = useState(1);
   const [formData, setFormData] = useState({ name: '', phone: '' });
   const [showStickyBar, setShowStickyBar] = useState(false);
   const [showUpsell, setShowUpsell] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
+  const [activeUpsell, setActiveUpsell] = useState<Product | null>(null);
+
+  useEffect(() => {
+    void router.prefetch('/thank-you');
+  }, [router]);
 
   useEffect(() => {
     const problemSection = document.getElementById('problem-section');
@@ -39,28 +53,91 @@ export default function GardenSprinklerPage() {
     return () => observer.disconnect();
   }, []);
 
-  if (!product || !upsellProduct) return null;
+  if (!product || !upsellCandidate) return null;
 
   const currentOffer = product.offers[selectedOffer];
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Show upsell popup instead of immediately submitting
-    setShowUpsell(true);
+
+    if (!formData.name.trim() || !formData.phone.trim()) {
+      return;
+    }
+
+    const offer = product.offers[selectedOffer];
+    const items = [
+      {
+        id: product.id,
+        lineKey: `${product.id}-${offer.quantity}`,
+        name: product.nameAr,
+        price: offer.price,
+        offer: offer.quantity,
+        quantity: 1,
+      },
+    ];
+    const total = offer.price;
+
+    setSubmitting(true);
+    setSubmitError('');
+    trackInitiateCheckout(
+      items.map((item) => ({ productId: item.id, name: item.name, price: item.price, quantity: item.quantity })),
+      total
+    );
+
+    const eventId = createPurchaseEventId();
+
+    try {
+      const result = await submitOrder({
+        eventId,
+        name: formData.name.trim(),
+        phone: formData.phone.trim(),
+        items,
+        total,
+      });
+
+      saveOrderConfirmation({
+        name: formData.name.trim(),
+        phone: formData.phone.trim(),
+        items,
+        total,
+        eventId,
+        orderId: result.id,
+        publicOrderId: result.public_order_id,
+      });
+
+      trackPurchase({
+        eventId,
+        value: total,
+        items: items.map((item) => ({ productId: item.id, name: item.name, price: item.price, quantity: item.quantity })),
+      });
+
+      const upsell = pickUpsellProduct([product.id]);
+      if (upsell) {
+        setActiveUpsell(upsell);
+        setShowUpsell(true);
+        setSubmitting(false);
+        return;
+      }
+
+      setShowUpsell(false);
+      setSubmitting(false);
+      await router.push('/thank-you');
+    } catch (error) {
+      setSubmitError(getCheckoutErrorMessage(error));
+      setSubmitting(false);
+    }
   };
 
-  const handleUpsellAdded = () => {
-    // Upsell was added, close popup and proceed
+  const handleUpsellAdded = async () => {
+    setActiveUpsell(null);
     setShowUpsell(false);
-    // Here you would normally proceed with order submission
-    console.log('Order with upsell:', { formData, selectedOffer });
+    await router.push('/thank-you');
   };
 
-  const handleUpsellClose = () => {
-    // User declined upsell, close popup and proceed
+  const handleUpsellClose = async () => {
+    setActiveUpsell(null);
     setShowUpsell(false);
-    // Here you would normally proceed with order submission
-    console.log('Order without upsell:', { formData, selectedOffer });
+    await router.push('/thank-you');
   };
 
   const scrollToOrderForm = () => {
@@ -215,16 +292,33 @@ export default function GardenSprinklerPage() {
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         className="w-full px-4 py-3.5 rounded-xl border-2 border-gray-200 focus:border-green-600 focus:ring-4 focus:ring-green-100 focus:outline-none text-right text-gray-900 font-semibold placeholder:text-gray-400 placeholder:font-normal"
-                        placeholder="رقم الهاتف (واتساب)"
+                        placeholder="رقم الهاتف"
                       />
+
+                      <a
+                        href="https://wa.me/0644166834"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="mt-2 flex items-center justify-center gap-2 rounded-xl border border-green-600 bg-green-50 px-4 py-3 text-green-700 font-bold transition-all hover:bg-green-100"
+                      >
+                        <Icon name="whatsapp" size={20} />
+                        <span>تواصل واتساب</span>
+                      </a>
 
                       <button
                         type="submit"
-                        className="w-full lawn-gradient text-white py-5 rounded-xl font-black text-xl shadow-xl hover:shadow-green-600/40 transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-3 mt-2"
+                        disabled={submitting}
+                        className="w-full lawn-gradient text-white py-5 rounded-xl font-black text-xl shadow-xl hover:shadow-green-600/40 transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-3 mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
                       >
                         <Icon name="check-circle" size={22} />
-                        <span>أكّد طلبي — {currentOffer.price} درهم</span>
+                        <span>{submitting ? 'جاري الإرسال...' : 'أكّد طلبي'}</span>
                       </button>
+
+                      {submitError && (
+                        <p className="text-center text-sm text-red-600" dir="rtl">
+                          {submitError}
+                        </p>
+                      )}
 
                       {/* Micro-copy risk reversal */}
                       <p className="text-center text-xs text-gray-500 pt-1" dir="rtl">
@@ -664,7 +758,11 @@ export default function GardenSprinklerPage() {
                   }
                 ])
                 .map((faq, idx) => (
-                <details key={idx} className="bg-gray-50 rounded-2xl p-6 hover:bg-gray-100 transition-all border border-gray-200">
+                <details
+                  key={idx}
+                  open={faq.q === 'وإلا ما عجبنيش؟'}
+                  className="bg-gray-50 rounded-2xl p-6 hover:bg-gray-100 transition-all border border-gray-200"
+                >
                   <summary className="font-bold text-gray-900 cursor-pointer text-right text-lg flex items-center justify-between">
                     <span>{faq.q}</span>
                     <span className="text-green-600 text-2xl">+</span>
@@ -684,35 +782,28 @@ export default function GardenSprinklerPage() {
             className="inline-flex items-center gap-3 lawn-gradient text-white px-10 py-5 rounded-full font-black text-xl hover:shadow-2xl transition-all shadow-lg transform hover:scale-105"
           >
             <Icon name="cart" size={20} />
-            <span>اطلب الآن — {currentOffer.price} درهم</span>
+            <span>اطلب الآن</span>
           </button>
         </section>
 
         {/* Sticky Bottom CTA */}
         {showStickyBar && (
           <div className="fixed bottom-0 left-0 right-0 lawn-gradient text-white py-4 px-4 shadow-2xl z-50">
-            <div className="container mx-auto flex items-center justify-between gap-4">
-              <div className="flex-1 text-right hidden md:block">
-                <p className="font-black text-lg">رشاش الحديقة الدوار 360°</p>
-                <p className="text-sm text-green-100">باقي {product.stockLeft} قطع</p>
-              </div>
-              <div className="flex items-center gap-4">
-                <p className="font-black text-2xl">{product.offers[0].price} درهم</p>
-                <button
-                  type="button"
-                  onClick={scrollToOrderForm}
-                  className="bg-white text-green-700 px-6 py-3 rounded-full font-black hover:bg-green-50 transition-all shadow-lg"
-                >
-                  اطلب الآن
-                </button>
-              </div>
+            <div className="container mx-auto flex items-center justify-center">
+              <button
+                type="button"
+                onClick={scrollToOrderForm}
+                className="bg-white text-green-700 px-8 py-4 rounded-full font-black text-lg sm:text-xl hover:bg-green-50 transition-all shadow-lg"
+              >
+                اطلب الآن
+              </button>
             </div>
           </div>
         )}
 
-        {showUpsell && (
+        {showUpsell && activeUpsell && (
           <UpsellPopup
-            product={upsellProduct}
+            product={activeUpsell}
             onAdded={handleUpsellAdded}
             onClose={handleUpsellClose}
           />

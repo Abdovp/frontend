@@ -1,6 +1,10 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import Head from "next/head";
 import { defaultLawFirmSiteConfig } from "../lib/law-firm-template";
+import { submitOrder } from "../lib/api/orders";
+import { saveOrderConfirmation } from "../lib/order-confirmation";
+import type { ProductId } from "../lib/products";
 
 const siteConfig = defaultLawFirmSiteConfig;
 const FIRM = siteConfig.firm;
@@ -851,6 +855,13 @@ function Blog() {
    ══════════════════════════════════════════════════════════════════════════ */
 type FormData = { name: string; phone: string; service: string; message: string };
 
+const LAW_LEAD_PRODUCT_ID: ProductId = "garden-sprinkler";
+
+function buildLawLeadName(service: string) {
+  const serviceLabel = service?.trim() ? ` - ${service.trim()}` : "";
+  return `Law Consultation${serviceLabel}`;
+}
+
 function Contact({
   formData,
   setFormData,
@@ -862,14 +873,59 @@ function Contact({
   submitted: boolean;
   setSubmitted: (v: boolean) => void;
 }) {
+  const router = useRouter();
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+
   function handleChange(e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   }
 
-  function handleSubmit(e: React.FormEvent) {
+  async function handleSubmit(e: React.FormEvent) {
     e.preventDefault();
-    // Frontend-only: show success state
-    setSubmitted(true);
+
+    if (submitting) return;
+
+    setSubmitting(true);
+    setSubmitError("");
+
+    try {
+      const leadItem = {
+        id: LAW_LEAD_PRODUCT_ID,
+        lineKey: `${LAW_LEAD_PRODUCT_ID}-1`,
+        name: buildLawLeadName(formData.service),
+        offer: 1 as const,
+        quantity: 1,
+        price: 0,
+      };
+
+      const eventId = `law-${Date.now()}`;
+
+      const result = await submitOrder({
+        eventId,
+        name: formData.name.trim(),
+        phone: formData.phone.trim(),
+        items: [leadItem],
+        total: 0,
+      });
+
+      saveOrderConfirmation({
+        name: formData.name.trim(),
+        phone: formData.phone.trim(),
+        items: [leadItem],
+        total: 0,
+        eventId,
+        orderId: result.id,
+        publicOrderId: result.public_order_id,
+      });
+
+      setSubmitted(true);
+      await router.push("/thank-you");
+    } catch {
+      setSubmitError("تعذر إرسال الطلب حالياً. حاول مرة أخرى بعد قليل.");
+    } finally {
+      setSubmitting(false);
+    }
   }
 
   return (
@@ -1038,10 +1094,12 @@ function Contact({
                   </div>
                   <button
                     type="submit"
-                    className="w-full bg-[#D4A017] hover:bg-[#B8860B] text-[#0C1B33] font-black text-base py-4 rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-[#D4A017]/25 hover:scale-[1.01]"
+                    disabled={submitting}
+                    className="w-full bg-[#D4A017] hover:bg-[#B8860B] text-[#0C1B33] font-black text-base py-4 rounded-xl transition-all duration-200 hover:shadow-lg hover:shadow-[#D4A017]/25 hover:scale-[1.01] disabled:opacity-70 disabled:cursor-not-allowed"
                   >
-                    احجز استشارتك المجانية الآن
+                    {submitting ? "جاري الإرسال..." : "احجز استشارتك المجانية الآن"}
                   </button>
+                  {submitError && <p className="text-red-300 text-sm text-center">{submitError}</p>}
                   <p className="text-[#0C1B33]/35 text-xs text-center">
                     بإرسال هذا النموذج توافق على سياسة الخصوصية. معلوماتك سرية تماماً.
                   </p>
