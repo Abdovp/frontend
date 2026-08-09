@@ -56,6 +56,11 @@ export default function GardenSprinklerPage() {
   if (!product || !upsellCandidate) return null;
 
   const currentOffer = product.offers[selectedOffer];
+  const offerTrustText = (idx: number) => {
+    if (idx === 1) return 'الاكثر طلبا - افضل توازن بين السعر والكمية';
+    if (idx === product.offers.length - 1) return 'افضل قيمة - اوفر سعر للقطعة';
+    return 'اختيار موثوق - نفس الجودة بضمان 30 يوم';
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -265,6 +270,7 @@ export default function GardenSprinklerPage() {
                                   <span className="text-gray-400 line-through text-sm">{offer.compareAt} درهم</span>
                                 )}
                               </div>
+                              <p className="mt-1 text-xs font-semibold text-green-700/90">{offerTrustText(idx)}</p>
                             </div>
                             {offer.badge && (
                               <span className="bg-yellow-400 text-yellow-900 px-2.5 py-1 rounded-full text-xs font-black flex-shrink-0">
