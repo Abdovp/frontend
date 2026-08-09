@@ -1,6 +1,7 @@
 import { STORE } from './products';
 
 /** Morocco (Africa/Casablanca) — work hours 11:00–19:00 */
+const SAME_DAY_CALL_HOUR = 7;
 const WORK_START_HOUR = 11;
 const WORK_END_HOUR = 19; // 7pm — orders at 19:00+ are outside hours
 
@@ -39,6 +40,16 @@ export function getCallScheduleInfo(date: Date = new Date()): CallScheduleInfo {
       inWorkHours: true,
     };
   }
+
+  const { hour } = getMoroccoParts(date);
+  if (hour >= SAME_DAY_CALL_HOUR && hour < WORK_START_HOUR) {
+    return {
+      statusLine: `الفريق غادي يبدا مع ${WORK_START_HOUR} صباحاً`,
+      message: 'غادي نتصلو بيك اليوم مع 11 صباحاً (بتوقيت المغرب)',
+      inWorkHours: false,
+    };
+  }
+
   return {
     statusLine: `استراحة فريق ${STORE.nameAr} دابا`,
     message: 'غادي نتصلو بيك غداً مع 11 صباحاً (بتوقيت المغرب)',
