@@ -56,10 +56,15 @@ export default function GardenSprinklerPage() {
   if (!product || !upsellCandidate) return null;
 
   const currentOffer = product.offers[selectedOffer];
-  const offerTrustText = (idx: number) => {
-    if (idx === 1) return 'الاكثر طلبا - افضل توازن بين السعر والكمية';
-    if (idx === product.offers.length - 1) return 'افضل قيمة - اوفر سعر للقطعة';
-    return 'اختيار موثوق - نفس الجودة بضمان 30 يوم';
+  const getOfferTrustLabel = (idx: number) => {
+    if (idx === 1) return 'الأكثر طلبا';
+    if (idx === product.offers.length - 1) return 'أفضل قيمة';
+    return 'خيار موثوق';
+  };
+  const getOfferSavingsLabel = (offer: (typeof product.offers)[number]) => {
+    if (!offer.compareAt || offer.compareAt <= offer.price) return null;
+    const savingsPercent = Math.round(((offer.compareAt - offer.price) / offer.compareAt) * 100);
+    return `توفير ${savingsPercent}%`;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -264,13 +269,21 @@ export default function GardenSprinklerPage() {
                             </div>
                             <div className="flex-1">
                               <div className="font-black text-gray-900 text-base">{offer.label}</div>
-                              <div className="flex items-center gap-2 mt-0.5">
+                              <div className="flex items-center gap-2 mt-0.5 flex-wrap">
                                 <span className="text-green-700 font-black text-lg">{offer.price} درهم</span>
                                 {offer.compareAt && (
                                   <span className="text-gray-400 line-through text-sm">{offer.compareAt} درهم</span>
                                 )}
+                                <span className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-yellow-100 to-amber-100 px-2.5 py-0.5 text-[11px] font-black text-yellow-900 border border-yellow-300/70">
+                                  <Icon name="star" size={10} />
+                                  <span>{getOfferTrustLabel(idx)}</span>
+                                </span>
+                                {getOfferSavingsLabel(offer) && (
+                                  <span className="inline-flex items-center rounded-full bg-green-100 px-2 py-0.5 text-[11px] font-black text-green-800">
+                                    {getOfferSavingsLabel(offer)}
+                                  </span>
+                                )}
                               </div>
-                              <p className="mt-1 text-xs font-semibold text-green-700/90">{offerTrustText(idx)}</p>
                             </div>
                             {offer.badge && (
                               <span className="bg-yellow-400 text-yellow-900 px-2.5 py-1 rounded-full text-xs font-black flex-shrink-0">
