@@ -20,7 +20,7 @@ export default function GardenSprinklerPage() {
   const router = useRouter();
   const product = getProduct('garden-sprinkler');
   const upsellCandidate = getProduct('car-vacuum');
-  const [selectedOffer, setSelectedOffer] = useState(1);
+  const [selectedOffer, setSelectedOffer] = useState(0);
   const [formData, setFormData] = useState({ name: '', phone: '' });
   const [showStickyBar, setShowStickyBar] = useState(false);
   const [showUpsell, setShowUpsell] = useState(false);
