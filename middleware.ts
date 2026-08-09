@@ -8,7 +8,16 @@ export function middleware(request: NextRequest) {
     url.host = 'boyashop.store';
     return NextResponse.redirect(url, 308);
   }
-  return NextResponse.next();
+
+  // Add performance headers
+  const response = NextResponse.next();
+  
+  // Enable browser caching for static assets
+  if (request.nextUrl.pathname.startsWith('/images/')) {
+    response.headers.set('Cache-Control', 'public, max-age=31536000, immutable');
+  }
+  
+  return response;
 }
 
 export const config = {
