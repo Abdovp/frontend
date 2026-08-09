@@ -9,9 +9,11 @@ import { saveOrderConfirmation } from '../../lib/order-confirmation';
 import { pickUpsellProduct } from '../../lib/upsell';
 import { getProduct, type Product } from '../../lib/products';
 import Header from '../../components/Header';
-import Footer from '../../components/Footer';
 import Icon from '../../components/ui/Icon';
 import dynamic from 'next/dynamic';
+
+// Lazy load components not needed for initial render
+const Footer = dynamic(() => import('../../components/Footer'), { ssr: true });
 const UpsellPopup = dynamic(() => import('../../components/UpsellPopup'), { ssr: false });
 
 export default function GardenSprinklerPage() {
@@ -170,6 +172,8 @@ export default function GardenSprinklerPage() {
         <meta name="description" content="احصل على حديقة خضراء جميلة بدون تعب يومي. رشاش دوار ذكي 360° يوفر الماء والوقت ويعطيك عشب أخضر طول السنة. دفع عند الاستلام وضمان 30 يوم." />
         <meta property="og:title" content="رشاش الحديقة الذكي - حوّل حديقتك لخضراء" />
         <meta property="og:description" content="سقي أوتوماتيكي ذكي - وفر 40% من الماء واحصل على حديقة خضراء بدون تعب" />
+        {/* Preload critical hero image */}
+        <link rel="preload" as="image" href="/images/garden-sprinkler.webp" />
       </Head>
 
 
