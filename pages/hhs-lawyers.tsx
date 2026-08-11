@@ -196,24 +196,6 @@ function getAreaIcon(id: string) {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
-   FLOATING WHATSAPP BUTTON
-   ══════════════════════════════════════════════════════════════════════════ */
-function WhatsAppFloat() {
-  return (
-    <a
-      href={`https://wa.me/${FIRM.whatsapp}?text=${encodeURIComponent('مرحبا! بويا شوب سترد على جميع أسئلتك. كيف يمكنني أساعدك؟')}`}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="fixed bottom-6 start-6 z-50 flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl px-4 py-3 transition-all duration-300 hover:scale-105 group"
-      aria-label="تواصل عبر واتساب"
-    >
-      <IcoWhatsApp c="w-6 h-6 flex-shrink-0" />
-      <span className="font-semibold text-sm whitespace-nowrap hidden sm:inline">استشارة عبر واتساب</span>
-    </a>
-  );
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
    NAVBAR
    ══════════════════════════════════════════════════════════════════════════ */
 function Navbar({ open, setOpen }: { open: boolean; setOpen: (v: boolean) => void }) {
@@ -348,15 +330,6 @@ function Hero() {
               className="inline-flex items-center gap-2 bg-[#D4A017] hover:bg-[#B8860B] text-[#0C1B33] font-black text-base px-8 py-4 rounded-xl transition-all duration-200 hover:scale-105 shadow-lg shadow-[#D4A017]/25"
             >
               احجز استشارة مجانية
-            </a>
-            <a
-              href={`https://wa.me/${FIRM.whatsapp}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 bg-white/10 hover:bg-white/15 text-white border border-white/20 font-semibold text-base px-8 py-4 rounded-xl transition-all duration-200"
-            >
-              <IcoWhatsApp c="w-5 h-5" />
-              تواصل الآن
             </a>
           </div>
 
@@ -959,22 +932,6 @@ function Contact({
                 </div>
               </div>
 
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-xl bg-[#D4A017]/15 flex items-center justify-center flex-shrink-0">
-                  <IcoWhatsApp c="w-5 h-5 text-[#D4A017]" />
-                </div>
-                <div>
-                  <p className="text-white/40 text-sm mb-1">واتساب</p>
-                  <a
-                    href={`https://wa.me/${FIRM.whatsapp}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-white font-semibold hover:text-[#D4A017] transition-colors text-lg"
-                  >
-                    متاح على مدار الساعة
-                  </a>
-                </div>
-              </div>
 
               <div className="flex items-start gap-4">
                 <div className="w-12 h-12 rounded-xl bg-[#D4A017]/15 flex items-center justify-center flex-shrink-0">
@@ -1209,17 +1166,6 @@ function Footer() {
                   {FIRM.email}
                 </a>
               </div>
-              <div className="flex items-center gap-3">
-                <IcoWhatsApp c="w-4 h-4 text-[#D4A017] flex-shrink-0" />
-                <a
-                  href={`https://wa.me/${FIRM.whatsapp}`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-white/45 hover:text-[#D4A017] text-sm transition-colors"
-                >
-                  واتساب — متاح ٢٤/٧
-                </a>
-              </div>
             </div>
             {/* CTA */}
             <a
@@ -1276,7 +1222,6 @@ export default function LawFirmTemplate() {
         <meta name="robots" content="index, follow" />
       </Head>
 
-      <WhatsAppFloat />
       <Navbar open={menuOpen} setOpen={setMenuOpen} />
 
       <main dir="rtl">
