@@ -7,7 +7,7 @@ import { getCheckoutErrorMessage } from '../../lib/api/order-errors';
 import { trackInitiateCheckout, trackPurchase } from '../../lib/analytics/track';
 import { saveOrderConfirmation } from '../../lib/order-confirmation';
 import { pickUpsellProduct } from '../../lib/upsell';
-import { getProduct, type Product } from '../../lib/products';
+import { getProduct, STORE, type Product } from '../../lib/products';
 import Header from '../../components/Header';
 import Icon from '../../components/ui/Icon';
 import dynamic from 'next/dynamic';
@@ -58,6 +58,10 @@ export default function GardenSprinklerPage() {
   if (!product || !upsellCandidate) return null;
 
   const currentOffer = product.offers[selectedOffer];
+  const whatsappNumber = STORE.whatsapp.replace(/\D/g, '');
+  const whatsappMessage = encodeURIComponent('مرحبا! بويا شوب سترد على جميع أسئلتك. كيف يمكنني أساعدك؟');
+  const whatsappHref = `https://wa.me/${whatsappNumber}?text=${whatsappMessage}`;
+
   const getOfferTrustLabel = (idx: number) => {
     if (idx === 1) return 'الأكثر طلبا';
     if (idx === product.offers.length - 1) return 'أفضل قيمة';
@@ -319,7 +323,7 @@ export default function GardenSprinklerPage() {
                       />
 
                       <a
-                        href="https://wa.me/0644166834?text=%D9%85%D8%B1%D8%AD%D8%A8%D8%A7%20BoyaShop%D8%8C%20%D8%B9%D9%86%D8%AF%D9%8A%20%D8%B4%D9%8A%20%D8%A3%D8%B3%D8%A6%D9%84%D8%A9%20%D9%82%D8%A8%D9%84%20%D9%85%D8%A7%20%D9%86%D9%83%D9%85%D9%84%20%D8%A7%D9%84%D8%B7%D9%84%D8%A8%D8%8C%20%D9%88%D8%A7%D8%B4%20%D9%85%D9%85%D9%83%D9%86%20%D8%AA%D8%B9%D8%A7%D9%88%D9%86%D9%88%D9%86%D9%8A%D8%9F"
+                        href={whatsappHref}
                         target="_blank"
                         rel="noopener noreferrer"
                         className="mt-2 flex items-center justify-center gap-2 rounded-xl border border-green-600 bg-green-50 px-4 py-3 text-green-700 font-bold transition-all hover:bg-green-100"
@@ -334,7 +338,7 @@ export default function GardenSprinklerPage() {
                         className="w-full lawn-gradient text-white py-5 rounded-xl font-black text-xl shadow-xl hover:shadow-green-600/40 transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-3 mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
                       >
                         <Icon name="check-circle" size={22} />
-                        <span>{submitting ? 'جاري الإرسال...' : 'أكّد طلبي'}</span>
+                        <span>{submitting ? 'جاري الإرسال...' : 'اطلب لآن'}</span>
                       </button>
 
                       {submitError && (
