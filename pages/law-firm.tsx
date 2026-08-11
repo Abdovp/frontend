@@ -200,7 +200,7 @@ function getAreaIcon(id: string) {
 function WhatsAppFloat() {
   return (
     <a
-      href={`https://wa.me/${FIRM.whatsapp}?text=السلام عليكم، أرغب في الحصول على استشارة قانونية`}
+      href={`https://wa.me/${FIRM.whatsapp}?text=${encodeURIComponent('مرحبا! بويا شوب سترد على جميع أسئلتك. كيف يمكنني أساعدك؟')}`}
       target="_blank"
       rel="noopener noreferrer"
       className="fixed bottom-6 start-6 z-50 flex items-center gap-2 bg-green-500 hover:bg-green-600 text-white rounded-full shadow-2xl px-4 py-3 transition-all duration-300 hover:scale-105 group"
