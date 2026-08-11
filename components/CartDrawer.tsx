@@ -445,7 +445,7 @@ function CheckoutModal({ onClose, items, total }: CheckoutModalProps) {
             )}
             <button type="submit" disabled={submitting} className="checkout-cta w-full disabled:opacity-50">
               <Icon name="check" size={20} />
-              {submitting ? 'جاري التأكيد...' : 'تأكيد الطلب — دفع عند الاستلام'}
+              {submitting ? 'جاري التأكيد...' : 'اطلب لآن'}
             </button>
           </form>
 

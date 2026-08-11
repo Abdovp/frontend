@@ -32,7 +32,7 @@ export default function ProductPageLayout({ product }: { product: Product }) {
         <meta property="og:title" content={`${product.nameAr} | بويا شوب`} />
         <meta property="og:description" content={product.metaDescription} />
       </Head>
-      <div className="product-page">
+      <div className="product-page relative">
         <Header />
         <main>
           {/* 1 — Hero: image + headline + offer cards + CTA */}
