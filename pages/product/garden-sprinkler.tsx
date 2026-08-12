@@ -229,7 +229,7 @@ export default function GardenSprinklerPage() {
                 <div className="space-y-3 bg-white rounded-2xl p-6 shadow-lg border border-green-100" dir="rtl">
                   {[
                     'سقي متساوي لكل متر — ولا بقعة صفراء',
-                    'وفر حتى 40% من الماء — فاتورة أقل',
+                    'سقي اوتوماتيكي — بدون مجهود',
                     'تركيب فأقل من دقيقتين — بدون أدوات',
                     'مقاوم للشمس والحرارة — يخدم سنين'
                   ].map((benefit, idx) => (
