@@ -833,7 +833,7 @@ export const products: Record<ProductId, Product> = {
     offers: [
       {
         quantity: 1,
-        price: 129,
+        price: 149,
         label: 'رشاش واحد',
         sublabel: 'للحديقة أو المزروعات',
         perks: ['3 أذرع قابلة للتعديل', 'قاعدة ثابتة', 'توصيل مجاني', `ضمان ${WARRANTY_DAYS} يوم`],
