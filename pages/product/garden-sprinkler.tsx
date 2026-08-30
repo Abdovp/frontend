@@ -335,7 +335,7 @@ export default function GardenSprinklerPage() {
                       <button
                         type="submit"
                         disabled={submitting}
-                        className="w-full lawn-gradient text-white py-5 rounded-xl font-black text-xl shadow-xl hover:shadow-green-600/40 transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-3 mt-2 disabled:opacity-70 disabled:cursor-not-allowed"
+                        className="w-full lawn-gradient text-white py-5 rounded-xl font-black text-xl shadow-xl hover:shadow-green-600/40 transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-3 mt-2 disabled:opacity-70 disabled:cursor-not-allowed animate-cta-pulse"
                       >
                         <Icon name="check-circle" size={22} />
                         <span>{submitting ? 'جاري الإرسال...' : 'اطلب لآن'}</span>
