@@ -58,9 +58,20 @@ export function whenPixelsReady(run: () => void) {
   window.setTimeout(() => waitUntilReady(), 1200);
 }
 
-function trackFacebook(eventName: string, params: Record<string, unknown>, eventId: string) {
-  if (!PIXEL_IDS.facebook || !window.fbq) return;
-  window.fbq('track', eventName, params, { eventID: eventId });
+function trackFacebook(
+  eventName: string,
+  params: Record<string, unknown>,
+  eventId: string,
+  attempt = 0
+) {
+  if (!PIXEL_IDS.facebook) return;
+  if (typeof window.fbq === 'function') {
+    window.fbq('track', eventName, params, { eventID: eventId });
+    return;
+  }
+
+  if (attempt >= 40) return;
+  window.setTimeout(() => trackFacebook(eventName, params, eventId, attempt + 1), 150);
 }
 
 function trackTikTok(eventName: string, params: Record<string, unknown>, eventId: string) {

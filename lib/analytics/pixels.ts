@@ -13,9 +13,9 @@ declare global {
 }
 
 export const PIXEL_IDS = {
-  facebook: process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID || '',
-  tiktok: process.env.NEXT_PUBLIC_TIKTOK_PIXEL_ID || '',
-  snapchat: process.env.NEXT_PUBLIC_SNAPCHAT_PIXEL_ID || '',
+  facebook: (process.env.NEXT_PUBLIC_FACEBOOK_PIXEL_ID || '').trim(),
+  tiktok: (process.env.NEXT_PUBLIC_TIKTOK_PIXEL_ID || '').trim(),
+  snapchat: (process.env.NEXT_PUBLIC_SNAPCHAT_PIXEL_ID || '').trim(),
 };
 
 export function hasAnyPixel(): boolean {
