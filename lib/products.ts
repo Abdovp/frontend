@@ -833,21 +833,21 @@ export const products: Record<ProductId, Product> = {
     offers: [
       {
         quantity: 1,
-        price: 99,
+        price: 79,
         label: 'رشاش واحد',
         sublabel: 'للحديقة أو المزروعات',
         perks: ['3 أذرع قابلة للتعديل', 'قاعدة ثابتة', 'توصيل مجاني', `ضمان ${WARRANTY_DAYS} يوم`],
       },
       {
         quantity: 2,
-        price: 199,
+        price: 149,
         label: 'رشاشان',
         sublabel: 'لحديقة كبيرة أو وحدة هدية',
         perks: ['رشاش ثاني بسعر مناسب', 'توصيل مجاني', `ضمان ${WARRANTY_DAYS} يوم`],
       },
       {
         quantity: 3,
-        price: 299,
+        price: 219,
         label: '3 رشاشات',
         sublabel: 'لحديقة كبيرة أو عدة مناطق',
         perks: ['3 رشاشات بسعر مناسب', 'توصيل مجاني', `ضمان ${WARRANTY_DAYS} يوم`],
