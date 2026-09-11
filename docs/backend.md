@@ -17,7 +17,7 @@
 - Database migration on start
 - Env variables for secrets, DB, pixel IDs
 - Docker for local/dev
-- Ready for deployment on easypanel
+- Ready for deployment on Vercel
 
 ## Coding Rules
 - Use Python 3.11+

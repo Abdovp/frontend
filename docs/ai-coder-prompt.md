@@ -30,7 +30,7 @@ You are tasked with building a DTC e-commerce store for Morocco, fully branded a
 5. Integrate all pixels (web + CAPI) with deduplication and best practices.
 6. Validate all forms, especially Moroccan phone numbers.
 7. Orders must be sent to Google Sheet via webhook.
-8. All code must be ready for GitHub and deployment on easypanel.
+8. All code must be ready for GitHub and deployment on Vercel.
 9. Use the provided sheet template for order export.
 
 ## Brand

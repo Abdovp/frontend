@@ -2,14 +2,14 @@
 
 ## Frontend
 - Use Docker for local/dev/prod
-- Deploy to easypanel
+- Deploy to Vercel
 - Use env variables from `env-frontend.example.md`
 - Push to GitHub
 - Use GitHub Actions for CI/CD
 
 ## Backend
 - Use Docker for local/dev/prod
-- Deploy to easypanel
+- Deploy to Vercel or a separate backend host
 - Use env variables from `env-backend.example.md`
 - Database migration on start
 - Push to GitHub

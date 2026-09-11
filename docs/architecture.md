@@ -3,7 +3,7 @@
 ## Tech Stack
 - **Frontend:** Next.js (React), Tailwind CSS, Headless UI, Zustand (state), React Hook Form, Framer Motion (animations)
 - **Backend:** FastAPI (Python), PostgreSQL, SQLAlchemy, Pydantic, Uvicorn, Google Sheets API (webhook)
-- **DevOps:** Docker, GitHub Actions, Easypanel
+- **DevOps:** Docker, GitHub Actions, Vercel
 
 ## Structure
 - `frontend/` — All UI, pixel scripts, cart logic, checkout, responsive design

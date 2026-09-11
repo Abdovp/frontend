@@ -45,7 +45,7 @@ Welcome to the documentation for building the ultimate Moroccan DTC e-commerce s
 - Checkout with upsell popup
 - Orders sent to Google Sheet via webhook
 - Dockerized frontend & backend
-- Ready for deployment on easypanel
+- Ready for deployment on Vercel
 
 ---
 

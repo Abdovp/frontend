@@ -1,22 +1,19 @@
 # Database Schema & Migration
 
-## Database (EasyPanel)
+## Database (PostgreSQL)
 
-**Important:** PostgreSQL must be in the **same project** as the backend (`boya-shop`).  
-Each project has its own Docker network — `boya_database` is **not** reachable from `boya-shop` backend.
+Use a managed PostgreSQL service or a private database instance that is reachable by the backend. Keep the database credentials in environment variables and avoid hardcoding them in the app.
 
-### Recommended layout (one project)
+### Recommended layout
 
-Project **`boya-shop`**:
-- `database` — PostgreSQL
-- `backend` — App, port 8000
-- `frontend` — App, port 3000
+- `backend` — FastAPI app, port 8000
+- `frontend` — Next.js app on Vercel, port 3000
+- `database` — PostgreSQL service
 
-Internal host: `boya-shop_database`  
-Copy **Internal Connection URL** from EasyPanel → `boya-shop` → `database` → Credentials.
+Use the connection string provided by your hosting or database provider.
 
 Example:
-`postgresql://postgres:YOUR_PASSWORD@boya-shop_database:5432/boya-shop?sslmode=disable`
+`postgresql://postgres:YOUR_PASSWORD@host:5432/boya-shop?sslmode=disable`
 
 ## Tables
 ### products
