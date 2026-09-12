@@ -1241,6 +1241,10 @@ export function getProduct(id: ProductId): Product {
   return products[id];
 }
 
+export function getProductBySlug(slug: string): Product | undefined {
+  return productList.find((product) => product.slug === slug || product.id === slug || product.href === `/product/${slug}`);
+}
+
 /** Single-unit / first listed offer — used for sticky CTA and default selection. */
 export function getFirstOffer(product: Product): ProductOffer {
   return product.offers[0];
