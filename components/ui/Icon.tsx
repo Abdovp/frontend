@@ -36,7 +36,11 @@ export type IconName =
   | 'droplets'
   | 'settings'
   | 'anchor'
-  | 'zap';
+  | 'zap'
+  | 'cable'
+  | 'battery'
+  | 'rotate'
+  | 'cpu';
 
 interface IconProps extends SVGProps<SVGSVGElement> {
   name: IconName;
@@ -194,6 +198,33 @@ const paths: Record<IconName, ReactElement> = {
   ),
   zap: (
     <path d="M13 3L5 13h7l-1 8 8-10h-7l1-8z" />
+  ),
+  cable: (
+    <>
+      <rect x="7" y="3" width="10" height="7" rx="2" />
+      <path d="M10 10v4c0 3 4 3 4 6v1" />
+      <rect x="11" y="20" width="6" height="2" rx="1" />
+    </>
+  ),
+  battery: (
+    <>
+      <rect x="3" y="6" width="16" height="12" rx="2" />
+      <path d="M21 10v4" />
+      <path d="M7 10h6" />
+      <path d="M10 14h6" />
+    </>
+  ),
+  rotate: (
+    <>
+      <path d="M21 12a9 9 0 11-2.6-6.4" />
+      <path d="M21 3v6h-6" />
+    </>
+  ),
+  cpu: (
+    <>
+      <rect x="7" y="7" width="10" height="10" rx="2" />
+      <path d="M9 3v4M15 3v4M9 17v4M15 17v4M3 9h4M3 15h4M17 9h4M17 15h4" />
+    </>
   ),
 };
 

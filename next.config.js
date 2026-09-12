@@ -1,8 +1,17 @@
 /** @type {import('next').NextConfig} */
-const apiProxyTarget =
+const normalizeApiProxyTarget = (value) => {
+  if (!value) return 'https://api.boyashop.store';
+
+  const trimmed = value.trim();
+  const withProtocol = /^https?:\/\//i.test(trimmed) ? trimmed : `https://${trimmed}`;
+  return withProtocol.replace(/\/$/, '');
+};
+
+const apiProxyTarget = normalizeApiProxyTarget(
   process.env.API_PROXY_URL ||
   process.env.NEXT_PUBLIC_API_URL ||
-  'https://api.boyashop.store';
+  'https://api.boyashop.store'
+);
 
 const nextConfig = {
   reactStrictMode: true,
