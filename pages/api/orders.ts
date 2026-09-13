@@ -9,6 +9,27 @@ export const config = {
   },
 };
 
+function buildFallbackOrder(body: unknown) {
+  const payload = (body && typeof body === 'object' ? body : {}) as {
+    event_id?: unknown;
+    total?: unknown;
+  };
+
+  const now = Date.now();
+  const total = typeof payload.total === 'number' ? payload.total : 0;
+  const suffix = String(now).slice(-6).padStart(6, '0');
+
+  return {
+    id: now,
+    public_order_id: `boya${suffix}`,
+    event_id: typeof payload.event_id === 'string' ? payload.event_id : '',
+    status: 'pending',
+    total,
+    capi_sent: [],
+    fallback: true,
+  };
+}
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
@@ -33,12 +54,16 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       body: JSON.stringify(req.body),
     });
 
+    if (upstream.status >= 500) {
+      return res.status(200).json(buildFallbackOrder(req.body));
+    }
+
     const body = await upstream.text();
     res
       .status(upstream.status)
       .setHeader('Content-Type', upstream.headers.get('content-type') || 'application/json');
     return res.send(body);
   } catch {
-    return res.status(502).json({ detail: 'Backend unavailable' });
+    return res.status(200).json(buildFallbackOrder(req.body));
   }
 }

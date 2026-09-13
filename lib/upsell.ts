@@ -14,6 +14,13 @@ export function hasUpsellAvailable(orderedIds: ProductId[]): boolean {
 
 export function pickUpsellProduct(orderedIds: ProductId[]): Product | null {
   // Specific upsell mappings for certain products
+  if (!orderedIds.includes('cooling-pack')) {
+    const coolingPack = productList.find((p) => p.id === 'cooling-pack');
+    if (coolingPack && isProductAvailable(coolingPack)) {
+      return coolingPack;
+    }
+  }
+
   if (orderedIds.includes('garden-sprinkler')) {
     const carVacuum = productList.find((p) => p.id === 'car-vacuum');
     if (carVacuum && isProductAvailable(carVacuum)) {
