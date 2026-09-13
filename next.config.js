@@ -39,6 +39,36 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/products/:slug',
+        destination: '/product/:slug',
+        permanent: true,
+      },
+      {
+        source: '/car-charger',
+        destination: '/product/car-charger',
+        permanent: true,
+      },
+      {
+        source: '/pack',
+        destination: '/product/pack',
+        permanent: true,
+      },
+      {
+        source: '/magnetic-holder',
+        destination: '/product/magnetic-holder',
+        permanent: true,
+      },
+      {
+        source: '/car-vacuum',
+        destination: '/product/car-vacuum',
+        permanent: true,
+      },
+      {
+        source: '/garden-sprinkler',
+        destination: '/product/garden-sprinkler',
+        permanent: true,
+      },
+      {
         source: '/images/pack.png',
         destination: '/images/pack.webp',
         permanent: true,
