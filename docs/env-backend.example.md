@@ -7,6 +7,10 @@ FRONTEND_URL=https://boyashop.store
 
 DATABASE_URL=postgres://postgres:YOUR_PASSWORD@boya-shop_database:5432/boya-shop?sslmode=disable
 
+# Leave false on serverless/Vercel so root and health routes still work even if DB is slow/down.
+# Enable only on environments where startup migrations/init are expected.
+ENABLE_DB_INIT_ON_STARTUP=false
+
 CORS_ORIGINS=https://boyashop.store,https://www.boyashop.store,http://localhost:3000
 
 GOOGLE_SHEETS_WEBHOOK_URL=
