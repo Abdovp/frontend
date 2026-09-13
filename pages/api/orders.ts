@@ -9,11 +9,22 @@ export const config = {
   },
 };
 
+interface IncomingOrderItem {
+  product_name?: unknown;
+  sku?: unknown;
+  quantity?: unknown;
+}
+
+interface IncomingOrderPayload {
+  event_id?: unknown;
+  total?: unknown;
+  customer_name?: unknown;
+  phone?: unknown;
+  items?: unknown;
+}
+
 function buildFallbackOrder(body: unknown) {
-  const payload = (body && typeof body === 'object' ? body : {}) as {
-    event_id?: unknown;
-    total?: unknown;
-  };
+  const payload = (body && typeof body === 'object' ? body : {}) as IncomingOrderPayload;
 
   const now = Date.now();
   const total = typeof payload.total === 'number' ? payload.total : 0;
@@ -28,6 +39,60 @@ function buildFallbackOrder(body: unknown) {
     capi_sent: [],
     fallback: true,
   };
+}
+
+function asItems(value: unknown): IncomingOrderItem[] {
+  return Array.isArray(value) ? (value as IncomingOrderItem[]) : [];
+}
+
+async function saveFallbackOrderToWebhook(orderBody: unknown, publicOrderId: string): Promise<boolean> {
+  const webhookUrl = process.env.ORDER_FALLBACK_WEBHOOK_URL?.trim();
+  if (!webhookUrl) {
+    return false;
+  }
+
+  const payload = (orderBody && typeof orderBody === 'object' ? orderBody : {}) as IncomingOrderPayload;
+  const items = asItems(payload.items);
+
+  const productSummary = items
+    .map((item) => {
+      const name = typeof item.product_name === 'string' ? item.product_name : 'منتج';
+      const quantity = typeof item.quantity === 'number' ? item.quantity : 1;
+      return `${name} x${quantity}`;
+    })
+    .join(' | ');
+
+  const skuSummary = items
+    .map((item) => (typeof item.sku === 'string' ? item.sku : ''))
+    .filter(Boolean)
+    .join(', ');
+
+  const totalQty = items.reduce(
+    (sum, item) => sum + (typeof item.quantity === 'number' ? item.quantity : 1),
+    0
+  );
+
+  const webhookPayload = {
+    date: new Date().toISOString(),
+    'order id': publicOrderId,
+    nom: typeof payload.customer_name === 'string' ? payload.customer_name : '',
+    telephone: typeof payload.phone === 'string' ? payload.phone : '',
+    produit: productSummary,
+    sku: skuSummary,
+    'Qté': totalQty,
+    'prix total': typeof payload.total === 'number' ? payload.total : 0,
+  };
+
+  try {
+    const response = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(webhookPayload),
+    });
+    return response.ok;
+  } catch {
+    return false;
+  }
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
@@ -55,7 +120,20 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     });
 
     if (upstream.status >= 500) {
-      return res.status(200).json(buildFallbackOrder(req.body));
+      const fallbackOrder = buildFallbackOrder(req.body);
+      const fallbackSaved = await saveFallbackOrderToWebhook(req.body, fallbackOrder.public_order_id);
+
+      if (!fallbackSaved) {
+        return res.status(503).json({
+          detail: 'Database unavailable and fallback capture failed. Order was not saved.',
+        });
+      }
+
+      return res.status(200).json({
+        ...fallbackOrder,
+        status: 'pending_backup',
+        tracked_via: 'sheet_webhook',
+      });
     }
 
     const body = await upstream.text();
@@ -64,6 +142,19 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
       .setHeader('Content-Type', upstream.headers.get('content-type') || 'application/json');
     return res.send(body);
   } catch {
-    return res.status(200).json(buildFallbackOrder(req.body));
+    const fallbackOrder = buildFallbackOrder(req.body);
+    const fallbackSaved = await saveFallbackOrderToWebhook(req.body, fallbackOrder.public_order_id);
+
+    if (!fallbackSaved) {
+      return res.status(503).json({
+        detail: 'Backend unreachable and fallback capture failed. Order was not saved.',
+      });
+    }
+
+    return res.status(200).json({
+      ...fallbackOrder,
+      status: 'pending_backup',
+      tracked_via: 'sheet_webhook',
+    });
   }
 }
