@@ -1,15 +1,49 @@
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 import { useAdminDocument } from '../../components/admin/useAdminDocument';
+import { isAdminLoggedIn, setAdminSession } from '../../lib/admin/auth';
 
 export default function AdminLoginPage() {
   const router = useRouter();
   useAdminDocument();
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    router.replace('/admin');
+    if (isAdminLoggedIn()) {
+      void router.replace('/admin');
+    }
   }, [router]);
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setLoading(true);
+    setError('');
+
+    try {
+      const response = await fetch('/api/admin/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ username: username.trim(), password }),
+      });
+
+      if (!response.ok) {
+        const body = (await response.json().catch(() => null)) as { detail?: string } | null;
+        throw new Error(body?.detail || 'Could not sign in');
+      }
+
+      const body = (await response.json()) as { token: string; username: string };
+      setAdminSession(body.token, body.username);
+      void router.replace('/admin');
+    } catch (submitError) {
+      setError(submitError instanceof Error ? submitError.message : 'Could not sign in');
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <>
@@ -29,10 +63,43 @@ export default function AdminLoginPage() {
             </p>
           </div>
 
-          <div className="admin-panel">
-            <h2 className="text-xl font-bold text-slate-900">Redirecting...</h2>
-            <p className="mt-1 text-sm text-admin-muted">Admin login is disabled. Opening the dashboard.</p>
-          </div>
+          <form className="admin-panel space-y-4" onSubmit={handleSubmit}>
+            <div>
+              <label className="mb-1 block text-sm font-medium text-slate-700" htmlFor="admin-username">
+                Username
+              </label>
+              <input
+                id="admin-username"
+                type="text"
+                value={username}
+                onChange={(event) => setUsername(event.target.value)}
+                className="admin-input"
+                autoComplete="username"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="mb-1 block text-sm font-medium text-slate-700" htmlFor="admin-password">
+                Password
+              </label>
+              <input
+                id="admin-password"
+                type="password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+                className="admin-input"
+                autoComplete="current-password"
+                required
+              />
+            </div>
+
+            {error ? <p className="rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">{error}</p> : null}
+
+            <button type="submit" className="admin-btn-secondary w-full" disabled={loading}>
+              {loading ? 'Signing in...' : 'Sign in'}
+            </button>
+          </form>
         </div>
       </div>
     </>

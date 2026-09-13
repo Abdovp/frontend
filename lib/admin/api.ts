@@ -1,4 +1,5 @@
 import { apiUrl } from '../api/base-url';
+import { getAdminToken } from './auth';
 import type { AdminMetrics, AdminOrderDetail, AdminOrderList, OrderStatus } from './types';
 
 class AdminApiError extends Error {
@@ -15,6 +16,10 @@ const ADMIN_FETCH_TIMEOUT_MS = 15_000;
 async function adminFetch<T>(path: string, init: RequestInit = {}): Promise<T> {
   const headers = new Headers(init.headers);
   headers.set('Content-Type', 'application/json');
+  const token = getAdminToken();
+  if (token) {
+    headers.set('Authorization', `Bearer ${token}`);
+  }
 
   const controller = new AbortController();
   const timeoutId = window.setTimeout(() => controller.abort(), ADMIN_FETCH_TIMEOUT_MS);
