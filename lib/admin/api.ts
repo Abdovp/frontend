@@ -38,12 +38,25 @@ async function adminFetch<T>(path: string, init: RequestInit = {}): Promise<T> {
   }
 
   if (!response.ok) {
-    let detail = 'Request failed';
+    let detail = `Request failed (${response.status})`;
     try {
       const body = await response.json();
-      detail = body.detail || detail;
+      if (typeof body?.detail === 'string' && body.detail.trim()) {
+        detail = body.detail;
+      }
     } catch {
-      // ignore
+      try {
+        const text = (await response.text()).trim();
+        if (text) {
+          detail = text.length > 140 ? `${text.slice(0, 137)}...` : text;
+        }
+      } catch {
+        // ignore
+      }
+    }
+
+    if (response.status >= 500 && detail === `Request failed (${response.status})`) {
+      detail = `Backend unavailable (${response.status}). Check API server.`;
     }
     throw new AdminApiError(detail, response.status);
   }

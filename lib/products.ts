@@ -1079,7 +1079,7 @@ export const products: Record<ProductId, Product> = {
       '/images/car-charger.webp',
       '/images/car-charger-2.webp',
       '/images/car-charger-3.webp',
-      '/images/car-charger-solution.webp',
+      '/images/car-charger-solution-v2.webp',
     ],
     image: '/images/car-charger.webp',
     howToUse: {
@@ -1124,7 +1124,7 @@ export const products: Record<ProductId, Product> = {
         'حماية سداسية مدمجة تضمن أمان الهاتف وبطارية السيارة',
       ],
       imageLabel: 'الحل الشامل للشحن ف السيارة',
-      image: '/images/car-charger-solution.webp',
+      image: '/images/car-charger-solution-v2.webp',
     },
     proof: {
       eyebrow: 'إثبات',
