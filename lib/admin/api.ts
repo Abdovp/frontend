@@ -65,40 +65,7 @@ async function adminFetch<T>(path: string, init: RequestInit = {}): Promise<T> {
 
 export async function fetchAdminMetrics(fromDate: string, toDate: string) {
   const params = new URLSearchParams({ from: fromDate, to: toDate, morocco_only: 'true' });
-  try {
-    return await adminFetch<AdminMetrics>(`/api/admin/metrics?${params}`);
-  } catch (err) {
-    if (err instanceof AdminApiError && err.status >= 500) {
-      return {
-        from_date: fromDate,
-        to_date: toDate,
-        morocco_only: true,
-        page_views: 0,
-        view_content: 0,
-        add_to_cart: 0,
-        initiate_checkout: 0,
-        orders: 0,
-        revenue: 0,
-        average_order_value: 0,
-        conversion_rate: 0,
-        checkout_conversion_rate: 0,
-        upsell_orders: 0,
-        upsell_rate: 0,
-        pending_orders: 0,
-        confirmed_orders: 0,
-        shipped_orders: 0,
-        delivered_orders: 0,
-        cancelled_orders: 0,
-        confirmation_rate: 0,
-        delivery_rate: 0,
-        cancellation_rate: 0,
-        funnel: [],
-        daily: [],
-        top_products: [],
-      };
-    }
-    throw err;
-  }
+  return adminFetch<AdminMetrics>(`/api/admin/metrics?${params}`);
 }
 
 type OrderListParams = {
@@ -118,20 +85,7 @@ export async function fetchAdminOrders(params: OrderListParams = {}) {
   if (params.search) query.set('search', params.search);
   if (params.from) query.set('from', params.from);
   if (params.to) query.set('to', params.to);
-  try {
-    return await adminFetch<AdminOrderList>(`/api/admin/orders?${query}`);
-  } catch (err) {
-    if (err instanceof AdminApiError && err.status >= 500) {
-      return {
-        items: [],
-        total: 0,
-        page: params.page ?? 1,
-        limit: params.limit ?? 20,
-        pages: 1,
-      };
-    }
-    throw err;
-  }
+  return adminFetch<AdminOrderList>(`/api/admin/orders?${query}`);
 }
 
 export async function fetchAdminOrder(orderId: number) {
