@@ -5,7 +5,12 @@ export function getApiBaseUrl(): string {
   // Local dev: same-origin /api/* so Next.js rewrites can proxy (see next.config.js).
   if (typeof window !== 'undefined') {
     const { hostname } = window.location;
-    if (hostname === 'localhost' || hostname === '127.0.0.1') {
+    if (
+      hostname === 'localhost' ||
+      hostname === '127.0.0.1' ||
+      hostname === 'boyashop.store' ||
+      hostname === 'www.boyashop.store'
+    ) {
       return '';
     }
   }

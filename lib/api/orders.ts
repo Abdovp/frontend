@@ -2,10 +2,10 @@ import type { CartItem } from '../cart-store';
 import { createEventId, getFacebookCookies } from '../analytics/track';
 import { getTikTokCookies } from '../analytics/pixels';
 import { getProductSku } from '../products';
+import { apiUrl } from './base-url';
 import { OrderSubmitError, readOrderSubmitError } from './order-errors';
 
-/** Hardcoded so static export on boyashop.store always hits the live API. */
-const ORDERS_API_URL = 'https://api.boyashop.store/api/orders';
+const ORDERS_API_URL = apiUrl('/api/orders');
 
 export interface SubmitOrderInput {
   eventId: string;
