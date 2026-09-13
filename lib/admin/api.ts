@@ -1,5 +1,5 @@
 import { apiUrl } from '../api/base-url';
-import { getAdminToken } from './auth';
+import { clearAdminSession, getAdminToken } from './auth';
 import type { AdminMetrics, AdminOrderDetail, AdminOrderList, OrderStatus } from './types';
 
 class AdminApiError extends Error {
@@ -62,6 +62,13 @@ async function adminFetch<T>(path: string, init: RequestInit = {}): Promise<T> {
 
     if (response.status >= 500 && detail === `Request failed (${response.status})`) {
       detail = `Backend unavailable (${response.status}). Check API server.`;
+    }
+    if (response.status === 401) {
+      clearAdminSession();
+      if (typeof window !== 'undefined') {
+        window.location.assign('/admin/login');
+      }
+      throw new AdminApiError('Your admin session expired. Please sign in again.', 401);
     }
     throw new AdminApiError(detail, response.status);
   }
