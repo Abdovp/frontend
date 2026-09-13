@@ -7,6 +7,10 @@ NEXT_PUBLIC_API_URL=https://api.boyashop.store
 # Set this to your Google Apps Script webhook URL to avoid losing orders during DB/API incidents.
 ORDER_FALLBACK_WEBHOOK_URL=
 
+# Backward-compatible aliases also supported by the fallback capture:
+GOOGLE_SHEETS_WEBHOOK_URL=
+GOOGLE_SHEET_WEBHOOK_URL=
+
 # Public storefront URL
 NEXT_PUBLIC_SITE_URL=https://boyashop.store
 NEXT_PUBLIC_DOMAIN=boyashop.store

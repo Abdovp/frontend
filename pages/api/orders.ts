@@ -46,7 +46,13 @@ function asItems(value: unknown): IncomingOrderItem[] {
 }
 
 async function saveFallbackOrderToWebhook(orderBody: unknown, publicOrderId: string): Promise<boolean> {
-  const webhookUrl = process.env.ORDER_FALLBACK_WEBHOOK_URL?.trim();
+  const webhookUrl =
+    process.env.ORDER_FALLBACK_WEBHOOK_URL?.trim() ||
+    process.env.GOOGLE_SHEETS_WEBHOOK_URL?.trim() ||
+    process.env.GOOGLE_SHEET_WEBHOOK_URL?.trim() ||
+    process.env.NEXT_PUBLIC_ORDER_FALLBACK_WEBHOOK_URL?.trim() ||
+    process.env.NEXT_PUBLIC_GOOGLE_SHEETS_WEBHOOK_URL?.trim() ||
+    process.env.NEXT_PUBLIC_GOOGLE_SHEET_WEBHOOK_URL?.trim();
   if (!webhookUrl) {
     return false;
   }
