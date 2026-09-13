@@ -22,6 +22,9 @@ export interface SubmitOrderResult {
   status: string;
   total: number;
   capi_sent: string[];
+  fallback?: boolean;
+  tracked_via?: string;
+  warning?: string;
 }
 
 function normalizeOrderResult(data: unknown): SubmitOrderResult {
@@ -41,6 +44,13 @@ function normalizeOrderResult(data: unknown): SubmitOrderResult {
     status: order.status ?? 'pending',
     total: typeof order.total === 'number' ? order.total : 0,
     capi_sent: Array.isArray(order.capi_sent) ? order.capi_sent : [],
+    fallback: typeof order.fallback === 'boolean' ? order.fallback : undefined,
+    tracked_via: typeof (order as { tracked_via?: unknown }).tracked_via === 'string'
+      ? (order as { tracked_via: string }).tracked_via
+      : undefined,
+    warning: typeof (order as { warning?: unknown }).warning === 'string'
+      ? (order as { warning: string }).warning
+      : undefined,
   };
 }
 
@@ -87,7 +97,14 @@ export async function submitOrder(input: SubmitOrderInput): Promise<SubmitOrderR
   }
 
   try {
-    return normalizeOrderResult(await response.json());
+    const result = normalizeOrderResult(await response.json());
+    if (result.tracked_via === 'fallback_local') {
+      throw new OrderSubmitError(
+        result.warning || 'الطلب ما تسجّلش لا فالسيرفر لا فالغوغل شيت. عاود جرّب من بعد.',
+        503
+      );
+    }
+    return result;
   } catch (error) {
     if (error instanceof OrderSubmitError) throw error;
     throw new OrderSubmitError('الخدمة ردّت بشكل غير متوقع. جرّب مرة أخرى.', response.status);
