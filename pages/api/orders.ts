@@ -128,13 +128,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (upstream.status >= 500) {
       const fallbackOrder = buildFallbackOrder(req.body);
       const fallbackSaved = await saveFallbackOrderToWebhook(req.body, fallbackOrder.public_order_id);
+
+      if (!fallbackSaved) {
+        return res.status(503).json({
+          detail: 'Backend is down and fallback webhook is not configured/reachable. Order was not saved.',
+        });
+      }
+
       return res.status(200).json({
         ...fallbackOrder,
-        status: fallbackSaved ? 'pending_backup' : 'pending_manual',
-        tracked_via: fallbackSaved ? 'sheet_webhook' : 'fallback_local',
-        warning: fallbackSaved
-          ? undefined
-          : 'Backend is down and fallback webhook is not configured/reachable. Save this order manually from confirmation details.',
+        status: 'pending_backup',
+        tracked_via: 'sheet_webhook',
       });
     }
 
@@ -146,13 +150,17 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   } catch {
     const fallbackOrder = buildFallbackOrder(req.body);
     const fallbackSaved = await saveFallbackOrderToWebhook(req.body, fallbackOrder.public_order_id);
+
+    if (!fallbackSaved) {
+      return res.status(503).json({
+        detail: 'Backend is down and fallback webhook is not configured/reachable. Order was not saved.',
+      });
+    }
+
     return res.status(200).json({
       ...fallbackOrder,
-      status: fallbackSaved ? 'pending_backup' : 'pending_manual',
-      tracked_via: fallbackSaved ? 'sheet_webhook' : 'fallback_local',
-      warning: fallbackSaved
-        ? undefined
-        : 'Backend is down and fallback webhook is not configured/reachable. Save this order manually from confirmation details.',
+      status: 'pending_backup',
+      tracked_via: 'sheet_webhook',
     });
   }
 }
