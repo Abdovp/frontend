@@ -1,4 +1,4 @@
-import Icon from '../ui/Icon';
+﻿import Icon from '../ui/Icon';
 import type { Product } from '../../lib/products';
 
 export default function CarChargerReviews({ product }: { product: Product }) {
@@ -7,13 +7,13 @@ export default function CarChargerReviews({ product }: { product: Product }) {
   return (
     <section className="relative overflow-hidden bg-[#FFFFFF] py-14 md:py-20">
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-1/2 left-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#1A73E8]/8 blur-[130px]" />
+        <div className="absolute top-1/2 left-1/2 h-96 w-96 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#1663D6]/8 blur-[130px]" />
       </div>
 
       <div className="container-wide relative">
         <div dir="rtl" className="mb-10 text-center">
           {proof.eyebrow && (
-            <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#F9A825] bg-[#FFF7D6] px-3.5 py-1.5 text-[0.68rem] font-extrabold uppercase tracking-widest2 text-[#B45309]">
+            <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#E39A1C] bg-[#FFF7D6] px-3.5 py-1.5 text-[0.68rem] font-extrabold uppercase tracking-widest2 text-[#B45309]">
               <Icon name="star" size={13} />
               {proof.eyebrow}
             </p>
@@ -42,19 +42,19 @@ export default function CarChargerReviews({ product }: { product: Product }) {
           {product.reviews.slice(0, 3).map((review) => (
             <div
               key={review.name}
-              className="rounded-2xl border border-[#E5E7EB] bg-[#FFFFFF] p-5 transition-colors hover:border-[#1A73E8]/35"
+              className="rounded-2xl border border-[#E5E7EB] bg-[#FFFFFF] p-5 transition-colors hover:border-[#1663D6]/35"
             >
               <div className="mb-3 flex items-center justify-between">
                 <div className="flex items-center gap-0.5">
                   {Array.from({ length: 5 }).map((_, i) => (
-                    <Icon key={i} name="star" size={14} className={i < review.rating ? 'text-[#F9A825]' : 'text-[#D1D5DB]'} />
+                    <Icon key={i} name="star" size={14} className={i < review.rating ? 'text-[#E39A1C]' : 'text-[#D1D5DB]'} />
                   ))}
                 </div>
                 <span className="text-xs text-[#6B7280]">{review.date}</span>
               </div>
               <p className="mb-4 text-sm leading-relaxed text-[#4B5563]">&ldquo;{review.text}&rdquo;</p>
               <div className="flex items-center gap-2 border-t border-[#E5E7EB] pt-3">
-                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#EAF2FF] text-xs font-extrabold text-[#1A73E8]">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#EAF2FF] text-xs font-extrabold text-[#1663D6]">
                   {review.name.charAt(0)}
                 </span>
                 <div>
@@ -69,3 +69,5 @@ export default function CarChargerReviews({ product }: { product: Product }) {
     </section>
   );
 }
+
+

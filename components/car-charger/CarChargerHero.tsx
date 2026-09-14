@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+﻿import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { createPurchaseEventId, submitOrder } from '../../lib/api/orders';
 import { getCheckoutErrorMessage } from '../../lib/api/order-errors';
@@ -67,7 +67,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
   const firstOffer = useMemo(() => getFirstOffer(product), [product]);
   const whatsappNumber = useMemo(() => STORE.whatsapp.replace(/\D/g, ''), []);
   const whatsappHref = useMemo(
-    () => `https://wa.me/${whatsappNumber}?text=${encodeURIComponent('مرحبا! بويا شوب سترد على جميع أسئلتك. كيف يمكنني أساعدك؟')}`,
+    () => `https://wa.me/${whatsappNumber}?text=${encodeURIComponent('Ù…Ø±Ø­Ø¨Ø§! Ø¨ÙˆÙŠØ§ Ø´ÙˆØ¨ Ø³ØªØ±Ø¯ Ø¹Ù„Ù‰ Ø¬Ù…ÙŠØ¹ Ø£Ø³Ø¦Ù„ØªÙƒ. ÙƒÙŠÙ ÙŠÙ…ÙƒÙ†Ù†ÙŠ Ø£Ø³Ø§Ø¹Ø¯ÙƒØŸ')}`,
     [whatsappNumber]
   );
 
@@ -218,8 +218,8 @@ export default function CarChargerHero({ product }: { product: Product }) {
     <section className="relative overflow-hidden bg-[#FFFFFF] pt-8 pb-14 md:pt-14 md:pb-20">
       {/* Ambient glow background */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -top-32 right-1/4 h-[420px] w-[420px] rounded-full bg-[#F9A825]/18 blur-[120px]" />
-        <div className="absolute top-1/3 -left-20 h-[380px] w-[380px] rounded-full bg-[#1A73E8]/12 blur-[110px]" />
+        <div className="absolute -top-32 right-1/4 h-[420px] w-[420px] rounded-full bg-[#E39A1C]/18 blur-[120px]" />
+        <div className="absolute top-1/3 -left-20 h-[380px] w-[380px] rounded-full bg-[#1663D6]/12 blur-[110px]" />
         <div
           className="absolute inset-0 opacity-[0.035]"
           style={{
@@ -235,24 +235,24 @@ export default function CarChargerHero({ product }: { product: Product }) {
           {/* Gallery */}
           <div className="order-1 lg:order-2 lg:sticky lg:top-28">
             <div className="relative rounded-[2rem] border border-[#E5E7EB] bg-[#FFFFFF] p-2 shadow-[0_30px_80px_-20px_rgba(17,24,39,0.2)]">
-              <div className="absolute -inset-px rounded-[2rem] bg-gradient-to-tr from-[#F9A825]/25 via-transparent to-[#1A73E8]/20 opacity-70" />
+              <div className="absolute -inset-px rounded-[2rem] bg-gradient-to-tr from-[#E39A1C]/25 via-transparent to-[#1663D6]/20 opacity-70" />
               <div className="relative overflow-hidden rounded-[1.6rem] bg-[#EAF2FF]">
                 <ProductImage
                   src={galleryImages[activeImage]}
                   alt={
                     product.galleryLabels[activeImage]
-                      ? `${product.nameAr} — ${product.galleryLabels[activeImage]}`
+                      ? `${product.nameAr} â€” ${product.galleryLabels[activeImage]}`
                       : product.nameAr
                   }
                   fallbackLabel={product.galleryLabels[activeImage] ?? product.galleryLabels[0]}
-                  fallbackSublabel="صورة المنتج"
+                  fallbackSublabel="ØµÙˆØ±Ø© Ø§Ù„Ù…Ù†ØªØ¬"
                   aspect="square"
                   fit="cover"
                   priority
                 />
               </div>
               {/* Corner badge */}
-              <div className="absolute top-4 right-4 rounded-xl bg-[#F9A825] px-3 py-1.5 text-xs font-extrabold text-[#111827] shadow-lg shadow-[#F9A825]/35">
+              <div className="absolute top-4 right-4 rounded-xl bg-[#E39A1C] px-3 py-1.5 text-xs font-extrabold text-[#111827] shadow-lg shadow-[#E39A1C]/35">
                 120W
               </div>
             </div>
@@ -264,7 +264,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
                     key={src}
                     type="button"
                     onClick={() => setActiveImage(index)}
-                    aria-label={product.galleryLabels[index] ?? `صورة ${index + 1}`}
+                    aria-label={product.galleryLabels[index] ?? `ØµÙˆØ±Ø© ${index + 1}`}
                     aria-pressed={activeImage === index}
                     className="sr-only"
                   >
@@ -283,7 +283,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
 
           {/* Copy + offers */}
           <div dir="rtl" className="order-2 text-right lg:order-1">
-            <p className="mb-2 text-sm font-extrabold tracking-wide text-[#F9A825]">{product.category}</p>
+            <p className="mb-2 text-sm font-extrabold tracking-wide text-[#E39A1C]">{product.category}</p>
             <h1 className="mb-3 font-heading text-3xl font-extrabold leading-[1.15] text-[#111827] text-balance md:text-4xl lg:text-[2.6rem]">
               {product.checkoutHeadline}
             </h1>
@@ -295,14 +295,14 @@ export default function CarChargerHero({ product }: { product: Product }) {
                     key={i}
                     name="star"
                     size={16}
-                    className={i < Math.round(product.rating) ? 'text-[#F9A825]' : 'text-[#D1D5DB]'}
+                    className={i < Math.round(product.rating) ? 'text-[#E39A1C]' : 'text-[#D1D5DB]'}
                   />
                 ))}
                 <span className="font-bold text-[#111827]">{product.rating}</span>
-                <span className="text-[#6B7280]">({product.reviewCount} تقييم)</span>
+                <span className="text-[#6B7280]">({product.reviewCount} ØªÙ‚ÙŠÙŠÙ…)</span>
               </span>
               <span className="inline-flex items-center gap-1.5 font-semibold text-[#B45309]">
-                <Icon name="flame" size={15} className="text-[#F9A825]" />
+                <Icon name="flame" size={15} className="text-[#E39A1C]" />
                 {product.soldText}
               </span>
             </div>
@@ -314,7 +314,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
             <ul className="mb-6 space-y-2.5">
               {product.highlights.map((h) => (
                 <li key={h} className="flex items-start gap-3 font-bold text-[#111827]">
-                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#EAF2FF] text-[#1A73E8]">
+                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#EAF2FF] text-[#1663D6]">
                     <Icon name="check" size={14} />
                   </span>
                   <span>{h}</span>
@@ -324,20 +324,20 @@ export default function CarChargerHero({ product }: { product: Product }) {
 
             {/* Scarcity */}
             <div
-              className={`mb-6 flex items-center gap-3 rounded-2xl border border-[#F9A825] bg-[#FFF7D6] px-4 py-3 font-bold text-[#111827] ${
+              className={`mb-6 flex items-center gap-3 rounded-2xl border border-[#E39A1C] bg-[#FFF7D6] px-4 py-3 font-bold text-[#111827] ${
                 isAvailable ? 'animate-pulse' : ''
               }`}
               style={{ animationDuration: '3s' }}
             >
-              <Icon name="flame" size={18} className="shrink-0 text-[#F9A825]" />
+              <Icon name="flame" size={18} className="shrink-0 text-[#E39A1C]" />
               <p>{product.scarcityText}</p>
             </div>
 
             <div ref={cardRef} className="mb-3 flex items-center gap-2">
-              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#1A73E8] text-sm font-bold text-white">
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#1663D6] text-sm font-bold text-white">
                 1
               </span>
-              <p className="font-heading font-extrabold text-[#111827]">اختار العرض</p>
+              <p className="font-heading font-extrabold text-[#111827]">Ø§Ø®ØªØ§Ø± Ø§Ù„Ø¹Ø±Ø¶</p>
             </div>
 
             <div id="cc-pricing" className="mb-5 flex scroll-mt-28 flex-col gap-3">
@@ -349,9 +349,9 @@ export default function CarChargerHero({ product }: { product: Product }) {
                     {offer.badge && (
                       <span
                         className={`absolute -top-2.5 right-4 z-10 rounded-full px-3 py-1 text-[0.65rem] font-extrabold text-white shadow-lg ${
-                          offer.badge === 'أقصى توفير'
+                          offer.badge === 'Ø£Ù‚ØµÙ‰ ØªÙˆÙÙŠØ±'
                             ? 'bg-[#16A34A]'
-                            : 'bg-[#F9A825] text-[#111827]'
+                            : 'bg-[#E39A1C] text-[#111827]'
                         }`}
                       >
                         {offer.badge}
@@ -364,13 +364,13 @@ export default function CarChargerHero({ product }: { product: Product }) {
                       disabled={!isAvailable}
                       className={`flex w-full items-center gap-4 rounded-2xl border px-4 py-4 text-right transition-all ${
                         isSelected && isAvailable
-                          ? 'border-[#1A73E8] bg-[#EAF2FF] shadow-[0_0_0_1px_rgba(26,115,232,0.2)]'
-                          : 'border-[#E5E7EB] bg-[#FFFFFF] hover:border-[#1A73E8]/40'
+                          ? 'border-[#1663D6] bg-[#EAF2FF] shadow-[0_0_0_1px_rgba(22,99,214,0.2)]'
+                          : 'border-[#E5E7EB] bg-[#FFFFFF] hover:border-[#1663D6]/40'
                       } ${!isAvailable ? 'cursor-not-allowed opacity-50' : ''}`}
                     >
                       <span
                         className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 ${
-                          isSelected && isAvailable ? 'border-[#1A73E8] bg-[#1A73E8]' : 'border-[#D1D5DB]'
+                          isSelected && isAvailable ? 'border-[#1663D6] bg-[#1663D6]' : 'border-[#D1D5DB]'
                         }`}
                       >
                         {isSelected && isAvailable && <span className="h-2 w-2 rounded-full bg-white" />}
@@ -383,7 +383,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
                       </span>
                       <span className="shrink-0 text-start">
                         <span className="flex items-baseline gap-1">
-                          <span className="font-heading text-2xl font-extrabold leading-none text-[#1A73E8]">
+                          <span className="font-heading text-2xl font-extrabold leading-none text-[#1663D6]">
                             {offer.price}
                           </span>
                           <span className="text-sm font-semibold text-[#6B7280]">{CURRENCY}</span>
@@ -395,7 +395,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
                         )}
                         {savings != null && savings > 0 && (
                           <span className="mt-1 inline-block rounded-full bg-[#FFF7D6] px-2 py-0.5 text-[0.7rem] font-extrabold text-[#B45309]">
-                            وفّر {savings} {CURRENCY}
+                            ÙˆÙÙ‘Ø± {savings} {CURRENCY}
                           </span>
                         )}
                       </span>
@@ -408,17 +408,17 @@ export default function CarChargerHero({ product }: { product: Product }) {
             {/* Checkout form */}
             <div className="overflow-hidden rounded-2xl border border-[#E5E7EB] bg-[#FFFFFF]">
               <div className="flex items-center gap-3 bg-[#EAF2FF] px-5 py-3.5">
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#1A73E8] text-sm font-bold text-white">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#1663D6] text-sm font-bold text-white">
                   2
                 </span>
                 <div className="min-w-0 flex-1">
                   <p className="font-heading text-sm font-extrabold leading-none text-[#111827]">
-                    أكمل بياناتك — التوصيل مجاناً
+                    Ø£ÙƒÙ…Ù„ Ø¨ÙŠØ§Ù†Ø§ØªÙƒ â€” Ø§Ù„ØªÙˆØµÙŠÙ„ Ù…Ø¬Ø§Ù†Ø§Ù‹
                   </p>
-                  <p className="mt-0.5 text-xs text-[#4B5563]">دفع عند الاستلام • لا حاجة لبطاقة بنكية</p>
+                  <p className="mt-0.5 text-xs text-[#4B5563]">Ø¯ÙØ¹ Ø¹Ù†Ø¯ Ø§Ù„Ø§Ø³ØªÙ„Ø§Ù… â€¢ Ù„Ø§ Ø­Ø§Ø¬Ø© Ù„Ø¨Ø·Ø§Ù‚Ø© Ø¨Ù†ÙƒÙŠØ©</p>
                 </div>
-                <span className="shrink-0 rounded-full bg-[#F9A825] px-2.5 py-1 text-[0.6rem] font-extrabold leading-none text-[#111827]">
-                  الخطوة الأخيرة
+                <span className="shrink-0 rounded-full bg-[#E39A1C] px-2.5 py-1 text-[0.6rem] font-extrabold leading-none text-[#111827]">
+                  Ø§Ù„Ø®Ø·ÙˆØ© Ø§Ù„Ø£Ø®ÙŠØ±Ø©
                 </span>
               </div>
 
@@ -426,7 +426,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
                 <form onSubmit={(e) => { void handleSubmit(e); }} noValidate className="space-y-3">
                   <div>
                     <label htmlFor="cc-checkout-name" className="mb-1.5 block text-sm font-bold text-[#111827]">
-                      الاسم الكامل
+                      Ø§Ù„Ø§Ø³Ù… Ø§Ù„ÙƒØ§Ù…Ù„
                     </label>
                     <input
                       ref={nameRef}
@@ -434,13 +434,13 @@ export default function CarChargerHero({ product }: { product: Product }) {
                       type="text"
                       name="name"
                       autoComplete="name"
-                      placeholder="مثلاً: محمد العلوي"
+                      placeholder="Ù…Ø«Ù„Ø§Ù‹: Ù…Ø­Ù…Ø¯ Ø§Ù„Ø¹Ù„ÙˆÙŠ"
                       value={formData.name}
                       onChange={(e) => setField('name', e.target.value)}
                       onBlur={(e) => handleBlur('name', e.target.value)}
                       disabled={submitting}
                       aria-invalid={Boolean(showError('name'))}
-                      className={`w-full rounded-xl border bg-[#FFFFFF] px-4 py-3 text-[#111827] placeholder:text-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#1A73E8]/35 ${
+                      className={`w-full rounded-xl border bg-[#FFFFFF] px-4 py-3 text-[#111827] placeholder:text-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#1663D6]/35 ${
                         showError('name') ? 'border-[#DC2626]' : 'border-[#E5E7EB]'
                       }`}
                     />
@@ -453,7 +453,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
 
                   <div>
                     <label htmlFor="cc-checkout-phone" className="mb-1.5 block text-sm font-bold text-[#111827]">
-                      رقم الهاتف
+                      Ø±Ù‚Ù… Ø§Ù„Ù‡Ø§ØªÙ
                     </label>
                     <input
                       id="cc-checkout-phone"
@@ -467,7 +467,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
                       onBlur={(e) => handleBlur('phone', e.target.value)}
                       disabled={submitting}
                       aria-invalid={Boolean(showError('phone'))}
-                      className={`w-full rounded-xl border bg-[#FFFFFF] px-4 py-3 text-left text-[#111827] placeholder:text-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#1A73E8]/35 ${
+                      className={`w-full rounded-xl border bg-[#FFFFFF] px-4 py-3 text-left text-[#111827] placeholder:text-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#1663D6]/35 ${
                         showError('phone') ? 'border-[#DC2626]' : 'border-[#E5E7EB]'
                       }`}
                     />
@@ -476,7 +476,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
                         {showError('phone')}
                       </p>
                     ) : (
-                      <p className="mt-1 text-xs text-[#6B7280]">سيتصل بك المندوب على هذا الرقم للتأكيد</p>
+                      <p className="mt-1 text-xs text-[#6B7280]">Ø³ÙŠØªØµÙ„ Ø¨Ùƒ Ø§Ù„Ù…Ù†Ø¯ÙˆØ¨ Ø¹Ù„Ù‰ Ù‡Ø°Ø§ Ø§Ù„Ø±Ù‚Ù… Ù„Ù„ØªØ£ÙƒÙŠØ¯</p>
                     )}
                   </div>
 
@@ -496,7 +496,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
                       )}
                     </div>
                     <div className="text-end">
-                      <p className="text-lg font-extrabold leading-none text-[#1A73E8]">
+                      <p className="text-lg font-extrabold leading-none text-[#1663D6]">
                         {selectedOffer?.price ?? firstOffer.price}{' '}
                         <span className="text-sm font-semibold text-[#6B7280]">{CURRENCY}</span>
                       </p>
@@ -515,23 +515,23 @@ export default function CarChargerHero({ product }: { product: Product }) {
                     className="flex w-full items-center justify-center gap-2 rounded-xl border border-[#16A34A]/35 bg-[#16A34A]/10 px-4 py-2.5 text-sm font-extrabold text-[#166534] transition-colors hover:bg-[#16A34A]/15"
                   >
                     <Icon name="whatsapp" size={18} />
-                    <span>تواصل واتساب</span>
+                    <span>ØªÙˆØ§ØµÙ„ ÙˆØ§ØªØ³Ø§Ø¨</span>
                   </a>
 
                   <button
                     type="submit"
                     disabled={!isAvailable || submitting}
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#1A73E8] py-4 text-lg font-black text-white shadow-[0_10px_35px_-8px_rgba(26,115,232,0.5)] transition-all hover:scale-[1.01] hover:bg-[#1558B0] disabled:opacity-50 disabled:hover:scale-100 animate-cta-pulse"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#1663D6] py-4 text-lg font-black text-white shadow-[0_10px_35px_-8px_rgba(22,99,214,0.5)] transition-all hover:scale-[1.01] hover:bg-[#124FA8] disabled:opacity-50 disabled:hover:scale-100 animate-cta-pulse"
                   >
                     {submitting ? (
                       <>
                         <span className="inline-block h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                        جاري تأكيد طلبك...
+                        Ø¬Ø§Ø±ÙŠ ØªØ£ÙƒÙŠØ¯ Ø·Ù„Ø¨Ùƒ...
                       </>
                     ) : (
                       <>
                         <Icon name="lock" size={20} />
-                        {isAvailable ? 'اطلب لآن 🚀' : 'غير متوفر حالياً'}
+                        {isAvailable ? 'Ø§Ø·Ù„Ø¨ Ù„Ø¢Ù† ðŸš€' : 'ØºÙŠØ± Ù…ØªÙˆÙØ± Ø­Ø§Ù„ÙŠØ§Ù‹'}
                       </>
                     )}
                   </button>
@@ -539,21 +539,21 @@ export default function CarChargerHero({ product }: { product: Product }) {
                   <div className="grid grid-cols-3 gap-1.5">
                     <div className="flex flex-col items-center gap-1 rounded-xl border border-[#16A34A]/20 bg-[#16A34A]/10 px-1 py-2.5 text-center">
                       <Icon name="wallet" size={16} className="text-[#16A34A]" />
-                      <p className="text-[0.6rem] font-bold leading-tight text-[#166534]">دفع عند الاستلام</p>
+                      <p className="text-[0.6rem] font-bold leading-tight text-[#166534]">Ø¯ÙØ¹ Ø¹Ù†Ø¯ Ø§Ù„Ø§Ø³ØªÙ„Ø§Ù…</p>
                     </div>
                     <div className="flex flex-col items-center gap-1 rounded-xl border border-[#16A34A]/20 bg-[#16A34A]/10 px-1 py-2.5 text-center">
                       <Icon name="truck" size={16} className="text-[#16A34A]" />
-                      <p className="text-[0.6rem] font-bold leading-tight text-[#166534]">توصيل مجاني</p>
+                      <p className="text-[0.6rem] font-bold leading-tight text-[#166534]">ØªÙˆØµÙŠÙ„ Ù…Ø¬Ø§Ù†ÙŠ</p>
                     </div>
                     <div className="flex flex-col items-center gap-1 rounded-xl border border-[#16A34A]/20 bg-[#16A34A]/10 px-1 py-2.5 text-center">
                       <Icon name="refresh" size={16} className="text-[#16A34A]" />
-                      <p className="text-[0.6rem] font-bold leading-tight text-[#166534]">استرجاع مضمون</p>
+                      <p className="text-[0.6rem] font-bold leading-tight text-[#166534]">Ø§Ø³ØªØ±Ø¬Ø§Ø¹ Ù…Ø¶Ù…ÙˆÙ†</p>
                     </div>
                   </div>
 
                   <p className="flex items-center justify-center gap-1 pt-0.5 text-center text-xs text-[#6B7280]">
                     <Icon name="lock" size={12} className="shrink-0" />
-                    بياناتك آمنة — لن نشاركها مع أي طرف
+                    Ø¨ÙŠØ§Ù†Ø§ØªÙƒ Ø¢Ù…Ù†Ø© â€” Ù„Ù† Ù†Ø´Ø§Ø±ÙƒÙ‡Ø§ Ù…Ø¹ Ø£ÙŠ Ø·Ø±Ù
                   </p>
                 </form>
               </div>
@@ -578,10 +578,10 @@ export default function CarChargerHero({ product }: { product: Product }) {
             type="button"
             onClick={handleStickyClick}
             disabled={!isAvailable}
-            className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#1A73E8] py-3.5 text-sm font-extrabold text-white shadow-lg transition-colors hover:bg-[#1558B0] disabled:opacity-50 md:hidden animate-cta-pulse"
+            className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#1663D6] py-3.5 text-sm font-extrabold text-white shadow-lg transition-colors hover:bg-[#124FA8] disabled:opacity-50 md:hidden animate-cta-pulse"
           >
             <Icon name="arrow-up" size={18} />
-            {isAvailable ? `اطلب دابا — ${firstOffer.price} ${CURRENCY}` : 'غير متوفر حالياً'}
+            {isAvailable ? `Ø§Ø·Ù„Ø¨ Ø¯Ø§Ø¨Ø§ â€” ${firstOffer.price} ${CURRENCY}` : 'ØºÙŠØ± Ù…ØªÙˆÙØ± Ø­Ø§Ù„ÙŠØ§Ù‹'}
           </button>
 
           <div dir="rtl" className="mx-auto hidden w-full max-w-3xl items-center gap-3 md:flex">
@@ -597,17 +597,17 @@ export default function CarChargerHero({ product }: { product: Product }) {
               </div>
               <p className="truncate text-sm font-bold text-[#111827]">{product.nameAr}</p>
             </div>
-            <p className="shrink-0 text-lg font-extrabold text-[#1A73E8]">
+            <p className="shrink-0 text-lg font-extrabold text-[#1663D6]">
               {firstOffer.price} {CURRENCY}
             </p>
             <button
               type="button"
               onClick={handleStickyClick}
               disabled={!isAvailable}
-              className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#1A73E8] py-3 font-extrabold text-white shadow-lg transition-colors hover:bg-[#1558B0] disabled:opacity-50 animate-cta-pulse"
+              className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#1663D6] py-3 font-extrabold text-white shadow-lg transition-colors hover:bg-[#124FA8] disabled:opacity-50 animate-cta-pulse"
             >
               <Icon name="lock" size={18} />
-              {isAvailable ? 'اطلب الآن' : 'غير متوفر حالياً'}
+              {isAvailable ? 'Ø§Ø·Ù„Ø¨ Ø§Ù„Ø¢Ù†' : 'ØºÙŠØ± Ù…ØªÙˆÙØ± Ø­Ø§Ù„ÙŠØ§Ù‹'}
             </button>
           </div>
         </div>
@@ -615,3 +615,5 @@ export default function CarChargerHero({ product }: { product: Product }) {
     </section>
   );
 }
+
+

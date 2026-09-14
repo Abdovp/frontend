@@ -1,4 +1,4 @@
-import Head from 'next/head';
+﻿import Head from 'next/head';
 import { useEffect } from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
@@ -25,9 +25,9 @@ export default function CarChargerPage({ product }: { product: Product }) {
   return (
     <>
       <Head>
-        <title>{`${product.nameAr} | بويا شوب`}</title>
+        <title>{`${product.nameAr} | Ø¨ÙˆÙŠØ§ Ø´ÙˆØ¨`}</title>
         <meta name="description" content={product.metaDescription} />
-        <meta property="og:title" content={`${product.nameAr} | بويا شوب`} />
+        <meta property="og:title" content={`${product.nameAr} | Ø¨ÙˆÙŠØ§ Ø´ÙˆØ¨`} />
         <meta property="og:description" content={product.metaDescription} />
         <meta name="theme-color" content="#F7F7F5" />
       </Head>
@@ -48,3 +48,5 @@ export default function CarChargerPage({ product }: { product: Product }) {
     </>
   );
 }
+
+

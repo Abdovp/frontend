@@ -1,4 +1,4 @@
-import Icon from '../ui/Icon';
+﻿import Icon from '../ui/Icon';
 import type { Product } from '../../lib/products';
 
 export default function CarChargerPain({ product }: { product: Product }) {
@@ -6,13 +6,13 @@ export default function CarChargerPain({ product }: { product: Product }) {
   return (
     <section className="relative overflow-hidden bg-[#F1F3F5] py-14 md:py-20" aria-labelledby="cc-pain-heading">
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute top-0 left-1/3 h-72 w-72 rounded-full bg-[#F9A825]/20 blur-[100px]" />
+        <div className="absolute top-0 left-1/3 h-72 w-72 rounded-full bg-[#E39A1C]/20 blur-[100px]" />
       </div>
       <div className="container-wide relative">
         <div dir="rtl" className="mb-8 text-center">
           {pain.eyebrow && (
-            <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#F9A825] bg-[#FFF7D6] px-3.5 py-1.5 text-[0.68rem] font-extrabold uppercase tracking-widest2 text-[#B45309]">
-              <Icon name="flame" size={13} className="text-[#F9A825]" />
+            <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#E39A1C] bg-[#FFF7D6] px-3.5 py-1.5 text-[0.68rem] font-extrabold uppercase tracking-widest2 text-[#B45309]">
+              <Icon name="flame" size={13} className="text-[#E39A1C]" />
               {pain.eyebrow}
             </p>
           )}
@@ -38,7 +38,7 @@ export default function CarChargerPain({ product }: { product: Product }) {
             {pain.bullets.map((b) => (
               <div
                 key={b}
-                className="rounded-2xl border border-[#F9A825]/30 bg-[#FFF7D6] p-4 text-right shadow-[0_10px_24px_rgba(249,168,37,0.12)]"
+                className="rounded-2xl border border-[#E39A1C]/30 bg-[#FFF7D6] p-4 text-right shadow-[0_10px_24px_rgba(227,154,28,0.12)]"
               >
                 <p className="text-sm font-extrabold leading-relaxed text-[#111827]">{b}</p>
               </div>
@@ -49,3 +49,5 @@ export default function CarChargerPain({ product }: { product: Product }) {
     </section>
   );
 }
+
+
