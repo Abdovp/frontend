@@ -8,6 +8,12 @@ const CAR_CHARGER_B_PRICES: Record<OfferQuantity, number> = {
   3: 299,
 };
 
+const CAR_CHARGER_A_PRICES: Record<OfferQuantity, number> = {
+  1: 159,
+  2: 249,
+  3: 329,
+};
+
 function withOfferPrices(product: Product, prices: Record<OfferQuantity, number>): Product {
   const offers: ProductOffer[] = product.offers.map((offer) => ({
     ...offer,
@@ -22,6 +28,6 @@ function withOfferPrices(product: Product, prices: Record<OfferQuantity, number>
 
 export function getCarChargerProductVariant(variant: 'a' | 'b'): Product {
   const product = getProduct('car-charger');
-  if (variant === 'a') return product;
+  if (variant === 'a') return withOfferPrices(product, CAR_CHARGER_A_PRICES);
   return withOfferPrices(product, CAR_CHARGER_B_PRICES);
 }
