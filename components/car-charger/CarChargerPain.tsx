@@ -1,4 +1,4 @@
-﻿import Icon from '../ui/Icon';
+import Icon from '../ui/Icon';
 import type { Product } from '../../lib/products';
 
 export default function CarChargerPain({ product }: { product: Product }) {
@@ -49,5 +49,3 @@ export default function CarChargerPain({ product }: { product: Product }) {
     </section>
   );
 }
-
-

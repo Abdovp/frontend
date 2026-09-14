@@ -1,4 +1,4 @@
-﻿import Icon from '../ui/Icon';
+import Icon from '../ui/Icon';
 import type { Product } from '../../lib/products';
 
 export default function CarChargerHowTo({ product }: { product: Product }) {
@@ -35,9 +35,9 @@ export default function CarChargerHowTo({ product }: { product: Product }) {
         {/* Delivery mini-steps */}
         <div dir="rtl" className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-3">
           {[
-            { icon: 'cart' as const, title: 'Ø§Ø·Ù„Ø¨ Ù Ø¯Ù‚ÙŠÙ‚Ø©', text: 'Ø§Ø®ØªØ§Ø± Ø§Ù„Ø¹Ø±Ø¶ ÙˆØ¹Ù…Ù‘Ø± Ù…Ø¹Ù„ÙˆÙ…Ø§ØªÙƒ' },
-            { icon: 'whatsapp' as const, title: 'ØªØ£ÙƒÙŠØ¯ Ø³Ø±ÙŠØ¹', text: 'ÙƒÙ†Ø£ÙƒØ¯Ùˆ Ù…Ø¹Ø§Ùƒ Ø¨Ø§Ù„Ù‡Ø§ØªÙ Ø£Ùˆ ÙˆØ§ØªØ³Ø§Ø¨' },
-            { icon: 'truck' as const, title: 'ØªÙˆØµÙŠÙ„ + Ø¯ÙØ¹', text: 'ØªØ®Ù„Ù‘Øµ ÙÙ‚Ø· Ø¹Ù†Ø¯ Ø§Ø³ØªÙ„Ø§Ù… Ø§Ù„Ø·Ø±Ø¯' },
+            { icon: 'cart' as const, title: 'اطلب ف دقيقة', text: 'اختار العرض وعمّر معلوماتك' },
+            { icon: 'whatsapp' as const, title: 'تأكيد سريع', text: 'كنأكدو معاك بالهاتف أو واتساب' },
+            { icon: 'truck' as const, title: 'توصيل + دفع', text: 'تخلّص فقط عند استلام الطرد' },
           ].map((s) => (
             <div key={s.title} className="flex items-center gap-3 rounded-2xl border border-[#E5E7EB] bg-[#FFFFFF] p-4">
               <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#EAF2FF] text-[#1663D6]">
@@ -54,5 +54,3 @@ export default function CarChargerHowTo({ product }: { product: Product }) {
     </section>
   );
 }
-
-

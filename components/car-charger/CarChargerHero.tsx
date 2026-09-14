@@ -1,4 +1,4 @@
-﻿import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useRouter } from 'next/router';
 import { createPurchaseEventId, submitOrder } from '../../lib/api/orders';
 import { getCheckoutErrorMessage } from '../../lib/api/order-errors';
@@ -67,7 +67,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
   const firstOffer = useMemo(() => getFirstOffer(product), [product]);
   const whatsappNumber = useMemo(() => STORE.whatsapp.replace(/\D/g, ''), []);
   const whatsappHref = useMemo(
-    () => `https://wa.me/${whatsappNumber}?text=${encodeURIComponent('Ù…Ø±Ø­Ø¨Ø§! Ø¨ÙˆÙŠØ§ Ø´ÙˆØ¨ Ø³ØªØ±Ø¯ Ø¹Ù„Ù‰ Ø¬Ù…ÙŠØ¹ Ø£Ø³Ø¦Ù„ØªÙƒ. ÙƒÙŠÙ ÙŠÙ…ÙƒÙ†Ù†ÙŠ Ø£Ø³Ø§Ø¹Ø¯ÙƒØŸ')}`,
+    () => `https://wa.me/${whatsappNumber}?text=${encodeURIComponent('مرحبا! بويا شوب سترد على جميع أسئلتك. كيف يمكنني أساعدك؟')}`,
     [whatsappNumber]
   );
 
@@ -241,11 +241,11 @@ export default function CarChargerHero({ product }: { product: Product }) {
                   src={galleryImages[activeImage]}
                   alt={
                     product.galleryLabels[activeImage]
-                      ? `${product.nameAr} â€” ${product.galleryLabels[activeImage]}`
+                      ? `${product.nameAr} — ${product.galleryLabels[activeImage]}`
                       : product.nameAr
                   }
                   fallbackLabel={product.galleryLabels[activeImage] ?? product.galleryLabels[0]}
-                  fallbackSublabel="ØµÙˆØ±Ø© Ø§Ù„Ù…Ù†ØªØ¬"
+                  fallbackSublabel="صورة المنتج"
                   aspect="square"
                   fit="cover"
                   priority
@@ -264,7 +264,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
                     key={src}
                     type="button"
                     onClick={() => setActiveImage(index)}
-                    aria-label={product.galleryLabels[index] ?? `ØµÙˆØ±Ø© ${index + 1}`}
+                    aria-label={product.galleryLabels[index] ?? `صورة ${index + 1}`}
                     aria-pressed={activeImage === index}
                     className="sr-only"
                   >
@@ -299,7 +299,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
                   />
                 ))}
                 <span className="font-bold text-[#111827]">{product.rating}</span>
-                <span className="text-[#6B7280]">({product.reviewCount} ØªÙ‚ÙŠÙŠÙ…)</span>
+                <span className="text-[#6B7280]">({product.reviewCount} تقييم)</span>
               </span>
               <span className="inline-flex items-center gap-1.5 font-semibold text-[#B45309]">
                 <Icon name="flame" size={15} className="text-[#E39A1C]" />
@@ -337,7 +337,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
               <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#1663D6] text-sm font-bold text-white">
                 1
               </span>
-              <p className="font-heading font-extrabold text-[#111827]">Ø§Ø®ØªØ§Ø± Ø§Ù„Ø¹Ø±Ø¶</p>
+              <p className="font-heading font-extrabold text-[#111827]">اختار العرض</p>
             </div>
 
             <div id="cc-pricing" className="mb-5 flex scroll-mt-28 flex-col gap-3">
@@ -349,7 +349,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
                     {offer.badge && (
                       <span
                         className={`absolute -top-2.5 right-4 z-10 rounded-full px-3 py-1 text-[0.65rem] font-extrabold text-white shadow-lg ${
-                          offer.badge === 'Ø£Ù‚ØµÙ‰ ØªÙˆÙÙŠØ±'
+                          offer.badge === 'أقصى توفير'
                             ? 'bg-[#16A34A]'
                             : 'bg-[#E39A1C] text-[#111827]'
                         }`}
@@ -395,7 +395,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
                         )}
                         {savings != null && savings > 0 && (
                           <span className="mt-1 inline-block rounded-full bg-[#FFF7D6] px-2 py-0.5 text-[0.7rem] font-extrabold text-[#B45309]">
-                            ÙˆÙÙ‘Ø± {savings} {CURRENCY}
+                            وفّر {savings} {CURRENCY}
                           </span>
                         )}
                       </span>
@@ -413,12 +413,12 @@ export default function CarChargerHero({ product }: { product: Product }) {
                 </span>
                 <div className="min-w-0 flex-1">
                   <p className="font-heading text-sm font-extrabold leading-none text-[#111827]">
-                    Ø£ÙƒÙ…Ù„ Ø¨ÙŠØ§Ù†Ø§ØªÙƒ â€” Ø§Ù„ØªÙˆØµÙŠÙ„ Ù…Ø¬Ø§Ù†Ø§Ù‹
+                    أكمل بياناتك — التوصيل مجاناً
                   </p>
-                  <p className="mt-0.5 text-xs text-[#4B5563]">Ø¯ÙØ¹ Ø¹Ù†Ø¯ Ø§Ù„Ø§Ø³ØªÙ„Ø§Ù… â€¢ Ù„Ø§ Ø­Ø§Ø¬Ø© Ù„Ø¨Ø·Ø§Ù‚Ø© Ø¨Ù†ÙƒÙŠØ©</p>
+                  <p className="mt-0.5 text-xs text-[#4B5563]">دفع عند الاستلام • لا حاجة لبطاقة بنكية</p>
                 </div>
                 <span className="shrink-0 rounded-full bg-[#E39A1C] px-2.5 py-1 text-[0.6rem] font-extrabold leading-none text-[#111827]">
-                  Ø§Ù„Ø®Ø·ÙˆØ© Ø§Ù„Ø£Ø®ÙŠØ±Ø©
+                  الخطوة الأخيرة
                 </span>
               </div>
 
@@ -426,7 +426,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
                 <form onSubmit={(e) => { void handleSubmit(e); }} noValidate className="space-y-3">
                   <div>
                     <label htmlFor="cc-checkout-name" className="mb-1.5 block text-sm font-bold text-[#111827]">
-                      Ø§Ù„Ø§Ø³Ù… Ø§Ù„ÙƒØ§Ù…Ù„
+                      الاسم الكامل
                     </label>
                     <input
                       ref={nameRef}
@@ -434,7 +434,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
                       type="text"
                       name="name"
                       autoComplete="name"
-                      placeholder="Ù…Ø«Ù„Ø§Ù‹: Ù…Ø­Ù…Ø¯ Ø§Ù„Ø¹Ù„ÙˆÙŠ"
+                      placeholder="مثلاً: محمد العلوي"
                       value={formData.name}
                       onChange={(e) => setField('name', e.target.value)}
                       onBlur={(e) => handleBlur('name', e.target.value)}
@@ -453,7 +453,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
 
                   <div>
                     <label htmlFor="cc-checkout-phone" className="mb-1.5 block text-sm font-bold text-[#111827]">
-                      Ø±Ù‚Ù… Ø§Ù„Ù‡Ø§ØªÙ
+                      رقم الهاتف
                     </label>
                     <input
                       id="cc-checkout-phone"
@@ -476,7 +476,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
                         {showError('phone')}
                       </p>
                     ) : (
-                      <p className="mt-1 text-xs text-[#6B7280]">Ø³ÙŠØªØµÙ„ Ø¨Ùƒ Ø§Ù„Ù…Ù†Ø¯ÙˆØ¨ Ø¹Ù„Ù‰ Ù‡Ø°Ø§ Ø§Ù„Ø±Ù‚Ù… Ù„Ù„ØªØ£ÙƒÙŠØ¯</p>
+                      <p className="mt-1 text-xs text-[#6B7280]">سيتصل بك المندوب على هذا الرقم للتأكيد</p>
                     )}
                   </div>
 
@@ -515,7 +515,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
                     className="flex w-full items-center justify-center gap-2 rounded-xl border border-[#16A34A]/35 bg-[#16A34A]/10 px-4 py-2.5 text-sm font-extrabold text-[#166534] transition-colors hover:bg-[#16A34A]/15"
                   >
                     <Icon name="whatsapp" size={18} />
-                    <span>ØªÙˆØ§ØµÙ„ ÙˆØ§ØªØ³Ø§Ø¨</span>
+                    <span>تواصل واتساب</span>
                   </a>
 
                   <button
@@ -526,12 +526,12 @@ export default function CarChargerHero({ product }: { product: Product }) {
                     {submitting ? (
                       <>
                         <span className="inline-block h-5 w-5 animate-spin rounded-full border-2 border-white border-t-transparent" />
-                        Ø¬Ø§Ø±ÙŠ ØªØ£ÙƒÙŠØ¯ Ø·Ù„Ø¨Ùƒ...
+                        جاري تأكيد طلبك...
                       </>
                     ) : (
                       <>
                         <Icon name="lock" size={20} />
-                        {isAvailable ? 'Ø§Ø·Ù„Ø¨ Ù„Ø¢Ù† ðŸš€' : 'ØºÙŠØ± Ù…ØªÙˆÙØ± Ø­Ø§Ù„ÙŠØ§Ù‹'}
+                        {isAvailable ? 'اطلب لآن 🚀' : 'غير متوفر حالياً'}
                       </>
                     )}
                   </button>
@@ -539,21 +539,21 @@ export default function CarChargerHero({ product }: { product: Product }) {
                   <div className="grid grid-cols-3 gap-1.5">
                     <div className="flex flex-col items-center gap-1 rounded-xl border border-[#16A34A]/20 bg-[#16A34A]/10 px-1 py-2.5 text-center">
                       <Icon name="wallet" size={16} className="text-[#16A34A]" />
-                      <p className="text-[0.6rem] font-bold leading-tight text-[#166534]">Ø¯ÙØ¹ Ø¹Ù†Ø¯ Ø§Ù„Ø§Ø³ØªÙ„Ø§Ù…</p>
+                      <p className="text-[0.6rem] font-bold leading-tight text-[#166534]">دفع عند الاستلام</p>
                     </div>
                     <div className="flex flex-col items-center gap-1 rounded-xl border border-[#16A34A]/20 bg-[#16A34A]/10 px-1 py-2.5 text-center">
                       <Icon name="truck" size={16} className="text-[#16A34A]" />
-                      <p className="text-[0.6rem] font-bold leading-tight text-[#166534]">ØªÙˆØµÙŠÙ„ Ù…Ø¬Ø§Ù†ÙŠ</p>
+                      <p className="text-[0.6rem] font-bold leading-tight text-[#166534]">توصيل مجاني</p>
                     </div>
                     <div className="flex flex-col items-center gap-1 rounded-xl border border-[#16A34A]/20 bg-[#16A34A]/10 px-1 py-2.5 text-center">
                       <Icon name="refresh" size={16} className="text-[#16A34A]" />
-                      <p className="text-[0.6rem] font-bold leading-tight text-[#166534]">Ø§Ø³ØªØ±Ø¬Ø§Ø¹ Ù…Ø¶Ù…ÙˆÙ†</p>
+                      <p className="text-[0.6rem] font-bold leading-tight text-[#166534]">استرجاع مضمون</p>
                     </div>
                   </div>
 
                   <p className="flex items-center justify-center gap-1 pt-0.5 text-center text-xs text-[#6B7280]">
                     <Icon name="lock" size={12} className="shrink-0" />
-                    Ø¨ÙŠØ§Ù†Ø§ØªÙƒ Ø¢Ù…Ù†Ø© â€” Ù„Ù† Ù†Ø´Ø§Ø±ÙƒÙ‡Ø§ Ù…Ø¹ Ø£ÙŠ Ø·Ø±Ù
+                    بياناتك آمنة — لن نشاركها مع أي طرف
                   </p>
                 </form>
               </div>
@@ -581,7 +581,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
             className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#1663D6] py-3.5 text-sm font-extrabold text-white shadow-lg transition-colors hover:bg-[#124FA8] disabled:opacity-50 md:hidden animate-cta-pulse"
           >
             <Icon name="arrow-up" size={18} />
-            {isAvailable ? `Ø§Ø·Ù„Ø¨ Ø¯Ø§Ø¨Ø§ â€” ${firstOffer.price} ${CURRENCY}` : 'ØºÙŠØ± Ù…ØªÙˆÙØ± Ø­Ø§Ù„ÙŠØ§Ù‹'}
+            {isAvailable ? `اطلب دابا — ${firstOffer.price} ${CURRENCY}` : 'غير متوفر حالياً'}
           </button>
 
           <div dir="rtl" className="mx-auto hidden w-full max-w-3xl items-center gap-3 md:flex">
@@ -607,7 +607,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
               className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#1663D6] py-3 font-extrabold text-white shadow-lg transition-colors hover:bg-[#124FA8] disabled:opacity-50 animate-cta-pulse"
             >
               <Icon name="lock" size={18} />
-              {isAvailable ? 'Ø§Ø·Ù„Ø¨ Ø§Ù„Ø¢Ù†' : 'ØºÙŠØ± Ù…ØªÙˆÙØ± Ø­Ø§Ù„ÙŠØ§Ù‹'}
+              {isAvailable ? 'اطلب الآن' : 'غير متوفر حالياً'}
             </button>
           </div>
         </div>
@@ -615,5 +615,3 @@ export default function CarChargerHero({ product }: { product: Product }) {
     </section>
   );
 }
-
-

@@ -1,4 +1,4 @@
-﻿import Icon from '../ui/Icon';
+import Icon from '../ui/Icon';
 import type { Product } from '../../lib/products';
 
 export default function CarChargerReviews({ product }: { product: Product }) {
@@ -69,5 +69,3 @@ export default function CarChargerReviews({ product }: { product: Product }) {
     </section>
   );
 }
-
-

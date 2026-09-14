@@ -1,4 +1,4 @@
-﻿import { useState } from 'react';
+import { useState } from 'react';
 import Icon from '../ui/Icon';
 import type { Product } from '../../lib/products';
 
@@ -31,7 +31,7 @@ export default function CarChargerFAQ({ product }: { product: Product }) {
     <section className="relative overflow-hidden bg-[#F1F3F5] py-14 md:py-20">
       <div className="container-wide relative">
         <h2 dir="rtl" className="mb-10 text-center font-heading text-2xl font-extrabold text-[#111827] sm:text-3xl md:text-4xl">
-          Ø§Ù„Ø£Ø³Ø¦Ù„Ø© Ø§Ù„Ø´Ø§Ø¦Ø¹Ø©
+          الأسئلة الشائعة
         </h2>
 
         <div dir="rtl" className="mx-auto max-w-3xl space-y-8">
@@ -50,5 +50,3 @@ export default function CarChargerFAQ({ product }: { product: Product }) {
     </section>
   );
 }
-
-
