@@ -1050,15 +1050,15 @@ export const products: Record<ProductId, Product> = {
     offers: [
       {
         quantity: 1,
-        price: 169,
+        price: 159,
         label: 'شاحن واحد',
         sublabel: 'لتجربة الشحن الذكي ف سيارتك',
         perks: ['شاحن 4 في 1 بقوة 120W', 'توصيل مجاني', `ضمان ${WARRANTY_DAYS} يوم`],
       },
       {
         quantity: 2,
-        price: 269,
-        compareAt: 338,
+        price: 249,
+        compareAt: 318,
         label: 'شاحنان',
         sublabel: 'لك ولعائلتك أو كهدية قيمة',
         badge: 'الأكثر مبيعاً',
@@ -1066,8 +1066,8 @@ export const products: Record<ProductId, Product> = {
       },
       {
         quantity: 3,
-        price: 359,
-        compareAt: 507,
+        price: 329,
+        compareAt: 477,
         label: '3 شواحن',
         sublabel: 'للعائلة وأصحاب السيارات',
         badge: 'أقصى توفير',
