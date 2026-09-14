@@ -35,10 +35,8 @@ export function whenPixelsReady(run: () => void) {
   };
 
   const fire = () => {
-    if (PIXEL_IDS.tiktok && window.ttq?.ready) {
-      window.ttq.ready(runSafely);
-      return;
-    }
+    // Never block all analytics on a single vendor callback.
+    // TikTok can still queue commands before its SDK is fully loaded.
     runSafely();
   };
 
