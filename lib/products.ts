@@ -1064,15 +1064,6 @@ export const products: Record<ProductId, Product> = {
         badge: 'الأكثر مبيعاً',
         perks: ['شاحنان كاملان', 'توفير 69 درهم', 'توصيل مجاني', `ضمان ${WARRANTY_DAYS} يوم`],
       },
-      {
-        quantity: 3,
-        price: 299,
-        compareAt: 477,
-        label: '3 شواحن',
-        sublabel: 'للعائلة وأصحاب السيارات',
-        badge: 'أقصى توفير',
-        perks: ['3 شواحن كاملة', 'توفير 148 درهم', 'توصيل مجاني', `ضمان ${WARRANTY_DAYS} يوم`],
-      },
     ],
     galleryLabels: ['الشاحن 4 في 1', 'الكابلات القابلة للسحب', 'مراقبة الفولطاج LED', 'الرأس الدوار 180°', 'داخل السيارة'],
     galleryImages: [

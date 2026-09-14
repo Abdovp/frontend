@@ -215,16 +215,16 @@ export default function CarChargerHero({ product }: { product: Product }) {
   };
 
   return (
-    <section className="relative overflow-hidden bg-[#05070d] pt-8 pb-14 md:pt-14 md:pb-20">
+    <section className="relative overflow-hidden bg-[#FFFFFF] pt-8 pb-14 md:pt-14 md:pb-20">
       {/* Ambient glow background */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute -top-32 right-1/4 h-[420px] w-[420px] rounded-full bg-orange-500/20 blur-[120px]" />
-        <div className="absolute top-1/3 -left-20 h-[380px] w-[380px] rounded-full bg-cyan-500/15 blur-[110px]" />
+        <div className="absolute -top-32 right-1/4 h-[420px] w-[420px] rounded-full bg-[#F9A825]/18 blur-[120px]" />
+        <div className="absolute top-1/3 -left-20 h-[380px] w-[380px] rounded-full bg-[#1A73E8]/12 blur-[110px]" />
         <div
           className="absolute inset-0 opacity-[0.035]"
           style={{
             backgroundImage:
-              'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
+              'linear-gradient(#111827 1px, transparent 1px), linear-gradient(90deg, #111827 1px, transparent 1px)',
             backgroundSize: '48px 48px',
           }}
         />
@@ -234,9 +234,9 @@ export default function CarChargerHero({ product }: { product: Product }) {
         <div className="layout-ltr grid items-start gap-10 lg:grid-cols-2 lg:gap-14">
           {/* Gallery */}
           <div className="order-1 lg:order-2 lg:sticky lg:top-28">
-            <div className="relative rounded-[2rem] border border-white/10 bg-gradient-to-b from-white/[0.06] to-transparent p-2 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.7)]">
-              <div className="absolute -inset-px rounded-[2rem] bg-gradient-to-tr from-orange-500/25 via-transparent to-cyan-400/25 opacity-60" />
-              <div className="relative rounded-[1.6rem] overflow-hidden bg-[#0b1120]">
+            <div className="relative rounded-[2rem] border border-[#E5E7EB] bg-[#FFFFFF] p-2 shadow-[0_30px_80px_-20px_rgba(17,24,39,0.2)]">
+              <div className="absolute -inset-px rounded-[2rem] bg-gradient-to-tr from-[#F9A825]/25 via-transparent to-[#1A73E8]/20 opacity-70" />
+              <div className="relative overflow-hidden rounded-[1.6rem] bg-[#EAF2FF]">
                 <ProductImage
                   src={galleryImages[activeImage]}
                   alt={
@@ -252,7 +252,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
                 />
               </div>
               {/* Corner badge */}
-              <div className="absolute top-4 right-4 rounded-xl bg-gradient-to-r from-orange-500 to-red-600 px-3 py-1.5 text-xs font-extrabold text-white shadow-lg shadow-orange-900/40">
+              <div className="absolute top-4 right-4 rounded-xl bg-[#F9A825] px-3 py-1.5 text-xs font-extrabold text-[#111827] shadow-lg shadow-[#F9A825]/35">
                 120W
               </div>
             </div>
@@ -283,8 +283,8 @@ export default function CarChargerHero({ product }: { product: Product }) {
 
           {/* Copy + offers */}
           <div dir="rtl" className="order-2 text-right lg:order-1">
-            <p className="mb-2 text-sm font-extrabold tracking-wide text-orange-400">{product.category}</p>
-            <h1 className="mb-3 font-heading text-3xl font-extrabold leading-[1.15] text-white text-balance md:text-4xl lg:text-[2.6rem]">
+            <p className="mb-2 text-sm font-extrabold tracking-wide text-[#F9A825]">{product.category}</p>
+            <h1 className="mb-3 font-heading text-3xl font-extrabold leading-[1.15] text-[#111827] text-balance md:text-4xl lg:text-[2.6rem]">
               {product.checkoutHeadline}
             </h1>
 
@@ -295,26 +295,26 @@ export default function CarChargerHero({ product }: { product: Product }) {
                     key={i}
                     name="star"
                     size={16}
-                    className={i < Math.round(product.rating) ? 'text-amber-400' : 'text-white/15'}
+                    className={i < Math.round(product.rating) ? 'text-[#F9A825]' : 'text-[#D1D5DB]'}
                   />
                 ))}
-                <span className="font-bold text-white">{product.rating}</span>
-                <span className="text-white/40">({product.reviewCount} تقييم)</span>
+                <span className="font-bold text-[#111827]">{product.rating}</span>
+                <span className="text-[#6B7280]">({product.reviewCount} تقييم)</span>
               </span>
-              <span className="inline-flex items-center gap-1.5 font-semibold text-orange-300">
-                <Icon name="flame" size={15} className="text-orange-400" />
+              <span className="inline-flex items-center gap-1.5 font-semibold text-[#B45309]">
+                <Icon name="flame" size={15} className="text-[#F9A825]" />
                 {product.soldText}
               </span>
             </div>
 
-            <p className="mb-5 text-base font-medium leading-relaxed text-white/70 md:text-lg">
+            <p className="mb-5 text-base font-medium leading-relaxed text-[#4B5563] md:text-lg">
               {product.checkoutDescription}
             </p>
 
             <ul className="mb-6 space-y-2.5">
               {product.highlights.map((h) => (
-                <li key={h} className="flex items-start gap-3 font-bold text-white/90">
-                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-cyan-400/15 text-cyan-300">
+                <li key={h} className="flex items-start gap-3 font-bold text-[#111827]">
+                  <span className="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#EAF2FF] text-[#1A73E8]">
                     <Icon name="check" size={14} />
                   </span>
                   <span>{h}</span>
@@ -324,20 +324,20 @@ export default function CarChargerHero({ product }: { product: Product }) {
 
             {/* Scarcity */}
             <div
-              className={`mb-6 flex items-center gap-3 rounded-2xl border border-red-500/30 bg-red-500/10 px-4 py-3 font-bold text-red-300 ${
+              className={`mb-6 flex items-center gap-3 rounded-2xl border border-[#F9A825] bg-[#FFF7D6] px-4 py-3 font-bold text-[#111827] ${
                 isAvailable ? 'animate-pulse' : ''
               }`}
               style={{ animationDuration: '3s' }}
             >
-              <Icon name="flame" size={18} className="shrink-0 text-red-400" />
+              <Icon name="flame" size={18} className="shrink-0 text-[#F9A825]" />
               <p>{product.scarcityText}</p>
             </div>
 
             <div ref={cardRef} className="mb-3 flex items-center gap-2">
-              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-orange-500 to-red-600 text-sm font-bold text-white">
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#1A73E8] text-sm font-bold text-white">
                 1
               </span>
-              <p className="font-heading font-extrabold text-white">اختار العرض</p>
+              <p className="font-heading font-extrabold text-[#111827]">اختار العرض</p>
             </div>
 
             <div id="cc-pricing" className="mb-5 flex scroll-mt-28 flex-col gap-3">
@@ -350,8 +350,8 @@ export default function CarChargerHero({ product }: { product: Product }) {
                       <span
                         className={`absolute -top-2.5 right-4 z-10 rounded-full px-3 py-1 text-[0.65rem] font-extrabold text-white shadow-lg ${
                           offer.badge === 'أقصى توفير'
-                            ? 'bg-gradient-to-r from-emerald-500 to-emerald-600'
-                            : 'bg-gradient-to-r from-orange-500 to-red-600'
+                            ? 'bg-[#16A34A]'
+                            : 'bg-[#F9A825] text-[#111827]'
                         }`}
                       >
                         {offer.badge}
@@ -364,37 +364,37 @@ export default function CarChargerHero({ product }: { product: Product }) {
                       disabled={!isAvailable}
                       className={`flex w-full items-center gap-4 rounded-2xl border px-4 py-4 text-right transition-all ${
                         isSelected && isAvailable
-                          ? 'border-cyan-400/60 bg-cyan-400/[0.07] shadow-[0_0_0_1px_rgba(34,211,238,0.25)]'
-                          : 'border-white/10 bg-white/[0.03] hover:border-white/20'
+                          ? 'border-[#1A73E8] bg-[#EAF2FF] shadow-[0_0_0_1px_rgba(26,115,232,0.2)]'
+                          : 'border-[#E5E7EB] bg-[#FFFFFF] hover:border-[#1A73E8]/40'
                       } ${!isAvailable ? 'cursor-not-allowed opacity-50' : ''}`}
                     >
                       <span
                         className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 ${
-                          isSelected && isAvailable ? 'border-cyan-400 bg-cyan-400' : 'border-white/25'
+                          isSelected && isAvailable ? 'border-[#1A73E8] bg-[#1A73E8]' : 'border-[#D1D5DB]'
                         }`}
                       >
-                        {isSelected && isAvailable && <span className="h-2 w-2 rounded-full bg-[#05070d]" />}
+                        {isSelected && isAvailable && <span className="h-2 w-2 rounded-full bg-white" />}
                       </span>
                       <span className="min-w-0 flex-1">
-                        <span className="block font-heading font-bold text-white">{offer.label}</span>
+                        <span className="block font-heading font-bold text-[#111827]">{offer.label}</span>
                         {offer.sublabel && (
-                          <span className="mt-0.5 block text-sm text-white/50">{offer.sublabel}</span>
+                          <span className="mt-0.5 block text-sm text-[#6B7280]">{offer.sublabel}</span>
                         )}
                       </span>
                       <span className="shrink-0 text-start">
                         <span className="flex items-baseline gap-1">
-                          <span className="font-heading text-2xl font-extrabold leading-none text-transparent bg-gradient-to-l from-orange-400 to-amber-300 bg-clip-text">
+                          <span className="font-heading text-2xl font-extrabold leading-none text-[#1A73E8]">
                             {offer.price}
                           </span>
-                          <span className="text-sm font-semibold text-white/50">{CURRENCY}</span>
+                          <span className="text-sm font-semibold text-[#6B7280]">{CURRENCY}</span>
                         </span>
                         {offer.compareAt && (
-                          <span className="mt-0.5 block text-xs text-white/30 line-through">
+                          <span className="mt-0.5 block text-xs text-[#6B7280] line-through">
                             {offer.compareAt} {CURRENCY}
                           </span>
                         )}
                         {savings != null && savings > 0 && (
-                          <span className="mt-1 inline-block rounded-full bg-emerald-400/15 px-2 py-0.5 text-[0.7rem] font-extrabold text-emerald-300">
+                          <span className="mt-1 inline-block rounded-full bg-[#FFF7D6] px-2 py-0.5 text-[0.7rem] font-extrabold text-[#B45309]">
                             وفّر {savings} {CURRENCY}
                           </span>
                         )}
@@ -406,18 +406,18 @@ export default function CarChargerHero({ product }: { product: Product }) {
             </div>
 
             {/* Checkout form */}
-            <div className="overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] backdrop-blur">
-              <div className="flex items-center gap-3 bg-gradient-to-l from-orange-500 to-red-600 px-5 py-3.5">
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white/20 text-sm font-bold text-white">
+            <div className="overflow-hidden rounded-2xl border border-[#E5E7EB] bg-[#FFFFFF]">
+              <div className="flex items-center gap-3 bg-[#EAF2FF] px-5 py-3.5">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#1A73E8] text-sm font-bold text-white">
                   2
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className="font-heading text-sm font-extrabold leading-none text-white">
+                  <p className="font-heading text-sm font-extrabold leading-none text-[#111827]">
                     أكمل بياناتك — التوصيل مجاناً
                   </p>
-                  <p className="mt-0.5 text-xs text-white/75">دفع عند الاستلام • لا حاجة لبطاقة بنكية</p>
+                  <p className="mt-0.5 text-xs text-[#4B5563]">دفع عند الاستلام • لا حاجة لبطاقة بنكية</p>
                 </div>
-                <span className="shrink-0 rounded-full bg-white/90 px-2.5 py-1 text-[0.6rem] font-extrabold leading-none text-red-600">
+                <span className="shrink-0 rounded-full bg-[#F9A825] px-2.5 py-1 text-[0.6rem] font-extrabold leading-none text-[#111827]">
                   الخطوة الأخيرة
                 </span>
               </div>
@@ -425,7 +425,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
               <div className="px-5 pb-5 pt-4">
                 <form onSubmit={(e) => { void handleSubmit(e); }} noValidate className="space-y-3">
                   <div>
-                    <label htmlFor="cc-checkout-name" className="mb-1.5 block text-sm font-bold text-white/80">
+                    <label htmlFor="cc-checkout-name" className="mb-1.5 block text-sm font-bold text-[#111827]">
                       الاسم الكامل
                     </label>
                     <input
@@ -440,19 +440,19 @@ export default function CarChargerHero({ product }: { product: Product }) {
                       onBlur={(e) => handleBlur('name', e.target.value)}
                       disabled={submitting}
                       aria-invalid={Boolean(showError('name'))}
-                      className={`w-full rounded-xl border bg-[#0b1120] px-4 py-3 text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-cyan-400/50 ${
-                        showError('name') ? 'border-red-500/60' : 'border-white/10'
+                      className={`w-full rounded-xl border bg-[#FFFFFF] px-4 py-3 text-[#111827] placeholder:text-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#1A73E8]/35 ${
+                        showError('name') ? 'border-[#DC2626]' : 'border-[#E5E7EB]'
                       }`}
                     />
                     {showError('name') && (
-                      <p className="mt-1 text-xs font-semibold text-red-400" role="alert">
+                      <p className="mt-1 text-xs font-semibold text-[#DC2626]" role="alert">
                         {showError('name')}
                       </p>
                     )}
                   </div>
 
                   <div>
-                    <label htmlFor="cc-checkout-phone" className="mb-1.5 block text-sm font-bold text-white/80">
+                    <label htmlFor="cc-checkout-phone" className="mb-1.5 block text-sm font-bold text-[#111827]">
                       رقم الهاتف
                     </label>
                     <input
@@ -467,41 +467,41 @@ export default function CarChargerHero({ product }: { product: Product }) {
                       onBlur={(e) => handleBlur('phone', e.target.value)}
                       disabled={submitting}
                       aria-invalid={Boolean(showError('phone'))}
-                      className={`w-full rounded-xl border bg-[#0b1120] px-4 py-3 text-left text-white placeholder:text-white/30 focus:outline-none focus:ring-2 focus:ring-cyan-400/50 ${
-                        showError('phone') ? 'border-red-500/60' : 'border-white/10'
+                      className={`w-full rounded-xl border bg-[#FFFFFF] px-4 py-3 text-left text-[#111827] placeholder:text-[#9CA3AF] focus:outline-none focus:ring-2 focus:ring-[#1A73E8]/35 ${
+                        showError('phone') ? 'border-[#DC2626]' : 'border-[#E5E7EB]'
                       }`}
                     />
                     {showError('phone') ? (
-                      <p className="mt-1 text-xs font-semibold text-red-400" role="alert">
+                      <p className="mt-1 text-xs font-semibold text-[#DC2626]" role="alert">
                         {showError('phone')}
                       </p>
                     ) : (
-                      <p className="mt-1 text-xs text-white/40">سيتصل بك المندوب على هذا الرقم للتأكيد</p>
+                      <p className="mt-1 text-xs text-[#6B7280]">سيتصل بك المندوب على هذا الرقم للتأكيد</p>
                     )}
                   </div>
 
                   {submitError && (
-                    <p className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-2.5 text-sm font-semibold text-red-300" role="alert">
+                    <p className="rounded-xl border border-[#DC2626] bg-[#FEE2E2] px-4 py-2.5 text-sm font-semibold text-[#DC2626]" role="alert">
                       {submitError}
                     </p>
                   )}
 
-                  <div className="flex items-center justify-between rounded-xl border border-white/10 bg-white/[0.03] px-4 py-3">
+                  <div className="flex items-center justify-between rounded-xl border border-[#E5E7EB] bg-[#F7F7F5] px-4 py-3">
                     <div className="text-sm">
-                      <p className="font-bold leading-none text-white">{selectedOffer?.label ?? firstOffer.label}</p>
+                      <p className="font-bold leading-none text-[#111827]">{selectedOffer?.label ?? firstOffer.label}</p>
                       {(selectedOffer?.sublabel ?? firstOffer.sublabel) && (
-                        <p className="mt-0.5 text-xs text-white/45">
+                        <p className="mt-0.5 text-xs text-[#6B7280]">
                           {selectedOffer?.sublabel ?? firstOffer.sublabel}
                         </p>
                       )}
                     </div>
                     <div className="text-end">
-                      <p className="text-lg font-extrabold leading-none text-transparent bg-gradient-to-l from-orange-400 to-amber-300 bg-clip-text">
+                      <p className="text-lg font-extrabold leading-none text-[#1A73E8]">
                         {selectedOffer?.price ?? firstOffer.price}{' '}
-                        <span className="text-sm font-semibold text-white/50">{CURRENCY}</span>
+                        <span className="text-sm font-semibold text-[#6B7280]">{CURRENCY}</span>
                       </p>
                       {(selectedOffer?.compareAt ?? firstOffer.compareAt) && (
-                        <p className="mt-0.5 text-[0.65rem] text-white/30 line-through">
+                        <p className="mt-0.5 text-[0.65rem] text-[#6B7280] line-through">
                           {selectedOffer?.compareAt ?? firstOffer.compareAt} {CURRENCY}
                         </p>
                       )}
@@ -512,7 +512,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
                     href={whatsappHref}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-400/30 bg-emerald-500/10 px-4 py-2.5 text-sm font-extrabold text-emerald-200 transition-colors hover:bg-emerald-500/15"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl border border-[#16A34A]/35 bg-[#16A34A]/10 px-4 py-2.5 text-sm font-extrabold text-[#166534] transition-colors hover:bg-[#16A34A]/15"
                   >
                     <Icon name="whatsapp" size={18} />
                     <span>تواصل واتساب</span>
@@ -521,7 +521,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
                   <button
                     type="submit"
                     disabled={!isAvailable || submitting}
-                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-l from-orange-500 to-red-600 py-4 text-lg font-black text-white shadow-[0_10px_35px_-8px_rgba(249,115,22,0.55)] transition-transform hover:scale-[1.01] disabled:opacity-50 disabled:hover:scale-100 animate-cta-pulse"
+                    className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#1A73E8] py-4 text-lg font-black text-white shadow-[0_10px_35px_-8px_rgba(26,115,232,0.5)] transition-all hover:scale-[1.01] hover:bg-[#1558B0] disabled:opacity-50 disabled:hover:scale-100 animate-cta-pulse"
                   >
                     {submitting ? (
                       <>
@@ -537,21 +537,21 @@ export default function CarChargerHero({ product }: { product: Product }) {
                   </button>
 
                   <div className="grid grid-cols-3 gap-1.5">
-                    <div className="flex flex-col items-center gap-1 rounded-xl border border-emerald-400/20 bg-emerald-400/[0.06] px-1 py-2.5 text-center">
-                      <Icon name="wallet" size={16} className="text-emerald-300" />
-                      <p className="text-[0.6rem] font-bold leading-tight text-emerald-300">دفع عند الاستلام</p>
+                    <div className="flex flex-col items-center gap-1 rounded-xl border border-[#16A34A]/20 bg-[#16A34A]/10 px-1 py-2.5 text-center">
+                      <Icon name="wallet" size={16} className="text-[#16A34A]" />
+                      <p className="text-[0.6rem] font-bold leading-tight text-[#166534]">دفع عند الاستلام</p>
                     </div>
-                    <div className="flex flex-col items-center gap-1 rounded-xl border border-emerald-400/20 bg-emerald-400/[0.06] px-1 py-2.5 text-center">
-                      <Icon name="truck" size={16} className="text-emerald-300" />
-                      <p className="text-[0.6rem] font-bold leading-tight text-emerald-300">توصيل مجاني</p>
+                    <div className="flex flex-col items-center gap-1 rounded-xl border border-[#16A34A]/20 bg-[#16A34A]/10 px-1 py-2.5 text-center">
+                      <Icon name="truck" size={16} className="text-[#16A34A]" />
+                      <p className="text-[0.6rem] font-bold leading-tight text-[#166534]">توصيل مجاني</p>
                     </div>
-                    <div className="flex flex-col items-center gap-1 rounded-xl border border-emerald-400/20 bg-emerald-400/[0.06] px-1 py-2.5 text-center">
-                      <Icon name="refresh" size={16} className="text-emerald-300" />
-                      <p className="text-[0.6rem] font-bold leading-tight text-emerald-300">استرجاع مضمون</p>
+                    <div className="flex flex-col items-center gap-1 rounded-xl border border-[#16A34A]/20 bg-[#16A34A]/10 px-1 py-2.5 text-center">
+                      <Icon name="refresh" size={16} className="text-[#16A34A]" />
+                      <p className="text-[0.6rem] font-bold leading-tight text-[#166534]">استرجاع مضمون</p>
                     </div>
                   </div>
 
-                  <p className="flex items-center justify-center gap-1 pt-0.5 text-center text-xs text-white/35">
+                  <p className="flex items-center justify-center gap-1 pt-0.5 text-center text-xs text-[#6B7280]">
                     <Icon name="lock" size={12} className="shrink-0" />
                     بياناتك آمنة — لن نشاركها مع أي طرف
                   </p>
@@ -568,7 +568,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
 
       {/* Sticky CTA */}
       <div
-        className={`fixed inset-x-0 bottom-0 z-40 border-t border-white/10 bg-[#05070d]/95 backdrop-blur transition-transform duration-300 ${
+        className={`fixed inset-x-0 bottom-0 z-40 border-t border-[#E5E7EB] bg-[#FFFFFF]/95 backdrop-blur transition-transform duration-300 ${
           showSticky ? 'translate-y-0' : 'translate-y-full'
         }`}
         aria-hidden={!showSticky}
@@ -578,7 +578,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
             type="button"
             onClick={handleStickyClick}
             disabled={!isAvailable}
-            className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-l from-orange-500 to-red-600 py-3.5 text-sm font-extrabold text-white shadow-lg disabled:opacity-50 md:hidden animate-cta-pulse"
+            className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#1A73E8] py-3.5 text-sm font-extrabold text-white shadow-lg transition-colors hover:bg-[#1558B0] disabled:opacity-50 md:hidden animate-cta-pulse"
           >
             <Icon name="arrow-up" size={18} />
             {isAvailable ? `اطلب دابا — ${firstOffer.price} ${CURRENCY}` : 'غير متوفر حالياً'}
@@ -586,7 +586,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
 
           <div dir="rtl" className="mx-auto hidden w-full max-w-3xl items-center gap-3 md:flex">
             <div className="flex min-w-0 max-w-[11rem] shrink-0 items-center gap-2.5">
-              <div className="h-11 w-11 shrink-0 overflow-hidden rounded-lg border border-white/10 bg-[#0b1120]">
+              <div className="h-11 w-11 shrink-0 overflow-hidden rounded-lg border border-[#E5E7EB] bg-[#EAF2FF]">
                 <ProductImage
                   src={galleryImages[0] ?? product.image}
                   alt={product.nameAr}
@@ -595,16 +595,16 @@ export default function CarChargerHero({ product }: { product: Product }) {
                   fit="cover"
                 />
               </div>
-              <p className="truncate text-sm font-bold text-white">{product.nameAr}</p>
+              <p className="truncate text-sm font-bold text-[#111827]">{product.nameAr}</p>
             </div>
-            <p className="shrink-0 text-lg font-extrabold text-transparent bg-gradient-to-l from-orange-400 to-amber-300 bg-clip-text">
+            <p className="shrink-0 text-lg font-extrabold text-[#1A73E8]">
               {firstOffer.price} {CURRENCY}
             </p>
             <button
               type="button"
               onClick={handleStickyClick}
               disabled={!isAvailable}
-              className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-gradient-to-l from-orange-500 to-red-600 py-3 font-extrabold text-white shadow-lg disabled:opacity-50 animate-cta-pulse"
+              className="flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#1A73E8] py-3 font-extrabold text-white shadow-lg transition-colors hover:bg-[#1558B0] disabled:opacity-50 animate-cta-pulse"
             >
               <Icon name="lock" size={18} />
               {isAvailable ? 'اطلب الآن' : 'غير متوفر حالياً'}

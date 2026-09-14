@@ -29,9 +29,9 @@ export default function CarChargerPage({ product }: { product: Product }) {
         <meta name="description" content={product.metaDescription} />
         <meta property="og:title" content={`${product.nameAr} | بويا شوب`} />
         <meta property="og:description" content={product.metaDescription} />
-        <meta name="theme-color" content="#05070d" />
+        <meta name="theme-color" content="#F7F7F5" />
       </Head>
-      <div className="car-charger-page relative bg-[#05070d]">
+      <div className="car-charger-page relative bg-[#F7F7F5] text-[#111827]">
         <Header />
         <main>
           <CarChargerHero product={product} />
