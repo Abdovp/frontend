@@ -31,9 +31,17 @@ function applyVariantPricing(variant: 'a' | 'b') {
   };
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ req, res }) => {
+export const getServerSideProps: GetServerSideProps = async ({ req, res, query }) => {
+  const queryVariant = typeof query.ab === 'string' ? query.ab : undefined;
   const existing = req.cookies[AB_COOKIE];
-  const variant = existing === 'a' || existing === 'b' ? existing : Math.random() < 0.5 ? 'a' : 'b';
+  const variant =
+    queryVariant === 'a' || queryVariant === 'b'
+      ? queryVariant
+      : existing === 'a' || existing === 'b'
+        ? existing
+        : Math.random() < 0.5
+          ? 'a'
+          : 'b';
 
   res.setHeader('Set-Cookie', `${AB_COOKIE}=${variant}; Path=/; Max-Age=2592000; SameSite=Lax`);
 
