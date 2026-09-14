@@ -27,8 +27,9 @@ export function middleware(request: NextRequest) {
   }
 
   if (pathname === PRICING_EXPERIMENT_PATH) {
+    const forced = readVariant(request.nextUrl.searchParams.get('ab') ?? undefined);
     const existing = readVariant(request.cookies.get(PRICING_EXPERIMENT_COOKIE)?.value);
-    const variant = existing ?? (Math.random() < 0.5 ? 'a' : 'b');
+    const variant = forced ?? existing ?? (Math.random() < 0.5 ? 'a' : 'b');
 
     const response =
       variant === 'b'
