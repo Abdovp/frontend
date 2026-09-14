@@ -247,7 +247,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
                   fallbackLabel={product.galleryLabels[activeImage] ?? product.galleryLabels[0]}
                   fallbackSublabel="صورة المنتج"
                   aspect="square"
-                  fit="cover"
+                  fit="contain"
                   priority
                 />
               </div>
