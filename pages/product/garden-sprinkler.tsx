@@ -7,7 +7,7 @@ import { getCheckoutErrorMessage } from '../../lib/api/order-errors';
 import { trackInitiateCheckout, trackPurchase } from '../../lib/analytics/track';
 import { saveOrderConfirmation } from '../../lib/order-confirmation';
 import { pickUpsellProduct } from '../../lib/upsell';
-import { getProduct, STORE, type Product } from '../../lib/products';
+import { getProduct, isProductAvailable, STORE, type Product } from '../../lib/products';
 import Header from '../../components/Header';
 import Icon from '../../components/ui/Icon';
 import dynamic from 'next/dynamic';
@@ -57,6 +57,7 @@ export default function GardenSprinklerPage() {
 
   if (!product || !upsellCandidate) return null;
 
+  const isAvailable = isProductAvailable(product);
   const currentOffer = product.offers[selectedOffer];
   const whatsappNumber = STORE.whatsapp.replace(/\D/g, '');
   const whatsappMessage = encodeURIComponent('مرحبا! بويا شوب سترد على جميع أسئلتك. كيف يمكنني أساعدك؟');
@@ -75,6 +76,11 @@ export default function GardenSprinklerPage() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!isAvailable) {
+      setSubmitError('هذا المنتج نفد من المخزون حالياً. تواصل معنا عبر واتساب للمزيد من التفاصيل.');
+      return;
+    }
 
     if (!formData.name.trim() || !formData.phone.trim()) {
       return;
@@ -246,10 +252,18 @@ export default function GardenSprinklerPage() {
                   {/* Form Header */}
                   <div className="lawn-gradient px-8 py-5 text-center">
                     <div className="flex items-center justify-center gap-2 text-white/90 text-sm font-bold mb-1">
-                      <span className="w-2 h-2 bg-yellow-300 rounded-full animate-pulse"></span>
-                      <span>🔥 باقي {product.stockLeft} قطع فقط بهذا السعر</span>
+                      {isAvailable ? (
+                        <>
+                          <span className="w-2 h-2 bg-yellow-300 rounded-full animate-pulse"></span>
+                          <span>🔥 باقي {product.stockLeft} قطع فقط بهذا السعر</span>
+                        </>
+                      ) : (
+                        <span>نفد المخزون حالياً</span>
+                      )}
                     </div>
-                    <h3 className="text-2xl font-black text-white">اطلب الآن — الدفع عند الاستلام</h3>
+                    <h3 className="text-2xl font-black text-white">
+                      {isAvailable ? 'اطلب الآن — الدفع عند الاستلام' : 'سنرجّعوه قريباً إن شاء الله'}
+                    </h3>
                   </div>
 
                   <div className="p-6 lg:p-8">
@@ -258,17 +272,18 @@ export default function GardenSprinklerPage() {
                       {product.offers.map((offer, idx) => (
                         <label
                           key={idx}
-                          className={`block cursor-pointer rounded-xl border-2 transition-all ${
+                          className={`block rounded-xl border-2 transition-all ${
                             selectedOffer === idx
                               ? 'border-green-600 bg-green-50 ring-2 ring-green-300'
                               : 'border-gray-200 bg-gray-50 hover:border-green-300'
-                          }`}
+                          } ${isAvailable ? 'cursor-pointer' : 'cursor-not-allowed opacity-60'}`}
                         >
                           <input
                             type="radio"
                             name="offer"
                             checked={selectedOffer === idx}
                             onChange={() => setSelectedOffer(idx)}
+                            disabled={!isAvailable}
                             className="sr-only"
                           />
                           <div className="flex items-center gap-3 p-4" dir="rtl">
@@ -308,17 +323,19 @@ export default function GardenSprinklerPage() {
                       <input
                         type="text"
                         required
+                        disabled={!isAvailable}
                         value={formData.name}
                         onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                        className="w-full px-4 py-3.5 rounded-xl border-2 border-gray-200 focus:border-green-600 focus:ring-4 focus:ring-green-100 focus:outline-none text-right text-gray-900 font-semibold placeholder:text-gray-400 placeholder:font-normal"
+                        className="w-full px-4 py-3.5 rounded-xl border-2 border-gray-200 focus:border-green-600 focus:ring-4 focus:ring-green-100 focus:outline-none text-right text-gray-900 font-semibold placeholder:text-gray-400 placeholder:font-normal disabled:bg-gray-100 disabled:text-gray-500"
                         placeholder="الاسم الكامل"
                       />
                       <input
                         type="tel"
                         required
+                        disabled={!isAvailable}
                         value={formData.phone}
                         onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                        className="w-full px-4 py-3.5 rounded-xl border-2 border-gray-200 focus:border-green-600 focus:ring-4 focus:ring-green-100 focus:outline-none text-right text-gray-900 font-semibold placeholder:text-gray-400 placeholder:font-normal"
+                        className="w-full px-4 py-3.5 rounded-xl border-2 border-gray-200 focus:border-green-600 focus:ring-4 focus:ring-green-100 focus:outline-none text-right text-gray-900 font-semibold placeholder:text-gray-400 placeholder:font-normal disabled:bg-gray-100 disabled:text-gray-500"
                         placeholder="رقم الهاتف"
                       />
 
@@ -334,11 +351,11 @@ export default function GardenSprinklerPage() {
 
                       <button
                         type="submit"
-                        disabled={submitting}
+                        disabled={submitting || !isAvailable}
                         className="w-full lawn-gradient text-white py-5 rounded-xl font-black text-2xl shadow-xl hover:shadow-green-600/40 transition-all transform hover:scale-[1.02] active:scale-[0.98] flex items-center justify-center gap-3 mt-3 disabled:opacity-70 disabled:cursor-not-allowed animate-cta-pulse"
                       >
                         <Icon name="check-circle" size={22} />
-                        <span>{submitting ? 'جاري الإرسال...' : 'اطلب لآن'}</span>
+                        <span>{!isAvailable ? 'نفد المخزون' : submitting ? 'جاري الإرسال...' : 'اطلب الآن'}</span>
                       </button>
 
                       {submitError && (
@@ -805,16 +822,17 @@ export default function GardenSprinklerPage() {
         <section className="py-12 bg-white text-center">
           <button
             type="button"
-            onClick={scrollToOrderForm}
-            className="inline-flex items-center gap-3 lawn-gradient text-white px-10 py-5 rounded-full font-black text-xl hover:shadow-2xl transition-all shadow-lg transform hover:scale-105"
+            onClick={isAvailable ? scrollToOrderForm : undefined}
+            disabled={!isAvailable}
+            className="inline-flex items-center gap-3 lawn-gradient text-white px-10 py-5 rounded-full font-black text-xl hover:shadow-2xl transition-all shadow-lg transform hover:scale-105 disabled:cursor-not-allowed disabled:opacity-60 disabled:transform-none"
           >
             <Icon name="cart" size={20} />
-            <span>اطلب الآن</span>
+            <span>{isAvailable ? 'اطلب الآن' : 'نفد المخزون'}</span>
           </button>
         </section>
 
         {/* Sticky Bottom CTA */}
-        {showStickyBar && (
+        {showStickyBar && isAvailable && (
           <div className="fixed bottom-0 left-0 right-0 lawn-gradient text-white py-4 px-4 shadow-2xl z-50">
             <div className="container mx-auto flex items-center justify-center">
               <button

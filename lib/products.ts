@@ -808,7 +808,7 @@ export const products: Record<ProductId, Product> = {
     unit: 'رشاش',
     soldText: 'تباع +500 رشاش هاد الشهر',
     scarcityText: 'المخزون محدود!',
-    stockLeft: 15,
+    stockLeft: 0,
     deliveryDays: 'الأحد أو الإثنين',
     checkoutHeadline: 'رشاش قوي لحديقة خضراء ومزدهرة',
     checkoutDescription: 'رشاش دوار 360 درجة مع 3 أذرع قابلة للتعديل لسقي واسع ومتساوي',
