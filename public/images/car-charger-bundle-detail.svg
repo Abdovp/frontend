@@ -1,0 +1,45 @@
+<svg width="1200" height="1200" viewBox="0 0 1200 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="140" y1="130" x2="1060" y2="1070" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF"/>
+      <stop offset="1" stop-color="#EEF5FF"/>
+    </linearGradient>
+    <linearGradient id="blue" x1="260" y1="250" x2="950" y2="950" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1663D6"/>
+      <stop offset="1" stop-color="#18A0FB"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="280" y1="860" x2="940" y2="340" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E39A1C"/>
+      <stop offset="1" stop-color="#F5B84B"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="1200" rx="80" fill="url(#bg)"/>
+  <rect x="170" y="180" width="860" height="840" rx="64" fill="#FFFFFF" stroke="#D7E5F7" stroke-width="6"/>
+
+  <g transform="translate(246 244)">
+    <rect x="0" y="0" width="300" height="496" rx="40" fill="#0F172A" stroke="#334155" stroke-width="6"/>
+    <path d="M70 120H230" stroke="url(#blue)" stroke-width="26" stroke-linecap="round"/>
+    <path d="M70 200H190" stroke="#EAF6FF" stroke-width="10" stroke-linecap="round" opacity="0.75"/>
+    <rect x="58" y="308" width="184" height="96" rx="24" fill="#18A0FB" fill-opacity="0.12" stroke="#18A0FB" stroke-opacity="0.35" stroke-width="4"/>
+    <text x="150" y="365" fill="#EAF6FF" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" text-anchor="middle">4 in 1</text>
+    <circle cx="240" cy="84" r="28" fill="#E39A1C" fill-opacity="0.18" stroke="#E39A1C" stroke-opacity="0.5" stroke-width="4"/>
+    <text x="240" y="92" fill="#B45309" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" text-anchor="middle">CAR</text>
+  </g>
+
+  <g transform="translate(634 276)">
+    <rect x="0" y="0" width="320" height="430" rx="40" fill="#0B1524" stroke="#334155" stroke-width="6"/>
+    <path d="M68 108H248" stroke="url(#gold)" stroke-width="28" stroke-linecap="round"/>
+    <path d="M68 220C126 160 194 160 252 220" stroke="#18A0FB" stroke-width="20" stroke-linecap="round"/>
+    <rect x="86" y="244" width="148" height="112" rx="26" fill="#EAF6FF" fill-opacity="0.12" stroke="#18A0FB" stroke-opacity="0.35" stroke-width="4"/>
+    <text x="160" y="308" fill="#EAF6FF" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" text-anchor="middle">Stand</text>
+  </g>
+
+  <path d="M258 842C390 742 480 692 590 630C684 578 760 520 816 438C872 356 918 298 984 258" stroke="#1663D6" stroke-width="30" stroke-linecap="round"/>
+  <path d="M258 842C390 742 480 692 590 630C684 578 760 520 816 438C872 356 918 298 984 258" stroke="#EAF6FF" stroke-opacity="0.42" stroke-width="4" stroke-dasharray="2 14" stroke-linecap="round"/>
+
+  <rect x="320" y="848" width="180" height="74" rx="22" fill="#1663D6" fill-opacity="0.12" stroke="#1663D6" stroke-opacity="0.4" stroke-width="4"/>
+  <text x="410" y="894" fill="#1663D6" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" text-anchor="middle">Data</text>
+  <rect x="724" y="828" width="230" height="102" rx="26" fill="#E39A1C" fill-opacity="0.12" stroke="#E39A1C" stroke-opacity="0.42" stroke-width="4"/>
+  <text x="839" y="868" fill="#B45309" font-family="Inter, Arial, sans-serif" font-size="22" font-weight="800" text-anchor="middle">Together</text>
+  <text x="839" y="896" fill="#475569" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700" text-anchor="middle">in one pack</text>
+</svg>

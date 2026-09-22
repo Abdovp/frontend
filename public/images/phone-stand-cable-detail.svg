@@ -1,0 +1,59 @@
+<svg width="1200" height="1200" viewBox="0 0 1200 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="120" y1="120" x2="1080" y2="1080" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F8FBFF"/>
+      <stop offset="1" stop-color="#DDF2FF"/>
+    </linearGradient>
+    <linearGradient id="panel" x1="280" y1="228" x2="920" y2="972" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0B1730"/>
+      <stop offset="1" stop-color="#142649"/>
+    </linearGradient>
+    <linearGradient id="cable" x1="260" y1="690" x2="940" y2="450" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#18A0FB"/>
+      <stop offset="1" stop-color="#7DD3FC"/>
+    </linearGradient>
+    <filter id="blur" x="0" y="0" width="1200" height="1200" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="70"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="1200" rx="80" fill="url(#bg)"/>
+  <circle cx="260" cy="240" r="180" fill="#18A0FB" fill-opacity="0.14" filter="url(#blur)"/>
+  <circle cx="960" cy="900" r="240" fill="#7C3AED" fill-opacity="0.12" filter="url(#blur)"/>
+
+  <rect x="180" y="180" width="840" height="840" rx="64" fill="#FFFFFF" stroke="#D7E7F5" stroke-width="6"/>
+  <rect x="246" y="246" width="708" height="708" rx="48" fill="url(#panel)"/>
+
+  <path d="M330 742C430 656 476 610 540 560C618 497 674 434 724 350C758 292 792 258 858 224" stroke="url(#cable)" stroke-width="30" stroke-linecap="round"/>
+  <path d="M322 756C410 684 470 622 526 568C598 499 658 436 702 368C744 303 780 268 850 228" stroke="#EAF6FF" stroke-opacity="0.25" stroke-width="5" stroke-linecap="round" stroke-dasharray="2 14"/>
+
+  <g transform="translate(338 336)">
+    <rect x="0" y="0" width="324" height="444" rx="40" fill="#0A1324" stroke="#2C3B57" stroke-width="8"/>
+    <rect x="36" y="40" width="252" height="316" rx="28" fill="#0F172A"/>
+    <rect x="76" y="374" width="172" height="16" rx="8" fill="#334155"/>
+    <path d="M114 174H232" stroke="#18A0FB" stroke-width="10" stroke-linecap="round"/>
+    <path d="M154 144V204" stroke="#EAF6FF" stroke-width="8" stroke-linecap="round" opacity="0.85"/>
+    <circle cx="258" cy="98" r="28" fill="#18A0FB" fill-opacity="0.18" stroke="#18A0FB" stroke-opacity="0.5" stroke-width="4"/>
+    <text x="258" y="106" fill="#EAF6FF" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" text-anchor="middle">240</text>
+  </g>
+
+  <g transform="translate(692 308)">
+    <rect x="0" y="0" width="176" height="176" rx="36" fill="#18A0FB" fill-opacity="0.16" stroke="#18A0FB" stroke-opacity="0.45" stroke-width="4"/>
+    <path d="M44 88H132" stroke="#18A0FB" stroke-width="12" stroke-linecap="round"/>
+    <path d="M72 60V116" stroke="#EAF6FF" stroke-width="10" stroke-linecap="round"/>
+    <text x="88" y="146" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="800" text-anchor="middle">Data</text>
+  </g>
+
+  <g transform="translate(702 576)">
+    <rect x="0" y="0" width="192" height="192" rx="36" fill="#0B1730" stroke="#3B82F6" stroke-opacity="0.35" stroke-width="4"/>
+    <path d="M42 92H150" stroke="#7DD3FC" stroke-width="10" stroke-linecap="round"/>
+    <path d="M92 42V140" stroke="#EAF6FF" stroke-width="10" stroke-linecap="round" opacity="0.9"/>
+    <path d="M56 138C66 116 92 100 118 100C136 100 148 108 156 120" stroke="#18A0FB" stroke-width="6" stroke-linecap="round" stroke-dasharray="8 12"/>
+  </g>
+
+  <g transform="translate(282 768)">
+    <rect x="0" y="0" width="286" height="112" rx="28" fill="#FFFFFF" stroke="#D7E7F5" stroke-width="4"/>
+    <text x="48" y="70" fill="#0F172A" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="800">Foldable stand</text>
+    <circle cx="244" cy="56" r="28" fill="#18A0FB" fill-opacity="0.16" stroke="#18A0FB" stroke-opacity="0.5" stroke-width="4"/>
+    <path d="M228 56H260M244 40V72" stroke="#18A0FB" stroke-width="6" stroke-linecap="round"/>
+  </g>
+</svg>

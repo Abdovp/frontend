@@ -1,0 +1,88 @@
+<svg width="1200" height="1200" viewBox="0 0 1200 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="146" y1="116" x2="1060" y2="1084" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#07111F"/>
+      <stop offset="1" stop-color="#0F2740"/>
+    </linearGradient>
+    <linearGradient id="glowA" x1="183" y1="204" x2="1030" y2="1040" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#18A0FB" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#18A0FB" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="glowB" x1="798" y1="140" x2="349" y2="1040" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8B5CF6" stop-opacity="0.85"/>
+      <stop offset="1" stop-color="#8B5CF6" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="cable" x1="198" y1="874" x2="1012" y2="442" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#EAF6FF"/>
+      <stop offset="1" stop-color="#7DD3FC"/>
+    </linearGradient>
+    <linearGradient id="phone" x1="462" y1="271" x2="774" y2="922" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#18263C"/>
+      <stop offset="1" stop-color="#0B1524"/>
+    </linearGradient>
+    <filter id="blur" x="0" y="0" width="1200" height="1200" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="75"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="1200" rx="80" fill="url(#bg)"/>
+  <circle cx="300" cy="280" r="190" fill="url(#glowA)" filter="url(#blur)"/>
+  <circle cx="920" cy="260" r="180" fill="url(#glowB)" filter="url(#blur)"/>
+  <circle cx="930" cy="920" r="240" fill="#18A0FB" fill-opacity="0.18" filter="url(#blur)"/>
+
+  <g opacity="0.13">
+    <path d="M120 180H1080" stroke="#FFFFFF" stroke-width="1.5"/>
+    <path d="M120 300H1080" stroke="#FFFFFF" stroke-width="1.5"/>
+    <path d="M120 420H1080" stroke="#FFFFFF" stroke-width="1.5"/>
+    <path d="M120 540H1080" stroke="#FFFFFF" stroke-width="1.5"/>
+    <path d="M120 660H1080" stroke="#FFFFFF" stroke-width="1.5"/>
+    <path d="M120 780H1080" stroke="#FFFFFF" stroke-width="1.5"/>
+    <path d="M120 900H1080" stroke="#FFFFFF" stroke-width="1.5"/>
+    <path d="M180 120V1080" stroke="#FFFFFF" stroke-width="1.5"/>
+    <path d="M320 120V1080" stroke="#FFFFFF" stroke-width="1.5"/>
+    <path d="M460 120V1080" stroke="#FFFFFF" stroke-width="1.5"/>
+    <path d="M600 120V1080" stroke="#FFFFFF" stroke-width="1.5"/>
+    <path d="M740 120V1080" stroke="#FFFFFF" stroke-width="1.5"/>
+    <path d="M880 120V1080" stroke="#FFFFFF" stroke-width="1.5"/>
+    <path d="M1020 120V1080" stroke="#FFFFFF" stroke-width="1.5"/>
+  </g>
+
+  <g filter="url(#blur)" opacity="0.45">
+    <path d="M316 854C420 760 482 704 552 646C632 579 686 512 726 420C765 331 822 256 902 214" stroke="#18A0FB" stroke-width="56" stroke-linecap="round"/>
+  </g>
+
+  <path d="M318 854C422 760 484 704 554 646C634 579 688 512 728 420C767 331 824 256 904 214" stroke="url(#cable)" stroke-width="32" stroke-linecap="round"/>
+  <path d="M291 874C345 854 362 830 389 800C435 747 487 716 548 675C623 625 667 570 705 499C744 428 782 353 846 286C873 258 892 243 920 230" stroke="#EAF6FF" stroke-opacity="0.45" stroke-width="4" stroke-linecap="round" stroke-dasharray="2 14"/>
+
+  <g transform="translate(430 190)">
+    <rect x="0" y="0" width="340" height="610" rx="52" fill="url(#phone)" stroke="#334155" stroke-width="8"/>
+    <rect x="42" y="58" width="256" height="420" rx="30" fill="#0B1220" stroke="#1E293B" stroke-width="4"/>
+    <rect x="104" y="506" width="132" height="18" rx="9" fill="#334155"/>
+    <circle cx="170" cy="36" r="10" fill="#334155"/>
+    <rect x="214" y="86" width="60" height="182" rx="30" fill="#18A0FB" fill-opacity="0.14" stroke="#18A0FB" stroke-opacity="0.3"/>
+    <path d="M214 168C231 157 246 148 264 148C282 148 293 157 293 168C293 189 265 203 248 210C232 203 214 190 214 168Z" fill="#18A0FB" fill-opacity="0.65"/>
+    <path d="M242 228C259 219 276 216 295 217" stroke="#18A0FB" stroke-width="5" stroke-linecap="round" stroke-opacity="0.7"/>
+    <path d="M70 120H170" stroke="#7DD3FC" stroke-width="7" stroke-linecap="round" opacity="0.9"/>
+    <path d="M70 150H144" stroke="#EAF6FF" stroke-width="7" stroke-linecap="round" opacity="0.6"/>
+  </g>
+
+  <g transform="translate(308 730)">
+    <rect x="0" y="0" width="140" height="140" rx="28" fill="#0B1524" stroke="#334155" stroke-width="6"/>
+    <path d="M23 72C48 44 78 28 111 24" stroke="#18A0FB" stroke-width="12" stroke-linecap="round"/>
+    <path d="M38 102C54 84 68 74 93 70" stroke="#EAF6FF" stroke-width="9" stroke-linecap="round" opacity="0.7"/>
+    <circle cx="105" cy="42" r="12" fill="#18A0FB"/>
+  </g>
+
+  <g transform="translate(760 720)">
+    <rect x="0" y="0" width="230" height="164" rx="32" fill="#0B1524" stroke="#334155" stroke-width="6"/>
+    <rect x="34" y="34" width="162" height="96" rx="24" fill="#18A0FB" fill-opacity="0.13" stroke="#18A0FB" stroke-opacity="0.4"/>
+    <path d="M58 82H172" stroke="#7DD3FC" stroke-width="10" stroke-linecap="round"/>
+    <path d="M92 58V106" stroke="#EAF6FF" stroke-width="8" stroke-linecap="round" opacity="0.8"/>
+    <rect x="154" y="56" width="24" height="52" rx="12" fill="#EAF6FF" fill-opacity="0.3"/>
+  </g>
+
+  <g transform="translate(782 186)">
+    <rect x="0" y="0" width="176" height="176" rx="44" fill="#18A0FB" fill-opacity="0.14" stroke="#18A0FB" stroke-opacity="0.5" stroke-width="4"/>
+    <text x="88" y="95" fill="#EAF6FF" font-family="Inter, Arial, sans-serif" font-size="34" font-weight="800" text-anchor="middle">240W</text>
+    <text x="88" y="128" fill="#7DD3FC" font-family="Inter, Arial, sans-serif" font-size="16" font-weight="700" text-anchor="middle">MAX</text>
+  </g>
+</svg>

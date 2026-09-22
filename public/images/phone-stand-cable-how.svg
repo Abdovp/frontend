@@ -1,0 +1,46 @@
+<svg width="1200" height="1200" viewBox="0 0 1200 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="186" y1="144" x2="1014" y2="1056" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#07111F"/>
+      <stop offset="1" stop-color="#0E1B31"/>
+    </linearGradient>
+    <linearGradient id="card" x1="248" y1="238" x2="944" y2="962" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F1F39"/>
+      <stop offset="1" stop-color="#182B4B"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="306" y1="784" x2="908" y2="420" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#18A0FB"/>
+      <stop offset="1" stop-color="#7DD3FC"/>
+    </linearGradient>
+    <filter id="blur" x="0" y="0" width="1200" height="1200" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="65"/>
+    </filter>
+  </defs>
+  <rect width="1200" height="1200" rx="80" fill="url(#bg)"/>
+  <circle cx="230" cy="250" r="180" fill="#18A0FB" fill-opacity="0.14" filter="url(#blur)"/>
+  <circle cx="970" cy="930" r="250" fill="#7C3AED" fill-opacity="0.11" filter="url(#blur)"/>
+
+  <rect x="190" y="190" width="820" height="820" rx="64" fill="#FFFFFF" fill-opacity="0.05" stroke="#FFFFFF" stroke-opacity="0.1" stroke-width="4"/>
+  <rect x="258" y="258" width="684" height="684" rx="48" fill="url(#card)"/>
+
+  <g transform="translate(334 332)">
+    <rect x="0" y="0" width="532" height="172" rx="36" fill="#0A1324" stroke="#2B3C59" stroke-width="6"/>
+    <path d="M86 86H442" stroke="url(#accent)" stroke-width="26" stroke-linecap="round"/>
+    <circle cx="86" cy="86" r="36" fill="#18A0FB" fill-opacity="0.2" stroke="#18A0FB" stroke-opacity="0.55" stroke-width="4"/>
+    <circle cx="442" cy="86" r="36" fill="#18A0FB" fill-opacity="0.18" stroke="#18A0FB" stroke-opacity="0.5" stroke-width="4"/>
+    <text x="264" y="112" fill="#EAF6FF" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="800" text-anchor="middle">USB-C</text>
+  </g>
+
+  <g transform="translate(338 548)">
+    <rect x="0" y="0" width="524" height="250" rx="36" fill="#0A1324" stroke="#2B3C59" stroke-width="6"/>
+    <path d="M84 124C150 76 214 76 258 124C302 172 370 172 438 124" stroke="url(#accent)" stroke-width="22" stroke-linecap="round"/>
+    <path d="M84 124C150 76 214 76 258 124C302 172 370 172 438 124" stroke="#EAF6FF" stroke-opacity="0.18" stroke-width="4" stroke-dasharray="2 12" stroke-linecap="round"/>
+    <rect x="192" y="54" width="140" height="104" rx="24" fill="#18A0FB" fill-opacity="0.12" stroke="#18A0FB" stroke-opacity="0.4" stroke-width="4"/>
+    <text x="262" y="118" fill="#EAF6FF" font-family="Inter, Arial, sans-serif" font-size="24" font-weight="800" text-anchor="middle">Fold</text>
+  </g>
+
+  <g transform="translate(362 826)">
+    <rect x="0" y="0" width="476" height="92" rx="26" fill="#FFFFFF" fill-opacity="0.1" stroke="#FFFFFF" stroke-opacity="0.12" stroke-width="2"/>
+    <text x="48" y="58" fill="#EAF6FF" font-family="Inter, Arial, sans-serif" font-size="26" font-weight="800">Stand + Sync + Charge</text>
+  </g>
+</svg>
