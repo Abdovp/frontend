@@ -681,7 +681,7 @@ function BundleHero({ product }: { product: Product }) {
         </div>
       )}
 
-      {upsellProduct && <UpsellPopup product={upsellProduct} onAccept={handleUpsellAdded} onClose={handleUpsellClose} />}
+      {upsellProduct && <UpsellPopup product={upsellProduct} onAdded={handleUpsellAdded} onClose={handleUpsellClose} />}
     </section>
   );
 }
