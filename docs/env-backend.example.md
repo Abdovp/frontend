@@ -15,6 +15,13 @@ CORS_ORIGINS=https://boyashop.store,https://www.boyashop.store,http://localhost:
 
 GOOGLE_SHEETS_WEBHOOK_URL=
 
+# Customer WhatsApp notification after an order is created.
+# Required only when WHATSAPP_ENABLED=true.
+WHATSAPP_ENABLED=false
+WHATSAPP_TOKEN=
+WHATSAPP_PHONE_NUMBER_ID=
+WHATSAPP_API_VERSION=v20.0
+
 META_PIXEL_ID=
 META_ACCESS_TOKEN=
 META_API_VERSION=v20.0
