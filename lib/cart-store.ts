@@ -27,7 +27,7 @@ interface CartStore {
 
 export const useCartStore = create<CartStore>((set, get) => ({
   items: [],
-  selectedOffers: {},
+  selectedOffers: { 'car-charger': 2 },
   isOpen: false,
 
   openCart: () => set({ isOpen: true }),
