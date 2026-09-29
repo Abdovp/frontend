@@ -1280,8 +1280,12 @@ export const products: Record<ProductId, Product> = {
       },
     ],
     galleryLabels: ['الذراع العام', 'الحامل', 'الUSB', 'التخزين', 'داخل السيارة'],
-    galleryImages: ['/images/armrest-hero.webp', '/images/armrest-hero.webp', '/images/armrest-hero.webp'],
-    image: '/images/armrest-hero.webp',
+    galleryImages: [
+      '/images/armrest-hero.webp?v=2026-09-29',
+      '/images/armrest-hero.webp?v=2026-09-29',
+      '/images/armrest-hero.webp?v=2026-09-29',
+    ],
+    image: '/images/armrest-hero.webp?v=2026-09-29',
     howToUse: {
       title: 'كيفاش تستعمل الذراع',
       steps: [
@@ -1309,7 +1313,7 @@ export const products: Record<ProductId, Product> = {
         'الترتيب الداخلي كيتأثر ف كل رحلة',
       ],
       imageLabel: 'إزعاج المقعد اليومي',
-      image: '/images/armrest-problem.webp',
+      image: '/images/armrest-problem.webp?v=2026-09-29',
     },
     logic: {
       eyebrow: 'الحل',
@@ -1322,7 +1326,7 @@ export const products: Record<ProductId, Product> = {
         'تخزين داخلي للملحقات الصغيرة',
       ],
       imageLabel: 'الذراع أثناء الاستعمال',
-      image: '/images/armrest-solution.webp',
+      image: '/images/armrest-solution.webp?v=2026-09-29',
     },
     proof: {
       eyebrow: 'إثبات',
