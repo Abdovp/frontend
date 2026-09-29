@@ -87,7 +87,7 @@ export default function ProductImage({
         unoptimized={isGif}
         placeholder={isGif ? 'empty' : 'blur'}
         blurDataURL={isGif ? undefined : BLUR_PLACEHOLDER}
-        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 400px"
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 360px"
         className={`${fitClass} ${imageClassName}`.trim()}
       />
     </div>
