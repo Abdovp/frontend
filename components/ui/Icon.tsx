@@ -40,7 +40,8 @@ export type IconName =
   | 'cable'
   | 'battery'
   | 'rotate'
-  | 'cpu';
+  | 'cpu'
+  | 'usb';
 
 interface IconProps extends SVGProps<SVGSVGElement> {
   name: IconName;
@@ -224,6 +225,12 @@ const paths: Record<IconName, ReactElement> = {
     <>
       <rect x="7" y="7" width="10" height="10" rx="2" />
       <path d="M9 3v4M15 3v4M9 17v4M15 17v4M3 9h4M3 15h4M17 9h4M17 15h4" />
+    </>
+  ),
+  usb: (
+    <>
+      <path d="M8 7h8v4h3v5a2 2 0 01-2 2h-1a2 2 0 01-2-2v-5H8v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5h3V7zm4 0V3m-2 4h4" />
+      <path d="M7 14h10" />
     </>
   ),
 };

@@ -2,17 +2,6 @@ import Icon from '../ui/Icon';
 import ProductImage from '../ui/ProductImage';
 import type { Product } from '../../lib/products';
 
-const SPECS = [
-  { icon: 'zap' as const, label: 'القوة الإجمالية', value: '120 واط (Max)' },
-  { icon: 'cpu' as const, label: 'منفذ PD', value: '3A — شحن فائق السرعة' },
-  { icon: 'cable' as const, label: 'منفذ USB', value: '2.4A' },
-  { icon: 'rotate' as const, label: 'طول الكابلات', value: '80 سم قابل للسحب' },
-  { icon: 'battery' as const, label: 'مراقبة الفولطاج', value: 'شاشة LED رقمية حية' },
-  { icon: 'settings' as const, label: 'زاوية الرأس', value: 'دوران 180 درجة' },
-  { icon: 'shield' as const, label: 'الحماية', value: '6 طبقات أمان ذكية' },
-  { icon: 'check-circle' as const, label: 'التوافق', value: '12V–24V كل السيارات' },
-];
-
 export default function CarChargerSolution({ product }: { product: Product }) {
   const { logic } = product;
   const imageSrc = logic.image ?? product.image;
@@ -65,26 +54,6 @@ export default function CarChargerSolution({ product }: { product: Product }) {
           </div>
         </div>
 
-        {/* Tech specs table */}
-        <div className="mt-14 md:mt-20">
-          <h3 dir="rtl" className="mb-6 text-center font-heading text-xl font-extrabold text-[#111827] md:text-2xl">
-            المواصفات التقنية الكاملة
-          </h3>
-          <div dir="rtl" className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
-            {SPECS.map((spec) => (
-              <div
-                key={spec.label}
-                className="rounded-2xl border border-[#E5E7EB] bg-[#FFFFFF] p-4 text-center transition-colors hover:border-[#1663D6]/35"
-              >
-                <span className="mx-auto mb-2 flex h-10 w-10 items-center justify-center rounded-xl bg-[#EAF2FF] text-[#1663D6]">
-                  <Icon name={spec.icon} size={19} />
-                </span>
-                <p className="text-[0.7rem] font-semibold text-[#6B7280]">{spec.label}</p>
-                <p className="mt-0.5 text-sm font-extrabold text-[#111827]">{spec.value}</p>
-              </div>
-            ))}
-          </div>
-        </div>
       </div>
     </section>
   );
