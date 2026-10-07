@@ -2,7 +2,9 @@ import Icon from '../ui/Icon';
 import type { Product } from '../../lib/products';
 
 export default function CarChargerHowTo({ product }: { product: Product }) {
-  const { howToUse } = product;
+  const { howToUse, pain } = product;
+  const imageSrc = howToUse.image || pain.image;
+  const imageAlt = howToUse.imageLabel ?? pain.imageLabel ?? howToUse.title;
 
   return (
     <section className="relative overflow-hidden bg-[#F1F3F5] py-14 md:py-20">
@@ -11,9 +13,9 @@ export default function CarChargerHowTo({ product }: { product: Product }) {
           {howToUse.title}
         </h2>
 
-        {howToUse.image && (
+        {imageSrc && (
           <div className="relative mb-10 overflow-hidden rounded-[2rem] border border-[#E5E7EB] shadow-2xl">
-            <img src={howToUse.image} alt={howToUse.imageLabel ?? howToUse.title} className="block h-auto w-full" />
+            <img src={imageSrc} alt={imageAlt} className="block h-auto w-full" />
           </div>
         )}
 
