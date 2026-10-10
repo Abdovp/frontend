@@ -5,8 +5,9 @@ import Footer from '../Footer';
 import WhatsAppFloat from '../ui/WhatsAppFloat';
 import { trackViewContent } from '../../lib/analytics/track';
 import CarChargerHero from '../car-charger/CarChargerHero';
-import CarChargerHowTo from '../car-charger/CarChargerHowTo';
+import CarChargerPain from '../car-charger/CarChargerPain';
 import CarChargerSolution from '../car-charger/CarChargerSolution';
+import CarChargerHowTo from '../car-charger/CarChargerHowTo';
 import CarChargerReviews from '../car-charger/CarChargerReviews';
 import CarChargerFAQ from '../car-charger/CarChargerFAQ';
 import CarChargerFinalCTA from '../car-charger/CarChargerFinalCTA';
@@ -35,8 +36,9 @@ export default function CarArmrestPage({ product }: { product: Product }) {
         <Header />
         <main>
           <CarChargerHero product={product} />
-          <CarChargerHowTo product={product} />
+          <CarChargerPain product={product} />
           <CarChargerSolution product={product} />
+          <CarChargerHowTo product={product} />
           <CarChargerReviews product={product} />
           <CarChargerFAQ product={product} />
           <CarChargerFinalCTA product={product} />
