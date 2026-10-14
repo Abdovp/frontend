@@ -261,7 +261,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
               <div className="mt-3 hidden">
                 {galleryImages.map((src, index) => (
                   <button
-                    key={src}
+                    key={`${src}-${index}`}
                     type="button"
                     onClick={() => setActiveImage(index)}
                     aria-label={product.galleryLabels[index] ?? `صورة ${index + 1}`}
@@ -496,6 +496,10 @@ export default function CarChargerHero({ product }: { product: Product }) {
                       )}
                     </div>
                     <div className="text-end">
+                      <div className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-[#111827]/10 bg-[#111827]/5 px-2 py-1 shadow-sm">
+                        <span className="h-2.5 w-2.5 rounded-full bg-[#111111] ring-1 ring-black/10" aria-hidden="true" />
+                        <span className="text-[0.62rem] font-extrabold text-[#111827]/75">اللون المتاح: أسود</span>
+                      </div>
                       <p className="text-lg font-extrabold leading-none text-[#1663D6]">
                         {selectedOffer?.price ?? firstOffer.price}{' '}
                         <span className="text-sm font-semibold text-[#6B7280]">{CURRENCY}</span>
