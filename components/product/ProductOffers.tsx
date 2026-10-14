@@ -462,10 +462,6 @@ export default function ProductOffers({ product }: ProductOffersProps) {
                       )}
                     </div>
                     <div className="text-end">
-                      <div className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-ink/10 bg-[#111827]/5 px-2 py-1 shadow-sm">
-                        <span className="h-2.5 w-2.5 rounded-full bg-[#111111] ring-1 ring-black/10" aria-hidden="true" />
-                        <span className="text-[0.62rem] font-extrabold text-ink/75">اللون المتاح: أسود</span>
-                      </div>
                       <p className="font-extrabold text-brand text-lg leading-none">
                         {selectedOffer?.price ?? firstOffer.price}{' '}
                         <span className="text-sm font-semibold text-ink/50">{CURRENCY}</span>
