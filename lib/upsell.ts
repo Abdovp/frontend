@@ -13,6 +13,16 @@ export function hasUpsellAvailable(orderedIds: ProductId[]): boolean {
 }
 
 export function pickUpsellProduct(orderedIds: ProductId[]): Product | null {
+  const lastOrderedId = orderedIds.at(-1);
+  const preferredPackId = lastOrderedId === 'garden-sprinkler' || lastOrderedId === 'car-vacuum' ? 'cooling-pack' : null;
+
+  if (preferredPackId) {
+    const carPack = productList.find((p) => p.id === preferredPackId);
+    if (carPack && !orderedIds.includes(carPack.id) && isProductAvailable(carPack)) {
+      return carPack;
+    }
+  }
+
   const charger = productList.find((p) => p.id === 'car-charger');
   if (charger && !orderedIds.includes('car-charger') && isProductAvailable(charger)) {
     return charger;
