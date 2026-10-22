@@ -581,7 +581,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
             className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#1663D6] py-3.5 text-sm font-extrabold text-white shadow-lg transition-colors hover:bg-[#124FA8] disabled:opacity-50 md:hidden animate-cta-pulse"
           >
             <Icon name="arrow-up" size={18} />
-            {isAvailable ? `اطلب دابا — ${firstOffer.price} ${CURRENCY}` : 'غير متوفر حالياً'}
+            {isAvailable ? `اطلب دابا — ${(selectedOffer?.price ?? firstOffer.price)} ${CURRENCY}` : 'غير متوفر حالياً'}
           </button>
 
           <div dir="rtl" className="mx-auto hidden w-full max-w-3xl items-center gap-3 md:flex">
@@ -598,7 +598,7 @@ export default function CarChargerHero({ product }: { product: Product }) {
               <p className="truncate text-sm font-bold text-[#111827]">{product.nameAr}</p>
             </div>
             <p className="shrink-0 text-lg font-extrabold text-[#1663D6]">
-              {firstOffer.price} {CURRENCY}
+              {selectedOffer?.price ?? firstOffer.price} {CURRENCY}
             </p>
             <button
               type="button"

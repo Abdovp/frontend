@@ -1,4 +1,5 @@
 import Icon from '../ui/Icon';
+import { useCartStore } from '../../lib/cart-store';
 import { CURRENCY, getFirstOffer, WARRANTY_DAYS, type Product } from '../../lib/products';
 
 const GUARANTEES = [
@@ -9,7 +10,9 @@ const GUARANTEES = [
 ];
 
 export default function CarChargerFinalCTA({ product }: { product: Product }) {
-  const offer = getFirstOffer(product);
+  const defaultOffer = getFirstOffer(product);
+  const selected = useCartStore((state) => state.selectedOffers[product.id] ?? defaultOffer.quantity);
+  const offer = product.offers.find((item) => item.quantity === selected) ?? defaultOffer;
 
   return (
     <section className="relative overflow-hidden bg-[#111827] py-14 md:py-20">

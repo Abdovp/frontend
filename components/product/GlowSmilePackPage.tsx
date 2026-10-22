@@ -116,7 +116,7 @@ export default function GlowSmilePackPage() {
               >
                 <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#1f1d1d] text-sm font-black text-white">↑</span>
                 <span className="text-sm font-black">اطلب الآن</span>
-                <span className="text-lg font-black">199 {CURRENCY}</span>
+                <span className="text-lg font-black">{offers[0].price} {CURRENCY}</span>
               </button>
             </div>
           </div>
@@ -362,7 +362,7 @@ export default function GlowSmilePackPage() {
                         </a>
 
                         <button type="button" className="btn-gold !shadow-none w-full" onClick={handleCheckoutCTA}>
-                          اطلب الآن — 199 {CURRENCY}
+                          اطلب الآن — {activeOffer.price} {CURRENCY}
                         </button>
 
                         <div className="mt-3 grid grid-cols-3 gap-1.5">

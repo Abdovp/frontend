@@ -526,7 +526,7 @@ export default function ProductOffers({ product }: ProductOffersProps) {
         <StoreTrustBand className="mt-8 md:mt-10" />
       </div>
 
-      {/* Sticky CTA — always shows first-offer price, once scrolled past product card */}
+      {/* Sticky CTA — shows the currently selected offer price, once scrolled past product card */}
       <div
         className={`sticky-cta ${showStickyBar ? 'sticky-cta--visible' : ''}`}
         aria-hidden={!showStickyBar}
@@ -540,7 +540,7 @@ export default function ProductOffers({ product }: ProductOffersProps) {
             className="checkout-cta checkout-cta--pulse sticky-cta__button sticky-cta__button--mobile w-full disabled:opacity-50 md:hidden"
           >
             <Icon name="arrow-up" size={18} />
-            {isAvailable ? `اطلب دابا — ${firstOffer.price} ${CURRENCY}` : 'غير متوفر حالياً'}
+            {isAvailable ? `اطلب دابا — ${(selectedOffer?.price ?? firstOffer.price)} ${CURRENCY}` : 'غير متوفر حالياً'}
           </button>
 
           {/* Desktop — product info + wide CTA */}
@@ -564,7 +564,7 @@ export default function ProductOffers({ product }: ProductOffersProps) {
                   {product.nameAr}
                 </p>
                 <p className="mt-0.5 text-xs leading-snug text-ink/50">
-                  {isAvailable ? `${firstOffer.price} ${CURRENCY} • دفع عند الاستلام` : 'غير متوفر حالياً'}
+                  {isAvailable ? `${selectedOffer?.price ?? firstOffer.price} ${CURRENCY} • دفع عند الاستلام` : 'غير متوفر حالياً'}
                 </p>
               </div>
             </div>
@@ -575,7 +575,7 @@ export default function ProductOffers({ product }: ProductOffersProps) {
               className="checkout-cta checkout-cta--pulse sticky-cta__button sticky-cta__button--desktop min-w-0 flex-1 disabled:opacity-50"
             >
               <Icon name="arrow-up" size={18} />
-              {isAvailable ? `اطلب دابا الآن • ${firstOffer.price} ${CURRENCY}` : 'غير متوفر حالياً'}
+              {isAvailable ? `اطلب دابا الآن • ${(selectedOffer?.price ?? firstOffer.price)} ${CURRENCY}` : 'غير متوفر حالياً'}
             </button>
           </div>
         </div>
