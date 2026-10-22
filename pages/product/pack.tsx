@@ -1,6 +1,5 @@
-import ProductPageLayout from '../../components/product/ProductPageLayout';
-import { getProduct } from '../../lib/products';
+import GlowSmilePackPage from '../../components/product/GlowSmilePackPage';
 
-export default function CoolingPackPage() {
-  return <ProductPageLayout product={getProduct('cooling-pack')} />;
+export default function PackPage() {
+  return <GlowSmilePackPage />;
 }
