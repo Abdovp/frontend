@@ -60,11 +60,7 @@ export default function GlowSmilePackPage() {
 
   const activeOffer = offers.find((offer) => offer.id === selectedOffer) ?? offers[0];
 
-  const handleGoToThankYou = () => {
-    void router.push('/thank-you');
-  };
-
-  const handleAddToCart = () => {
+  const handleCheckoutCTA = () => {
     const errors = validateCheckoutForm({
       name: customerName,
       phone: customerPhone,
@@ -72,18 +68,19 @@ export default function GlowSmilePackPage() {
 
     if (Object.keys(errors).length > 0) {
       setFormErrors(errors);
+      document.getElementById('cta-form')?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start',
+      });
       return;
     }
 
     setFormErrors({});
-    useCartStore.getState().addItem({
-      id: 'cooling-pack',
-      name: 'باك إضاءة الوجه + تنظيف الأسنان',
-      price: activeOffer.price,
-      offer: 1,
-      quantity: 1,
-    });
-    useCartStore.getState().openCart();
+    void router.push('/thank-you');
+  };
+
+  const handleAddToCart = () => {
+    handleCheckoutCTA();
   };
 
   return (
@@ -114,7 +111,7 @@ export default function GlowSmilePackPage() {
             <div className="mx-auto max-w-md rounded-full bg-white/80 p-1.5 shadow-[0_18px_40px_rgba(116,77,61,0.18)] ring-1 ring-[#f0d9cd] backdrop-blur-md">
               <button
                 type="button"
-                onClick={handleGoToThankYou}
+                onClick={handleCheckoutCTA}
                 className="flex w-full items-center justify-center gap-3 rounded-full bg-[#f7d8cc] px-4 py-3 text-[#1f1b1a] shadow-[0_0_0_1px_rgba(255,255,255,0.4)] transition-all duration-300 [animation:ctaPulse_3s_ease-in-out_infinite]"
               >
                 <span className="inline-flex h-7 w-7 items-center justify-center rounded-full bg-[#1f1d1d] text-sm font-black text-white">↑</span>
@@ -364,7 +361,7 @@ export default function GlowSmilePackPage() {
                           واتساب
                         </a>
 
-                        <button type="button" className="btn-gold !shadow-none w-full" onClick={handleGoToThankYou}>
+                        <button type="button" className="btn-gold !shadow-none w-full" onClick={handleCheckoutCTA}>
                           اطلب الآن — 199 {CURRENCY}
                         </button>
 
@@ -657,7 +654,7 @@ export default function GlowSmilePackPage() {
                       ))}
                     </div>
 
-                    <button className="btn-gold mt-5 w-full" onClick={handleGoToThankYou}>
+                    <button className="btn-gold mt-5 w-full" onClick={handleCheckoutCTA}>
                       اطلب 199 درهم الآن
                     </button>
                   </div>
@@ -674,7 +671,7 @@ export default function GlowSmilePackPage() {
                     <h2 className="text-3xl font-black">وجه أنعم وابتسامة أنضف تبدأ من اليوم</h2>
                   </div>
                   <div className="flex flex-wrap gap-3">
-                    <button className="btn-gold" onClick={handleGoToThankYou}>اطلب الباك الآن</button>
+                    <button className="btn-gold" onClick={handleCheckoutCTA}>اطلب الباك الآن</button>
                     <a href={whatsappLink} target="_blank" rel="noreferrer" className="btn-outline border-white/30 bg-white/5 text-white hover:text-white">
                       تواصل واتساب
                     </a>
