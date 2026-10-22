@@ -1,6 +1,6 @@
 import type { IconName } from '../components/ui/Icon';
 
-export type ProductId = 'cooling-pack' | 'magnetic-holder' | 'car-vacuum' | 'garden-sprinkler' | 'car-charger' | 'car-armrest';
+export type ProductId = 'face-pack' | 'cooling-pack' | 'magnetic-holder' | 'car-vacuum' | 'garden-sprinkler' | 'car-charger' | 'car-armrest';
 
 export interface ProductOffer {
   quantity: 1 | 2 | 3;
@@ -154,6 +154,175 @@ export const SHARED_GUARANTEES: GuaranteeItem[] = [
 ];
 
 export const products: Record<ProductId, Product> = {
+  'face-pack': {
+    id: 'face-pack',
+    sku: 'BOYA-FACE-2847',
+    slug: 'pack',
+    href: '/product/pack',
+    nameAr: 'باك إضاءة الوجه + تنظيف الأسنان',
+    nameEn: 'Face Glow + Oral Care Pack',
+    category: 'عناية الوجه والأسنان',
+    icon: 'spark',
+    tagline: 'تخلصي من البقع السوداء، وعيّني ابتسامتك مع سلك الاسنان المائي.',
+    metaDescription:
+      'باك إضاءة الوجه + تنظيف الأسنان من بويا شوب: XR Cleaner للبقع السوداء وسلك الاسنان المائي لتنظيف بين الأسنان. حل عملي للنساء والرجال. الدفع عند الاستلام، توصيل سريع، من 199 درهم.',
+    rating: 4.9,
+    reviewCount: 2400,
+    unit: 'باك',
+    soldText: 'تباع +2,400 باك هاد الشهر',
+    scarcityText: 'المخزون محدود — الطلب سريع!',
+    stockLeft: 12,
+    deliveryDays: '24–48 ساعة',
+    checkoutHeadline: 'باك كامل لوجه أنعم وابتسامة أنضف',
+    checkoutDescription: 'باك مكوّن من XR Cleaner و سلك الاسنان المائي في باك واحد',
+    highlights: [
+      'تخفيف مظهر البقع السوداء',
+      'تنظيف عميق بين الأسنان',
+      'روتين سهل وسريع في البيت',
+    ],
+    valueProps: [
+      { icon: 'spark', title: 'إضاءة البشرة', text: 'توازن لون البشرة وافتقار للبقع السوداء' },
+      { icon: 'shield', title: 'نظافة عميقة', text: 'تنظيف بين الأسنان وتحسين رائحة الفم' },
+      { icon: 'clock', title: 'روتين سريع', text: 'استعمال يومي بدون تعقيد' },
+      { icon: 'leaf', title: 'راحة وثقة', text: 'وجه أكثر نضارة وابتسامة أكثر سطوعاً' },
+    ],
+    trustBadges: [
+      { icon: 'badge', title: 'أصلي 100%', subtitle: 'جودة مفحوصة' },
+      { icon: 'shield', title: `${WARRANTY_DAYS} يوم`, subtitle: 'ضمان كامل' },
+      { icon: 'star', title: '4.9/5', subtitle: '2,400+ تقييم' },
+      { icon: 'truck', title: '24–48 ساعة', subtitle: 'توصيل سريع' },
+    ],
+    guarantees: SHARED_GUARANTEES,
+    offers: [
+      {
+        quantity: 1,
+        price: 199,
+        label: 'باك واحد',
+        sublabel: 'عرض موجه للعناية اليومية',
+        perks: ['XR Cleaner + سلك الاسنان المائي', 'توصيل مجاني', `ضمان ${WARRANTY_DAYS} يوم`],
+      },
+      {
+        quantity: 2,
+        price: 349,
+        label: 'عرض خاص',
+        sublabel: 'باقي من الباك كامل مع خصم',
+        badge: 'الأكثر مبيعاً',
+        perks: ['باك كامل + شحن سريع', 'توصيل مجاني', `ضمان ${WARRANTY_DAYS} يوم`],
+      },
+    ],
+    galleryLabels: ['الباك كامل', 'XR Cleaner', 'سلك الاسنان المائي', 'المكونات', 'خطة الاستخدام'],
+    image: '/images/pack-pain-custom.jfif',
+    howToUse: {
+      title: 'كيفاش تستعمل الباك',
+      steps: [
+        {
+          title: 'ركّب المظلة على الزجاج الأمامي',
+          body: 'افتح المظلة الحرارية وثبّتها على الزجاج من الداخل. كتعكس الشمس قبل ما تدخل للسيارة.',
+        },
+        {
+          title: 'وصّل المروحة لـ USB السيارة',
+          body: 'ركّب المروحة المزدوجة فوق التابلو أو على زجاج النافذة وشبّكها بـ USB. كتشتغل مباشرة.',
+        },
+        {
+          title: 'شغّل المروحة وركّب',
+          body: 'قبل ما تركب بـ 2-3 دقائق شغّل المروحة. توصل، تحس الفرق مباشرة — جو مريح بلا انتظار.',
+        },
+      ],
+      image: '/images/pack-how.webp',
+      imageLabel: 'طريقة تركيب الباك',
+    },
+    pain: {
+      eyebrow: 'المشكل',
+      title: 'كتعاني من حرارة السيارة فهاد الصيف؟',
+      body: 'تخيّل راسك باغي تخرج، كتحل باب الطوموبيل وكتضربك واحد السخونية كتمحق. الغيدون كيحرق، والريحة كتخنق، والمكيف واخا عاطيه "الماكس" والو.. كتحس براسك غارق في العرق قبل ما تبدا نهارك. كل صيف نفس الفيلم كيتعاود.. واش ما عييتيش من هاد العذاب؟',
+      bullets: [
+        'السخونية كتضرب وجهك مع كتحل الباب',
+        'الغيدون كيحرق يديك قبل ما تسوق',
+        'الجلد والبلاستيك كيدوبو بصمت ف كل صيف',
+        'المكيف بوحدو ما كافيش',
+      ],
+      imageLabel: 'حرارة الطوموبيل ف الصيف',
+      image: '/images/pack-pain.webp',
+    },
+    logic: {
+      eyebrow: 'الحل',
+      title: 'تهوية نشطة + حجب حراري = حماية مزدوجة',
+      body: 'المروحة كتطرد الهواء الساخن. المظلة كتحجب الشمس قبل ما تدخل. بجوج كيخدمو مع بعضياتهم — نتيجة فورية بدون تعقيد.',
+      bullets: [
+        'فرق ملحوظ ف الحرارة من أول استعمال',
+        'حماية الجلد والبلاستيك من التلف',
+        'سيارة باردة مع استهلاك أقل',
+      ],
+      imageLabel: 'الباك أثناء الاستعمال',
+      image: '/images/pack-solution.webp',
+    },
+    proof: {
+      eyebrow: 'إثبات',
+      title: 'الناس كانت مترددة، وراحوا الحمد لله كشفوا الفرق',
+      body: 'الناس اللي جربت الباك كتهني بأن الخلعة كتنقذها من حمالة حرارة البوخ وكتخلّيها تحس براحة في اللحظة الأولى. كل تقييم كيكشف نفس القصة: "لما كدخل السيارة، كتحس بالفرق من أول دقيقة".',
+      bullets: [
+        'تقييم 4.9 من 2,400 عميل',
+        'توصيل سريع مع الدفع عند الاستلام',
+        'سيارة أهدأ ورائحة أنظف',
+      ],
+      imageLabel: 'تجربة العملاء',
+      image: '/images/pack-proof.webp',
+    },
+    howItWorks: {
+      eyebrow: 'كيفاش',
+      title: 'من الحرارة إلى الراحة في 3 خطوات',
+      body: 'التركيب ساهل، الاستعمال سريع، والنتيجة محسوسة فوريا. ما تحتاجش إلى تعقيد أو تدخلات كثيرة.',
+      bullets: [
+        'ركب المظلة + المروحة',
+        'شغّلها قبل التشغيل',
+        'استمتع بداخل سيارة أبرد',
+      ],
+      imageLabel: 'مراحل الاستعمال',
+      image: '/images/pack-how.webp',
+    },
+    faqs: [
+      {
+        title: 'الأسئلة الشائعة',
+        items: [
+          {
+            q: 'هل الباك مناسب لسيارتي؟',
+            a: 'نعم، مناسب لمعظم السيارات لأن تركيب المظلة والمروحة قابل للتعديل.',
+          },
+          {
+            q: 'هل الأمر يستغرق وقتاً طويلاً؟',
+            a: 'لا، التركيب مباشر في بضع دقائق فقط.',
+          },
+          {
+            q: 'هل يوجد ضمان؟',
+            a: 'نعم، ضمان 30 يومًا على جميع المنتجات.',
+          },
+        ],
+      },
+    ],
+    reviews: [
+      {
+        name: 'سارة م.',
+        city: 'الرباط',
+        rating: 5,
+        date: 'منذ 2 أيام',
+        text: 'الفرق محسوس من أول استخدام، خاصّة في الصيف. السيارة باردة وواضحة أكثر.',
+      },
+      {
+        name: 'ياسين ب.',
+        city: 'فاس',
+        rating: 5,
+        date: 'منذ 5 أيام',
+        text: 'مريح جدًا، تركيب سريع، وفعلاً كا يقلل حرارة الزجاج بشكل كبير.',
+      },
+      {
+        name: 'راضية س.',
+        city: 'الدار البيضاء',
+        rating: 4,
+        date: 'منذ 8 أيام',
+        text: 'جلستني وراحة يدي حسيت بها مباشرة. الجودة عندها نفس مستوى اللي كنت كنتظر.',
+      },
+    ],
+  },
   'cooling-pack': {
     id: 'cooling-pack',
     sku: 'BOYA-FACE-2847',
@@ -1444,6 +1613,10 @@ export function getFirstOffer(product: Product): ProductOffer {
 }
 
 export function getProductSku(id: ProductId | string): string {
+  if (id === 'face-pack' || id === 'cooling-pack') {
+    return 'BOYA-FACE-2847';
+  }
+
   const product = products[id as ProductId];
   return product?.sku ?? `BOYA-UNK-${String(id).replace(/-/g, '').slice(0, 8).toUpperCase()}`;
 }

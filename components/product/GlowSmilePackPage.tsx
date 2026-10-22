@@ -7,8 +7,12 @@ import Footer from '../Footer';
 import WhatsAppFloat from '../ui/WhatsAppFloat';
 import Icon from '../ui/Icon';
 import { useCartStore } from '../../lib/cart-store';
-import { CURRENCY, STORE } from '../../lib/products';
+import { createPurchaseEventId, submitOrder } from '../../lib/api/orders';
+import { getCheckoutErrorMessage } from '../../lib/api/order-errors';
+import { trackInitiateCheckout, trackPurchase } from '../../lib/analytics/track';
+import { CURRENCY, STORE, products } from '../../lib/products';
 import { validateCheckoutForm } from '../../lib/checkout-validation';
+import { saveOrderConfirmation } from '../../lib/order-confirmation';
 
 const offers = [
   {
@@ -43,6 +47,8 @@ export default function GlowSmilePackPage() {
   const [customerName, setCustomerName] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
   const [formErrors, setFormErrors] = useState<{ name?: string; phone?: string }>({});
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
@@ -60,7 +66,7 @@ export default function GlowSmilePackPage() {
 
   const activeOffer = offers.find((offer) => offer.id === selectedOffer) ?? offers[0];
 
-  const handleCheckoutCTA = () => {
+  const handleCheckoutCTA = async () => {
     const errors = validateCheckoutForm({
       name: customerName,
       phone: customerPhone,
@@ -76,7 +82,66 @@ export default function GlowSmilePackPage() {
     }
 
     setFormErrors({});
-    void router.push('/thank-you');
+    setSubmitting(true);
+    setSubmitError('');
+
+    const product = products['face-pack'] ?? products['cooling-pack'];
+    const offer = product.offers.find((item) => item.quantity === (selectedOffer === 'double' ? 2 : 1)) ?? product.offers[0];
+    const items = [
+      {
+        id: product.id,
+        lineKey: `${product.id}-${offer.quantity}`,
+        name: product.nameAr,
+        price: offer.price,
+        offer: offer.quantity,
+        quantity: 1,
+      },
+    ];
+    const total = offer.price;
+
+    trackInitiateCheckout(
+      items.map((item) => ({ productId: item.id, name: item.name, price: item.price, quantity: item.quantity })),
+      total
+    );
+
+    const eventId = createPurchaseEventId();
+
+    try {
+      const result = await submitOrder({
+        eventId,
+        name: customerName.trim(),
+        phone: customerPhone.trim(),
+        items,
+        total,
+      });
+
+      saveOrderConfirmation({
+        name: customerName.trim(),
+        phone: customerPhone.trim(),
+        items,
+        total,
+        eventId,
+        orderId: result.id,
+        publicOrderId: result.public_order_id,
+      });
+
+      trackPurchase({
+        eventId,
+        value: total,
+        items: items.map((item) => ({
+          productId: item.id,
+          name: item.name,
+          price: item.price,
+          quantity: item.quantity,
+        })),
+      });
+
+      setSubmitting(false);
+      await router.push('/thank-you');
+    } catch (error) {
+      setSubmitError(getCheckoutErrorMessage(error));
+      setSubmitting(false);
+    }
   };
 
   const handleAddToCart = () => {
@@ -361,8 +426,8 @@ export default function GlowSmilePackPage() {
                           واتساب
                         </a>
 
-                        <button type="button" className="btn-gold !shadow-none w-full" onClick={handleCheckoutCTA}>
-                          اطلب الآن — {activeOffer.price} {CURRENCY}
+                        <button type="button" className="btn-gold !shadow-none w-full" onClick={() => void handleCheckoutCTA()} disabled={submitting}>
+                          {submitting ? 'جاري التأكيد...' : `اطلب الآن — ${activeOffer.price} ${CURRENCY}`}
                         </button>
 
                         <div className="mt-3 grid grid-cols-3 gap-1.5">
