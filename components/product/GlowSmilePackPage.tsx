@@ -192,15 +192,6 @@ export default function GlowSmilePackPage() {
                 <div className="order-1 lg:order-2 lg:sticky lg:top-28">
                   <div className="relative rounded-[30px] border border-[#f0d8cd] bg-white/80 p-4 shadow-[0_25px_70px_rgba(126,78,60,0.12)] backdrop-blur-md">
                     <div className="rounded-[26px] bg-[linear-gradient(140deg,#fff3ef_0%,#f7f7ff_100%)] p-4">
-                      <div className="mb-4 flex items-center justify-between">
-                        <span className="rounded-full border border-[#e9d3c5] bg-[#fffaf7] px-3 py-1 text-[0.65rem] font-black tracking-[0.18em] text-[#7b5c46] uppercase">
-                          Pack of 2
-                        </span>
-                        <span className="rounded-full border border-[#dfe7ff] bg-[#edf4ff] px-2.5 py-1 text-[0.6rem] font-black text-[#3f5dae]">
-                          100% مضمونة
-                        </span>
-                      </div>
-
                       <div className="relative h-[440px] overflow-hidden rounded-[26px] bg-[linear-gradient(140deg,#fff3ef_0%,#f7f7ff_100%)]">
                         <Image
                           src="/images/pack-hero.jpg"
@@ -210,15 +201,6 @@ export default function GlowSmilePackPage() {
                           sizes="(max-width: 1024px) 100vw, 50vw"
                           className="object-cover object-center"
                         />
-                      </div>
-
-                      <div className="mt-5 rounded-2xl border border-[#f1d7cb] bg-[#fff6f2] px-4 py-3 text-center">
-                        <div className="text-[0.68rem] font-black tracking-[0.14em] text-[#9b5e55] uppercase">إجمالي العرض</div>
-                        <div className="mt-1 flex items-end justify-center gap-2">
-                          <span className="text-3xl font-black text-[#1d1b1a]">{activeOffer.price}</span>
-                          <span className="pb-1 text-sm font-bold text-[#675954]">درهم</span>
-                        </div>
-                        <div className="mt-1 text-sm font-medium text-[#7d5d58] line-through">{activeOffer.oldPrice} درهم</div>
                       </div>
                     </div>
                   </div>
