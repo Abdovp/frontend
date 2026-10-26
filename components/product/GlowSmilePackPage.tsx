@@ -42,7 +42,7 @@ const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
 
 export default function GlowSmilePackPage() {
   const router = useRouter();
-  const [selectedOffer, setSelectedOffer] = useState<(typeof offers)[number]['id']>('double');
+  const [selectedOffer, setSelectedOffer] = useState<(typeof offers)[number]['id']>(offers[0].id);
   const [showStickyCta, setShowStickyCta] = useState(false);
   const [customerName, setCustomerName] = useState('');
   const [customerPhone, setCustomerPhone] = useState('');
