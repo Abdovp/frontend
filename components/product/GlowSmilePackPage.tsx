@@ -204,7 +204,7 @@ export default function GlowSmilePackPage() {
 
                 <div dir="rtl" className="order-2 -mt-1 text-right lg:order-1 lg:-mt-2">
                   <h1 className="mb-2 font-heading text-3xl font-extrabold leading-[1.35] text-[#1d1d1d] md:text-4xl lg:text-5xl lg:leading-[1.3]">
-                    باك كامل يخلّي وجهك ناعم <span className="text-[#c77763]">وابتسامتك أنضف</span>
+                    باك العناية المتكاملة لبشرة أنقى <span className="text-[#c77763]">وابتسامة أكثر نظافة</span>
                   </h1>
 
                   <div className="mb-4 flex flex-wrap items-center gap-x-4 gap-y-2 text-sm">
