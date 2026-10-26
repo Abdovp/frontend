@@ -241,7 +241,7 @@ export default function GlowSmilePackPage() {
                   <div className="mb-6 rounded-2xl border border-[#f2d6c8] bg-[#fff7f3] px-4 py-3 text-[#69473f] shadow-sm">
                     <div className="flex items-center gap-2 font-bold">
                       <span className="flex h-6 w-6 items-center justify-center rounded-full bg-[#f7d6c8] text-[#9a5d4e]">⚡</span>
-                      المخزون محدود — الطلبات بسرعة متزايدة هذه الأيام
+                      التوصيل مجاني والدفع عند الاستلام — ضمان الاسترجاع
                     </div>
                   </div>
 
