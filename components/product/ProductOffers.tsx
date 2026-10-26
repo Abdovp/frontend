@@ -254,7 +254,7 @@ export default function ProductOffers({ product }: ProductOffersProps) {
               fallbackSublabel="صورة المنتج"
               aspect="square"
               fit="cover"
-              objectPosition={product.id === 'cooling-pack' ? 'top' : 'center'}
+              objectPosition="center"
               className="rounded-2xl shadow-card bg-white"
               priority
             />

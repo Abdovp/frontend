@@ -19,7 +19,7 @@ import CartProductThumb from './ui/CartProductThumb';
 import Icon, { Stars } from './ui/Icon';
 import UpsellPopup from './UpsellPopup';
 
-const CROSS_SELL_ORDER: ProductId[] = ['cooling-pack', 'magnetic-holder', 'car-vacuum'];
+const CROSS_SELL_ORDER: ProductId[] = ['face-pack', 'magnetic-holder', 'car-vacuum'];
 
 function getCrossSellProducts(cartIds: ProductId[]): Product[] {
   return CROSS_SELL_ORDER.filter((id) => !cartIds.includes(id)).map((id) => products[id]);

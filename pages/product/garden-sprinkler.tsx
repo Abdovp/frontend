@@ -19,7 +19,7 @@ const UpsellPopup = dynamic(() => import('../../components/UpsellPopup'), { ssr:
 export default function GardenSprinklerPage() {
   const router = useRouter();
   const product = getProduct('garden-sprinkler');
-  const upsellCandidate = getProduct('cooling-pack');
+  const upsellCandidate = getProduct('face-pack');
   const [selectedOffer, setSelectedOffer] = useState(0);
   const [formData, setFormData] = useState({ name: '', phone: '' });
   const [showStickyBar, setShowStickyBar] = useState(false);

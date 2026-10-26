@@ -85,7 +85,7 @@ export default function GlowSmilePackPage() {
     setSubmitting(true);
     setSubmitError('');
 
-    const product = products['face-pack'] ?? products['cooling-pack'];
+    const product = products['face-pack'];
     const offer = product.offers.find((item) => item.quantity === (selectedOffer === 'double' ? 2 : 1)) ?? product.offers[0];
     const items = [
       {

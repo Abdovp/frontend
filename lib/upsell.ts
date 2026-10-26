@@ -14,12 +14,12 @@ export function hasUpsellAvailable(orderedIds: ProductId[]): boolean {
 
 export function pickUpsellProduct(orderedIds: ProductId[]): Product | null {
   const lastOrderedId = orderedIds.at(-1);
-  const preferredPackId = lastOrderedId === 'garden-sprinkler' || lastOrderedId === 'car-vacuum' ? 'cooling-pack' : null;
+  const preferredPackId = lastOrderedId === 'garden-sprinkler' || lastOrderedId === 'car-vacuum' ? 'face-pack' : null;
 
   if (preferredPackId) {
-    const carPack = productList.find((p) => p.id === preferredPackId);
-    if (carPack && !orderedIds.includes(carPack.id) && isProductAvailable(carPack)) {
-      return carPack;
+    const preferred = productList.find((p) => p.id === preferredPackId);
+    if (preferred && !orderedIds.includes(preferred.id) && isProductAvailable(preferred)) {
+      return preferred;
     }
   }
 
