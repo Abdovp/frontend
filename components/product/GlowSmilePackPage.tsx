@@ -201,31 +201,15 @@ export default function GlowSmilePackPage() {
                         </span>
                       </div>
 
-                      <div className="grid grid-cols-2 gap-4">
-                        <div className="rounded-[26px] bg-[linear-gradient(160deg,#fff0ee_0%,#f7ede9_100%)] p-4 shadow-inner ring-1 ring-[#f0dad2]">
-                          <div className="mb-4 flex justify-center">
-                            <div className="flex h-28 w-20 items-center justify-center rounded-[26px] bg-[radial-gradient(circle_at_top,_#fff_0%,_#f4d8cc_68%,_#d9aa98_100%)] shadow-[inset_0_2px_12px_rgba(255,255,255,0.75)]">
-                              <div className="rounded-full border-4 border-white/70 bg-[#d9d0d3] p-2 text-2xl">✦</div>
-                            </div>
-                          </div>
-                          <div className="text-center">
-                            <div className="text-lg font-black text-[#3c2f2a]">XR Cleaner</div>
-                            <div className="mt-1 text-xs font-medium text-[#6d544d]">للبقع السوداء</div>
-                          </div>
-                        </div>
-
-                        <div className="rounded-[26px] bg-[linear-gradient(160deg,#edf6ff_0%,#f6f8ff_100%)] p-4 shadow-inner ring-1 ring-[#dfe8ff]">
-                          <div className="mb-4 flex justify-center">
-                            <div className="relative flex h-28 w-20 items-end justify-center rounded-[26px] bg-[linear-gradient(180deg,#dfe8ff_0%,#c7d8ff_100%)] shadow-[inset_0_2px_12px_rgba(255,255,255,0.75)]">
-                              <div className="absolute left-1/2 top-3 h-10 w-10 -translate-x-1/2 rounded-full border-4 border-white/80 bg-[#f5fbff]" />
-                              <div className="mb-3 h-10 w-12 rounded-full border-2 border-white/80 bg-[#ebf3ff]" />
-                            </div>
-                          </div>
-                          <div className="text-center">
-                            <div className="text-lg font-black text-[#2d3d57]">سلك الاسنان المائي</div>
-                            <div className="mt-1 text-xs font-medium text-[#4e647e]">تنظيف الأسنان بين الأسنان</div>
-                          </div>
-                        </div>
+                      <div className="relative h-[440px] overflow-hidden rounded-[26px] bg-[linear-gradient(140deg,#fff3ef_0%,#f7f7ff_100%)]">
+                        <Image
+                          src="/images/pack-hero.jpg"
+                          alt="باك إضاءة الوجه + تنظيف الأسنان"
+                          fill
+                          priority
+                          sizes="(max-width: 1024px) 100vw, 50vw"
+                          className="object-cover object-center"
+                        />
                       </div>
 
                       <div className="mt-5 rounded-2xl border border-[#f1d7cb] bg-[#fff6f2] px-4 py-3 text-center">
