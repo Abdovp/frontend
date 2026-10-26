@@ -190,19 +190,15 @@ export default function GlowSmilePackPage() {
             <div className="container-wide relative z-10">
               <div className="layout-ltr grid items-start gap-10 lg:grid-cols-2 lg:gap-16">
                 <div className="order-1 lg:order-2 lg:sticky lg:top-28">
-                  <div className="relative rounded-[30px] border border-[#f0d8cd] bg-white/80 p-4 shadow-[0_25px_70px_rgba(126,78,60,0.12)] backdrop-blur-md">
-                    <div className="rounded-[26px] bg-[linear-gradient(140deg,#fff3ef_0%,#f7f7ff_100%)] p-4">
-                      <div className="relative h-[440px] overflow-hidden rounded-[26px] bg-[linear-gradient(140deg,#fff3ef_0%,#f7f7ff_100%)]">
-                        <Image
-                          src="/images/pack-hero.jpg"
-                          alt="باك إضاءة الوجه + تنظيف الأسنان"
-                          fill
-                          priority
-                          sizes="(max-width: 1024px) 100vw, 50vw"
-                          className="object-cover object-center"
-                        />
-                      </div>
-                    </div>
+                  <div className="relative aspect-[1792/1920] overflow-hidden rounded-[30px] border border-[#f0d8cd] bg-white shadow-[0_25px_70px_rgba(126,78,60,0.12)]">
+                    <Image
+                      src="/images/pack-hero.jpg"
+                      alt="باك إضاءة الوجه + تنظيف الأسنان"
+                      fill
+                      priority
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      className="object-cover object-center"
+                    />
                   </div>
                 </div>
 
