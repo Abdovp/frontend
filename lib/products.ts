@@ -1,6 +1,6 @@
 import type { IconName } from '../components/ui/Icon';
 
-export type ProductId = 'face-pack' | 'magnetic-holder' | 'car-vacuum' | 'garden-sprinkler' | 'car-charger' | 'car-armrest';
+export type ProductId = 'face-pack' | 'magnetic-holder' | 'car-vacuum' | 'garden-sprinkler' | 'car-charger' | 'car-armrest' | 'oral-irrigator';
 
 export interface ProductOffer {
   quantity: 1 | 2 | 3;
@@ -1385,6 +1385,123 @@ export const products: Record<ProductId, Product> = {
       },
     ],
   },
+  'oral-irrigator': {
+    id: 'oral-irrigator',
+    sku: 'BOYA-ORAL-IRRIGATOR',
+    slug: 'oral-irrigator',
+    href: '/product/oral-irrigator',
+    nameAr: 'جهاز تنظيف الأسنان المائي / Oral Irrigator',
+    nameEn: 'Oral Irrigator / Water Flosser',
+    category: 'العناية بالفم',
+    icon: 'droplets',
+    tagline: 'تنظيف أعمق بين الأسنان مع روتين يومي أسهل.',
+    metaDescription:
+      'جهاز تنظيف الأسنان المائي من بويا شوب: تنظيف بين الأسنان واللثة بشكل عملي ومريح مع الدفع عند الاستلام في المغرب.',
+    rating: 4.8,
+    reviewCount: 0,
+    unit: 'وحدة',
+    soldText: 'عرض تجريبي — التوفر حسب المخزون الفعلي',
+    scarcityText: 'المخزون محدود — الطلب سريع',
+    stockLeft: 12,
+    deliveryDays: '24–72 ساعة',
+    checkoutHeadline: 'تنظيف أعمق بين الأسنان مع روتين أسهل',
+    checkoutDescription: 'جهاز مائي عملي يساعدك على العناية باللثة وبين الأسنان بطريقة أقرب للراحة اليومية.',
+    highlights: ['تنظيف بين الأسنان', 'مناسب للروتين اليومي', 'تصميم عملي وقابل للحمل', 'شحن سهل'],
+    valueProps: [
+      { icon: 'droplets', title: 'تنظيف أعمق', text: 'ماء مضغوط يساعد على تنظيف ما بين الأسنان واللثة بشكل عملي.' },
+      { icon: 'shield', title: 'راحة اللثة', text: 'مناسب للاستخدام اليومي مع تدفق ماء ناعم ومدروس.' },
+      { icon: 'clock', title: 'روتين سريع', text: 'دقيقتين فقط يوميًا للحفاظ على نظافة الفم بشكل أفضل.' },
+      { icon: 'battery', title: 'شحن عملي', text: 'قابل لإعادة الشحن ومريح للاستخدام في البيت والسفر.' },
+    ],
+    trustBadges: [
+      { icon: 'badge', title: 'جودة موثوقة', subtitle: 'نماذج مختارة بعناية' },
+      { icon: 'shield', title: 'ضمان 30 يوم', subtitle: 'تأكيد الجودة' },
+      { icon: 'star', title: '4.8/5', subtitle: 'جاهز للتقييم' },
+      { icon: 'truck', title: 'توصيل سريع', subtitle: 'في المغرب' },
+    ],
+    guarantees: SHARED_GUARANTEES,
+    offers: [
+      {
+        quantity: 1,
+        price: 690,
+        compareAt: 890,
+        label: 'عرض البداية',
+        sublabel: 'الدفع عند الاستلام',
+        badge: 'أفضل قيمة',
+        perks: ['توصيل سريع', 'ضمان 30 يوم', 'مناسب للاستخدام اليومي'],
+      },
+      {
+        quantity: 2,
+        price: 1180,
+        compareAt: 1480,
+        label: 'عرض المجموع',
+        sublabel: 'جهاز + إكسسوارات إضافية',
+        badge: 'وفر 300 درهم',
+        perks: ['توصيل مجاني', 'إكسسوارات إضافية', 'مناسب للأسر']
+      },
+    ],
+    galleryLabels: ['جهاز المائي', 'التفاصيل', 'التنظيف', 'الوضعيات'],
+    image: '/images/pack.webp',
+    pain: {
+      eyebrow: 'المشكل',
+      title: 'بقايا الطعام بين الأسنان لا تختفي بسهولة',
+      body: 'حتى مع فرشاة الأسنان، تبقى بعض المناطق صعبة الوصول، وتترك بقايا طعام ورائحة غير مريحة في اليوم.',
+      bullets: ['بقايا طعام بين الأسنان', 'منطقة اللثة صعبة الوصول', 'روتين يومي غير منتظم', 'شعور بالنظافة المحدودة'],
+      imageLabel: 'المشكلة الرئيسية',
+      image: '/images/pack-pain.webp',
+    },
+    logic: {
+      eyebrow: 'الحل',
+      title: 'تنظيف بالماء يدعم الروتين اليومي',
+      body: 'يستخدم الماء المضغوط لإزالة بقايا الطعام من الفجوات الصعبة بين الأسنان ومنطقة اللثة، مع سهولة استخدام مناسبة للحمل اليومي.',
+      bullets: ['تنظيف فعّال بين الأسنان', 'مناسب للروتين اليومي', 'راحة أكبر في الاستخدام', 'حجم عملي ومريح'],
+      imageLabel: 'الحل',
+      image: '/images/pack-solution.webp',
+    },
+    proof: {
+      eyebrow: 'إثبات',
+      title: 'تنظيف أسهل وراحة أكثر مع كل استخدام',
+      body: 'يمنحك جهاز التنظيف المائي طريقة عملية لإضافة طبقة إضافية من النظافة في الروتين اليومي، خاصة في المناطق التي لا تلمسها الفرشاة بوضوح.',
+      bullets: ['أسهل في الاستعمال', 'مناسب للأفكار اليومية', 'يقلل تراكم البقايا', 'مريح مع كل استخدام'],
+      imageLabel: 'المفعول اليومي',
+      image: '/images/pack.webp',
+    },
+    howItWorks: {
+      eyebrow: 'كيف يعمل',
+      title: 'هذه هي طريقة الاستعمال',
+      body: 'ملء الخزان، ضبط الضغط، ومتابعة التدفق في المناطق المراد تنظيفها.',
+      bullets: ['ملء الخزان', 'اختيار مستوى الضغط', 'توجيه الفوهة بين الأسنان'],
+      imageLabel: 'طريقة الاستعمال',
+      image: '/images/pack-how.webp',
+    },
+    howToUse: {
+      title: 'طريقة الاستعمال',
+      image: '/images/pack-how.webp',
+      imageLabel: 'طريقة الاستعمال',
+      steps: [
+        { title: 'ملأ الخزان', body: 'أضف الماء الفاتر إلى الخزان حتى يصل إلى المستوى المناسب.' },
+        { title: 'اختر الضغط', body: 'اضبط مستوى الضغط حسب راحتك، وابدأ بمستوى منخفض إذا كنت جديدا.' },
+        { title: 'وجه التدفق', body: 'وجه الفوهة من اللثة إلى ما بين الأسنان ولاحظ الفرق في النظافة.' },
+      ],
+    },
+    faqs: [
+      {
+        title: 'الاستعمال',
+        items: [
+          { q: 'كيفاش كايتشتغل جهاز تنظيف الأسنان المائي؟', a: 'يُضخ الماء تحت ضغط معيّن عبر فوهة مخصصة، ليغسل ما بين الأسنان واللثة بشكل عملي وسريع.' },
+          { q: 'هل مناسب للمبتدئين؟', a: 'نعم، بما أن فيه مستويات ضبط، يمكن البدء بمستوى منخفض ثم زيادة الضغط تدريجيًا.' },
+        ],
+      },
+      {
+        title: 'التوصيل والدفع',
+        items: [
+          { q: 'واش الدفع عند الاستلام؟', a: 'نعم، الدفع عند الاستلام هو خيار متاح في الغالب في المغرب لطلبات الموقع.' },
+          { q: 'شحال كايدوز التوصيل؟', a: 'التوصيل عادةً خلال 24-72 ساعة حسب المنطقة والتوفر.' },
+        ],
+      },
+    ],
+    reviews: [],
+  },
 };
 
 export const productList: Product[] = Object.values(products);
@@ -1409,6 +1526,9 @@ export function getFirstOffer(product: Product): ProductOffer {
 export function getProductSku(id: ProductId | string): string {
   if (id === 'face-pack' || id === 'cooling-pack') {
     return 'BOYA-FACE-2847';
+  }
+  if (id === 'oral-irrigator') {
+    return 'BOYA-ORAL-IRRIGATOR';
   }
 
   const product = products[id as ProductId];

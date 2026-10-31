@@ -62,10 +62,10 @@ export default function HomeBrandHero() {
                 <Icon name="arrow-left" size={18} />
               </Link>
               <Link
-                href="/product/pack"
+                href="/product/oral-irrigator"
                 className="inline-flex items-center justify-center gap-2 font-bold py-4 px-7 rounded-full border-2 border-white/25 text-white transition-all duration-200 hover:bg-white/10 hover:border-white/45 active:scale-[0.97]"
               >
-                المنتج الأكثر مبيعاً
+                جهاز تنظيف الأسنان المائي
               </Link>
             </div>
 

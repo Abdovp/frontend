@@ -15,6 +15,7 @@ export default function Footer({ showTrustCards = true }: { showTrustCards?: boo
         <div className="md:hidden py-2">
           <CollapsibleMenuDark title="المنتجات">
             <ul className="space-y-2.5 text-white/55 text-sm">
+              <li><Link href="/product/oral-irrigator" className="hover:text-accent transition">جهاز تنظيف الأسنان المائي</Link></li>
               <li><Link href="/product/pack" className="hover:text-accent transition">باك إضاءة الوجه + تنظيف الأسنان</Link></li>
               <li><Link href="/product/magnetic-holder" className="hover:text-accent transition">حامل الهاتف المغناطيسي</Link></li>
               <li><Link href="/product/car-vacuum" className="hover:text-accent transition">مكنسة محمولة 3 في 1</Link></li>
@@ -77,6 +78,7 @@ export default function Footer({ showTrustCards = true }: { showTrustCards?: boo
           <div>
             <p className="font-heading font-bold mb-4">المنتجات</p>
             <ul className="space-y-2.5 text-white/55 text-sm">
+              <li><Link href="/product/oral-irrigator" className="hover:text-accent transition">جهاز تنظيف الأسنان المائي</Link></li>
               <li><Link href="/product/pack" className="hover:text-accent transition">باك إضاءة الوجه + تنظيف الأسنان</Link></li>
               <li><Link href="/product/magnetic-holder" className="hover:text-accent transition">حامل الهاتف المغناطيسي</Link></li>
               <li><Link href="/product/car-vacuum" className="hover:text-accent transition">مكنسة محمولة 3 في 1</Link></li>

@@ -18,7 +18,7 @@ export default function AnnouncementBar({
   variant = 'marquee',
   intervalMs = 3000,
 }: AnnouncementBarProps) {
-  const [activeIndex, setActiveIndex] = useState(messages.length);
+  const [activeIndex, setActiveIndex] = useState(0);
   const [transitionEnabled, setTransitionEnabled] = useState(true);
 
   const tickSlides = useMemo(
@@ -30,17 +30,17 @@ export default function AnnouncementBar({
     if (variant !== 'tick') return;
 
     const timer = window.setInterval(() => {
-      setActiveIndex((current) => (current > 0 ? current - 1 : 0));
+      setActiveIndex((current) => (current >= tickSlides.length - 1 ? 0 : current + 1));
     }, intervalMs);
 
     return () => window.clearInterval(timer);
-  }, [variant, intervalMs]);
+  }, [variant, intervalMs, tickSlides.length]);
 
   const handleTickTransitionEnd = () => {
-    if (activeIndex !== 0) return;
+    if (activeIndex !== tickSlides.length - 1) return;
 
     setTransitionEnabled(false);
-    setActiveIndex(messages.length);
+    setActiveIndex(0);
     requestAnimationFrame(() => {
       requestAnimationFrame(() => setTransitionEnabled(true));
     });
