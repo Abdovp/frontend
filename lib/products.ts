@@ -1423,8 +1423,8 @@ export const products: Record<ProductId, Product> = {
     offers: [
       {
         quantity: 1,
-        price: 690,
-        compareAt: 890,
+        price: 189,
+        compareAt: 289,
         label: 'عرض البداية',
         sublabel: 'الدفع عند الاستلام',
         badge: 'أفضل قيمة',
@@ -1432,11 +1432,11 @@ export const products: Record<ProductId, Product> = {
       },
       {
         quantity: 2,
-        price: 1180,
-        compareAt: 1480,
+        price: 329,
+        compareAt: 459,
         label: 'عرض المجموع',
         sublabel: 'جهاز + إكسسوارات إضافية',
-        badge: 'وفر 300 درهم',
+        badge: 'وفر 130 درهم',
         perks: ['توصيل مجاني', 'إكسسوارات إضافية', 'مناسب للأسر']
       },
     ],
