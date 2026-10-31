@@ -17,17 +17,17 @@ const offers = [
   {
     id: 'single',
     label: 'عرض البداية',
-    price: 690,
-    oldPrice: 890,
+    price: 189,
+    oldPrice: 289,
     badge: 'أفضل قيمة',
     perk: 'الدفع عند الاستلام + توصيل سريع',
   },
   {
     id: 'bundle',
     label: 'عرض المجموع',
-    price: 1180,
-    oldPrice: 1480,
-    badge: 'وفر 300 درهم',
+    price: 329,
+    oldPrice: 459,
+    badge: 'وفر 130 درهم',
     perk: 'جهاز + إكسسوارات إضافية + توصيل مجاني',
   },
 ] as const;
