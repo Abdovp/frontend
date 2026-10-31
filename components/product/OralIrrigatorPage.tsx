@@ -334,6 +334,13 @@ export default function OralIrrigatorPage() {
                     Oral Irrigator
                   </div>
 
+                  <div className="mb-4 flex items-center justify-start gap-3">
+                    <span className="text-2xl font-black text-[#102233]">{firstOfferPrice} درهم</span>
+                    <span className="rounded-full bg-[#eaf9f4] px-2.5 py-1 text-[10px] font-black text-[#146a51]">
+                      {activeOffer.badge}
+                    </span>
+                  </div>
+
                   <h1 className="mb-4 font-heading text-3xl font-extrabold leading-[1.3] text-[#102233] md:text-4xl lg:text-[3.2rem]">
                     <span className="text-[#0f6b9c]">نظافة أعمق للأسنان</span> و<span className="text-[#102233]">انتعاش يدوم كل يوم</span>
                   </h1>
@@ -357,15 +364,11 @@ export default function OralIrrigatorPage() {
                   </div>
 
                   <div id="product-pricing" className="scroll-mt-28 rounded-[24px] border border-[#dfeef8] bg-white p-4 shadow-[0_16px_40px_rgba(17,32,51,0.07)]">
-                    <div className="flex items-center justify-between gap-3">
-                      <span className="text-2xl font-black text-[#102233]">{firstOfferPrice} درهم</span>
-
-                      <span className="rounded-full bg-[#eaf9f4] px-2.5 py-1 text-[10px] font-black text-[#146a51]">
-                        {activeOffer.badge}
-                      </span>
+                    <div className="mb-3 text-right">
+                      <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#5a7083]">اختر العرض</p>
                     </div>
 
-                    <div className="mt-4 flex flex-col gap-3">
+                    <div className="flex flex-col gap-3">
                       {offers.map((offer) => {
                         const isSelected = selectedOffer === offer.id;
                         return (
