@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import Header from '../Header';
 import Footer from '../Footer';
-import WhatsAppFloat from '../ui/WhatsAppFloat';
 import Icon from '../ui/Icon';
 import { createPurchaseEventId, submitOrder } from '../../lib/api/orders';
 import { getCheckoutErrorMessage } from '../../lib/api/order-errors';
@@ -332,13 +331,6 @@ export default function OralIrrigatorPage() {
                   <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#cfeaf8] bg-white px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#0e688f]">
                     <Icon name="spark" size={12} />
                     Oral Irrigator
-                  </div>
-
-                  <div className="mb-4 flex items-center justify-start gap-3">
-                    <span className="text-2xl font-black text-[#102233]">{firstOfferPrice} درهم</span>
-                    <span className="rounded-full bg-[#eaf9f4] px-2.5 py-1 text-[10px] font-black text-[#146a51]">
-                      {activeOffer.badge}
-                    </span>
                   </div>
 
                   <h1 className="mb-4 font-heading text-3xl font-extrabold leading-[1.3] text-[#102233] md:text-4xl lg:text-[3.2rem]">
@@ -784,7 +776,6 @@ export default function OralIrrigatorPage() {
         </main>
 
         <Footer />
-        <WhatsAppFloat />
       </div>
     </>
   );
