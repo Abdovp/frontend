@@ -1441,7 +1441,7 @@ export const products: Record<ProductId, Product> = {
       },
     ],
     galleryLabels: ['جهاز المائي', 'التفاصيل', 'التنظيف', 'الوضعيات'],
-    image: '/images/pack.webp',
+    image: '/images/hero/hero-product.avif',
     pain: {
       eyebrow: 'المشكل',
       title: 'بقايا الطعام بين الأسنان لا تختفي بسهولة',
