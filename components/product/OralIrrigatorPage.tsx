@@ -357,14 +357,8 @@ export default function OralIrrigatorPage() {
                   </div>
 
                   <div id="product-pricing" className="scroll-mt-28 rounded-[24px] border border-[#dfeef8] bg-white p-4 shadow-[0_16px_40px_rgba(17,32,51,0.07)]">
-                    <div className="flex flex-wrap items-center justify-between gap-3">
-                      <div>
-                        <div className="flex items-center gap-2">
-                          <span className="text-2xl font-black text-[#102233]">{firstOfferPrice} درهم</span>
-                          <span className="text-sm text-[#6a7c8c] line-through">{offers[0].oldPrice} درهم</span>
-                        </div>
-                        <p className="mt-1 text-xs text-[#4a6178]">السعر الحالي لعرض التهيئة الأولي — قد يتغير حسب التوفر</p>
-                      </div>
+                    <div className="flex items-center justify-between gap-3">
+                      <span className="text-2xl font-black text-[#102233]">{firstOfferPrice} درهم</span>
 
                       <span className="rounded-full bg-[#eaf9f4] px-2.5 py-1 text-[10px] font-black text-[#146a51]">
                         {activeOffer.badge}
