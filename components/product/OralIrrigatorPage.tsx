@@ -419,17 +419,17 @@ export default function OralIrrigatorPage() {
                     </div>
                   </div>
 
-                  <div className="mt-4 flex flex-wrap items-center gap-3 text-xs text-[#4d647a]">
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-[#eef9f5] px-2.5 py-1 font-bold text-[#1a765b]">
-                      <Icon name="check-circle" size={14} />
+                  <div className="mt-4 flex flex-wrap items-center gap-3 text-sm text-[#4d647a]">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-[#eef9f5] px-3 py-1.5 font-black text-[#1a765b]">
+                      <Icon name="check-circle" size={16} />
                       الدفع عند الاستلام
                     </span>
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-[#eef5ff] px-2.5 py-1 font-bold text-[#235f90]">
-                      <Icon name="truck" size={14} />
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-[#eef5ff] px-3 py-1.5 font-black text-[#235f90]">
+                      <Icon name="truck" size={16} />
                       توصيل في المغرب
                     </span>
-                    <span className="inline-flex items-center gap-1.5 rounded-full bg-[#fff5e8] px-2.5 py-1 font-bold text-[#a65f0f]">
-                      <Icon name="shield" size={14} />
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-[#fff5e8] px-3 py-1.5 font-black text-[#a65f0f]">
+                      <Icon name="shield" size={16} />
                       ضمان 30 يوم
                     </span>
                   </div>
