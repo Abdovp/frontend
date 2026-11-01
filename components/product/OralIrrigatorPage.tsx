@@ -182,6 +182,29 @@ export default function OralIrrigatorPage() {
     [selectedOffer]
   );
 
+  const scrollToOrderForm = () => {
+    setSelectedOffer('single');
+    const pricingSection = document.getElementById('product-pricing');
+    pricingSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    window.setTimeout(() => {
+      const nameInput = document.getElementById('oral-checkout-name') as HTMLInputElement | null;
+      nameInput?.focus();
+    }, 350);
+  };
+
+  const OrderNowButton = () => (
+    <div className="my-8 flex justify-center px-4">
+      <button
+        type="button"
+        onClick={scrollToOrderForm}
+        className="inline-flex items-center justify-center gap-3 rounded-full bg-[#0f5b8a] px-6 py-3.5 text-base font-black text-white shadow-[0_18px_30px_rgba(15,91,138,0.22)] transition hover:bg-[#0d4f7b]"
+      >
+        <span>اطلب الآن</span>
+        <span className="rounded-full bg-white/10 px-2 py-1 text-sm">{offers[0].price} درهم</span>
+      </button>
+    </div>
+  );
+
   const handleCheckoutCTA = async () => {
     const errors = validateCheckoutForm({
       name: customerName,
@@ -438,6 +461,8 @@ export default function OralIrrigatorPage() {
             </div>
           </section>
 
+          <OrderNowButton />
+
           <section className="bg-[#f5f9fc] py-16 md:py-20">
             <div className="container-wide">
               <div className="grid items-center gap-8 lg:grid-cols-[0.9fr_1.1fr]">
@@ -518,6 +543,8 @@ export default function OralIrrigatorPage() {
             </div>
           </section>
 
+          <OrderNowButton />
+
           <section className="bg-[#eff8ff] py-16 md:py-20">
             <div className="container-wide">
               <div className="mb-8 text-center">
@@ -544,6 +571,7 @@ export default function OralIrrigatorPage() {
             </div>
           </section>
 
+          <OrderNowButton />
 
           <section className="bg-white py-16 md:py-20">
             <div className="container-wide max-w-5xl">
@@ -579,6 +607,8 @@ export default function OralIrrigatorPage() {
               </div>
             </div>
           </section>
+
+          <OrderNowButton />
 
           <section className="bg-[#f6fbff] py-16 md:py-20" dir="rtl">
             <div className="container-wide max-w-5xl">
