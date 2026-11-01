@@ -461,8 +461,6 @@ export default function OralIrrigatorPage() {
             </div>
           </section>
 
-          <OrderNowButton />
-
           <section className="bg-[#f5f9fc] py-16 md:py-20">
             <div className="container-wide">
               <div className="grid items-center gap-8 lg:grid-cols-[0.9fr_1.1fr]">
@@ -508,6 +506,8 @@ export default function OralIrrigatorPage() {
               </div>
             </div>
           </section>
+
+          <OrderNowButton />
 
           <section className="bg-white py-16 md:py-20">
             <div className="container-wide max-w-5xl">
