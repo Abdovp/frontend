@@ -15,19 +15,19 @@ import { saveOrderConfirmation } from '../../lib/order-confirmation';
 const offers = [
   {
     id: 'single',
-    label: 'عرض البداية',
+    label: 'جهاز واحد',
     price: 149,
     oldPrice: 289,
-    badge: 'أفضل قيمة',
+    badge: '',
     perk: 'الدفع عند الاستلام + توصيل سريع',
   },
   {
     id: 'bundle',
-    label: 'عرض المجموع',
+    label: 'جهازان',
     price: 249,
     oldPrice: 459,
-    badge: 'وفر 130 درهم',
-    perk: 'جهاز + إكسسوارات إضافية + توصيل مجاني',
+    badge: 'أفضل قيمة',
+    perk: 'أفضل قيمة + توصيل مجاني',
   },
 ] as const;
 
@@ -197,10 +197,10 @@ export default function OralIrrigatorPage() {
       <button
         type="button"
         onClick={scrollToOrderForm}
-        className="inline-flex items-center justify-center gap-3 rounded-full bg-[#0f5b8a] px-6 py-3.5 text-base font-black text-white shadow-[0_18px_30px_rgba(15,91,138,0.22)] transition hover:bg-[#0d4f7b]"
+        className="inline-flex items-center justify-center gap-3 rounded-full bg-gradient-to-r from-[#0f5b8a] via-[#0a72af] to-[#0d4f7b] px-8 py-4 text-base font-black text-white shadow-[0_20px_35px_rgba(15,91,138,0.26)] transition hover:scale-[1.01] hover:shadow-[0_26px_40px_rgba(15,91,138,0.32)]"
       >
         <span>اطلب الآن</span>
-        <span className="rounded-full bg-white/10 px-2 py-1 text-sm">{offers[0].price} درهم</span>
+        <span className="rounded-full bg-white/12 px-2.5 py-1.5 text-sm">{offers[0].price} درهم</span>
       </button>
     </div>
   );
@@ -362,12 +362,14 @@ export default function OralIrrigatorPage() {
                     ))}
                   </div>
 
-                  <div id="product-pricing" className="scroll-mt-28 rounded-[24px] border border-[#dfeef8] bg-white p-4 shadow-[0_16px_40px_rgba(17,32,51,0.07)]">
-                    <div className="mb-3 text-right">
-                      <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#5a7083]">اختر العرض</p>
+                  <div id="product-pricing" className="scroll-mt-28 rounded-[28px] border border-[#dfeef8] bg-white p-5 shadow-[0_20px_45px_rgba(17,32,51,0.08)]">
+                    <div className="mb-5 flex items-center justify-center gap-3 text-center">
+                      <span className="inline-flex items-center justify-center rounded-full border border-[#d1ebff] bg-[#eef8ff] px-6 py-3 text-[15px] font-black tracking-[0.08em] text-[#0f6b9c] sm:text-lg">
+                        ادخل بياناتك للطلب
+                      </span>
                     </div>
 
-                    <div className="flex flex-col gap-3">
+                    <div className="flex flex-col gap-3.5">
                       {offers.map((offer) => {
                         const isSelected = selectedOffer === offer.id;
                         return (
@@ -375,16 +377,23 @@ export default function OralIrrigatorPage() {
                             key={offer.id}
                             type="button"
                             onClick={() => setSelectedOffer(offer.id)}
-                            className={`w-full rounded-2xl border p-3 text-right transition ${isSelected ? 'border-[#0f6b9c] bg-[#edf8ff] shadow-sm' : 'border-[#dfeef8] bg-[#f9fbff] hover:border-[#cfeaf8]'}`}
+                            className={`w-full rounded-[22px] border p-4 text-right transition ${isSelected ? 'border-[#0f6b9c] bg-[#edf8ff] shadow-[0_14px_28px_rgba(15,91,138,0.08)] ring-2 ring-[#d4ebff]' : 'border-[#dfeef8] bg-[#f9fbff] hover:border-[#cfeaf8]'}`}
                           >
                             <div className="flex items-center justify-between gap-3">
-                              <div>
-                                <p className="text-sm font-extrabold text-[#112033]">{offer.label}</p>
-                                <p className="text-[11px] text-[#476078]">{offer.perk}</p>
+                              <div className="flex-1">
+                                <div className="flex items-center gap-2">
+                                  <p className="text-base font-extrabold text-[#112033]">{offer.label}</p>
+                                  {offer.badge && (
+                                    <span className="rounded-full bg-[#e8f8ef] px-2.5 py-1 text-[10px] font-black text-[#1d7a5f]">
+                                      {offer.badge}
+                                    </span>
+                                  )}
+                                </div>
+                                <p className="mt-1.5 text-[11px] leading-relaxed text-[#476078] sm:text-xs">{offer.perk}</p>
                               </div>
                               <div className="text-left">
-                                <p className="text-lg font-black text-[#112033]">{offer.price} درهم</p>
-                                <p className="text-[11px] text-[#73859a] line-through">{offer.oldPrice} درهم</p>
+                                <p className="text-2xl font-black text-[#112033]">{offer.price} درهم</p>
+                                <p className="text-[11px] text-[#73859a] line-through sm:text-xs">{offer.oldPrice} درهم</p>
                               </div>
                             </div>
                           </button>
@@ -399,7 +408,7 @@ export default function OralIrrigatorPage() {
                           id="oral-checkout-name"
                           value={customerName}
                           onChange={(e) => setCustomerName(e.target.value)}
-                          className="w-full rounded-2xl border border-[#dfeef8] bg-[#f9fbff] px-4 py-3 text-base text-[#112033] outline-none ring-0 transition focus:border-[#0f6b9c]"
+                          className="w-full rounded-[18px] border border-[#dfeef8] bg-[#f9fbff] px-5 py-4 text-base text-[#112033] shadow-sm outline-none transition focus:border-[#0f6b9c] focus:bg-white focus:ring-4 focus:ring-[#d5ecff] sm:py-5"
                           placeholder="اكتب اسمك"
                         />
                         {formErrors.name && <p className="mt-1 text-xs font-bold text-red-600">{formErrors.name}</p>}
@@ -411,7 +420,7 @@ export default function OralIrrigatorPage() {
                           id="oral-checkout-phone"
                           value={customerPhone}
                           onChange={(e) => setCustomerPhone(e.target.value)}
-                          className="w-full rounded-2xl border border-[#dfeef8] bg-[#f9fbff] px-4 py-3 text-base text-[#112033] outline-none ring-0 transition focus:border-[#0f6b9c]"
+                          className="w-full rounded-[18px] border border-[#dfeef8] bg-[#f9fbff] px-5 py-4 text-base text-[#112033] shadow-sm outline-none transition focus:border-[#0f6b9c] focus:bg-white focus:ring-4 focus:ring-[#d5ecff] sm:py-5"
                           placeholder="06XXXXXXXX"
                         />
                         {formErrors.phone && <p className="mt-1 text-xs font-bold text-red-600">{formErrors.phone}</p>}
@@ -425,18 +434,18 @@ export default function OralIrrigatorPage() {
                         type="button"
                         onClick={handleCheckoutCTA}
                         disabled={submitting}
-                        className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-[#0f5b8a] px-6 py-4 text-base font-black text-white shadow-[0_18px_30px_rgba(15,91,138,0.22)] transition hover:bg-[#0d4f7b]"
+                        className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#0f5b8a] via-[#0a72af] to-[#0d4f7b] px-8 py-5 text-xl font-black text-white shadow-[0_22px_36px_rgba(15,91,138,0.28)] transition hover:scale-[1.01] hover:shadow-[0_28px_42px_rgba(15,91,138,0.34)] disabled:cursor-not-allowed disabled:opacity-80"
                       >
-                        <Icon name="cart" size={18} />
+                        <Icon name="cart" size={20} />
                         {submitting ? 'جاري الطلب...' : 'اطلب الآن'}
                       </button>
                       <a
                         href={whatsappLink}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center justify-center gap-2 rounded-full border border-[#dfeef8] bg-white px-6 py-4 text-base font-black text-[#123752]"
+                        className="inline-flex items-center justify-center gap-2 rounded-full border border-[#dfeef8] bg-white px-8 py-5 text-xl font-black text-[#123752] shadow-sm transition hover:border-[#cfeaf8] hover:bg-[#f7fbff]"
                       >
-                        <Icon name="whatsapp" size={18} />
+                        <Icon name="whatsapp" size={20} />
                         تواصل واتساب
                       </a>
                     </div>

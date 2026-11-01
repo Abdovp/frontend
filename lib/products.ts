@@ -1425,7 +1425,7 @@ export const products: Record<ProductId, Product> = {
         quantity: 1,
         price: 149,
         compareAt: 289,
-        label: 'عرض البداية',
+        label: 'جهاز واحد',
         sublabel: 'الدفع عند الاستلام',
         badge: 'أفضل قيمة',
         perks: ['توصيل سريع', 'ضمان 30 يوم', 'مناسب للاستخدام اليومي'],
@@ -1434,10 +1434,10 @@ export const products: Record<ProductId, Product> = {
         quantity: 2,
         price: 249,
         compareAt: 459,
-        label: 'عرض المجموع',
-        sublabel: 'جهاز + إكسسوارات إضافية',
-        badge: 'وفر 130 درهم',
-        perks: ['توصيل مجاني', 'إكسسوارات إضافية', 'مناسب للأسر']
+        label: 'جهازان',
+        sublabel: 'أفضل قيمة + توصيل مجاني',
+        badge: 'أفضل قيمة',
+        perks: ['توصيل مجاني', 'مناسب للأسر']
       },
     ],
     galleryLabels: ['جهاز المائي', 'التفاصيل', 'التنظيف', 'الوضعيات'],
