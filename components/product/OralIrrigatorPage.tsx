@@ -449,7 +449,7 @@ export default function OralIrrigatorPage() {
                     </span>
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-[#eef5ff] px-3 py-1.5 font-black text-[#235f90]">
                       <Icon name="truck" size={16} />
-                      free delivery
+                      التوصيل مجاني
                     </span>
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-[#fff5e8] px-3 py-1.5 font-black text-[#a65f0f]">
                       <Icon name="shield" size={16} />
@@ -662,7 +662,7 @@ export default function OralIrrigatorPage() {
               <div className="grid gap-4 md:grid-cols-4">
                 {[
                   { icon: 'wallet', title: 'الدفع عند الاستلام', text: 'لا تدفع قبل أن تستلم الطلب وتأكد من الجودة.' },
-                  { icon: 'truck', title: 'free delivery', text: 'توصيل إلى المدن الكبرى والمدن الأخرى حسب المنطقة.' },
+                  { icon: 'truck', title: 'التوصيل مجاني', text: 'توصيل إلى المدن الكبرى والمدن الأخرى حسب المنطقة.' },
                   { icon: 'refresh', title: 'ضمان 30 يوم', text: 'إمكانية إرجاع أو استبدال المنتج في حالة وجود خلل.' },
                   { icon: 'whatsapp', title: 'دعم مباشر', text: 'تواصل مباشر مع الفريق قبل الطلب أو بعده.' },
                 ].map((item) => (
@@ -742,7 +742,7 @@ export default function OralIrrigatorPage() {
                       <span className="text-2xl font-black">{firstOfferPrice} درهم</span>
                     </div>
                     <div className="mb-4 flex items-center justify-between gap-3 text-xs text-white/75">
-                      <span>free delivery</span>
+                      <span>التوصيل مجاني</span>
                       <span>الدفع عند الاستلام</span>
                     </div>
                     <button
