@@ -438,33 +438,6 @@ export default function OralIrrigatorPage() {
             </div>
           </section>
 
-          <section className="bg-[#0d1d2a] py-14 text-white md:py-20">
-            <div className="container-wide">
-              <div className="mb-8 text-center">
-                <p className="mb-3 inline-flex items-center justify-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.16em] text-[#9ad5f3]">
-                  <Icon name="flame" size={12} />
-                  مشكل شائع
-                </p>
-                <h2 className="font-heading text-2xl font-extrabold text-white md:text-4xl">
-                  بقايا الطعام بين الأسنان و رائحة فم كريهة
-                </h2>
-              </div>
-
-              <div className="grid gap-4 md:grid-cols-3">
-                {[
-                  'بقايا طعام تتجمع بين الأسنان بعد الوجبات.',
-                  'منطقة اللثة والفراغات الصعبة الوصول لها مع الفرشاة فقط.',
-                  'رائحة الفم الكريهة تؤثر على الثقة اليومية.',
-                ].map((point, index) => (
-                  <div key={point} className="rounded-2xl border border-white/10 bg-white/5 p-5 text-right">
-                    <span className="mb-3 flex h-9 w-9 items-center justify-center rounded-full bg-[#1d82b8] text-lg font-black text-white">{index + 1}</span>
-                    <p className="text-sm leading-relaxed text-white/80">{point}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </section>
-
           <section className="bg-[#f5f9fc] py-16 md:py-20">
             <div className="container-wide">
               <div className="grid items-center gap-8 lg:grid-cols-[0.9fr_1.1fr]">
