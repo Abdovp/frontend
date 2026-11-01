@@ -16,7 +16,7 @@ const offers = [
   {
     id: 'single',
     label: 'عرض البداية',
-    price: 189,
+    price: 149,
     oldPrice: 289,
     badge: 'أفضل قيمة',
     perk: 'الدفع عند الاستلام + توصيل سريع',
@@ -24,7 +24,7 @@ const offers = [
   {
     id: 'bundle',
     label: 'عرض المجموع',
-    price: 329,
+    price: 249,
     oldPrice: 459,
     badge: 'وفر 130 درهم',
     perk: 'جهاز + إكسسوارات إضافية + توصيل مجاني',
