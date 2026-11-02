@@ -323,7 +323,7 @@ export default function OralIrrigatorPage() {
             <div className="container-wide relative z-10 mx-auto w-full md:max-w-[1180px]">
               <div className="mx-auto grid w-full items-center justify-center gap-6 md:max-w-[1180px] md:gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:items-center lg:justify-items-center">
                 <div className="order-1 w-full lg:order-2 lg:sticky lg:top-24 lg:justify-self-center">
-                  <div className="relative mx-auto w-[90%] max-w-[320px] overflow-hidden rounded-[30px] border border-[#dfeef9] bg-white p-0 shadow-[0_26px_60px_rgba(17,32,51,0.09)] sm:max-w-[420px] md:max-w-[500px] lg:max-w-[520px]">
+                  <div className="relative mx-auto w-[88%] max-w-[320px] overflow-hidden rounded-[30px] border border-[#dfeef9] bg-white p-0 shadow-[0_26px_60px_rgba(17,32,51,0.09)] sm:max-w-[390px] md:max-w-[500px] lg:max-w-[520px]">
                     <div className="relative aspect-[4/5] overflow-hidden rounded-[30px] bg-[#eef7ff]">
                       <img
                         src="/images/hero/hero-product.avif"
@@ -334,7 +334,7 @@ export default function OralIrrigatorPage() {
                   </div>
                 </div>
 
-                <div className="order-2 mx-auto w-full max-w-[520px] lg:justify-self-center">
+                <div className="order-2 mx-auto w-full max-w-[100%] md:max-w-[520px] lg:justify-self-center">
                   <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#cfeaf8] bg-white px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#0e688f]">
                     <Icon name="spark" size={12} />
                     Oral Irrigator
