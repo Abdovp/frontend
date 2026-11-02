@@ -334,7 +334,7 @@ export default function OralIrrigatorPage() {
                   </div>
                 </div>
 
-                <div className="order-2 text-right">
+                <div className="order-2">
                   <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#cfeaf8] bg-white px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#0e688f]">
                     <Icon name="spark" size={12} />
                     Oral Irrigator
@@ -412,7 +412,7 @@ export default function OralIrrigatorPage() {
                             key={offer.id}
                             type="button"
                             onClick={() => setSelectedOffer(offer.id)}
-                            className={`w-full rounded-[22px] border p-4 text-right transition ${isSelected ? 'border-[#0f6b9c] bg-[#edf8ff] shadow-[0_14px_28px_rgba(15,91,138,0.08)] ring-2 ring-[#d4ebff]' : 'border-[#dfeef8] bg-[#f9fbff] hover:border-[#cfeaf8]'}`}
+                            className={`w-full rounded-[22px] border p-4 transition ${isSelected ? 'border-[#0f6b9c] bg-[#edf8ff] shadow-[0_14px_28px_rgba(15,91,138,0.08)] ring-2 ring-[#d4ebff]' : 'border-[#dfeef8] bg-[#f9fbff] hover:border-[#cfeaf8]'}`}
                           >
                             <div className="flex items-center justify-between gap-3">
                               <div className="flex-1">
@@ -436,7 +436,7 @@ export default function OralIrrigatorPage() {
                       })}
                     </div>
 
-                    <div className="mt-4 grid gap-3 text-right">
+                    <div className="mt-4 grid gap-3">
                       <div>
                         <label htmlFor="oral-checkout-name" className="mb-1.5 block text-sm font-bold text-[#112033]">الاسم الكامل</label>
                         <input
@@ -518,7 +518,7 @@ export default function OralIrrigatorPage() {
                   </div>
                 </div>
 
-                <div className="text-right">
+                <div>
                   <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#dfeef8] bg-white px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-[#0f6b9c]">
                     <Icon name="droplets" size={12} />
                     الحل
@@ -577,7 +577,7 @@ export default function OralIrrigatorPage() {
 
               <div className="grid gap-5 md:grid-cols-3">
                 {stepCards.map((step, idx) => (
-                  <div key={step.title} className="rounded-[26px] border border-[#dfeef8] bg-[#f7fbff] p-5 text-right shadow-sm">
+                  <div key={step.title} className="rounded-[26px] border border-[#dfeef8] bg-[#f7fbff] p-5 shadow-sm">
                     <span className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#0f5b8a] text-xl font-black text-white">{idx + 1}</span>
                     <h3 className="mb-2 text-xl font-extrabold text-[#112033]">{step.title}</h3>
                     <p className="text-sm leading-relaxed text-[#4c647a]">{step.body}</p>
@@ -603,7 +603,7 @@ export default function OralIrrigatorPage() {
 
               <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
                 {benefitCards.map((item) => (
-                  <div key={item.title} className="rounded-[24px] border border-[#dfeef8] bg-white p-5 text-right shadow-[0_12px_30px_rgba(17,32,51,0.05)]">
+                  <div key={item.title} className="rounded-[24px] border border-[#dfeef8] bg-white p-5 shadow-[0_12px_30px_rgba(17,32,51,0.05)]">
                     <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-[#eaf8ff] text-[#0c6d9f]">
                       <Icon name={item.icon} size={18} />
                     </span>
@@ -668,7 +668,7 @@ export default function OralIrrigatorPage() {
 
               <div className="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory md:grid md:grid-cols-2 md:overflow-visible md:pb-0 xl:grid-cols-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {reviews.map((review) => (
-                  <div key={review.name} className="min-w-[260px] snap-start rounded-[24px] border border-[#dfeef8] bg-white p-5 text-right shadow-[0_18px_40px_rgba(17,32,51,0.04)] md:min-w-0">
+                  <div key={review.name} className="min-w-[260px] snap-start rounded-[24px] border border-[#dfeef8] bg-white p-5 shadow-[0_18px_40px_rgba(17,32,51,0.04)] md:min-w-0">
                     <img
                       src={review.image}
                       alt={review.name}
@@ -710,7 +710,7 @@ export default function OralIrrigatorPage() {
                   { icon: 'refresh', title: 'ضمان 30 يوم', text: 'إمكانية إرجاع أو استبدال المنتج في حالة وجود خلل.' },
                   { icon: 'whatsapp', title: 'دعم مباشر', text: 'تواصل مباشر مع الفريق قبل الطلب أو بعده.' },
                 ].map((item) => (
-                  <div key={item.title} className="rounded-[24px] border border-white/10 bg-white/5 p-5 text-right">
+                  <div key={item.title} className="rounded-[24px] border border-white/10 bg-white/5 p-5">
                     <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-[#173d5d] text-[#b7ebff]">
                       <Icon name={item.icon as any} size={18} />
                     </span>
@@ -743,7 +743,7 @@ export default function OralIrrigatorPage() {
                       <button
                         type="button"
                         onClick={() => setOpenFaq(isOpen ? null : key)}
-                        className="flex w-full items-center justify-between gap-4 px-4 py-4 text-right"
+                        className="flex w-full items-center justify-between gap-4 px-4 py-4"
                         aria-expanded={isOpen}
                       >
                         <span className="font-extrabold text-[#112033]">{faq.q}</span>
@@ -767,7 +767,7 @@ export default function OralIrrigatorPage() {
             <div className="container-wide">
               <div className="rounded-[30px] border border-[#dfeef8] bg-[linear-gradient(135deg,#0f5b8a_0%,#0d3b67_100%)] p-7 text-white shadow-[0_28px_55px_rgba(10,52,77,0.17)] md:p-10">
                 <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-                  <div className="text-right">
+                  <div>
                     <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-[#bfe8ff]">
                       <Icon name="spark" size={12} />
                       طلب سريع
@@ -780,7 +780,7 @@ export default function OralIrrigatorPage() {
                     </p>
                   </div>
 
-                  <div className="rounded-[26px] border border-white/10 bg-white/5 p-4 text-right">
+                  <div className="rounded-[26px] border border-white/10 bg-white/5 p-4">
                     <div className="mb-3 flex items-center justify-between gap-3">
                       <span className="text-xs text-white/75">السعر الحالي</span>
                       <span className="text-2xl font-black">{firstOfferPrice} درهم</span>
