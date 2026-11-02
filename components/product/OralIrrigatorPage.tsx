@@ -162,11 +162,11 @@ export default function OralIrrigatorPage() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const pricingSection = document.getElementById('product-pricing');
-      if (!pricingSection) return;
+      const solutionSection = document.getElementById('solution-section');
+      if (!solutionSection) return;
 
-      const rect = pricingSection.getBoundingClientRect();
-      const isVisible = rect.top <= window.innerHeight * 0.9 && rect.bottom >= window.innerHeight * 0.2;
+      const rect = solutionSection.getBoundingClientRect();
+      const isVisible = rect.top <= window.innerHeight * 0.9 && rect.bottom >= 0;
       setShowStickyCta(isVisible);
     };
 
@@ -362,45 +362,6 @@ export default function OralIrrigatorPage() {
                         </div>
                       </div>
                     ))}
-                  </div>
-
-                  <div className="mb-4 rounded-[24px] border border-[#edf3f8] bg-[#f8fbff] p-3 shadow-sm">
-                    <div className="mb-2 flex items-center justify-between gap-2">
-                      <div className="flex -space-x-2">
-                        {reviews.slice(0, 4).map((review) => (
-                          <img
-                            key={review.name}
-                            src={review.image}
-                            alt={review.name}
-                            className="h-12 w-12 rounded-full border-2 border-white object-cover shadow-sm"
-                          />
-                        ))}
-                      </div>
-                      <div className="flex items-center gap-1 text-[10px] text-[#f59e0b]">
-                        {Array.from({ length: 5 }).map((_, i) => (
-                          <span key={i}>★</span>
-                        ))}
-                      </div>
-                    </div>
-
-                    <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory md:overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                      {reviews.slice(0, 4).map((review) => (
-                        <div key={review.name} className="min-w-[240px] snap-start rounded-[20px] border border-[#dfeef8] bg-white p-3 text-left shadow-[0_12px_24px_rgba(17,32,51,0.04)]">
-                          <div className="mb-3 flex items-center gap-3">
-                            <img
-                              src={review.image}
-                              alt={review.name}
-                              className="h-12 w-12 rounded-full object-cover"
-                            />
-                            <div>
-                              <p className="text-[11px] font-black text-[#153452]">{review.name}</p>
-                              <div className="mt-1 text-[8px] text-[#f59e0b]">★★★★★</div>
-                            </div>
-                          </div>
-                          <p className="text-[10px] font-bold leading-relaxed text-[#153452]">“{review.text}”</p>
-                        </div>
-                      ))}
-                    </div>
                   </div>
 
                   <div id="product-pricing" className="mx-auto w-full max-w-[520px] scroll-mt-28 rounded-[28px] border border-[#dfeef8] bg-white p-5 shadow-[0_20px_45px_rgba(17,32,51,0.08)]">
