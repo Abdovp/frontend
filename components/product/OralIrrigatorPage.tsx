@@ -162,10 +162,12 @@ export default function OralIrrigatorPage() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const pricingSection = document.getElementById('product-pricing');
-      if (!pricingSection) return;
-      const rect = pricingSection.getBoundingClientRect();
-      setShowStickyCta(rect.top < window.innerHeight * 0.65);
+      const solutionSection = document.getElementById('solution-section');
+      if (!solutionSection) return;
+
+      const rect = solutionSection.getBoundingClientRect();
+      const hasReachedSolution = rect.top <= window.innerHeight * 0.7;
+      setShowStickyCta(hasReachedSolution);
     };
 
     handleScroll();
@@ -374,7 +376,11 @@ export default function OralIrrigatorPage() {
                           />
                         ))}
                       </div>
-                      <div className="text-[9px] text-[#f59e0b]">★★★★★</div>
+                      <div className="flex items-center gap-1 text-[10px] text-[#f59e0b]">
+                        {Array.from({ length: 5 }).map((_, i) => (
+                          <span key={i}>★</span>
+                        ))}
+                      </div>
                     </div>
 
                     <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory md:overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
@@ -384,7 +390,7 @@ export default function OralIrrigatorPage() {
                             <img
                               src={review.image}
                               alt={review.name}
-                              className="h-10 w-10 rounded-full object-cover"
+                              className="h-12 w-12 rounded-full object-cover"
                             />
                             <div>
                               <p className="text-[11px] font-black text-[#153452]">{review.name}</p>
@@ -505,7 +511,7 @@ export default function OralIrrigatorPage() {
             </div>
           </section>
 
-          <section className="bg-[#f5f9fc] py-16 md:py-20">
+          <section id="solution-section" className="bg-[#f5f9fc] py-16 md:py-20">
             <div className="container-wide mx-auto max-w-[1180px]">
               <div className="grid items-center gap-8 lg:grid-cols-[0.9fr_1.1fr]">
                 <div className="overflow-hidden rounded-[28px] border border-[#dfeef8] bg-white shadow-[0_18px_40px_rgba(17,32,51,0.06)]">
