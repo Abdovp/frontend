@@ -162,12 +162,12 @@ export default function OralIrrigatorPage() {
 
   useEffect(() => {
     const handleScroll = () => {
-      const solutionSection = document.getElementById('solution-section');
-      if (!solutionSection) return;
+      const heroSection = document.getElementById('hero-section');
+      if (!heroSection) return;
 
-      const rect = solutionSection.getBoundingClientRect();
-      const isVisible = rect.top <= window.innerHeight * 0.9 && rect.bottom >= -window.innerHeight * 0.4;
-      setShowStickyCta(isVisible);
+      const rect = heroSection.getBoundingClientRect();
+      const isInHero = rect.top < window.innerHeight * 0.95 && rect.bottom > 0;
+      setShowStickyCta(!isInHero);
     };
 
     handleScroll();
@@ -321,7 +321,7 @@ export default function OralIrrigatorPage() {
             </div>
           </div>
 
-          <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top,_rgba(110,198,214,0.22),_transparent_23%),linear-gradient(135deg,#f9fcff_0%,#eef8ff_40%,#fdfdfd_100%)] py-10 md:py-16">
+          <section id="hero-section" className="relative overflow-hidden bg-[radial-gradient(circle_at_top,_rgba(110,198,214,0.22),_transparent_23%),linear-gradient(135deg,#f9fcff_0%,#eef8ff_40%,#fdfdfd_100%)] py-10 md:py-16">
             <div className="container-wide relative z-10 mx-auto w-full md:max-w-[1180px]">
               <div className="mx-auto grid w-full items-center justify-center gap-6 md:max-w-[1180px] md:gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:items-center lg:justify-items-center">
                 <div className="order-1 w-full lg:order-2 lg:sticky lg:top-24 lg:justify-self-center">
