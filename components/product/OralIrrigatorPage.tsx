@@ -166,7 +166,7 @@ export default function OralIrrigatorPage() {
       if (!solutionSection) return;
 
       const rect = solutionSection.getBoundingClientRect();
-      const isVisible = rect.top <= window.innerHeight * 0.9 && rect.bottom >= 0;
+      const isVisible = rect.top <= window.innerHeight * 0.9 && rect.bottom >= -window.innerHeight * 0.4;
       setShowStickyCta(isVisible);
     };
 
