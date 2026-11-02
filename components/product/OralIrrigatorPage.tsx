@@ -320,8 +320,8 @@ export default function OralIrrigatorPage() {
           </div>
 
           <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top,_rgba(110,198,214,0.22),_transparent_23%),linear-gradient(135deg,#f9fcff_0%,#eef8ff_40%,#fdfdfd_100%)] py-10 md:py-16">
-            <div className="container-wide relative z-10">
-              <div className="mx-auto grid max-w-[1180px] items-start gap-8 md:gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+            <div className="container-wide relative z-10 mx-auto max-w-[1180px]">
+              <div className="mx-auto grid max-w-[1180px] items-start gap-8 md:gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
                 <div className="order-1 lg:order-2 lg:sticky lg:top-24">
                   <div className="relative mx-auto w-full max-w-[420px] overflow-hidden rounded-[30px] border border-[#dfeef9] bg-white p-0 shadow-[0_26px_60px_rgba(17,32,51,0.09)] md:max-w-[520px]">
                     <div className="relative aspect-[4/5] overflow-hidden rounded-[30px] bg-[#eef7ff]">
@@ -506,7 +506,7 @@ export default function OralIrrigatorPage() {
           </section>
 
           <section className="bg-[#f5f9fc] py-16 md:py-20">
-            <div className="container-wide">
+            <div className="container-wide mx-auto max-w-[1180px]">
               <div className="grid items-center gap-8 lg:grid-cols-[0.9fr_1.1fr]">
                 <div className="overflow-hidden rounded-[28px] border border-[#dfeef8] bg-white shadow-[0_18px_40px_rgba(17,32,51,0.06)]">
                   <div className="relative aspect-[4/4.6] overflow-hidden bg-[#edf9ff]">
@@ -590,7 +590,7 @@ export default function OralIrrigatorPage() {
           <OrderNowButton />
 
           <section className="bg-[#eff8ff] py-16 md:py-20">
-            <div className="container-wide">
+            <div className="container-wide mx-auto max-w-[1180px]">
               <div className="mb-8 text-center">
                 <p className="mb-3 inline-flex items-center justify-center gap-2 rounded-full border border-[#dfeef8] bg-white px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-[#0f6b9c]">
                   <Icon name="shield" size={12} />
@@ -655,7 +655,7 @@ export default function OralIrrigatorPage() {
           <OrderNowButton />
 
           <section className="bg-[#f6fbff] py-16 md:py-20" dir="rtl">
-            <div className="container-wide max-w-5xl">
+            <div className="container-wide mx-auto max-w-[1100px]">
               <div className="mb-8 text-center">
                 <p className="mb-3 inline-flex items-center justify-center gap-2 rounded-full border border-[#dfeef8] bg-white px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-[#0f6b9c]">
                   <Icon name="star" size={12} />
@@ -692,7 +692,7 @@ export default function OralIrrigatorPage() {
           </section>
 
           <section className="bg-[#102233] py-16 text-white md:py-20">
-            <div className="container-wide">
+            <div className="container-wide mx-auto max-w-[1180px]">
               <div className="mb-8 text-center">
                 <p className="mb-3 inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-[#9ad5f3]">
                   <Icon name="shield" size={12} />
@@ -723,7 +723,7 @@ export default function OralIrrigatorPage() {
           </section>
 
           <section className="bg-white py-16 md:py-20">
-            <div className="container-wide max-w-4xl">
+            <div className="container-wide mx-auto max-w-[1000px]">
               <div className="mb-8 text-center">
                 <p className="mb-3 inline-flex items-center justify-center gap-2 rounded-full border border-[#dfeef8] bg-[#f5fbff] px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-[#0f6b9c]">
                   <Icon name="chat" size={12} />
@@ -764,7 +764,7 @@ export default function OralIrrigatorPage() {
           </section>
 
           <section className="bg-[#f4fbff] py-16 md:py-20">
-            <div className="container-wide">
+            <div className="container-wide mx-auto max-w-[1180px]">
               <div className="rounded-[30px] border border-[#dfeef8] bg-[linear-gradient(135deg,#0f5b8a_0%,#0d3b67_100%)] p-7 text-white shadow-[0_28px_55px_rgba(10,52,77,0.17)] md:p-10">
                 <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr]">
                   <div>
