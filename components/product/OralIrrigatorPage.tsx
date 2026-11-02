@@ -321,8 +321,8 @@ export default function OralIrrigatorPage() {
 
           <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top,_rgba(110,198,214,0.22),_transparent_23%),linear-gradient(135deg,#f9fcff_0%,#eef8ff_40%,#fdfdfd_100%)] py-10 md:py-16">
             <div className="container-wide relative z-10 mx-auto max-w-[1180px]">
-              <div className="mx-auto grid max-w-[1180px] items-start gap-8 md:gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16">
-                <div className="order-1 lg:order-2 lg:sticky lg:top-24">
+              <div className="mx-auto grid w-full max-w-[1180px] items-start justify-center gap-8 md:gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:gap-16 lg:items-center">
+                <div className="order-1 w-full justify-self-center lg:order-2 lg:sticky lg:top-24">
                   <div className="relative mx-auto w-full max-w-[420px] overflow-hidden rounded-[30px] border border-[#dfeef9] bg-white p-0 shadow-[0_26px_60px_rgba(17,32,51,0.09)] md:max-w-[520px]">
                     <div className="relative aspect-[4/5] overflow-hidden rounded-[30px] bg-[#eef7ff]">
                       <img
