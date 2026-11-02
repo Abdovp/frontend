@@ -362,6 +362,41 @@ export default function OralIrrigatorPage() {
                     ))}
                   </div>
 
+                  <div className="mb-4 rounded-[24px] border border-[#edf3f8] bg-[#f8fbff] p-3 shadow-sm">
+                    <div className="mb-2 flex items-center justify-between gap-2">
+                      <div className="flex -space-x-2">
+                        {reviews.slice(0, 4).map((review) => (
+                          <img
+                            key={review.name}
+                            src={review.image}
+                            alt={review.name}
+                            className="h-12 w-12 rounded-full border-2 border-white object-cover shadow-sm"
+                          />
+                        ))}
+                      </div>
+                      <div className="text-[9px] text-[#f59e0b]">★★★★★</div>
+                    </div>
+
+                    <div className="flex gap-3 overflow-x-auto pb-2 snap-x snap-mandatory md:overflow-x-auto [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
+                      {reviews.slice(0, 4).map((review) => (
+                        <div key={review.name} className="min-w-[240px] snap-start rounded-[20px] border border-[#dfeef8] bg-white p-3 text-left shadow-[0_12px_24px_rgba(17,32,51,0.04)]">
+                          <div className="mb-3 flex items-center gap-3">
+                            <img
+                              src={review.image}
+                              alt={review.name}
+                              className="h-10 w-10 rounded-full object-cover"
+                            />
+                            <div>
+                              <p className="text-[11px] font-black text-[#153452]">{review.name}</p>
+                              <div className="mt-1 text-[8px] text-[#f59e0b]">★★★★★</div>
+                            </div>
+                          </div>
+                          <p className="text-[10px] font-bold leading-relaxed text-[#153452]">“{review.text}”</p>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
                   <div id="product-pricing" className="scroll-mt-28 rounded-[28px] border border-[#dfeef8] bg-white p-5 shadow-[0_20px_45px_rgba(17,32,51,0.08)]">
                     <div className="mb-5 flex items-center justify-center gap-3 text-center">
                       <span className="inline-flex items-center justify-center rounded-full border border-[#d1ebff] bg-[#eef8ff] px-6 py-3 text-[15px] font-black tracking-[0.08em] text-[#0f6b9c] sm:text-lg">
