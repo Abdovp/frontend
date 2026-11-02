@@ -364,7 +364,6 @@ export default function OralIrrigatorPage() {
                     ))}
                   </div>
 
-<<<<<<< HEAD
                   <div className="mb-4 rounded-[24px] border border-[#edf3f8] bg-[#f8fbff] p-3 shadow-sm">
                     <div className="mb-2 flex items-center justify-between gap-2">
                       <div className="flex -space-x-2">
@@ -405,9 +404,6 @@ export default function OralIrrigatorPage() {
                   </div>
 
                   <div id="product-pricing" className="mx-auto w-full max-w-[520px] scroll-mt-28 rounded-[28px] border border-[#dfeef8] bg-white p-5 shadow-[0_20px_45px_rgba(17,32,51,0.08)]">
-=======
-                  <div id="product-pricing" className="scroll-mt-28 rounded-[28px] border border-[#dfeef8] bg-white p-5 shadow-[0_20px_45px_rgba(17,32,51,0.08)]">
->>>>>>> fb97c1c (Update sticky CTA timing and product offer copy)
                     <div className="mb-5 flex items-center justify-center gap-3 text-center">
                       <span className="inline-flex items-center justify-center rounded-full border border-[#d1ebff] bg-[#eef8ff] px-6 py-3 text-[15px] font-black tracking-[0.08em] text-[#0f6b9c] sm:text-lg">
                         ادخل بياناتك للطلب
@@ -515,13 +511,8 @@ export default function OralIrrigatorPage() {
             </div>
           </section>
 
-<<<<<<< HEAD
           <section id="solution-section" className="bg-[#f5f9fc] py-16 md:py-20">
             <div className="container-wide mx-auto max-w-[1180px]">
-=======
-          <section className="bg-[#f5f9fc] py-16 md:py-20">
-            <div className="container-wide">
->>>>>>> fb97c1c (Update sticky CTA timing and product offer copy)
               <div className="grid items-center gap-8 lg:grid-cols-[0.9fr_1.1fr]">
                 <div className="overflow-hidden rounded-[28px] border border-[#dfeef8] bg-white shadow-[0_18px_40px_rgba(17,32,51,0.06)]">
                   <div className="relative aspect-[4/4.6] overflow-hidden bg-[#edf9ff]">
