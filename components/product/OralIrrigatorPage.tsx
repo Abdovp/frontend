@@ -320,10 +320,10 @@ export default function OralIrrigatorPage() {
           </div>
 
           <section className="relative overflow-hidden bg-[radial-gradient(circle_at_top,_rgba(110,198,214,0.22),_transparent_23%),linear-gradient(135deg,#f9fcff_0%,#eef8ff_40%,#fdfdfd_100%)] py-10 md:py-16">
-            <div className="container-wide relative z-10 mx-auto w-full max-w-[420px] md:max-w-[1180px]">
-              <div className="mx-auto grid w-full max-w-[420px] items-center justify-center gap-6 md:max-w-[1180px] md:gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:items-center lg:justify-items-center">
+            <div className="container-wide relative z-10 mx-auto w-full md:max-w-[1180px]">
+              <div className="mx-auto grid w-full items-center justify-center gap-6 md:max-w-[1180px] md:gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:items-center lg:justify-items-center">
                 <div className="order-1 w-full lg:order-2 lg:sticky lg:top-24 lg:justify-self-center">
-                  <div className="relative mx-auto w-full max-w-[360px] overflow-hidden rounded-[30px] border border-[#dfeef9] bg-white p-0 shadow-[0_26px_60px_rgba(17,32,51,0.09)] sm:max-w-[420px] md:max-w-[500px] lg:max-w-[520px]">
+                  <div className="relative mx-auto w-[90%] max-w-[320px] overflow-hidden rounded-[30px] border border-[#dfeef9] bg-white p-0 shadow-[0_26px_60px_rgba(17,32,51,0.09)] sm:max-w-[420px] md:max-w-[500px] lg:max-w-[520px]">
                     <div className="relative aspect-[4/5] overflow-hidden rounded-[30px] bg-[#eef7ff]">
                       <img
                         src="/images/hero/hero-product.avif"
