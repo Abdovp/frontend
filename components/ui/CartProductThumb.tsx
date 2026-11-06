@@ -3,8 +3,10 @@ import { products, type ProductId } from '../../lib/products';
 import Icon from './Icon';
 
 type Props = {
-  productId: ProductId;
+  productId?: ProductId;
   size?: 'sm' | 'md';
+  imageSrc?: string;
+  altText?: string;
 };
 
 const sizeClass = {
@@ -17,21 +19,31 @@ const imageSizes = {
   md: '64px',
 };
 
-export default function CartProductThumb({ productId, size = 'md' }: Props) {
-  const product = products[productId];
+export default function CartProductThumb({ productId, size = 'md', imageSrc, altText }: Props) {
+  const product = productId ? products[productId] : undefined;
+  const resolvedImage = imageSrc ?? product?.image;
+  const resolvedAlt = altText ?? product?.nameAr ?? 'Product';
 
-  if (product.image) {
+  if (resolvedImage) {
     return (
       <div
         className={`cart-item-thumb cart-item-thumb--photo relative ${sizeClass[size]}`}
       >
         <Image
-          src={product.image}
-          alt={product.nameAr}
+          src={resolvedImage}
+          alt={resolvedAlt}
           fill
           sizes={imageSizes[size]}
           className="object-contain object-center p-0.5"
         />
+      </div>
+    );
+  }
+
+  if (!product) {
+    return (
+      <div className={`cart-item-thumb cart-item-thumb--icon ${sizeClass[size]}`}>
+        <Icon name="shield" size={size === 'sm' ? 20 : 24} />
       </div>
     );
   }

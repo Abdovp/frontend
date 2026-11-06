@@ -71,7 +71,7 @@ export default function UpsellPopup({ product, onAdded, onClose }: UpsellPopupPr
           </div>
 
           <div className="flex gap-4 rounded-2xl border border-ink/[0.08] bg-cream p-4 mb-5">
-            <CartProductThumb productId={product.id} size="md" />
+            <CartProductThumb productId={product.id} size="md" imageSrc={product.image} altText={product.nameAr} />
             <div className="min-w-0 flex-1">
               <p className="font-heading font-bold text-ink leading-snug">{product.nameAr}</p>
               <p className="text-sm text-ink/55 mt-1 line-clamp-2">{product.tagline}</p>
