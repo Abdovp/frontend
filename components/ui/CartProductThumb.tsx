@@ -11,12 +11,12 @@ type Props = {
 
 const sizeClass = {
   sm: 'w-12 h-12',
-  md: 'w-16 h-16',
+  md: 'w-20 h-20',
 };
 
 const imageSizes = {
   sm: '48px',
-  md: '64px',
+  md: '80px',
 };
 
 export default function CartProductThumb({ productId, size = 'md', imageSrc, altText }: Props) {

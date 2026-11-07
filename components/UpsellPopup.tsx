@@ -84,7 +84,7 @@ export default function UpsellPopup({ product, onAdded, onClose }: UpsellPopupPr
 
           <div className="flex items-end justify-between gap-4 mb-5">
             <div>
-              <p className="text-xs text-ink/45 line-through">{product.offers[0].price} {CURRENCY}</p>
+              <p className="text-xs text-ink/45 line-through">169 {CURRENCY}</p>
               <p className="font-heading text-3xl font-extrabold text-brand leading-none">
                 {UPSELL_PRICE} <span className="text-base font-semibold">{CURRENCY}</span>
               </p>
