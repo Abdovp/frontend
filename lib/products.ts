@@ -1,6 +1,6 @@
 import type { IconName } from '../components/ui/Icon';
 
-export type ProductId = 'face-pack' | 'magnetic-holder' | 'car-vacuum' | 'garden-sprinkler' | 'car-charger' | 'car-armrest' | 'oral-irrigator';
+export type ProductId = 'face-pack' | 'magnetic-holder' | 'car-vacuum' | 'garden-sprinkler' | 'car-charger' | 'car-armrest' | 'oral-irrigator' | 'automatic-soldering-iron-pack';
 
 export interface ProductOffer {
   quantity: 1 | 2 | 3;
@@ -1502,6 +1502,117 @@ export const products: Record<ProductId, Product> = {
     ],
     reviews: [],
   },
+  'automatic-soldering-iron-pack': {
+    id: 'automatic-soldering-iron-pack',
+    sku: 'BOYA-SOLDERING-IRON-PACK',
+    slug: 'automatic-soldering-iron',
+    href: '/product/automatic-soldering-iron',
+    nameAr: 'باك المكواة اللحام الاوتوماتيكي + قاطع الأسلاك',
+    nameEn: 'Automatic Soldering Iron + Wire Cutter Pack',
+    category: 'أدوات إلكترونية',
+    icon: 'zap',
+    tagline: 'باك عملي لكل من يشتغل في الإلكترونيات والإصلاحات الصغيرة والمشاريع اليدوية.',
+    metaDescription:
+      'باك مكواة اللحام الاوتوماتيكي + قاطع الأسلاك من بويا شوب. مناسب للإلكترونيات، الإصلاحات الصغيرة، والمشاريع اليدوية. الدفع عند الاستلام وتوصيل مجاني في المغرب.',
+    rating: 4.9,
+    reviewCount: 128,
+    unit: 'باك',
+    soldText: 'الطلب سريع — المخزون محدود',
+    scarcityText: 'المخزون محدود — الطلب سريع',
+    stockLeft: 12,
+    deliveryDays: '24–48 ساعة',
+    checkoutHeadline: 'باك عملي للإلكترونيات',
+    checkoutDescription: 'مكواة لحام اوتوماتيكية + قاطع أسلاك دقيق في باك واحد',
+    highlights: ['لحام سريع ومريح', 'قاطع أسلاك دقيق', 'مناسب للمبتدئين', 'مفيد للإصلاحات الصغيرة'],
+    valueProps: [
+      { icon: 'zap', title: 'لحام سريع', text: 'مكواة تعمل بسرعة وفعالية في المهام الإلكترونية الصغيرة.' },
+      { icon: 'check-circle', title: 'السهولة', text: 'مناسب للمهام اليومية دون تعقيد أو تجهيزات كثيرة.' },
+      { icon: 'cpu', title: 'دقة العمل', text: 'قاطع أسلاك مناسب للتجميعات الدقيقة والمشاريع اليدوية.' },
+      { icon: 'shield', title: 'ثقة', text: 'مفيد للاستخدام المنزلي والمختبري والمشاريع الصغيرة.' },
+    ],
+    trustBadges: [
+      { icon: 'badge', title: 'جودة موثوقة', subtitle: 'منتجات مفحوصة' },
+      { icon: 'shield', title: 'ضمان 30 يوم', subtitle: 'تأكيد الجودة' },
+      { icon: 'star', title: '4.9/5', subtitle: '128 تقييم' },
+      { icon: 'truck', title: 'توصيل سريع', subtitle: 'في المغرب' },
+    ],
+    guarantees: SHARED_GUARANTEES,
+    offers: [
+      {
+        quantity: 1,
+        price: 199,
+        compareAt: 299,
+        label: 'باك واحد',
+        sublabel: 'الدفع عند الاستلام',
+        badge: 'أفضل قيمة',
+        perks: ['توصيل مجاني', 'ضمان 30 يوم', 'مناسب للإلكترونيات'],
+      },
+      {
+        quantity: 2,
+        price: 349,
+        compareAt: 499,
+        label: '2 باكات',
+        sublabel: 'خصم خاص',
+        badge: 'الأكثر طلباً',
+        perks: ['توصيل مجاني', 'خصم خاص', 'مناسبة للمشاريع المتعددة'],
+      },
+    ],
+    galleryLabels: ['الباك الكامل', 'المكواة', 'النظام', 'القاطع'],
+    pain: {
+      eyebrow: 'المشكل',
+      title: 'العمل الدقيق يطلب أدوات عملية وسريعة',
+      body: 'في الإصلاحات الصغيرة أو المشاريع الإلكترونية، يطلب منك أن تبقى دقيقاً وسريعاً دون تعقيد أو أدوات كثيرة. هذا ما يجعل الشغل يضيع وقتاً ومرهقة في كثير من الأحيان.',
+      bullets: ['تأخر في الإصلاحات الصغيرة', 'أدوات كثيرة ومشتتة', 'عدم الدقة في القطع', 'تعقيد في اللحام اليومي'],
+      imageLabel: 'المشكلة اليومية',
+    },
+    logic: {
+      eyebrow: 'الحل',
+      title: 'الأداة المناسبة تجعل المهمة أسهل وأسرع',
+      body: 'هذا الباك يجمع بين مكواة اللحام الاوتوماتيكي وقاطع الأسلاك المريح في أداة عملية مناسبة للإلكترونيات والمشاريع اليدوية اليومية.',
+      bullets: ['لحام أسرع', 'قطع أنظف', 'مناسب للمبتدئين', 'حل عملي في البيت أو الورشة'],
+      imageLabel: 'الحل العملي',
+    },
+    proof: {
+      eyebrow: 'إثبات',
+      title: 'سهل الاستعمال، عملي، ومفيد في كل مشروع صغير',
+      body: 'المنتج مصمم ليوفر لك أدوات أساسية في واحد، مع سهولة الاستخدام وتجربة عملية في اللحام والقطع دون تعب زائد.',
+      bullets: ['إصلاحات أسرع', 'أدوات مدمجة', 'مناسب للمهام اليومية', 'نتيجة أوضح'],
+      imageLabel: 'التجربة العملية',
+    },
+    howItWorks: {
+      eyebrow: 'كيف يعمل',
+      title: 'مجموعة عملية لمهام اللحام والقطع',
+      body: 'تجهز المكواة وتقوم بعملية اللحام، ثم تستخدم القاطع لتنظيف الأطراف والقطع بدقة في المشاريع الصغيرة.',
+      bullets: ['قم بتشغيل المكواة', 'اقطع الأطراف بدقة', 'استخدمه في المشاريع الصغيرة'],
+      imageLabel: 'طريقة الاستعمال',
+    },
+    howToUse: {
+      title: 'طريقة الاستعمال',
+      imageLabel: 'طريقة الاستعمال',
+      steps: [
+        { title: 'جهّز المكواة', body: 'اشتغل بالمكواة في منطقة مناسبة وراقب درجة الحرارة حسب نوع العمل.' },
+        { title: 'قم بلحام القطعة', body: 'استعمل نظام التغذية لوصل السلك بسهولة وسرعة أثناء اللحام.' },
+        { title: 'اقطع وانظف', body: 'استخدم القاطع الدقيق لتقليم الأطراف والقطع بشكل أنظف وأكثر دقة.' },
+      ],
+    },
+    faqs: [
+      {
+        title: 'الاستعمال',
+        items: [
+          { q: 'واش الباك مناسب للمبتدئين؟', a: 'نعم، هو مناسب للمبتدئين والمهتمين بالإلكترونيات والمشاريع اليدوية بسبب سهولة الاستخدام.' },
+          { q: 'شيء كايتضمن هاد الباك؟', a: 'الطلب يتضمن مكواة لحام اوتوماتيكية ونظام تغذية سلك والقاطع الدقيق في باك واحد.' },
+        ],
+      },
+      {
+        title: 'التوصيل والدفع',
+        items: [
+          { q: 'واش الدفع عند الاستلام؟', a: 'نعم، الدفع عند الاستلام متاح في المغرب.' },
+          { q: 'شحال كايدوز التوصيل؟', a: 'التوصيل غالباً خلال 24-48 ساعة حسب المنطقة.' },
+        ],
+      },
+    ],
+    reviews: [],
+  },
 };
 
 export const productList: Product[] = Object.values(products);
@@ -1529,6 +1640,9 @@ export function getProductSku(id: ProductId | string): string {
   }
   if (id === 'oral-irrigator') {
     return 'BOYA-ORAL-IRRIGATOR';
+  }
+  if (id === 'automatic-soldering-iron-pack') {
+    return 'BOYA-SOLDERING-IRON-PACK';
   }
 
   const product = products[id as ProductId];
