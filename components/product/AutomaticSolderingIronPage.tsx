@@ -553,6 +553,25 @@ export default function AutomaticSolderingIronPage() {
             </div>
           </section>
 
+          <div className="mx-auto max-w-4xl px-4 py-4 sm:px-6 lg:px-8">
+            <div className="rounded-[24px] border border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 p-4 shadow-[0_18px_32px_rgba(246,187,63,0.12)]">
+              <div className="flex flex-col items-center justify-center gap-3 text-center sm:flex-row sm:justify-between sm:text-right">
+                <div>
+                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-700">Order now</p>
+                  <p className="text-sm font-bold text-slate-700">مكواة اللحام + قاطع الأسلاك فباك واحد</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={scrollToOrderForm}
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#f6bb3f] px-5 py-3 text-sm font-black text-slate-900 shadow-[0_12px_24px_rgba(246,187,63,0.3)] transition hover:-translate-y-0.5"
+                >
+                  <Icon name="arrow-left" size={16} />
+                  اطلب الآن
+                </button>
+              </div>
+            </div>
+          </div>
+
           <section className="mx-auto max-w-5xl px-4 pb-20 pt-14 sm:px-6 lg:px-8">
             <div className="rounded-[28px] border border-sky-200 bg-sky-50 p-6 text-center shadow-[0_18px_32px_rgba(59,130,246,0.08)]">
               <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white px-3 py-1.5 text-xs font-bold text-sky-700">
