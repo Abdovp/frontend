@@ -13,7 +13,9 @@ import { createPurchaseEventId, submitOrder } from '../../lib/api/orders';
 import { getCheckoutErrorMessage } from '../../lib/api/order-errors';
 import { trackInitiateCheckout, trackPurchase, trackViewContent } from '../../lib/analytics/track';
 import { saveOrderConfirmation } from '../../lib/order-confirmation';
-import { STORE } from '../../lib/products';
+import { STORE, type Product } from '../../lib/products';
+import { pickUpsellProduct } from '../../lib/upsell';
+import UpsellPopup from '../UpsellPopup';
 
 type FormState = {
   name: string;
@@ -84,6 +86,7 @@ export default function AutomaticSolderingIronPage() {
   const [selectedPrice, setSelectedPrice] = useState<number>(PRICE_MAD);
   const [quantity, setQuantity] = useState<number>(1);
   const [errors, setErrors] = useState<Partial<Record<keyof FormState, string>>>({});
+  const [upsellProduct, setUpsellProduct] = useState<Product | null>(null);
 
   useEffect(() => {
     void router.prefetch('/thank-you');
@@ -134,6 +137,20 @@ export default function AutomaticSolderingIronPage() {
       const input = document.getElementById('boyashop-order-name') as HTMLInputElement | null;
       input?.focus();
     }, 250);
+  };
+
+  const finishCheckout = async () => {
+    await router.push('/thank-you');
+  };
+
+  const handleUpsellAdded = () => {
+    setUpsellProduct(null);
+    void finishCheckout();
+  };
+
+  const handleUpsellClose = () => {
+    setUpsellProduct(null);
+    void finishCheckout();
   };
 
   const handleSubmit = async (event: React.FormEvent) => {
@@ -195,8 +212,15 @@ export default function AutomaticSolderingIronPage() {
         items: items.map((item) => ({ productId: item.id, name: item.name, price: item.price, quantity: item.quantity })),
       });
 
+      const upsell = pickUpsellProduct([PRODUCT_ID]);
+      if (upsell) {
+        setUpsellProduct(upsell);
+        setSubmitting(false);
+        return;
+      }
+
       setSubmitting(false);
-      await router.push('/thank-you');
+      await finishCheckout();
     } catch (error) {
       setSubmitError(getCheckoutErrorMessage(error));
       setSubmitting(false);
@@ -219,6 +243,8 @@ export default function AutomaticSolderingIronPage() {
       </Head>
 
       <div className="min-h-screen bg-[#f5f7fb] text-slate-900" dir="rtl">
+        {upsellProduct && <UpsellPopup product={upsellProduct} onAdded={handleUpsellAdded} onClose={handleUpsellClose} />}
+
         <Header />
 
         <main>
