@@ -322,10 +322,10 @@ export default function OralIrrigatorPage() {
           </div>
 
           <section id="hero-section" className="relative overflow-hidden bg-[radial-gradient(circle_at_top,_rgba(110,198,214,0.22),_transparent_23%),linear-gradient(135deg,#f9fcff_0%,#eef8ff_40%,#fdfdfd_100%)] py-10 md:py-16">
-            <div className="container-wide relative z-10 mx-auto w-full md:max-w-[1180px]">
-              <div className="mx-auto grid w-full items-center justify-center gap-6 md:max-w-[1180px] md:gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16 lg:items-center lg:justify-items-center">
-                <div className="order-1 w-full lg:order-2 lg:sticky lg:top-24 lg:justify-self-center">
-                  <div className="relative mx-auto w-[88%] max-w-[320px] overflow-hidden rounded-[30px] border border-[#dfeef9] bg-white p-0 shadow-[0_26px_60px_rgba(17,32,51,0.09)] sm:max-w-[390px] md:max-w-[500px] lg:max-w-[520px]">
+            <div className="container-wide relative z-10">
+              <div className="grid items-start gap-10 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+                <div className="order-1 lg:order-2 lg:sticky lg:top-24">
+                  <div className="relative mx-auto w-full max-w-[520px] overflow-hidden rounded-[30px] border border-[#dfeef9] bg-white p-0 shadow-[0_26px_60px_rgba(17,32,51,0.09)]">
                     <div className="relative aspect-[4/5] overflow-hidden rounded-[30px] bg-[#eef7ff]">
                       <img
                         src="/images/hero/hero-product.avif"
@@ -336,7 +336,7 @@ export default function OralIrrigatorPage() {
                   </div>
                 </div>
 
-                <div className="order-2 mx-auto w-full max-w-[100%] md:max-w-[520px] lg:justify-self-center">
+                <div className="order-2 text-right">
                   <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-[#cfeaf8] bg-white px-3 py-1.5 text-[11px] font-extrabold uppercase tracking-[0.16em] text-[#0e688f]">
                     <Icon name="spark" size={12} />
                     Oral Irrigator
@@ -364,14 +364,15 @@ export default function OralIrrigatorPage() {
                     ))}
                   </div>
 
-                  <div id="product-pricing" className="mx-auto w-full max-w-[520px] scroll-mt-28 rounded-[28px] border border-[#dfeef8] bg-white p-5 shadow-[0_20px_45px_rgba(17,32,51,0.08)]">
-                    <div className="mb-5 flex items-center justify-center gap-3 text-center">
-                      <span className="inline-flex items-center justify-center rounded-full border border-[#d1ebff] bg-[#eef8ff] px-6 py-3 text-[15px] font-black tracking-[0.08em] text-[#0f6b9c] sm:text-lg">
+                  <div id="product-pricing" className="scroll-mt-28 rounded-[24px] border border-[#dfeef8] bg-white p-4 shadow-[0_16px_40px_rgba(17,32,51,0.07)]">
+                    <div className="mb-3 flex items-center justify-between gap-3 text-right">
+                      <span className="rounded-full border border-[#d1ebff] bg-[#eef8ff] px-2.5 py-1 text-[10px] font-black tracking-[0.08em] text-[#0f6b9c]">
                         ادخل بياناتك للطلب
                       </span>
+                      <p className="text-[11px] font-bold uppercase tracking-[0.12em] text-[#5a7083]">اختر العرض</p>
                     </div>
 
-                    <div className="flex flex-col gap-3.5">
+                    <div className="flex flex-col gap-3">
                       {offers.map((offer) => {
                         const isSelected = selectedOffer === offer.id;
                         return (
@@ -379,23 +380,23 @@ export default function OralIrrigatorPage() {
                             key={offer.id}
                             type="button"
                             onClick={() => setSelectedOffer(offer.id)}
-                            className={`w-full rounded-[22px] border p-4 transition ${isSelected ? 'border-[#0f6b9c] bg-[#edf8ff] shadow-[0_14px_28px_rgba(15,91,138,0.08)] ring-2 ring-[#d4ebff]' : 'border-[#dfeef8] bg-[#f9fbff] hover:border-[#cfeaf8]'}`}
+                            className={`w-full rounded-[22px] border p-3.5 text-right transition ${isSelected ? 'border-[#0f6b9c] bg-[#edf8ff] shadow-[0_14px_28px_rgba(15,91,138,0.08)] ring-2 ring-[#d4ebff]' : 'border-[#dfeef8] bg-[#f9fbff] hover:border-[#cfeaf8]'}`}
                           >
                             <div className="flex items-center justify-between gap-3">
                               <div className="flex-1">
                                 <div className="flex items-center gap-2">
-                                  <p className="text-base font-extrabold text-[#112033]">{offer.label}</p>
+                                  <p className="text-sm font-extrabold text-[#112033]">{offer.label}</p>
                                   {offer.badge && (
-                                    <span className="rounded-full bg-[#e8f8ef] px-2.5 py-1 text-[10px] font-black text-[#1d7a5f]">
+                                    <span className="rounded-full bg-[#e8f8ef] px-2 py-0.5 text-[9px] font-black text-[#1d7a5f]">
                                       {offer.badge}
                                     </span>
                                   )}
                                 </div>
-                                <p className="mt-1.5 text-[11px] leading-relaxed text-[#476078] sm:text-xs">{offer.perk}</p>
+                                <p className="mt-1 text-[11px] leading-relaxed text-[#476078]">{offer.perk}</p>
                               </div>
                               <div className="text-left">
-                                <p className="text-2xl font-black text-[#112033]">{offer.price} درهم</p>
-                                <p className="text-[11px] text-[#73859a] line-through sm:text-xs">{offer.oldPrice} درهم</p>
+                                <p className="text-xl font-black text-[#112033]">{offer.price} درهم</p>
+                                <p className="text-[11px] text-[#73859a] line-through">{offer.oldPrice} درهم</p>
                               </div>
                             </div>
                           </button>
@@ -403,14 +404,14 @@ export default function OralIrrigatorPage() {
                       })}
                     </div>
 
-                    <div className="mt-4 grid gap-3">
+                    <div className="mt-4 grid gap-3 text-right">
                       <div>
                         <label htmlFor="oral-checkout-name" className="mb-1.5 block text-sm font-bold text-[#112033]">الاسم الكامل</label>
                         <input
                           id="oral-checkout-name"
                           value={customerName}
                           onChange={(e) => setCustomerName(e.target.value)}
-                          className="w-full rounded-[18px] border border-[#dfeef8] bg-[#f9fbff] px-5 py-4 text-base text-[#112033] shadow-sm outline-none transition focus:border-[#0f6b9c] focus:bg-white focus:ring-4 focus:ring-[#d5ecff] sm:py-5"
+                          className="w-full rounded-[18px] border border-[#dfeef8] bg-[#f9fbff] px-5 py-4 text-base text-[#112033] shadow-sm outline-none transition focus:border-[#0f6b9c] focus:bg-white focus:ring-4 focus:ring-[#d5ecff]"
                           placeholder="اكتب اسمك"
                         />
                         {formErrors.name && <p className="mt-1 text-xs font-bold text-red-600">{formErrors.name}</p>}
@@ -422,7 +423,7 @@ export default function OralIrrigatorPage() {
                           id="oral-checkout-phone"
                           value={customerPhone}
                           onChange={(e) => setCustomerPhone(e.target.value)}
-                          className="w-full rounded-[18px] border border-[#dfeef8] bg-[#f9fbff] px-5 py-4 text-base text-[#112033] shadow-sm outline-none transition focus:border-[#0f6b9c] focus:bg-white focus:ring-4 focus:ring-[#d5ecff] sm:py-5"
+                          className="w-full rounded-[18px] border border-[#dfeef8] bg-[#f9fbff] px-5 py-4 text-base text-[#112033] shadow-sm outline-none transition focus:border-[#0f6b9c] focus:bg-white focus:ring-4 focus:ring-[#d5ecff]"
                           placeholder="06XXXXXXXX"
                         />
                         {formErrors.phone && <p className="mt-1 text-xs font-bold text-red-600">{formErrors.phone}</p>}
@@ -436,18 +437,18 @@ export default function OralIrrigatorPage() {
                         type="button"
                         onClick={handleCheckoutCTA}
                         disabled={submitting}
-                        className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#0f5b8a] via-[#0a72af] to-[#0d4f7b] px-8 py-5 text-xl font-black text-white shadow-[0_22px_36px_rgba(15,91,138,0.28)] transition hover:scale-[1.01] hover:shadow-[0_28px_42px_rgba(15,91,138,0.34)] disabled:cursor-not-allowed disabled:opacity-80"
+                        className="inline-flex flex-1 items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#0f5b8a] via-[#0a72af] to-[#0d4f7b] px-7 py-5 text-lg font-black text-white shadow-[0_22px_36px_rgba(15,91,138,0.28)] transition hover:scale-[1.01] hover:shadow-[0_28px_42px_rgba(15,91,138,0.34)] disabled:cursor-not-allowed disabled:opacity-80"
                       >
-                        <Icon name="cart" size={20} />
+                        <Icon name="cart" size={18} />
                         {submitting ? 'جاري الطلب...' : 'اطلب الآن'}
                       </button>
                       <a
                         href={whatsappLink}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex items-center justify-center gap-2 rounded-full border border-[#dfeef8] bg-white px-8 py-5 text-xl font-black text-[#123752] shadow-sm transition hover:border-[#cfeaf8] hover:bg-[#f7fbff]"
+                        className="inline-flex items-center justify-center gap-2 rounded-full border border-[#dfeef8] bg-white px-7 py-5 text-lg font-black text-[#123752] shadow-sm transition hover:border-[#cfeaf8] hover:bg-[#f7fbff]"
                       >
-                        <Icon name="whatsapp" size={20} />
+                        <Icon name="whatsapp" size={18} />
                         تواصل واتساب
                       </a>
                     </div>
@@ -472,8 +473,8 @@ export default function OralIrrigatorPage() {
             </div>
           </section>
 
-          <section id="solution-section" className="bg-[#f5f9fc] py-16 md:py-20">
-            <div className="container-wide mx-auto max-w-[1180px]">
+          <section className="bg-[#f5f9fc] py-16 md:py-20">
+            <div className="container-wide">
               <div className="grid items-center gap-8 lg:grid-cols-[0.9fr_1.1fr]">
                 <div className="overflow-hidden rounded-[28px] border border-[#dfeef8] bg-white shadow-[0_18px_40px_rgba(17,32,51,0.06)]">
                   <div className="relative aspect-[4/4.6] overflow-hidden bg-[#edf9ff]">
@@ -485,7 +486,7 @@ export default function OralIrrigatorPage() {
                   </div>
                 </div>
 
-                <div>
+                <div className="text-right">
                   <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-[#dfeef8] bg-white px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-[#0f6b9c]">
                     <Icon name="droplets" size={12} />
                     الحل
@@ -544,7 +545,7 @@ export default function OralIrrigatorPage() {
 
               <div className="grid gap-5 md:grid-cols-3">
                 {stepCards.map((step, idx) => (
-                  <div key={step.title} className="rounded-[26px] border border-[#dfeef8] bg-[#f7fbff] p-5 shadow-sm">
+                  <div key={step.title} className="rounded-[26px] border border-[#dfeef8] bg-[#f7fbff] p-5 text-right shadow-sm">
                     <span className="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-[#0f5b8a] text-xl font-black text-white">{idx + 1}</span>
                     <h3 className="mb-2 text-xl font-extrabold text-[#112033]">{step.title}</h3>
                     <p className="text-sm leading-relaxed text-[#4c647a]">{step.body}</p>
@@ -557,7 +558,7 @@ export default function OralIrrigatorPage() {
           <OrderNowButton />
 
           <section className="bg-[#eff8ff] py-16 md:py-20">
-            <div className="container-wide mx-auto max-w-[1180px]">
+            <div className="container-wide">
               <div className="mb-8 text-center">
                 <p className="mb-3 inline-flex items-center justify-center gap-2 rounded-full border border-[#dfeef8] bg-white px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-[#0f6b9c]">
                   <Icon name="shield" size={12} />
@@ -570,7 +571,7 @@ export default function OralIrrigatorPage() {
 
               <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
                 {benefitCards.map((item) => (
-                  <div key={item.title} className="rounded-[24px] border border-[#dfeef8] bg-white p-5 shadow-[0_12px_30px_rgba(17,32,51,0.05)]">
+                  <div key={item.title} className="rounded-[24px] border border-[#dfeef8] bg-white p-5 text-right shadow-[0_12px_30px_rgba(17,32,51,0.05)]">
                     <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-[#eaf8ff] text-[#0c6d9f]">
                       <Icon name={item.icon} size={18} />
                     </span>
@@ -622,7 +623,7 @@ export default function OralIrrigatorPage() {
           <OrderNowButton />
 
           <section className="bg-[#f6fbff] py-16 md:py-20" dir="rtl">
-            <div className="container-wide mx-auto max-w-[1100px]">
+            <div className="container-wide max-w-5xl">
               <div className="mb-8 text-center">
                 <p className="mb-3 inline-flex items-center justify-center gap-2 rounded-full border border-[#dfeef8] bg-white px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-[#0f6b9c]">
                   <Icon name="star" size={12} />
@@ -635,7 +636,7 @@ export default function OralIrrigatorPage() {
 
               <div className="flex gap-4 overflow-x-auto pb-2 snap-x snap-mandatory md:grid md:grid-cols-2 md:overflow-visible md:pb-0 xl:grid-cols-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
                 {reviews.map((review) => (
-                  <div key={review.name} className="min-w-[260px] snap-start rounded-[24px] border border-[#dfeef8] bg-white p-5 shadow-[0_18px_40px_rgba(17,32,51,0.04)] md:min-w-0">
+                  <div key={review.name} className="min-w-[260px] snap-start rounded-[24px] border border-[#dfeef8] bg-white p-5 text-right shadow-[0_18px_40px_rgba(17,32,51,0.04)] md:min-w-0">
                     <img
                       src={review.image}
                       alt={review.name}
@@ -659,7 +660,7 @@ export default function OralIrrigatorPage() {
           </section>
 
           <section className="bg-[#102233] py-16 text-white md:py-20">
-            <div className="container-wide mx-auto max-w-[1180px]">
+            <div className="container-wide">
               <div className="mb-8 text-center">
                 <p className="mb-3 inline-flex items-center justify-center gap-2 rounded-full border border-white/10 bg-white/5 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-[#9ad5f3]">
                   <Icon name="shield" size={12} />
@@ -677,7 +678,7 @@ export default function OralIrrigatorPage() {
                   { icon: 'refresh', title: 'ضمان 30 يوم', text: 'إمكانية إرجاع أو استبدال المنتج في حالة وجود خلل.' },
                   { icon: 'whatsapp', title: 'دعم مباشر', text: 'تواصل مباشر مع الفريق قبل الطلب أو بعده.' },
                 ].map((item) => (
-                  <div key={item.title} className="rounded-[24px] border border-white/10 bg-white/5 p-5">
+                  <div key={item.title} className="rounded-[24px] border border-white/10 bg-white/5 p-5 text-right">
                     <span className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-[#173d5d] text-[#b7ebff]">
                       <Icon name={item.icon as any} size={18} />
                     </span>
@@ -690,7 +691,7 @@ export default function OralIrrigatorPage() {
           </section>
 
           <section className="bg-white py-16 md:py-20">
-            <div className="container-wide mx-auto max-w-[1000px]">
+            <div className="container-wide max-w-4xl">
               <div className="mb-8 text-center">
                 <p className="mb-3 inline-flex items-center justify-center gap-2 rounded-full border border-[#dfeef8] bg-[#f5fbff] px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-[#0f6b9c]">
                   <Icon name="chat" size={12} />
@@ -710,7 +711,7 @@ export default function OralIrrigatorPage() {
                       <button
                         type="button"
                         onClick={() => setOpenFaq(isOpen ? null : key)}
-                        className="flex w-full items-center justify-between gap-4 px-4 py-4"
+                        className="flex w-full items-center justify-between gap-4 px-4 py-4 text-right"
                         aria-expanded={isOpen}
                       >
                         <span className="font-extrabold text-[#112033]">{faq.q}</span>
@@ -731,10 +732,10 @@ export default function OralIrrigatorPage() {
           </section>
 
           <section className="bg-[#f4fbff] py-16 md:py-20">
-            <div className="container-wide mx-auto max-w-[1180px]">
+            <div className="container-wide">
               <div className="rounded-[30px] border border-[#dfeef8] bg-[linear-gradient(135deg,#0f5b8a_0%,#0d3b67_100%)] p-7 text-white shadow-[0_28px_55px_rgba(10,52,77,0.17)] md:p-10">
                 <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr]">
-                  <div>
+                  <div className="text-right">
                     <p className="mb-3 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-[11px] font-black uppercase tracking-[0.14em] text-[#bfe8ff]">
                       <Icon name="spark" size={12} />
                       طلب سريع
@@ -747,7 +748,7 @@ export default function OralIrrigatorPage() {
                     </p>
                   </div>
 
-                  <div className="rounded-[26px] border border-white/10 bg-white/5 p-4">
+                  <div className="rounded-[26px] border border-white/10 bg-white/5 p-4 text-right">
                     <div className="mb-3 flex items-center justify-between gap-3">
                       <span className="text-xs text-white/75">السعر الحالي</span>
                       <span className="text-2xl font-black">{firstOfferPrice} درهم</span>
