@@ -62,7 +62,7 @@ export function hasUpsellAvailable(orderedIds: ProductId[]): boolean {
 export function pickUpsellProduct(orderedIds: ProductId[]): Product | null {
   const lastOrderedId = orderedIds.at(-1);
 
-  if (lastOrderedId === 'car-armrest') {
+  if (lastOrderedId === 'car-armrest' || lastOrderedId === 'automatic-soldering-iron-pack') {
     return armrestUpsellProduct;
   }
 
