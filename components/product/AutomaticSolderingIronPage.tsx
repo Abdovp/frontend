@@ -414,6 +414,19 @@ export default function AutomaticSolderingIronPage() {
             </div>
           </section>
 
+          <div className="mx-auto max-w-4xl px-4 pb-2 pt-2 sm:px-6 lg:px-8">
+            <div className="flex justify-center">
+              <button
+                type="button"
+                onClick={scrollToOrderForm}
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#f6bb3f] px-6 py-3 text-sm font-black text-slate-900 shadow-[0_12px_24px_rgba(246,187,63,0.3)] transition hover:-translate-y-0.5"
+              >
+                <Icon name="cart" size={16} />
+                اطلب الآن
+              </button>
+            </div>
+          </div>
+
           <section className="bg-[#0d1d2d] py-10 text-white">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="mb-5 max-w-3xl">
@@ -456,6 +469,19 @@ export default function AutomaticSolderingIronPage() {
               </div>
             </div>
           </section>
+
+          <div className="mx-auto max-w-4xl px-4 pb-2 pt-2 sm:px-6 lg:px-8">
+            <div className="flex justify-center">
+              <button
+                type="button"
+                onClick={scrollToOrderForm}
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-black text-white shadow-[0_12px_24px_rgba(15,23,42,0.14)] transition hover:-translate-y-0.5"
+              >
+                <Icon name="cart" size={16} />
+                اطلب الآن
+              </button>
+            </div>
+          </div>
 
           <section className="bg-white py-14">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -501,6 +527,19 @@ export default function AutomaticSolderingIronPage() {
             </div>
           </section>
 
+          <div className="mx-auto max-w-4xl px-4 pb-2 pt-2 sm:px-6 lg:px-8">
+            <div className="flex justify-center">
+              <button
+                type="button"
+                onClick={scrollToOrderForm}
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#f6bb3f] px-6 py-3 text-sm font-black text-slate-900 shadow-[0_12px_24px_rgba(246,187,63,0.28)] transition hover:-translate-y-0.5"
+              >
+                <Icon name="cart" size={16} />
+                اطلب الآن
+              </button>
+            </div>
+          </div>
+
           <section className="bg-[#f0f5ff] py-14">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="mb-8 text-center">
@@ -533,6 +572,19 @@ export default function AutomaticSolderingIronPage() {
             </div>
           </section>
 
+          <div className="mx-auto max-w-4xl px-4 py-4 sm:px-6 lg:px-8">
+            <div className="flex justify-center">
+              <button
+                type="button"
+                onClick={scrollToOrderForm}
+                className="inline-flex items-center justify-center gap-2 rounded-full bg-[#f6bb3f] px-6 py-3 text-sm font-black text-slate-900 shadow-[0_12px_24px_rgba(246,187,63,0.3)] transition hover:-translate-y-0.5"
+              >
+                <Icon name="cart" size={16} />
+                اطلب الآن
+              </button>
+            </div>
+          </div>
+
           <section className="bg-[#0b1730] py-14 text-white">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="mb-8 max-w-3xl">
@@ -553,25 +605,6 @@ export default function AutomaticSolderingIronPage() {
             </div>
           </section>
 
-          <div className="mx-auto max-w-4xl px-4 py-4 sm:px-6 lg:px-8">
-            <div className="rounded-[24px] border border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 p-4 shadow-[0_18px_32px_rgba(246,187,63,0.12)]">
-              <div className="flex flex-col items-center justify-center gap-3 text-center sm:flex-row sm:justify-between sm:text-right">
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-[0.2em] text-amber-700">Order now</p>
-                  <p className="text-sm font-bold text-slate-700">مكواة اللحام + قاطع الأسلاك فباك واحد</p>
-                </div>
-                <button
-                  type="button"
-                  onClick={scrollToOrderForm}
-                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#f6bb3f] px-5 py-3 text-sm font-black text-slate-900 shadow-[0_12px_24px_rgba(246,187,63,0.3)] transition hover:-translate-y-0.5"
-                >
-                  <Icon name="arrow-left" size={16} />
-                  اطلب الآن
-                </button>
-              </div>
-            </div>
-          </div>
-
           <section className="mx-auto max-w-5xl px-4 pb-20 pt-14 sm:px-6 lg:px-8">
             <div className="rounded-[28px] border border-sky-200 bg-sky-50 p-6 text-center shadow-[0_18px_32px_rgba(59,130,246,0.08)]">
               <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-white px-3 py-1.5 text-xs font-bold text-sky-700">
@@ -586,7 +619,7 @@ export default function AutomaticSolderingIronPage() {
                   onClick={scrollToOrderForm}
                   className="inline-flex items-center justify-center gap-2 rounded-full bg-slate-900 px-6 py-3 text-sm font-black text-white"
                 >
-                  <Icon name="arrow-left" size={16} />
+                  <Icon name="cart" size={16} />
                   اطلب الآن
                 </button>
                 <a
@@ -623,7 +656,7 @@ export default function AutomaticSolderingIronPage() {
                   onClick={scrollToOrderForm}
                   className="ml-0.5 inline-flex items-center justify-center gap-1.5 rounded-full bg-[#f6bb3f] px-3.5 py-2 text-xs font-black text-slate-900 shadow-[0_8px_18px_rgba(246,187,63,0.35)] transition hover:scale-[1.01]"
                 >
-                  <Icon name="arrow-left" size={14} />
+                  <Icon name="cart" size={14} />
                   اطلب الآن
                 </button>
               </div>
