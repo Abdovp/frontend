@@ -585,15 +585,30 @@ export default function AutomaticSolderingIronPage() {
         <Footer />
 
         {showStickyCta && (
-          <div className="fixed inset-x-0 bottom-0 z-50 flex justify-center px-2.5 pb-2.5 sm:px-3">
-            <button
-              type="button"
-              onClick={scrollToOrderForm}
-              className="inline-flex items-center justify-center gap-1.5 rounded-full bg-[#f6bb3f] px-4 py-2.5 text-xs font-black text-slate-900 shadow-[0_12px_24px_rgba(246,187,63,0.32)] transition hover:scale-[1.01]"
-            >
-              <Icon name="arrow-left" size={14} />
-              اطلب الآن
-            </button>
+          <div className="fixed inset-x-0 bottom-0 z-50 flex justify-center px-2.5 pb-2.5 sm:px-4">
+            <div className="w-full max-w-xl rounded-[22px] border border-slate-200/80 bg-white/90 p-1.5 shadow-[0_16px_36px_rgba(15,23,42,0.18)] backdrop-blur-xl">
+              <div className="flex items-center justify-center gap-2 rounded-[18px] bg-slate-950 px-2.5 py-2 text-white">
+                <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#f6bb3f] text-slate-900">
+                  <Icon name="cart" size={16} />
+                </div>
+
+                <div className="flex min-w-0 items-center gap-2 text-center">
+                  <div>
+                    <div className="text-[9px] font-bold text-slate-300">الدفع عند الاستلام</div>
+                    <div className="text-sm font-black text-white">{stickyPrice} درهم</div>
+                  </div>
+                </div>
+
+                <button
+                  type="button"
+                  onClick={scrollToOrderForm}
+                  className="ml-0.5 inline-flex items-center justify-center gap-1.5 rounded-full bg-[#f6bb3f] px-3.5 py-2 text-xs font-black text-slate-900 shadow-[0_8px_18px_rgba(246,187,63,0.35)] transition hover:scale-[1.01]"
+                >
+                  <Icon name="arrow-left" size={14} />
+                  اطلب الآن
+                </button>
+              </div>
+            </div>
           </div>
         )}
       </div>

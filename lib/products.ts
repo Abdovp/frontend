@@ -1625,8 +1625,22 @@ export function getProduct(id: ProductId): Product {
   return products[id];
 }
 
+const PRODUCT_SLUG_ALIASES: Record<string, string> = {
+  'soldering-pack': 'automatic-soldering-iron-pack',
+};
+
 export function getProductBySlug(slug: string): Product | undefined {
-  return productList.find((product) => product.slug === slug || product.id === slug || product.href === `/product/${slug}`);
+  const canonicalSlug = PRODUCT_SLUG_ALIASES[slug] ?? slug;
+
+  return productList.find(
+    (product) =>
+      product.slug === canonicalSlug ||
+      product.id === canonicalSlug ||
+      product.href === `/product/${canonicalSlug}` ||
+      product.slug === slug ||
+      product.id === slug ||
+      product.href === `/product/${slug}`
+  );
 }
 
 /** Single-unit / first listed offer — used for sticky CTA and default selection. */
