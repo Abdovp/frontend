@@ -316,7 +316,7 @@ export default function AutomaticSolderingIronPage() {
                           value={form.phone}
                           onChange={(e) => handleFieldChange('phone', formatPhone(e.target.value))}
                           className="w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-400 focus:border-amber-400"
-                          placeholder="06XXXXXXXX أو +2126XXXXXXXX"
+                          placeholder="06XXXXXXXX"
                         />
                         {errors.phone && <p className="mt-2 text-xs font-medium text-red-300">{errors.phone}</p>}
                       </div>
