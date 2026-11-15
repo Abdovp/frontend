@@ -507,8 +507,24 @@ export default function AutomaticSolderingIronPage() {
                 </p>
               </div>
 
-              <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-10">
-                <div className="order-2 overflow-hidden rounded-[30px] border border-slate-200 bg-[#f6f8fc] shadow-[0_24px_45px_rgba(15,23,42,0.04)] lg:order-1">
+              <div className="space-y-6">
+                <div className="grid gap-4 sm:grid-cols-2 lg:gap-5">
+                  {[
+                    { title: 'قطع دقيق', body: 'مناسب للأسلاك الصغيرة.', icon: 'check' },
+                    { title: 'تحكم أفضل', body: 'مفيد في المشاريع الدقيقة وأعمال الإصلاح.', icon: 'pin' },
+                    { title: 'قاطع متعدد الاستخدامات', body: 'أداة عملية في نفس الباك.', icon: 'shield' },
+                  ].map((item) => (
+                    <div key={item.title} className="rounded-[24px] border border-slate-200 bg-slate-50 p-5 shadow-[0_18px_32px_rgba(15,23,42,0.03)] lg:min-h-[220px] lg:p-6">
+                      <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-100 text-amber-700 lg:h-14 lg:w-14">
+                        <Icon name={item.icon as any} size={22} />
+                      </div>
+                      <h3 className="text-xl font-black text-slate-900 lg:text-2xl">{item.title}</h3>
+                      <p className="mt-2 text-sm leading-7 text-slate-600 lg:text-base">{item.body}</p>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="overflow-hidden rounded-[30px] border border-slate-200 bg-[#f6f8fc] shadow-[0_24px_45px_rgba(15,23,42,0.04)]">
                   <div className="relative h-[420px] overflow-hidden bg-white sm:h-[500px] lg:h-[620px]">
                     <Image
                       src={wireCutterPhoto}
@@ -516,24 +532,6 @@ export default function AutomaticSolderingIronPage() {
                       fill
                       className="object-cover object-center scale-[1.02]"
                     />
-                  </div>
-                </div>
-
-                <div className="order-1 lg:order-2">
-                  <div className="grid gap-4 sm:grid-cols-2 lg:gap-5">
-                    {[
-                      { title: 'قطع دقيق', body: 'مناسب للأسلاك الصغيرة.', icon: 'check' },
-                      { title: 'تحكم أفضل', body: 'مفيد في المشاريع الدقيقة وأعمال الإصلاح.', icon: 'pin' },
-                      { title: 'قاطع متعدد الاستخدامات', body: 'أداة عملية في نفس الباك.', icon: 'shield' },
-                    ].map((item) => (
-                      <div key={item.title} className="rounded-[24px] border border-slate-200 bg-slate-50 p-5 shadow-[0_18px_32px_rgba(15,23,42,0.03)] lg:min-h-[220px] lg:p-6">
-                        <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-100 text-amber-700 lg:h-14 lg:w-14">
-                          <Icon name={item.icon as any} size={22} />
-                        </div>
-                        <h3 className="text-xl font-black text-slate-900 lg:text-2xl">{item.title}</h3>
-                        <p className="mt-2 text-sm leading-7 text-slate-600 lg:text-base">{item.body}</p>
-                      </div>
-                    ))}
                   </div>
                 </div>
               </div>
@@ -559,7 +557,20 @@ export default function AutomaticSolderingIronPage() {
                 <h2 className="text-3xl font-black text-slate-900 sm:text-4xl">جوج أدوات مكملين لبعضياتهم، فباك واحد!</h2>
               </div>
 
-              <div className="mb-8 flex justify-center">
+              <div className="mb-8 grid gap-5 lg:grid-cols-3">
+                {[
+                  { title: 'لحام اوتوماتيكي', text: 'مكواة اللحام كتعاونك فعمليات اللحام وربط المكونات الإلكترونية.' },
+                  { title: 'قاطع متعدد الاستخدامات', text: 'قاطع الأسلاك كيساعدك فالتقليم وقطع الأطراف والأسلاك الدقيقة.' },
+                  { title: 'باك اللحام الاوتوماتيكي + قاطع الأسلاك', text: 'جوج أدوات مختلفة الاستعمال مجموعين فطلب واحد.' },
+                ].map((item) => (
+                  <div key={item.title} className="rounded-[28px] border border-sky-200 bg-white p-5 text-center shadow-[0_18px_32px_rgba(15,23,42,0.04)]">
+                    <h3 className="text-lg font-black text-slate-900">{item.title}</h3>
+                    <p className="mt-3 text-sm leading-7 text-slate-600">{item.text}</p>
+                  </div>
+                ))}
+              </div>
+
+              <div className="flex justify-center">
                 <div className="relative h-[420px] w-full max-w-5xl overflow-hidden rounded-[28px] border border-sky-200 bg-white shadow-[0_16px_28px_rgba(15,23,42,0.05)]">
                   <Image
                     src={solderingPackImage}
