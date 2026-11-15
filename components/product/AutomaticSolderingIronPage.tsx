@@ -248,12 +248,12 @@ export default function AutomaticSolderingIronPage() {
         <Header />
 
         <main>
-          <section id="page-hero" className="bg-gradient-to-br from-slate-950 via-slate-900 to-sky-950 text-white">
+          <section id="page-hero" className="bg-white text-slate-900">
             <div className="mx-auto max-w-7xl px-4 pb-12 pt-8 sm:px-6 lg:px-8 lg:pb-16 lg:pt-10">
               <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr]">
                 <div className="space-y-6">
-                  <div className="overflow-hidden rounded-[28px] border border-white/10 bg-white/5 p-0 shadow-[0_20px_40px_rgba(15,23,42,0.2)] backdrop-blur-sm">
-                    <div className="relative h-[420px] overflow-hidden bg-slate-900/40 sm:h-[460px] lg:h-[500px]">
+                  <div className="overflow-hidden rounded-[28px] border border-slate-200 bg-slate-50 p-0 shadow-[0_20px_40px_rgba(15,23,42,0.08)] backdrop-blur-sm">
+                    <div className="relative h-[420px] overflow-hidden bg-slate-100 sm:h-[460px] lg:h-[500px]">
                       <Image
                         src={solderingPackHeroImage}
                         alt="باك مكواة اللحام الآلي + قاطع الأسلاك الدقيق"
@@ -265,10 +265,10 @@ export default function AutomaticSolderingIronPage() {
                   </div>
 
                   <div>
-                    <h1 className="text-4xl font-black leading-[1.05] tracking-tight text-white sm:text-5xl">
+                    <h1 className="text-4xl font-black leading-[1.05] tracking-tight text-slate-900 sm:text-5xl">
                       باك اللحام الاوتوماتيكي + قاطع الأسلاك
                     </h1>
-                    <p className="mt-4 max-w-xl text-lg leading-8 text-slate-200">
+                    <p className="mt-4 max-w-xl text-lg leading-8 text-slate-600">
                       باك عملي لكل من يشتغل في الإلكترونيات، الإصلاحات الصغيرة، والمشاريع اليدوية بوضوح وسرعة.
                     </p>
                   </div>
@@ -279,7 +279,7 @@ export default function AutomaticSolderingIronPage() {
                       'قاطع أسلاك 10 في 1',
                       'سهل الاستخدام للمبتدئين',
                     ].map((item) => (
-                      <div key={item} className="flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 p-4 text-sm font-bold text-slate-100 backdrop-blur-sm">
+                      <div key={item} className="flex items-center gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 text-sm font-bold text-slate-700 backdrop-blur-sm">
                         <div className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-400 text-slate-900">
                           <Icon name="check-circle" size={16} />
                         </div>
@@ -298,53 +298,60 @@ export default function AutomaticSolderingIronPage() {
                         onClick={() => setSelectedPrice(price)}
                         className={`flex w-full items-center justify-between gap-3 rounded-[22px] border p-4 text-right transition ${
                           selectedPrice === price
-                            ? 'border-sky-400 bg-sky-500/10 shadow-[0_0_0_1px_rgba(96,165,250,0.45)]'
-                            : 'border-white/10 bg-slate-900/30 hover:border-sky-400/60'
+                            ? 'border-black bg-slate-50 shadow-[0_0_0_1px_rgba(0,0,0,0.24)]'
+                            : 'border-slate-400 bg-white hover:border-slate-600'
                         }`}
                       >
                         <div className="flex items-center gap-3">
-                          <span className={`flex h-5 w-5 items-center justify-center rounded-full border-2 ${selectedPrice === price ? 'border-sky-400 bg-sky-400' : 'border-slate-400 bg-transparent'}`}>
+                          <span className={`flex h-5 w-5 items-center justify-center rounded-full border-2 ${selectedPrice === price ? 'border-black bg-black' : 'border-slate-500 bg-transparent'}`}>
                             {selectedPrice === price && <span className="h-2.5 w-2.5 rounded-full bg-white" />}
                           </span>
                           <div>
-                            <div className="text-base font-black text-slate-200">{index === 0 ? 'باك واحد' : '2 باكات'}</div>
-                            <div className="text-xs text-slate-400">{index === 0 ? 'الاختيار المفضل' : 'تخفيض أفضل'}</div>
+                            <div className="text-base font-black text-slate-900">{index === 0 ? 'باك واحد' : '2 باكات'}</div>
+                            <div className="text-xs text-slate-500">{index === 0 ? 'الاختيار المفضل' : 'تخفيض أفضل'}</div>
                           </div>
                         </div>
 
                         <div className="text-left">
-                          <div className="text-2xl font-black text-white">{price} درهم</div>
-                          {index === 0 ? <div className="text-[10px] text-emerald-300">توصيل مجاني</div> : <div className="text-[10px] text-amber-300">وفر 49 درهم</div>}
+                          {index === 1 ? (
+                            <div className="flex items-center gap-2">
+                              <span className="text-2xl font-black text-slate-900">{price} درهم</span>
+                              <span className="text-lg font-medium text-slate-400 line-through">400 درهم</span>
+                            </div>
+                          ) : (
+                            <div className="text-2xl font-black text-slate-900">{price} درهم</div>
+                          )}
+                          {index === 0 ? <div className="text-[10px] text-emerald-600">توصيل مجاني</div> : <div className="text-[10px] text-amber-700">وفر 49 درهم</div>}
                         </div>
                       </button>
                     ))}
                   </div>
 
-                  <div className="rounded-[22px] border border-white/10 bg-slate-950/30 p-4 shadow-[0_20px_40px_rgba(15,23,42,0.18)]">
-                    <h2 className="mb-3 text-right text-xl font-black text-white">ادخل معلوماتك للطلب</h2>
+                  <div className="rounded-[22px] border border-black/20 bg-white p-4 shadow-[0_20px_40px_rgba(15,23,42,0.08)]">
+                    <h2 className="mb-3 text-right text-xl font-black text-slate-900">ادخل معلوماتك للطلب</h2>
                     <form id="order-form" onSubmit={handleSubmit} className="space-y-4">
                       <div>
-                        <label htmlFor="boyashop-order-name" className="mb-2 block text-sm font-bold text-slate-100">الاسم الكامل</label>
+                        <label htmlFor="boyashop-order-name" className="mb-2 block text-sm font-bold text-slate-800">الاسم الكامل</label>
                         <input
                           id="boyashop-order-name"
                           value={form.name}
                           onChange={(e) => handleFieldChange('name', e.target.value)}
-                          className="w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-400 focus:border-amber-400"
+                          className="w-full rounded-2xl border border-slate-400 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-black"
                           placeholder="أدخل اسمك الكامل"
                         />
-                        {errors.name && <p className="mt-2 text-xs font-medium text-red-300">{errors.name}</p>}
+                        {errors.name && <p className="mt-2 text-xs font-medium text-red-600">{errors.name}</p>}
                       </div>
 
                       <div>
-                        <label htmlFor="boyashop-order-phone" className="mb-2 block text-sm font-bold text-slate-100">رقم الهاتف</label>
+                        <label htmlFor="boyashop-order-phone" className="mb-2 block text-sm font-bold text-slate-800">رقم الهاتف</label>
                         <input
                           id="boyashop-order-phone"
                           value={form.phone}
                           onChange={(e) => handleFieldChange('phone', formatPhone(e.target.value))}
-                          className="w-full rounded-2xl border border-white/10 bg-slate-950/40 px-4 py-3 text-sm text-white outline-none transition placeholder:text-slate-400 focus:border-amber-400"
+                          className="w-full rounded-2xl border border-slate-400 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-black"
                           placeholder="06XXXXXXXX"
                         />
-                        {errors.phone && <p className="mt-2 text-xs font-medium text-red-300">{errors.phone}</p>}
+                        {errors.phone && <p className="mt-2 text-xs font-medium text-red-600">{errors.phone}</p>}
                       </div>
 
                       <button
@@ -360,13 +367,13 @@ export default function AutomaticSolderingIronPage() {
                         href={`https://wa.me/${STORE.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent(`السلام عليكم، بدي اطلب باك مكواة اللحام الآلي + قاطع الأسلاك الدقيق، الكمية ${quantity}، المجموع ${total} درهم.`)}`}
                         target="_blank"
                         rel="noreferrer"
-                        className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-emerald-400/50 bg-emerald-500/10 px-6 py-3 text-base font-black text-emerald-200 transition hover:bg-emerald-500/20"
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-6 py-3 text-base font-black text-emerald-700 transition hover:bg-emerald-100"
                       >
                         <Icon name="whatsapp" size={18} />
                         تواصل واتساب
                       </a>
 
-                      {submitError && <p className="mt-3 text-sm font-medium text-red-300">{submitError}</p>}
+                      {submitError && <p className="mt-3 text-sm font-medium text-red-600">{submitError}</p>}
                     </form>
 
                     <div className="mt-4 grid grid-cols-3 gap-2 text-center">
@@ -375,11 +382,11 @@ export default function AutomaticSolderingIronPage() {
                         { label: 'الدفع عند الاستلام', icon: 'check-circle' },
                         { label: 'استرجاع مضمون', icon: 'shield' },
                       ].map((item) => (
-                        <div key={item.label} className="rounded-2xl border border-white/10 bg-slate-950/30 px-2 py-3">
-                          <div className="mb-1 flex justify-center text-amber-300">
+                        <div key={item.label} className="rounded-2xl border border-emerald-200 bg-emerald-50 px-2 py-3">
+                          <div className="mb-1 flex justify-center text-emerald-600">
                             <Icon name={item.icon as any} size={16} />
                           </div>
-                          <div className="text-[10px] font-bold text-slate-200">{item.label}</div>
+                          <div className="text-[10px] font-bold text-emerald-700">{item.label}</div>
                         </div>
                       ))}
                     </div>
@@ -428,21 +435,39 @@ export default function AutomaticSolderingIronPage() {
           </div>
 
           <section className="bg-[#0d1d2d] py-10 text-white">
+
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <div className="mb-5 max-w-3xl">
+              <div className="mb-6 max-w-3xl lg:mb-10">
                 <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-sky-500/10 px-3 py-1.5 text-xs font-bold text-sky-200">
                   <Icon name="settings" size={14} />
                   لحام اوتوماتيكي
                 </div>
-                <h2 className="text-3xl font-black sm:text-4xl">لحام اوتوماتيكي</h2>
-                <p className="mt-3 text-base leading-8 text-slate-300">
+                <h2 className="text-3xl font-black sm:text-4xl lg:text-5xl">لحام اوتوماتيكي</h2>
+                <p className="mt-3 text-base leading-8 text-slate-300 lg:text-lg lg:leading-9">
                   مكواة لحام مزودة بنظام مدمج لتغذية سلك اللحام، كتعاونك تقدم السلك أثناء العمل بطريقة عملية.
                 </p>
               </div>
 
-              <div className="grid gap-4 lg:grid-cols-[0.95fr_1.05fr]">
-                <div className="rounded-[30px] border border-sky-400/20 bg-white/5 p-0">
-                  <div className="relative h-[420px] overflow-hidden rounded-[30px] bg-white">
+              <div className="grid gap-5 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:gap-10">
+                <div className="order-2 lg:order-1">
+                  <div className="grid gap-3 sm:grid-cols-2 lg:gap-4">
+                    {[
+                      { icon: 'zap', title: 'تغذية عملية', text: 'تقدّم السلك بشكل مستمر أثناء الاستخدام.' },
+                      { icon: 'settings', title: 'راحة في العمل', text: 'تسهل التغطية على الأسلاك والمكونات.' },
+                    ].map((item) => (
+                      <div key={item.title} className="rounded-[24px] border border-sky-500/20 bg-white/5 p-4 shadow-[0_20px_30px_rgba(14,116,144,0.08)] lg:min-h-[210px] lg:p-6">
+                        <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-sky-500/10 text-sky-300 lg:h-12 lg:w-12">
+                          <Icon name={item.icon as any} size={20} />
+                        </div>
+                        <h3 className="text-xl font-black text-white lg:text-2xl">{item.title}</h3>
+                        <p className="mt-2 text-sm leading-7 text-slate-300 lg:text-base">{item.text}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                <div className="order-1 rounded-[30px] border border-sky-400/20 bg-white/5 p-0 shadow-[0_30px_50px_rgba(14,116,144,0.15)] lg:order-2">
+                  <div className="relative h-[420px] overflow-hidden rounded-[30px] bg-white lg:h-[520px]">
                     <Image
                       src={solderingGunGif}
                       alt="GIF لمكواة اللحام"
@@ -450,21 +475,6 @@ export default function AutomaticSolderingIronPage() {
                       className="h-full w-full object-cover object-center"
                     />
                   </div>
-                </div>
-
-                <div className="grid gap-3 sm:grid-cols-2">
-                  {[
-                    { icon: 'zap', title: 'تغذية عملية', text: 'تقدّم السلك بشكل مستمر أثناء الاستخدام.' },
-                    { icon: 'settings', title: 'راحة في العمل', text: 'تسهل التغطية على الأسلاك والمكونات.' },
-                  ].map((item) => (
-                    <div key={item.title} className="rounded-[24px] border border-sky-500/20 bg-white/5 p-4">
-                      <div className="mb-3 inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-sky-500/10 text-sky-300">
-                        <Icon name={item.icon as any} size={20} />
-                      </div>
-                      <h3 className="text-xl font-black text-white">{item.title}</h3>
-                      <p className="mt-2 text-sm leading-7 text-slate-300">{item.text}</p>
-                    </div>
-                  ))}
                 </div>
               </div>
             </div>
@@ -484,21 +494,22 @@ export default function AutomaticSolderingIronPage() {
           </div>
 
           <section className="bg-white py-14">
+
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-              <div className="mb-8 max-w-3xl">
+              <div className="mb-8 max-w-3xl lg:mb-12">
                 <div className="mb-3 inline-flex items-center gap-2 rounded-full bg-amber-50 px-3 py-1.5 text-xs font-bold text-amber-700">
                   <Icon name="spark" size={14} />
                   قاطع متعدد الاستخدامات
                 </div>
-                <h2 className="text-3xl font-black text-slate-900">قاطع متعدد الاستخدامات</h2>
-                <p className="mt-4 text-base leading-8 text-slate-600">
+                <h2 className="text-3xl font-black text-slate-900 lg:text-5xl">قاطع متعدد الاستخدامات</h2>
+                <p className="mt-4 text-base leading-8 text-slate-600 lg:text-lg lg:leading-9">
                   قاطع أسلاك دقيق مخصص لقطع الأسلاك الصغيرة وأطراف المكونات الإلكترونية.
                 </p>
               </div>
 
-              <div className="space-y-4">
-                <div className="overflow-hidden rounded-[30px] border border-slate-200 bg-[#f6f8fc]">
-                  <div className="relative h-[420px] overflow-hidden bg-white sm:h-[500px] lg:h-[560px]">
+              <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr] lg:items-center lg:gap-10">
+                <div className="order-2 overflow-hidden rounded-[30px] border border-slate-200 bg-[#f6f8fc] shadow-[0_24px_45px_rgba(15,23,42,0.04)] lg:order-1">
+                  <div className="relative h-[420px] overflow-hidden bg-white sm:h-[500px] lg:h-[620px]">
                     <Image
                       src={wireCutterPhoto}
                       alt="قاطع أسلاك متعدد الاستخدامات"
@@ -508,20 +519,22 @@ export default function AutomaticSolderingIronPage() {
                   </div>
                 </div>
 
-                <div className="grid gap-4 sm:grid-cols-2">
-                  {[
-                    { title: 'قطع دقيق', body: 'مناسب للأسلاك الصغيرة.', icon: 'check' },
-                    { title: 'تحكم أفضل', body: 'مفيد في المشاريع الدقيقة وأعمال الإصلاح.', icon: 'pin' },
-                    { title: 'قاطع متعدد الاستخدامات', body: 'أداة عملية في نفس الباك.', icon: 'shield' },
-                  ].map((item) => (
-                    <div key={item.title} className="rounded-[24px] border border-slate-200 bg-slate-50 p-5">
-                      <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-100 text-amber-700">
-                        <Icon name={item.icon as any} size={22} />
+                <div className="order-1 lg:order-2">
+                  <div className="grid gap-4 sm:grid-cols-2 lg:gap-5">
+                    {[
+                      { title: 'قطع دقيق', body: 'مناسب للأسلاك الصغيرة.', icon: 'check' },
+                      { title: 'تحكم أفضل', body: 'مفيد في المشاريع الدقيقة وأعمال الإصلاح.', icon: 'pin' },
+                      { title: 'قاطع متعدد الاستخدامات', body: 'أداة عملية في نفس الباك.', icon: 'shield' },
+                    ].map((item) => (
+                      <div key={item.title} className="rounded-[24px] border border-slate-200 bg-slate-50 p-5 shadow-[0_18px_32px_rgba(15,23,42,0.03)] lg:min-h-[220px] lg:p-6">
+                        <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-amber-100 text-amber-700 lg:h-14 lg:w-14">
+                          <Icon name={item.icon as any} size={22} />
+                        </div>
+                        <h3 className="text-xl font-black text-slate-900 lg:text-2xl">{item.title}</h3>
+                        <p className="mt-2 text-sm leading-7 text-slate-600 lg:text-base">{item.body}</p>
                       </div>
-                      <h3 className="text-xl font-black text-slate-900">{item.title}</h3>
-                      <p className="mt-2 text-sm leading-7 text-slate-600">{item.body}</p>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -555,19 +568,6 @@ export default function AutomaticSolderingIronPage() {
                     className="object-cover object-center"
                   />
                 </div>
-              </div>
-
-              <div className="grid gap-6 lg:grid-cols-3">
-                {[
-                  { title: 'لحام اوتوماتيكي', text: 'مكواة اللحام كتعاونك فعمليات اللحام وربط المكونات الإلكترونية.', accent: 'bg-sky-600 text-white' },
-                  { title: 'قاطع متعدد الاستخدامات', text: 'قاطع الأسلاك كيساعدك فالتقليم وقطع الأطراف والأسلاك الدقيقة.', accent: 'bg-slate-900 text-white' },
-                  { title: 'باك اللحام الاوتوماتيكي + قاطع الأسلاك', text: 'جوج أدوات مختلفة الاستعمال مجموعين فطلب واحد.', accent: 'bg-amber-400 text-slate-900' },
-                ].map((item) => (
-                  <div key={item.title} className={`rounded-[28px] p-6 shadow-[0_18px_32px_rgba(15,23,42,0.08)] ${item.accent}`}>
-                    <div className="mb-4 text-xl font-black">{item.title}</div>
-                    <p className="text-base leading-8">{item.text}</p>
-                  </div>
-                ))}
               </div>
             </div>
           </section>
