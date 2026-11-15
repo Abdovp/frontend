@@ -291,6 +291,7 @@ export default function AutomaticSolderingIronPage() {
 
                 <div className="space-y-3">
                   <div className="space-y-2">
+                    <div className="mb-1 text-right text-sm font-black text-slate-800">اختر العرض</div>
                     {PRICE_OPTIONS.map((price, index) => (
                       <button
                         key={price}
