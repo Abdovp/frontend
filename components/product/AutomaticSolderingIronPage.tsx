@@ -268,9 +268,6 @@ export default function AutomaticSolderingIronPage() {
                     <h1 className="text-4xl font-black leading-[1.05] tracking-tight text-slate-900 sm:text-5xl">
                       باك اللحام الاوتوماتيكي + قاطع الأسلاك
                     </h1>
-                    <p className="mt-4 max-w-xl text-lg leading-8 text-slate-600">
-                      باك عملي لكل من يشتغل في الإلكترونيات، الإصلاحات الصغيرة، والمشاريع اليدوية بوضوح وسرعة.
-                    </p>
 
                     <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:flex-wrap">
                       <div className="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-3 py-1.5 text-sm font-bold text-amber-700">
@@ -287,6 +284,10 @@ export default function AutomaticSolderingIronPage() {
                         </div>
                       ))}
                     </div>
+
+                    <p className="mt-4 max-w-xl text-lg leading-8 text-slate-600">
+                      باك عملي لكل من يشتغل في الإلكترونيات، الإصلاحات الصغيرة، والمشاريع اليدوية بوضوح وسرعة.
+                    </p>
                   </div>
 
                   <div className="space-y-3">
