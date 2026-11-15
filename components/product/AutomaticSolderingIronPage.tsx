@@ -324,19 +324,19 @@ export default function AutomaticSolderingIronPage() {
                             {selectedPrice === price && <span className="h-2.5 w-2.5 rounded-full bg-white" />}
                           </span>
                           <div>
-                            <div className="text-base font-black text-slate-900">{index === 0 ? 'باك واحد' : '2 باكات'}</div>
-                            <div className="text-[10px] text-slate-500">{index === 0 ? 'الاختيار المفضل' : 'تخفيض أفضل'}</div>
+                            <div className="text-lg font-black text-slate-900">{index === 0 ? 'باك واحد' : '2 باكات'}</div>
+                            <div className="text-[11px] text-slate-500">{index === 0 ? 'الاختيار المفضل' : 'تخفيض أفضل'}</div>
                           </div>
                         </div>
 
                         <div className="text-left">
                           {index === 1 ? (
                             <div className="flex items-center gap-2">
-                              <span className="text-[1.6rem] font-black leading-none text-slate-900">{price} درهم</span>
-                              <span className="text-sm font-medium text-slate-400 line-through">400 درهم</span>
+                              <span className="text-[1.4rem] font-black leading-none text-slate-900">{price} درهم</span>
+                              <span className="text-xs font-medium text-slate-400 line-through">400 درهم</span>
                             </div>
                           ) : (
-                            <div className="text-[1.6rem] font-black leading-none text-slate-900">{price} درهم</div>
+                            <div className="text-[1.4rem] font-black leading-none text-slate-900">{price} درهم</div>
                           )}
                           {index === 0 ? <div className="mt-1 text-[10px] text-emerald-600">توصيل مجاني</div> : <div className="mt-1 text-[10px] text-amber-700">وفر 49 درهم</div>}
                         </div>
