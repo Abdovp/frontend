@@ -271,6 +271,22 @@ export default function AutomaticSolderingIronPage() {
                     <p className="mt-4 max-w-xl text-lg leading-8 text-slate-600">
                       باك عملي لكل من يشتغل في الإلكترونيات، الإصلاحات الصغيرة، والمشاريع اليدوية بوضوح وسرعة.
                     </p>
+
+                    <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:flex-wrap">
+                      <div className="inline-flex items-center gap-2 rounded-full border border-amber-200 bg-amber-50 px-3 py-1.5 text-sm font-bold text-amber-700">
+                        <span className="text-base tracking-wide text-amber-500">★★★★★</span>
+                        <span>4.9/5</span>
+                      </div>
+                      <div className="text-sm font-medium text-slate-600">من أكثر من 1,200 عميل</div>
+                    </div>
+
+                    <div className="mt-4 flex flex-wrap gap-2">
+                      {['توصيل سريع', 'دفع عند الاستلام', 'موثوق ومضمون'].map((label) => (
+                        <div key={label} className="rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-bold text-slate-700 shadow-sm">
+                          {label}
+                        </div>
+                      ))}
+                    </div>
                   </div>
 
                   <div className="space-y-3">
@@ -308,19 +324,19 @@ export default function AutomaticSolderingIronPage() {
                             {selectedPrice === price && <span className="h-2.5 w-2.5 rounded-full bg-white" />}
                           </span>
                           <div>
-                            <div className="text-lg font-black text-slate-900">{index === 0 ? 'باك واحد' : '2 باكات'}</div>
-                            <div className="text-xs text-slate-500">{index === 0 ? 'الاختيار المفضل' : 'تخفيض أفضل'}</div>
+                            <div className="text-base font-black text-slate-900">{index === 0 ? 'باك واحد' : '2 باكات'}</div>
+                            <div className="text-[10px] text-slate-500">{index === 0 ? 'الاختيار المفضل' : 'تخفيض أفضل'}</div>
                           </div>
                         </div>
 
                         <div className="text-left">
                           {index === 1 ? (
                             <div className="flex items-center gap-2">
-                              <span className="text-[2rem] font-black leading-none text-slate-900">{price} درهم</span>
-                              <span className="text-base font-medium text-slate-400 line-through">400 درهم</span>
+                              <span className="text-[1.6rem] font-black leading-none text-slate-900">{price} درهم</span>
+                              <span className="text-sm font-medium text-slate-400 line-through">400 درهم</span>
                             </div>
                           ) : (
-                            <div className="text-[2rem] font-black leading-none text-slate-900">{price} درهم</div>
+                            <div className="text-[1.6rem] font-black leading-none text-slate-900">{price} درهم</div>
                           )}
                           {index === 0 ? <div className="mt-1 text-[10px] text-emerald-600">توصيل مجاني</div> : <div className="mt-1 text-[10px] text-amber-700">وفر 49 درهم</div>}
                         </div>
@@ -401,10 +417,10 @@ export default function AutomaticSolderingIronPage() {
             <div className="rounded-[32px] border border-slate-200 bg-white p-6 shadow-[0_18px_32px_rgba(15,23,42,0.04)] lg:p-10">
               <div>
                 <h2 className="text-3xl font-black text-slate-900">
-                  كتخدم فالإلكترونيات؟ الأدوات المناسبة كتفرق!
+                  هل ستستخدمها في الإلكترونيات؟ الأدوات المناسبة تفرق!
                 </h2>
                 <p className="mt-4 text-lg leading-8 text-slate-600">
-                  فلإصلاح والمشاريع اليدوية، كتحتاج أدوات مناسبة باش يعاونوك. لهذا جمعنا ليك جوج أدوات عملية فباك واحد.
+                  للإصلاح والمشاريع اليدوية، كتحتاج أدوات مناسبة باش يعاونوك. هذا جمعنا ليك جوج أدوات عملية فباك واحد.
                 </p>
                 <div className="mt-6 grid gap-3 sm:grid-cols-2">
                   {[
