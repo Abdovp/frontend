@@ -308,7 +308,7 @@ export default function AutomaticSolderingIronPage() {
                             {selectedPrice === price && <span className="h-2.5 w-2.5 rounded-full bg-white" />}
                           </span>
                           <div>
-                            <div className="text-base font-black text-slate-900">{index === 0 ? 'باك واحد' : '2 باكات'}</div>
+                            <div className="text-lg font-black text-slate-900">{index === 0 ? 'باك واحد' : '2 باكات'}</div>
                             <div className="text-xs text-slate-500">{index === 0 ? 'الاختيار المفضل' : 'تخفيض أفضل'}</div>
                           </div>
                         </div>
@@ -316,13 +316,13 @@ export default function AutomaticSolderingIronPage() {
                         <div className="text-left">
                           {index === 1 ? (
                             <div className="flex items-center gap-2">
-                              <span className="text-2xl font-black text-slate-900">{price} درهم</span>
-                              <span className="text-lg font-medium text-slate-400 line-through">400 درهم</span>
+                              <span className="text-[2rem] font-black leading-none text-slate-900">{price} درهم</span>
+                              <span className="text-base font-medium text-slate-400 line-through">400 درهم</span>
                             </div>
                           ) : (
-                            <div className="text-2xl font-black text-slate-900">{price} درهم</div>
+                            <div className="text-[2rem] font-black leading-none text-slate-900">{price} درهم</div>
                           )}
-                          {index === 0 ? <div className="text-[10px] text-emerald-600">توصيل مجاني</div> : <div className="text-[10px] text-amber-700">وفر 49 درهم</div>}
+                          {index === 0 ? <div className="mt-1 text-[10px] text-emerald-600">توصيل مجاني</div> : <div className="mt-1 text-[10px] text-amber-700">وفر 49 درهم</div>}
                         </div>
                       </button>
                     ))}
@@ -361,7 +361,7 @@ export default function AutomaticSolderingIronPage() {
                         className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#f6bb3f] px-6 py-4 text-base font-black text-slate-900 shadow-[0_18px_30px_rgba(246,187,63,0.28)] transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70"
                       >
                         <Icon name="cart" size={18} />
-                        {submitting ? 'جاري تأكيد الطلب...' : `${ORDER_BUTTON_TEXT} بـ ${total} درهم`}
+                        {submitting ? 'جاري تأكيد الطلب...' : 'اطلب الآن'}
                       </button>
 
                       <a
