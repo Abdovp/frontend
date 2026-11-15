@@ -509,6 +509,17 @@ export default function AutomaticSolderingIronPage() {
               </div>
 
               <div className="space-y-6">
+                <div className="overflow-hidden rounded-[30px] border border-slate-200 bg-[#f6f8fc] shadow-[0_24px_45px_rgba(15,23,42,0.04)]">
+                  <div className="relative h-[420px] overflow-hidden bg-white sm:h-[500px] lg:h-[620px]">
+                    <Image
+                      src={wireCutterPhoto}
+                      alt="قاطع أسلاك متعدد الاستخدامات"
+                      fill
+                      className="object-cover object-center scale-[1.02]"
+                    />
+                  </div>
+                </div>
+
                 <div className="grid gap-4 sm:grid-cols-2 lg:gap-5">
                   {[
                     { title: 'قطع دقيق', body: 'مناسب للأسلاك الصغيرة.', icon: 'check' },
@@ -523,17 +534,6 @@ export default function AutomaticSolderingIronPage() {
                       <p className="mt-2 text-sm leading-7 text-slate-600 lg:text-base">{item.body}</p>
                     </div>
                   ))}
-                </div>
-
-                <div className="overflow-hidden rounded-[30px] border border-slate-200 bg-[#f6f8fc] shadow-[0_24px_45px_rgba(15,23,42,0.04)]">
-                  <div className="relative h-[420px] overflow-hidden bg-white sm:h-[500px] lg:h-[620px]">
-                    <Image
-                      src={wireCutterPhoto}
-                      alt="قاطع أسلاك متعدد الاستخدامات"
-                      fill
-                      className="object-cover object-center scale-[1.02]"
-                    />
-                  </div>
                 </div>
               </div>
             </div>
@@ -558,7 +558,18 @@ export default function AutomaticSolderingIronPage() {
                 <h2 className="text-3xl font-black text-slate-900 sm:text-4xl">جوج أدوات مكملين لبعضياتهم، فباك واحد!</h2>
               </div>
 
-              <div className="mb-8 grid gap-5 lg:grid-cols-3">
+              <div className="mb-8 flex justify-center">
+                <div className="relative h-[420px] w-full max-w-5xl overflow-hidden rounded-[28px] border border-sky-200 bg-white shadow-[0_16px_28px_rgba(15,23,42,0.05)]">
+                  <Image
+                    src={solderingPackImage}
+                    alt="منتج باك اللحام الاوتوماتيكي + قاطع الأسلاك"
+                    fill
+                    className="object-cover object-center"
+                  />
+                </div>
+              </div>
+
+              <div className="grid gap-5 lg:grid-cols-3">
                 {[
                   { title: 'لحام اوتوماتيكي', text: 'مكواة اللحام كتعاونك فعمليات اللحام وربط المكونات الإلكترونية.' },
                   { title: 'قاطع متعدد الاستخدامات', text: 'قاطع الأسلاك كيساعدك فالتقليم وقطع الأطراف والأسلاك الدقيقة.' },
@@ -569,17 +580,6 @@ export default function AutomaticSolderingIronPage() {
                     <p className="mt-3 text-sm leading-7 text-slate-600">{item.text}</p>
                   </div>
                 ))}
-              </div>
-
-              <div className="flex justify-center">
-                <div className="relative h-[420px] w-full max-w-5xl overflow-hidden rounded-[28px] border border-sky-200 bg-white shadow-[0_16px_28px_rgba(15,23,42,0.05)]">
-                  <Image
-                    src={solderingPackImage}
-                    alt="منتج باك اللحام الاوتوماتيكي + قاطع الأسلاك"
-                    fill
-                    className="object-cover object-center"
-                  />
-                </div>
               </div>
             </div>
           </section>
