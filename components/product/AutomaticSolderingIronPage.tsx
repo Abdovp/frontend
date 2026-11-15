@@ -413,30 +413,6 @@ export default function AutomaticSolderingIronPage() {
             </div>
           </section>
 
-          <section className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8">
-            <div className="rounded-[32px] border border-slate-200 bg-white p-6 shadow-[0_18px_32px_rgba(15,23,42,0.04)] lg:p-10">
-              <div>
-                <h2 className="text-3xl font-black text-slate-900">
-                  هل ستستخدمها في الإلكترونيات؟ الأدوات المناسبة تفرق!
-                </h2>
-                <p className="mt-4 text-lg leading-8 text-slate-600">
-                  للإصلاح والمشاريع اليدوية، كتحتاج أدوات مناسبة باش يعاونوك. هذا جمعنا ليك جوج أدوات عملية فباك واحد.
-                </p>
-                <div className="mt-6 grid gap-3 sm:grid-cols-2">
-                  {[
-                    'مكواة لحام مريحة لعمليات التوصيل السريعة',
-                    'قطع أسلاك دقيقة مع تحكم أفضل في التفاصيل',
-                    'حل عملي للمهام اليومية في مجال الإلكترونيات',
-                  ].map((item) => (
-                    <div key={item} className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-3">
-                      <Icon name="check-circle" size={18} className="mt-0.5 text-emerald-600" />
-                      <span className="text-sm font-medium leading-7 text-slate-700">{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
 
           <div className="mx-auto max-w-4xl px-4 pb-2 pt-2 sm:px-6 lg:px-8">
             <div className="flex justify-center">
