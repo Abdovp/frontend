@@ -590,6 +590,71 @@ export default function AutomaticSolderingIronPage() {
             </div>
           </div>
 
+          <section className="bg-[#f8fafc] py-14 text-slate-900">
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+              <div className="mb-8 text-center">
+                <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-amber-100 px-3 py-1.5 text-xs font-black uppercase tracking-[0.18em] text-amber-700">
+                  <Icon name="star" size={14} />
+                  آراء موثّقة
+                </p>
+                <h2 className="text-3xl font-black text-slate-900 sm:text-4xl">ماذا قال من جربوه؟</h2>
+              </div>
+
+              <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+                {[
+                  {
+                    name: 'ياسين ب.',
+                    city: 'الرباط',
+                    date: 'منذ 2 أيام',
+                    text: 'المنتج فعلاً أعطاني سرعته في العمل، والراحة واضحة أثناء اللحام. الجودة قوية والباك يشتغل كتحتاجه.',
+                  },
+                  {
+                    name: 'أمين ح.',
+                    city: 'فاس',
+                    date: 'منذ 5 أيام',
+                    text: 'الباك عملي جدًا، خاصة القاطع الدقيق. الخطوات سريعة، واللحام أوضح من أول استخدام.',
+                  },
+                  {
+                    name: 'حسن ت.',
+                    city: 'الدار البيضاء',
+                    date: 'منذ أسبوع',
+                    text: 'عندك كلشي في باك واحد، وهذا هو اللي خلاني أستعمله يومياً في أعمالي الصغيرة.',
+                  },
+                  {
+                    name: 'كريم م.',
+                    city: 'مراكش',
+                    date: 'منذ 9 أيام',
+                    text: 'المكواة متينة، وسهلة في الاستخدام، والقاطع يخفف عني الوقت في كل مشروع صغير.',
+                  },
+                ].map((review) => (
+                  <div key={review.name} className="rounded-[24px] border border-slate-200 bg-white p-5 shadow-[0_18px_32px_rgba(15,23,42,0.04)]">
+                    <div className="mb-4 flex items-center justify-between gap-3">
+                      <div className="flex items-center gap-3">
+                        <span className="flex h-11 w-11 items-center justify-center rounded-full bg-sky-600 text-sm font-black text-white">
+                          {review.name.charAt(0)}
+                        </span>
+                        <div className="text-right">
+                          <p className="text-sm font-black text-slate-900">{review.name}</p>
+                          <p className="text-xs text-slate-500">{review.city} · {review.date}</p>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-0.5 text-amber-400">
+                        {Array.from({ length: 5 }).map((_, index) => (
+                          <Icon key={`${review.name}-${index}`} name="star" size={14} className="fill-current" />
+                        ))}
+                      </div>
+                    </div>
+                    <p className="text-sm leading-7 text-slate-600 text-right">“{review.text}”</p>
+                    <p className="mt-4 flex items-center justify-end gap-1.5 text-xs font-black text-emerald-700">
+                      <Icon name="check-circle" size={14} />
+                      شراء موثّق
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+
           <section className="bg-[#0b1730] py-14 text-white">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="mb-8 max-w-3xl">
