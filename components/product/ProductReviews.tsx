@@ -9,7 +9,40 @@ const distribution = [
   { stars: 1, pct: 0 },
 ];
 
+const maleReviews = [
+  {
+    name: 'ياسين ب.',
+    city: 'الرباط',
+    date: 'منذ 2 أيام',
+    rating: 5,
+    text: 'الموديل فعلاً خدمني في كل رحلة، والراحة حسيتها فورياً. التوصيل كان سريع والمنتج وصل بحالة ممتازة.'
+  },
+  {
+    name: 'أمين ح.',
+    city: 'فاس',
+    date: 'منذ 5 أيام',
+    rating: 5,
+    text: 'النوعية ممتازة، التركيب بسيط، وفعلاً أثبت نفسه في الاستعمال اليومي. أنصح به لأي سائق يحتاج راحة أكثر.'
+  },
+  {
+    name: 'حسن ت.',
+    city: 'الدار البيضاء',
+    date: 'منذ أسبوع',
+    rating: 5,
+    text: 'المشكلة اللي كنت عايشها حلت مباشرة. الجودة قوية، والشكل عملي، وكنت راضي من أول استخدام.'
+  },
+  {
+    name: 'كريم م.',
+    city: 'مراكش',
+    date: 'منذ 9 أيام',
+    rating: 5,
+    text: 'سهل في الاستخدام، قوي في الأداء، وممتاز مع الطريق الطويل. الجودة تجاوزت التوقعات في السعر.'
+  },
+];
+
 export default function ProductReviews({ product }: { product: Product }) {
+  const reviews = maleReviews;
+
   return (
     <section className="section-padding bg-cream" dir="rtl" aria-labelledby="reviews-heading">
       <div className="container-wide">
@@ -48,9 +81,9 @@ export default function ProductReviews({ product }: { product: Product }) {
           </div>
         </div>
 
-        {/* Review cards — up to 3 */}
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-          {product.reviews.slice(0, 3).map((r) => (
+        {/* Review cards — 4 male customers */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {reviews.map((r) => (
             <div key={r.name} className="card-flat p-6 flex flex-col">
               <div className="flex items-start justify-between mb-4 gap-3">
                 <div className="flex items-center gap-3">

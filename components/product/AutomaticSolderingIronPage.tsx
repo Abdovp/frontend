@@ -346,27 +346,27 @@ export default function AutomaticSolderingIronPage() {
                   </div>
 
                   <div className="rounded-[22px] border border-black/20 bg-white p-4 shadow-[0_20px_40px_rgba(15,23,42,0.08)]">
-                    <h2 className="mb-3 text-right text-xl font-black text-slate-900">ادخل معلوماتك للطلب</h2>
+                    <h2 className="mb-3 text-right text-2xl font-black text-slate-900">ادخل معلوماتك للطلب</h2>
                     <form id="order-form" onSubmit={handleSubmit} className="space-y-4">
                       <div>
-                        <label htmlFor="boyashop-order-name" className="mb-2 block text-sm font-bold text-slate-800">الاسم الكامل</label>
+                        <label htmlFor="boyashop-order-name" className="mb-2 block text-base font-bold text-slate-800">الاسم الكامل</label>
                         <input
                           id="boyashop-order-name"
                           value={form.name}
                           onChange={(e) => handleFieldChange('name', e.target.value)}
-                          className="w-full rounded-2xl border border-slate-400 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-black"
+                          className="w-full rounded-2xl border border-slate-400 bg-white px-4 py-3.5 text-base text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-black"
                           placeholder="أدخل اسمك الكامل"
                         />
                         {errors.name && <p className="mt-2 text-xs font-medium text-red-600">{errors.name}</p>}
                       </div>
 
                       <div>
-                        <label htmlFor="boyashop-order-phone" className="mb-2 block text-sm font-bold text-slate-800">رقم الهاتف</label>
+                        <label htmlFor="boyashop-order-phone" className="mb-2 block text-base font-bold text-slate-800">رقم الهاتف</label>
                         <input
                           id="boyashop-order-phone"
                           value={form.phone}
                           onChange={(e) => handleFieldChange('phone', formatPhone(e.target.value))}
-                          className="w-full rounded-2xl border border-slate-400 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-black"
+                          className="w-full rounded-2xl border border-slate-400 bg-white px-4 py-3.5 text-base text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-black"
                           placeholder="06XXXXXXXX"
                         />
                         {errors.phone && <p className="mt-2 text-xs font-medium text-red-600">{errors.phone}</p>}
@@ -375,7 +375,7 @@ export default function AutomaticSolderingIronPage() {
                       <button
                         type="submit"
                         disabled={submitting}
-                        className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#f6bb3f] px-6 py-4 text-base font-black text-slate-900 shadow-[0_18px_30px_rgba(246,187,63,0.28)] transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70"
+                        className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#f6bb3f] px-6 py-4 text-lg font-black text-slate-900 shadow-[0_18px_30px_rgba(246,187,63,0.28)] transition hover:-translate-y-0.5 disabled:cursor-not-allowed disabled:opacity-70"
                       >
                         <Icon name="cart" size={18} />
                         {submitting ? 'جاري تأكيد الطلب...' : 'اطلب الآن'}
