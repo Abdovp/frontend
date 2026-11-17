@@ -622,6 +622,30 @@ export default function AutomaticSolderingIronPage() {
             </div>
           </section>
 
+          <section className="mx-auto max-w-5xl px-4 py-8 sm:px-6 lg:px-8">
+            <div className="rounded-[28px] border border-amber-200 bg-gradient-to-r from-amber-100 to-yellow-50 p-6 text-center shadow-[0_18px_32px_rgba(245,158,11,0.12)]">
+              <p className="text-sm font-black uppercase tracking-[0.18em] text-amber-700">طلب سريع</p>
+              <h3 className="mt-3 text-2xl font-black text-slate-900">ابدأ طلبك الآن واطلب الباك اليوم</h3>
+              <div className="mt-5 flex flex-col justify-center gap-3 sm:flex-row">
+                <button
+                  type="button"
+                  onClick={scrollToOrderForm}
+                  className="inline-flex items-center justify-center gap-2 rounded-full bg-[#f6bb3f] px-6 py-3 text-sm font-black text-slate-900 shadow-[0_12px_24px_rgba(246,187,63,0.3)] transition hover:-translate-y-0.5"
+                >
+                  <Icon name="cart" size={16} />
+                  اطلب الآن
+                </button>
+                <a
+                  href={`https://wa.me/${STORE.whatsapp.replace(/\D/g, '')}?text=${encodeURIComponent('السلام عليكم، بدي اطلب باك مكواة اللحام + قاطع الأسلاك الدقيق.')}`}
+                  className="inline-flex items-center justify-center gap-2 rounded-full border border-slate-300 bg-white px-6 py-3 text-sm font-black text-slate-900"
+                >
+                  <Icon name="whatsapp" size={18} />
+                  تواصل واتساب
+                </a>
+              </div>
+            </div>
+          </section>
+
           <section className="bg-[#0b1730] py-14 text-white">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
               <div className="mb-8 max-w-3xl">
